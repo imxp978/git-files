@@ -2,11 +2,11 @@
 	include("sqlConn.php");
 	$con->select_db("my_db");
 	
-	$sql = "DELETE FROM persons WHERE personID = $_GET[id]"; 
-
-	$con->query($sql);
+	if (isset($_GET['id']) && $_GET['id'] != "") {
+		$sql = "DELETE FROM persons WHERE personID = $_GET[id]"; 
+		$con->query($sql);
+	}
 	header ("location:index.php");
-
 ?>
 
 <!doctype html>
