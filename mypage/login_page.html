@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>登入</title>
+	<style>
+		#input{
+			margin: 0 auto;
+			text-align: center;
+			border: solid 1px black;
+			width: 250px;
+		}
+
+		tr{
+			t/ext-align: center;
+		}	
+	</style>
+</head>
+<body>
+	<table id="input">
+		<form method="POST" action="">
+			<tr>
+				<td>
+					<h2>購物中心</h2>
+					<p>
+						<label for="u">帳號: </label><br>
+						<input id="u" name="username" type="text" placeholder="UserName">
+					</p>
+					<p>
+						<label for="password">密碼: </label><br>
+						<input id="password" name="password" type="password" placeholder="Password">
+					</p>
+					<p>
+						<input id="check" name="check" type="checkbox" checked>
+						<label for="check">記住我的帳號密碼</label>
+					</p>
+					<p>
+						<input id="male" type="radio" value="male"><label for="male">男</label>
+						<input id="female" type="radio" value="female"><label for="female">女</label>
+					</p>
+					<p>
+						<input type="submit" value="登入">
+					</p>
+					<p>
+						<a href="">馬上註冊會員</a><br>
+					</p>
+					<p>
+						<label for="date">生日:</label>
+						<input id="date" type="date"><br>
+						<select id="year" name="year">
+							<option value="1950">1950</option>
+							<option value="1951">1951</option>
+						</select>
+						<select id="month" name="month">
+							<option value="06">06</option>
+							<option value="07">07</option>
+						</select>
+						<select id="day" name="day">
+							<option value="15">15</option>
+							<option value="16">16</option>
+						</select>
+					</p>
+					<p>
+						<label for="note">備註:</label>
+						<textarea id="note" cols="20" rows="5"></textarea>
+					</p>
+				</td>
+			</tr>
+		</form>
+	</table>
+</body>
+</html>
