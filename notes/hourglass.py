@@ -17,3 +17,9 @@ for i in range(m):      ##lower part
 #         print(' ' * (m - i) + '*' * (2 * i + 1))
 #     else:
 #         print(' ' * (i - m) + '*' * (2 * (n - i) - 1))
+# print(m)
+# for i in range(n):
+#     if i <= m: 
+#         print( (i)* ' ' + (n - i*2)* '*' + i * ' ')
+#     elif i > m: 
+#         print( (m-i-1)*' ' + (2*i+3) * '*' + (m-i) * ' ' )
