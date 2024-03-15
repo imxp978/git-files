@@ -212,35 +212,34 @@
             <ul id="list">
             </ul>
         </div>
-        <div>
-            <button id="export">匯出</button> 
-            <button id="save">儲存</button>
-        </div>
+        <div id="ex">
+            <button id="export">匯出</button>
+        </div><br>
+		<div>
+			<button id="save">儲存</button>
+		</div>
     </div>
     <script>
-
-        var list = document.querySelector('#list');
-        var newjob = document.createElement('li');
-        var text = document.createElement('span');
-
         window.onload= function() {
             check_localStorage();
         };
 
+        var type = document.querySelector('#type').value;
+        var todo = document.querySelector('#todo').value;
+        var list = document.querySelector('#list');
+        var newjob = document.createElement('li');
+        var text = document.createElement('span');
+
         function check_localStorage() {
-			if ((localStorage.getItem('tasks')) != []) {
+			if (localStorage.getItem('tasks')) {
 				var tasks = JSON.parse(localStorage.getItem('tasks'));
                 for (let i = 0; i < tasks.length; i++) {
 
-                        type = tasks[i].level;
-                        console.log('TYPE: '+type);
-                        todo = tasks[i].content;
-                        console.log('TODO: '+todo);
+                        var type = tasks[i].level;
+                        var todo = tasks[i].content;
                         add_job(type, todo);
                     }
-			}else {
-
-            }
+				}
 		}
 		
 		function change_type() {
@@ -255,9 +254,6 @@
             }
         }
 
-        type = document.querySelector('#type').value;
-        todo = document.querySelector('#todo').value;
-
         function add_job(type, todo) {
 
             var list = document.querySelector('#list');
@@ -268,10 +264,7 @@
 			var br = document.createElement('br');
             var mark_done = document.createElement('span');
 
-            console.log('type: '+type);
-            console.log('todo: '+todo);
-
-            if (!type || !todo) {
+            if ((!todo || !type)) {
                 alert('請填寫重要性及工作項目');
             } else {
 				
@@ -346,14 +339,7 @@
         export_btn.onclick = export_job;
 
         var add_btn = document.querySelector('#add');
-        add_btn.addEventListener('click', function () {
-            type = document.querySelector('#type').value;
-            todo = document.querySelector('#todo').value;
-
-            add_job(type,todo);
-            }
-        );
-
+        add_btn.onclick = add_job;
 		
 	const save_btn = document.querySelector('#save');
 
@@ -379,8 +365,7 @@
 			alert('儲存成功');
 		} 
 	save_btn.addEventListener('click', function() {
-		localStorage.removeItem('tasks');
-        save();
+		save();
 	})
 /////////////////////////////////////////
 </script>
