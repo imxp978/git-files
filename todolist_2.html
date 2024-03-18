@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-         body {
+        body {
             display: block;
             flex-direction: column;
             justify-content: center;
@@ -73,9 +73,9 @@
             box-shadow: 0px 0px 0px gray;
             transition: all 0.2s;
         }
-        
-        button + button {
-          margin: 10px;
+
+        button+button {
+            margin: 10px;
         }
 
         li {
@@ -86,9 +86,10 @@
             justify-content: flex-end;
             align-items: baseline;
         }
-        
+
         span {
-            flex:2;
+            flex: 2;
+            transition: 0.3s;
         }
 
         #wrap {
@@ -103,7 +104,6 @@
             border-radius: 15px;
             background-color: lightgray;
             padding: 20px;
-
         }
 
         #main {
@@ -120,19 +120,12 @@
             width: 100%;
             line-height: 2em;
         }
-        
+
         #list {
-          
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          
-          
-        }
-        
-        button {
-          border: 1px solid black;
-          margin: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
         .normal {
@@ -185,12 +178,12 @@
             font-weight: bolder;
             color: darkred;
         }
-        
+
         .mark_done {
-          margin-right: 5px;
-          text-align: right;
-          flex: 0.5;
-          font-size: 12px;
+            margin-right: 5px;
+            text-align: right;
+            flex: 0.5;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -218,32 +211,28 @@
         </div>
     </div>
     <script>
-
         var list = document.querySelector('#list');
         var newjob = document.createElement('li');
         var text = document.createElement('span');
 
-        window.onload= function() {
+        window.onload = function () {
             check_localStorage();
         };
 
         function check_localStorage() {
-			if ((localStorage.getItem('tasks')) != []) {
-				var tasks = JSON.parse(localStorage.getItem('tasks'));
+            if ((localStorage.getItem('tasks')) != []) {
+                var tasks = JSON.parse(localStorage.getItem('tasks'));
                 for (let i = 0; i < tasks.length; i++) {
 
-                        type = tasks[i].level;
-                        console.log('TYPE: '+type);
-                        todo = tasks[i].content;
-                        console.log('TODO: '+todo);
-                        add_job(type, todo);
-                    }
-			}else {
+                    type = tasks[i].level;
+                    todo = tasks[i].content;
 
+                    add_job(type, todo);
+                }
             }
-		}
-		
-		function change_type() {
+        }
+
+        function change_type() {
             var input = document.querySelector('#todo');
             var type = document.querySelector('#type');
             if (type.value == "normal") {
@@ -255,9 +244,6 @@
             }
         }
 
-        type = document.querySelector('#type').value;
-        todo = document.querySelector('#todo').value;
-
         function add_job(type, todo) {
 
             var list = document.querySelector('#list');
@@ -265,17 +251,14 @@
             var text = document.createElement('span');
             var button = document.createElement('button');
             var done_btn = document.createElement('button');
-			var br = document.createElement('br');
+            var br = document.createElement('br');
             var mark_done = document.createElement('span');
-
-            console.log('type: '+type);
-            console.log('todo: '+todo);
 
             if (!type || !todo) {
                 alert('請填寫重要性及工作項目');
             } else {
-				
-				list.append(newjob);
+
+                list.append(newjob);
                 newjob.append(text);
                 text.textContent = todo;
 
@@ -286,30 +269,33 @@
                 } else {
                     newjob.classList.add("urgent");
                 }
-								
+
                 newjob.append(mark_done);
                 mark_done.className = "mark_done";
                 mark_done.textContent = "[已完成] "
                 mark_done.style.display = "none";
                 
-  				newjob.append(done_btn);
-                done_btn.textContent = '標示為完成';
+
+                newjob.append(done_btn);
+                done_btn.textContent = '完成';
                 done_btn.onclick = function () {
-               		if (mark_done.style.display == "none") {
-                  	mark_done.style.display = "block";
-                    done_btn.textContent = "標示為未完成";
-                  } else {
-                  	mark_done.style.display = "none";
-                    done_btn.textContent = "標示為完成";
-                  }
+                    if (mark_done.style.display == "none") {
+                        mark_done.style.display = "block";
+                        done_btn.textContent = "待辦";
+                        text.style.textDecoration = "3px line-through rgba(255, 0, 0, 0.6)";
+                    } else {
+                        mark_done.style.display = "none";
+                        done_btn.textContent = "完成";
+                        text.style.textDecoration = "none";
+                    }
                 }
-				newjob.append(button);
+                newjob.append(button);
                 button.textContent = '刪除';
                 button.onclick = function () {
-                button.closest('li').remove();
+                    button.closest('li').remove();
                 }
             }
-            //reset values  
+            //reset input values  
             document.querySelector('#todo').value = '';
             document.querySelector('#type').value = 'normal';
             document.querySelector('#todo').className = 'normal_input';
@@ -317,7 +303,7 @@
 
         function export_job() {
             var list = document.querySelectorAll('li');
-     
+
             if (list.length == 0) {
                 alert('無待辦事項')
             } else {
@@ -339,6 +325,35 @@
                 alert('待辦事項: \n' + text);
             }
         }
+
+        const save_btn = document.querySelector('#save');
+
+        function save() {
+            if (localStorage['tasks']) {
+                localStorage.removeItem('tasks');
+            }
+
+            const jobs = document.querySelectorAll('li');
+            var tasks = [];
+            for (let i = 0; i < jobs.length; i++) {
+                const level_value = jobs[i].className;
+                const content_value = jobs[i].querySelector('span').textContent;
+                var task = {
+                    'level': level_value,
+                    'content': content_value,
+                };
+                tasks.push(task);
+            }
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            alert('儲存成功');
+        }
+
+        save_btn.addEventListener('click', function () {
+            localStorage.removeItem('tasks');
+            save();
+        })
+
+        //main function
         var type_slt = document.querySelector('#type');
         type_slt.onchange = change_type;
 
@@ -350,39 +365,9 @@
             type = document.querySelector('#type').value;
             todo = document.querySelector('#todo').value;
 
-            add_job(type,todo);
-            }
+            add_job(type, todo);
+        }
         );
-
-		
-	const save_btn = document.querySelector('#save');
-
-///////////////////////////////////////////
-	function save() {
-            if (localStorage['tasks']) {
-                localStorage.removeItem('tasks');
-            }
-
-			const jobs = document.querySelectorAll('li');
-            var tasks = []; 
-			for (let i = 0; i < jobs.length; i++) {
-				const level_value = jobs[i].className;
-				const content_value = jobs[i].querySelector('span').textContent;
-				var task = {
-					'level': level_value,
-					'content': content_value,				                    
-                };
-                tasks.push(task);                
-			}
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            console.log(localStorage);
-			alert('儲存成功');
-		} 
-	save_btn.addEventListener('click', function() {
-		localStorage.removeItem('tasks');
-        save();
-	})
-/////////////////////////////////////////
 </script>
 </body>
 
