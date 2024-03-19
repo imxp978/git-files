@@ -25,15 +25,14 @@
         if (seat < 17) {
             var seat_a = Math.floor(seat / 8) + 1;
             var seat_b = seat % 8;
-            if (seat_b == 0 ) {
-                seat_b = 8;
-            } 
         } else {
             var seat_a = Math.floor((seat + 1) / 8) + 1;
             var seat_b = (seat + 1)% 8;
-            if (seat_b == 0) {
-                seat_b = 8;
-            }
+        }
+
+        if (seat_b == 0) {
+            seat_a -= 1;
+            seat_b = 8;
         }
 
         function bg(seat) {
