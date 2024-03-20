@@ -1,0 +1,1814 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>自學網頁の嬰兒教材：JavaScript（八）—— 不想教你 Vue，只想讓你寫有趣專案</title>
+    <meta name="description" content="網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！">
+
+    <meta property='og:title' content="自學網頁の嬰兒教材：JavaScript（八）—— 不想教你 Vue，只想讓你寫有趣專案">
+    <meta property='og:description' content="網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！">
+    <meta property='og:image' content="https://i.imgur.com/eLkh90D.png">
+
+    <meta name="twitter:card" content="photo" />
+    <meta name="twitter:title" content="自學網頁の嬰兒教材：JavaScript（八）—— 不想教你 Vue，只想讓你寫有趣專案" />
+    <meta name="twitter:description" content="網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！" />
+    <meta name="twitter:image" content="https://i.imgur.com/eLkh90D.png" />
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="jdlMGGuVsVXzIv29N15OT53GKoPpDNiQCy7ycDed">
+
+    <link href="https://codelove.tw/css/app.css?v=2" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/vendor/css/open-color.css">
+
+    <script src='/vendor/js/jquery-3.3.1.min.js'></script>
+    <script src='/vendor/js/popper-1.14.0.min.js'></script>
+    <script src='/vendor/js/bootstrap.min.js'></script>
+
+    <script src="/vendor/toastr/toastr.min.js" defer></script>
+    <link href="/vendor/toastr/toastr.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/vendor/fontawesome-5.6.3/css/all.css">
+
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+
+    <script src="/vendor/autosize/autosize.min.js"></script>
+    <script src="/vendor/js-cookie/js.cookie.min.js"></script>
+
+    <script src="/vendor/linkify/linkify.min.js"></script>
+    <script src="/vendor/linkify/linkify-jquery.min.js"></script>
+
+    <script src="/vendor/fitvids/jquery.fitvids.min.js"></script>
+
+    <script>
+        // The `parsedown` library already handled it.?
+        $(document).ready(function(){
+            $('.linkify').linkify({
+                target: "_blank"
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $(".youtube-rwd").fitVids();
+        });
+    </script>
+
+    <script src="/vendor/lazyload/lazyload.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <style>
+        .text-break {
+            word-break: break-all;
+        }
+    </style>
+
+    <style>
+    img.emoji {
+        height: 1.3em;
+        width: 1.3em;
+        margin: 0 .05em 0 .1em;
+        vertical-align: -0.3em;
+    }
+</style>
+
+<style>
+    .visited-box {
+        height: 40px;
+        margin-top: 0.5rem;
+        /*
+        white-space: nowrap;
+        */
+        overflow: hidden;
+    }
+    .visited-box a {
+        margin-left: 5px;
+    }
+    .visited-box a:first-child {
+        margin-left: 0px;
+    }
+    .visited-box a:hover {
+        text-decoration: none;
+    }
+    .visited-avatar {
+        object-fit: cover;
+    }
+
+    #loading {
+        position: fixed; /* Sit on top of the page content */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #loading-icon {
+        color: white;
+    }
+</style>
+
+<style>
+    .text-default {
+        color: #212529 !important;
+    }
+    .text-break {
+        word-break: break-all;
+    }
+    .text-clamp-2 {
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+    .text-clamp-3 {
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+    .text-clamp-4 {
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+    .post-card {
+        border-top: 1px solid #dee2e6;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .post-card .image-box {
+        text-align: center;
+        overflow: hidden;
+        background: repeating-linear-gradient( 45deg, var(--oc-gray-2), var(--oc-gray-2) 10px, var(--oc-gray-3) 10px, var(--oc-gray-3) 20px );
+    }
+    .post-card .image {
+        /* width: 100%;
+        height: 200px; */
+        max-width: 100%;
+        max-height: 40vh;
+        object-fit: cover;
+        object-position: center;
+    }
+    @media (min-width: 576px) {
+        .post-card {
+            border-left: 1px solid #dee2e6;
+            border-right: 1px solid #dee2e6;
+            border-radius: .25rem;
+        }
+        .post-card .image-box {
+            border-top-right-radius: .25rem;
+            border-top-left-radius: .25rem;
+        }
+    }
+    .btn-like.clicked {
+        color: var(--oc-red-5) !important;
+    }
+</style>
+
+<style>
+    .post-core-title {
+        font-size: 27px;
+        font-weight: bold;
+    }
+    .post-core {
+        line-height: 1.6;
+    }
+    .post-core h1 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-top: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    .post-core h2 {
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    .post-core h3 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    .post-core h1:first-child, .post-core h2:first-child, .post-core h3:first-child {
+        margin-top: 0;
+    }
+    .post-core p {
+        font-size: 18px;
+        margin-bottom: 1rem;
+    }
+    .post-core pre {
+        padding: 1rem;
+    }
+    .post-core img:not(.emoji) {
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+    /* ref: https://codepen.io/anthony-liddle/pen/eYpRavv */
+    .post-core hr {
+        margin: 2rem auto;
+        position: relative;
+        height: 9px;
+        width: 9px;
+        border: transparent;
+        overflow: visible;
+        /* background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="0.75" y="0.5" width="8" height="8" rx="4" fill="%231CB0A8" /></svg>'); */
+    }
+    .post-core hr:before {
+        position: absolute;
+        height: 9px;
+        width: 10px;
+        content: '';
+        /* background-image: url('data:image/svg+xml;utf8,<svg width="10" height="9" viewBox="0 0 10 9" xmlns="http://www.w3.org/2000/svg"><path d="M3.91043 1.29752C4.30449 0.688518 5.19551 0.688519 5.58957 1.29752L9.25143 6.95675C9.68196 7.62211 9.20436 8.5 8.41186 8.5H1.08814C0.29564 8.5 -0.181954 7.62211 0.248574 6.95675L3.91043 1.29752Z" fill="%23FCB643" /></svg>'); */
+        left: -20px;
+    }
+    .post-core hr:after {
+        position: absolute;
+        height: 9px;
+        width: 9px;
+        content: '';
+        /* background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="0.75" y="0.5" width="8" height="8" rx="1" fill="%23EF4056" /></svg>'); */
+        right: -20px;
+    }
+    @media (min-width: 768px) {
+        .post-core-title {
+            font-size: 30px;
+        }
+        .post-core {
+            line-height: 1.8;
+        }
+        .post-core h1 {
+            font-size: 30px;
+            margin-top: 2.25rem;
+        }
+        .post-core h2 {
+            font-size: 27px;
+            margin-top: 1.5rem;
+        }
+        .post-core h3 {
+            font-size: 24px;
+            margin-top: 1.25rem;
+        }
+        .post-core p {
+            font-size: 20px;
+        }
+    }
+</style>
+
+<style>
+    .post-core pre {
+        background-color: #f1f3f5;
+    }
+    .post-core hr {
+        background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="3" height="3" rx="1.5" fill="%23212529" /></svg>');
+    }
+    .post-core hr:before {
+        background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="3" height="3" rx="1.5" fill="%23212529" /></svg>');
+    }
+    .post-core hr:after {
+        background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="3" height="3" rx="1.5" fill="%23212529" /></svg>');
+    }
+</style>
+
+<!-- full markdown support -->
+<style>
+    .post-core li {
+        font-size: 18px;
+    }
+    .post-core h4 {
+        font-size: 20px;
+    }
+    .post-core h5 {
+        font-size: 18px;
+    }
+    .post-core h6 {
+        font-size: 16px;
+    }
+    @media (min-width: 768px) {
+        .post-core li {
+            font-size: 20px;
+        }
+        .post-core h4 {
+            font-size: 22px;
+        }
+        .post-core h5 {
+            font-size: 20px;
+        }
+        .post-core h6 {
+            font-size: 18px;
+        }
+    }
+    .post-core blockquote {
+        padding-left: calc(1rem - 4px);
+        border-left: solid 4px var(--oc-gray-3);
+    }
+    .post-core p code, .post-core li code {
+        background-color: var(--oc-gray-2);
+        color: var(--oc-gray-9);
+        /* background-color: var(--oc-pink-1); */
+        border-radius: 5px;
+        font-size: 80%;
+        padding: 0.1em 0.25em;
+    }
+</style>
+
+<style>
+    .post-core table {
+        margin-bottom: 1rem;
+    }
+
+    .post-core table th, .post-core table td {
+        border: 1px solid var(--oc-gray-3);
+        padding: 8px 8px;
+        min-width: 60px;
+        font-size: 18px;
+    }
+
+    @media (min-width: 768px) {
+        .post-core table th, .post-core table td {
+            font-size: 20px;
+        }
+    }
+</style>
+
+<style>
+    .btn.btn-default {
+        color: #292b2c;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    .btn.btn-default:hover {
+        color: #292b2c;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+    }
+    .btn.btn-default:active {
+        color: #292b2c;
+        background-color: #e6e6e6;
+        background-image: none;
+        border-color: #adadad;
+    }
+</style>
+
+<style>
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .user-photo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+</style>
+
+<style>
+    .thumbnail {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+    .thumbnail img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        max-height: 100%;
+        width: auto;
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+    @media (min-width: 768px) {
+        .thumbnail {
+            height: 180px;
+        }
+    }
+
+</style>
+
+<style>
+    .tags-container {
+        margin-bottom: -5px;
+    }
+    .post-tag {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        background-color: var(--oc-gray-7) !important;
+        color: var(--oc-gray-4) !important;
+        margin-bottom: 5px;
+        border-radius: 3px;
+    }
+    .post-tag:hover {
+        cursor: pointer;
+        background-color: var(--oc-gray-8) !important;
+        color: #616161;
+        text-decoration: none;
+    }
+    .post-tag.sub {
+        /* margin-bottom: 0; */
+        padding: 0.2rem 0.4rem;
+        font-size: 0.875rem;
+    }
+</style>
+
+<style>
+    .badge-sales {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 1;
+        font-size: 1.5rem;
+    }
+    html {
+        scroll-padding-top: 80px;
+    }
+</style>
+
+    
+
+    <script src="/vendor/mobile-detect/mobile-detect.min.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DDHVBL1ZHK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-DDHVBL1ZHK');
+    </script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+    <div id="loading" style="display: none;">
+        <span id="loading-icon" class="fa-10x">
+            <i class="fas fa-spinner fa-spin"></i>
+        </span>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark _navbar-light _bg-white sticky-top">
+    <a class="navbar-brand" href="/">CodeLove 愛寫扣論壇</a>
+
+    <div>
+                                    <a href="/my-notifications" class="btn btn-link d-lg-none text-decoration-none">
+                    <i class="far fa-bell text-secondary"></i>
+                </a>
+                    
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <!-- <a class="nav-link" href="/">網站首頁</a> -->
+                <a class="nav-link" href="/articles">技術文章</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/discuss">討論專區</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/courses">自學作業包</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    自學作業包
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/courses/frontend-beginner">轉職前端：半路出家，入門必備教材！</a>
+                    <a class="dropdown-item" href="/courses/frontend-advanced">現役前端：業界人士，邁向資深之路！</a>
+                </div>
+            </li> -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    學員心得
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="https://codelove.tw/@pchun2330/post/AqJ6rq">轉職成功案例分享一：pchun</a>
+                    <a class="dropdown-item" href="https://codelove.tw/@birdie2019/post/jalr5x">轉職成功案例分享二：birdie</a>
+                    <a class="dropdown-item" href="https://codelove.tw/@howtomakeaturn/post/k31dYx">求職前的準備＆簡易指南</a>
+                </div>
+            </li>
+
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="https://codelove.tw/@howtomakeaturn/post/Aq5yVq">寫作計畫</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/search?q=作業分享">學員作業分享</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/trending-keywords">熱門搜尋</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="https://line.me/ti/g2/nipkjq2WoZPKX5dTn9tE9266aEOt6EOICFGa1g">LINE 群組</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="https://codelove.tw/@howtomakeaturn/post/jqeDka">文章 API</a>
+            </li> -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    社群與 API
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/search?q=作業分享">學員作業分享</a>
+                    <a class="dropdown-item" href="https://line.me/ti/g2/nipkjq2WoZPKX5dTn9tE9266aEOt6EOICFGa1g">LINE 群組</a>
+                    <a class="dropdown-item" href="https://codelove.tw/@howtomakeaturn/post/jqeDka">文章 API</a>
+                    <a class="dropdown-item" href="https://www.facebook.com/codelove.tw">FB 粉專</a>
+                </div>
+            </li>
+
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    技術文件
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/docs/vue3">Vue 3 台灣繁體中文文件</a>
+                    <a class="dropdown-item" href="/docs/laravel10">Laravel 10 台灣繁體中文文件</a>
+                </div>
+            </li> -->
+
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    社群連結
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="https://discord.gg/T5kgD6z9FR">Discord 交流群</a>
+                    <a class="dropdown-item" href="https://t.me/+1q6v3PkXp3AyZTRl">Telegram 交流群</a>
+                    <a class="dropdown-item" href="https://www.facebook.com/profile.php?id=100088031242230">Facebook 粉專</a>
+                    <a class="dropdown-item" href="https://www.facebook.com/groups/823853158867425">Facebook 社團</a>
+                </div>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a href="/coaching" class="btn btn-success btn my-2 my-lg-0 mx-lg-2">
+                   <i class="fas fa-comments"></i>&nbsp;
+                    線上指導
+                </a>
+            </li> -->
+            <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0" method="get" action="/search">
+                    <input class="form-control mx-lg-2" style="max-width: 150px;" type="search" placeholder="Search" aria-label="Search" name="q" >
+                    <input type="hidden" name="from" value="search">
+                    <button class="btn btn-default _mt-2 my-sm-0 _ml-sm-2 ml-2 ml-lg-0" type="submit">
+                        <i class="fas fa-search"></i>&nbsp;
+                        搜尋
+                    </button>
+                </form>
+            </li>
+        </ul>
+
+        <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <!-- <a href="/coaching" class="btn btn-warning btn my-2 my-lg-0 mr-lg-2">
+                    教練服務
+                </a> -->
+                <a href="/courses" class="btn btn-warning btn my-2 my-lg-0 mr-lg-2">
+                    自學教材
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/how-to-ask" class="btn btn-success btn my-2 my-lg-0 mr-lg-2">
+                    如何發問
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/new-post" class="btn btn-primary btn my-2 my-lg-0 mr-lg-2">
+                    發佈貼文
+                </a>
+            </li>
+
+                            <li class="nav-item">
+                    <a class="nav-link" href="/my-notifications" class="text-decoration-none">
+                                                    <i class="far fa-bell text-secondary"></i>
+                                            </a>
+                </li>
+            
+                            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://avatars.githubusercontent.com/u/103916953?v=4" width="40" height="40" class="d-inline-block align-top" alt="" style="margin-top: -8px; margin-bottom: -8px; border-radius: 50%; object-fit: cover;">&nbsp;
+                        <!-- <span class="d-lg-none d-xl-inline-block">
+                            <span class="d-inline-block text-truncate" style="vertical-align:middle; max-width: 80px;">
+                                
+                            </span>
+                        </span> -->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="https://codelove.tw/@imxp978">
+                            <br>
+                            <span class="username" style="font-size: 0.875rem;">@imxp978<br></span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/edit-photo">
+                            改大頭貼
+                        </a>
+                        <a class="dropdown-item" href="/edit-name">
+                            修改名稱
+                        </a>
+                        <a class="dropdown-item" href="/edit-intro">
+                            編輯簡介
+                        </a>
+                                                <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://codelove.tw/logout" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            登出
+                        </a>
+                        <form id="frm-logout" action="https://codelove.tw/logout" method="POST" style="display: none;">
+                            <input type="hidden" name="to" value="/">
+                            <input type="hidden" name="_token" value="jdlMGGuVsVXzIv29N15OT53GKoPpDNiQCy7ycDed">
+                        </form>
+                    </div>
+                </li>
+            
+        </ul>
+
+    </div>
+</nav>
+
+<style>
+    .navbar {
+        box-shadow: 0 2px 4px rgb(0 0 0 / 4%);
+    }
+    .navbar .username {
+        color: #6c757d;
+    }
+    .navbar .dropdown-item:active .username {
+        color: white;
+    }
+</style>
+
+    
+<div class="container px-0">
+    <div class="row no-gutters">
+        <div class="col-12 mb-n3">
+            <div class="d-none d-lg-block">
+                <h1 class="mt-5 h1 text-center px-3"><b>自學網頁の嬰兒教材：JavaScript（八）—— 不想教你 Vue，只想讓你寫有趣專案</b></h1>
+                <h3 class="mt-3 h3 mb-5 text-center px-3">網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！</h3>
+            </div>
+            <div class="d-lg-none">
+                <h1 class="mt-5 h2 text-center px-3"><b>自學網頁の嬰兒教材：JavaScript（八）—— 不想教你 Vue，只想讓你寫有趣專案</b></h1>
+                <h3 class="mt-3 h4 mb-5 text-center px-3">網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！</h3>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3 _d-none d-md-block">
+            <div class="mt-3 mr-md-3">
+                <div class="bg-white rounded border p-3">
+        <div class="font-weight-bold h5">課程內容</div>
+        <hr>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/63r87q">JavaScript 系列八：前言</a></div> -->
+        <div class="mt-2">
+                            👉
+                        <a href="https://codelove.tw/@howtomakeaturn/post/63r87q">JavaScript 系列八：前言</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/k31583">JavaScript 系列八：第1課 ── 碼表應用程式</a></div> -->
+        <div class="mt-2">
+                            👉
+                        <a href="https://codelove.tw/@howtomakeaturn/post/k31583">JavaScript 系列八：第1課 ── 碼表應用程式</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/waYLQ3">JavaScript 系列八：第2課 ── 筆記應用程式</a></div> -->
+        <div class="mt-2">
+                            👉
+                        <a href="https://codelove.tw/@howtomakeaturn/post/waYLQ3">JavaScript 系列八：第2課 ── 筆記應用程式</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/13k0Va">JavaScript 系列八：第3課 ── 分帳應用程式</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/13k0Va">JavaScript 系列八：第3課 ── 分帳應用程式</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/9aWkka">JavaScript 系列八：第4課 ── 行事曆應用程式</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/9aWkka">JavaScript 系列八：第4課 ── 行事曆應用程式</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/L3QRYa">JavaScript 系列八：第5課 ── 體重追蹤應用程式</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/L3QRYa">JavaScript 系列八：第5課 ── 體重追蹤應用程式</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/1ayR0q">JavaScript 系列八：第6課 ── 天氣查詢應用程式</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/1ayR0q">JavaScript 系列八：第6課 ── 天氣查詢應用程式</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/Ex2GE3">JavaScript 系列八：第7課 ── 國家資訊與地圖應用程式</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/Ex2GE3">JavaScript 系列八：第7課 ── 國家資訊與地圖應用程式</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/B3bD2q">JavaScript 系列八：結語</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/B3bD2q">JavaScript 系列八：結語</a>
+        </div>
+    </div>
+            </div>
+        </div>
+        <div class="col col-md-8 col-lg-6">
+                            <div class="mt-3 d-none">
+                    <div class="card border-dark text-center">
+    <!-- <div class="card-header">
+        Featured
+    </div> -->
+    <div class="card-body">
+        <h5 class="card-title">本課程為付費解鎖教材</h5>
+        <p class="card-text">站長獨家研發的新手友善、專案導向教材！</p>
+        <a href="/courses/frontend-beginner/pricing" class='btn btn-success btn-lg' style="width: 240px;">
+            <!-- <i class="fas fa-unlock-alt"></i>&nbsp;
+            付費解鎖 -->
+            查看方案
+        </a>
+    </div>
+</div>
+                </div>
+                                        <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/63r87q" class="text-muted" title="2023-02-16 14:13:35">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/63r87q" class="text-default">JavaScript 系列八：前言</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/63r87q" class="text-muted">在 Vue 的學習旅程中
+
+目前只學了官網 `Essentials` 的內容
+
+坊間補習班，通常會接著教 Vue 元件、模組化開發方法、Vue 進階工具、Vue 生態系工具、以及 JavaScript 生態系各種工具
+
+但是我認為，僅僅只是 `Essentials` 的內容，已經足以開發許多功能強大、好用的網頁應用程式、web 工具
+
+在這次的課程，我們將開發一系列「非常有趣、實用」的應用程式
+
+藉由這些練習，打好對於 Vue 理解的基礎，等於是紮穩馬步、練好內功
+
+---
+
+我曾多次提過，身為工程師，常常要做一些沒做過的功能
+
+需要自學能力、需要願意面對未知的信心與勇氣
+
+這次的課程，我只會提供簡單介紹＆關鍵字
+
+接著就直接提出作業規格，你需要自行研究如何完成作業
+
+---
+
+這堂課要做的各種專案，內容有趣到「你在找工作的時候，能夠直接當作品集放上去」
+
+請以這個目標為標準，把樣式做漂亮、UX 做完整！
+
+---
+
+話不多說，讓我們馬上開始來寫 Vue 吧！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="176" data-type="post">
+            <i class="far fa-heart"></i> <span>1</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/63r87q" class="text-muted">0留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/63r87q" class="text-muted">
+                466瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/k31583" class="text-muted" title="2023-02-16 14:13:51">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/k31583" class="text-default">JavaScript 系列八：第1課 ── 碼表應用程式</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/k31583" class="text-muted">## 課程目標
+
+- 能夠寫出碼表應用程式
+
+## 課程內容
+
+千萬不要小看簡易、陽春的小應用程式
+
+只要做到夠簡單好用、能解決使用者的問題
+
+就算只是放一些網路廣告，也能夠替開發者「賺到一點零用錢」
+
+這一課來寫碼表應用程式
+
+關鍵字 `online stopwatch` `線上碼表`
+
+## 課後作業
+
+請使用 https://replit.com/ 來寫作業
+
+這次作業的規格如下：
+
+- 有一個「開始」按鈕，一個「重設」按鈕
+- 按下開始之後，「開始」按鈕會變成「暫停」按鈕
+- 按下暫停之後，「暫停」按鈕會變成「繼續」按鈕
+- 按下重設按鈕，整個碼表會歸零
+- 畫面上有清楚的計時數字，起始格式為 `00:00.00`
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="177" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/k31583" class="text-muted">25留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/k31583" class="text-muted">
+                1,116瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/waYLQ3" class="text-muted" title="2023-02-16 14:14:06">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/waYLQ3" class="text-default">JavaScript 系列八：第2課 ── 筆記應用程式</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/waYLQ3" class="text-muted">## 課程目標
+
+- 能夠寫出筆記應用程式
+
+## 課程內容
+
+應用程式簡單沒關係，只要精準解決用戶通點
+
+甚至可以收一點點月租費，替開發者「賺到一點零用錢」
+
+這一課來寫筆記應用程式
+
+關鍵字 `write notes online` `online note tool`
+
+研究看看目前市面上，大家都做得怎樣
+
+最簡潔的是這兩款
+
+- https://justnotepad.com/
+- http://simplenotes.online/
+
+## 課後作業
+
+請使用 https://replit.com/ 來寫作業
+
+這次作業的規格如下：
+
+- 有一大塊輸入文字的地方，用戶可以當成臨時打筆記的地方
+- 以 `textarea` 實作即可，純文字即可，不需要複雜的文章格式編輯器
+- 筆記內容要隨時記錄到 local storage，用戶隨時關閉、開啟網頁，都不會失去資料
+- 側邊或底部，有一排「筆記清單」，用戶可以在多則筆記之間切換
+- 畫面上有一個「建立新筆記」按鈕
+- 「筆記清單」的每個筆記旁邊，都有「刪除」按鈕
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="178" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/waYLQ3" class="text-muted">19留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/waYLQ3" class="text-muted">
+                1,096瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/13k0Va" class="text-muted" title="2023-02-16 14:14:22">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/13k0Va" class="text-default">JavaScript 系列八：第3課 ── 分帳應用程式</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/13k0Va" class="text-muted">## 課程目標
+
+- 能夠寫出分帳應用程式
+
+## 課程內容
+
+實務上，在開發應用程式，難免需要用到一些數學計算
+
+通常也不用到太進階，大概國中數學的內容就很好用了
+
+我個人經驗是，其實國中數學、高中數學的內容，超級強大、好用
+
+只是大家普遍是填鴨式教育出身，失去創意、不知如何運用了
+
+---
+
+這一課來寫分帳應用程式
+
+關鍵字 `bill split online` `分帳 app` `splitwise 網頁版`
+
+## 課後作業
+
+請使用 https://replit.com/ 來寫作業
+
+這次作業的規格如下：
+
+- 這個程式的用途，是跟一群朋友出遊時，方便均分所有支出
+- 可以隨時打開使用，所以資料要隨時存到 local storage
+- 可以清楚看到，誰目前還欠多少錢、誰目前先出了多少錢
+- 旅遊結束時，可以根據上述資料，快速地互相結清帳款
+
+UI 規格如下：
+
+- 頁面上有一個「分帳成員」清單，裡面列出目前參與分帳的成員
+- 有一個「新增成員」按鈕，點擊可以輸入「成員姓名」後新增
+- 有一個「新增支出款項」按鈕，點擊可以輸入「款項名稱」、「款項金額」，並且可以選擇「由誰付款」
+- 上述兩個功能，可以做成 modal 視窗（輸入欄位放在視窗內），也可以直接把輸入欄位都放在畫面上
+- 頁面上條列出所有帳款，顯示付款人、金額、款項名稱，旁邊有刪除按鈕
+- 在「分帳成員」清單內，每個成員旁邊顯示「應付金額」或者「應收金額」，分別顯示為紅色、綠色（目前總支出，除以成員人數之後，與成員目前代墊支出的差額）
+- 頁面上有一個「旅程結束」按鈕，點擊後刪除所有成員、所有款項
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="179" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/13k0Va" class="text-muted">19留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/13k0Va" class="text-muted">
+                975瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/9aWkka" class="text-muted" title="2023-02-16 14:14:35">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/9aWkka" class="text-default">JavaScript 系列八：第4課 ── 行事曆應用程式</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/9aWkka" class="text-muted">## 課程目標
+
+- 能夠寫出行事曆應用程式
+
+## 課程內容
+
+現在新推出的大部份 javascript 套件，都會提供 native（原生）、React、Vue 三種版本，方便使用
+
+舉例來說，這款行事曆套件，就有多種版本
+
+https://fullcalendar.io/
+
+也有易安裝的 CDN 版本
+
+https://fullcalendar.io/docs/initialize-globals
+
+---
+
+所謂的 React、Vue 或是任何框架版本，其實就只是把套件，根據框架規格，封裝成元件而已
+
+（元件的觀念，之後會教，先別擔心）
+
+套件會大量跟 DOM 互動，框架也會跟 DOM 互動，兩者容易衝突，使用上通常會 bug 一大堆
+
+所以官方會推出套件版本，改掉一些底層寫法，方便框架用戶使用
+
+如果沒有，那就由開發者自己小心管理，通常也沒太大問題
+
+就是把初始化相關放在 `mounted` 裡面，然後狀態更新時，找方法與套件狀態同步，就這樣而已
+
+---
+
+這一課來寫行事曆應用程式
+
+關鍵字 `calendar app ui`
+
+## 課後作業
+
+請使用 https://replit.com/ 來寫作業
+
+這次作業的規格如下：
+
+- 這種程式應該要讓人註冊登入使用，需要後端配合，但我們簡化吧：免登入、把資料存在 local storage 就好
+- 有一個「新增活動」按鈕，點擊可以輸入「活動名稱」、選擇「活動日期」與「活動時間」
+- 不用做成「開始、結束」兩個時間點，就做成開始時間就好
+- 日期時間的 UI，請使用 https://github.com/xdan/datetimepicker
+- 上述功能，可以做成 modal 視窗（輸入欄位放在視窗內），也可以直接把輸入欄位都放在畫面上
+- 使用 FullCalendar 呈現行事曆，將活動顯示在對應日期
+- 點擊行事曆內的活動，可以刪除活動。請使用 javascript 內建的 `confirm` 函式，確認「是否刪除此筆活動？」後刪除
+- 請「不要」用官方 Vue 版本，請用 CDN 版本，學著自己在框架內導入套件
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="180" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/9aWkka" class="text-muted">14留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/9aWkka" class="text-muted">
+                998瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/L3QRYa" class="text-muted" title="2023-02-16 14:14:49">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/L3QRYa" class="text-default">JavaScript 系列八：第5課 ── 體重追蹤應用程式</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/L3QRYa" class="text-muted">## 課程目標
+
+- 能夠寫出體重追蹤應用程式
+
+## 課程內容
+
+找套件時，如果官方沒有提供特定框架的版本，通常會有開發者，自行包裝一個，分享給大家使用
+
+搜尋 `how to use 套件名稱 in 框架名稱` 大概就找得到相關資源了
+
+舉例來說，這款圖表套件，官方沒有提供框架版本
+
+https://www.chartjs.org/
+
+但是社群就有人做好了
+
+https://vue-chartjs.org/
+
+---
+
+介紹一個網站 https://dribbble.com/
+
+業界設計師，經常在上面搜尋別人的成品、找靈感、分享靈感
+
+除了在 google 搜尋關鍵字，也可以常常到 Dribbble 搜尋
+
+---
+
+這一課來寫體重追蹤應用程式
+
+關鍵字 `weight tracking`
+
+## 課後作業
+
+請使用 https://replit.com/ 來寫作業
+
+這次作業的規格如下：
+
+- 這種程式應該要讓人註冊登入使用，需要後端配合，但我們簡化吧：免登入、把資料存在 local storage 就好
+- 此程式能夠新增一筆體重資料，input 欄位有「體重」、「日期」
+- 有清單列表顯示每一筆輸入的資料，按照日期排序。每筆資料旁邊有刪除按鈕
+- 使用 Chart.js 將體重的走勢，用折線圖（Line Chart）呈現
+- 請「不要」使用社群包裝的版本（vue-chartjs），學著自己在框架內導入套件
+
+---
+
+提示：vue 跟 chart.js 整合的時候，有一個地雷！會導致 `RangeError: Maximum call stack size exceeded `
+
+要解決這個地雷，請參閱這邊的討論
+
+https://codelove.tw/@birdie2019/post/Ja69K3
+
+---
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="181" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/L3QRYa" class="text-muted">12留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/L3QRYa" class="text-muted">
+                947瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/1ayR0q" class="text-muted" title="2023-02-16 14:15:00">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/1ayR0q" class="text-default">JavaScript 系列八：第6課 ── 天氣查詢應用程式</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/1ayR0q" class="text-muted">## 課程目標
+
+- 能夠寫出天氣查詢應用程式
+
+## 課程內容
+
+開發應用程式時，經常需要上網找一些資料 API
+
+比如搜尋 `台灣氣象資料 api` 會找到中央氣象局開發的 API 服務
+
+https://opendata.cwb.gov.tw/index
+
+想使用這些 API，通常就把官網說明文件看一看，試一試即可
+
+如果不順利，就上網找找看有沒有人寫過 API 串接教學，照做即可
+
+為了避免 API 服務被濫用、過度呼叫，通常 API 需要註冊之後，取得金鑰（key）才能呼叫
+
+如何使用金鑰驗證？通常是在發出 api call 的時候，在 http request header 裡面附上 API key
+
+也有可能就直接在呼叫的 url 附上，或者在 http post 內用 form data 附上
+
+各種 API 驗證方式不同，取決於 API 提供者的主觀偏好
+
+多找找範例、說明文件，多多嘗試即可
+
+---
+
+這一課來寫天氣查詢應用程式
+
+關鍵字 `weather app ui`
+
+## 課後作業
+
+請使用 https://replit.com/ 來寫作業
+
+這次作業的規格如下：
+
+- 頁面上有一個「縣市」選單，可選擇要查詢的縣市
+- 選擇縣市之後，在畫面上顯示此縣市當下的這些資訊：
+  - 天氣現象
+  - 最高溫度
+  - 最低溫度
+  - 降雨機率
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="182" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/1ayR0q" class="text-muted">12留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/1ayR0q" class="text-muted">
+                863瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/Ex2GE3" class="text-muted" title="2023-02-16 14:15:14">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/Ex2GE3" class="text-default">JavaScript 系列八：第7課 ── 國家資訊與地圖應用程式</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/Ex2GE3" class="text-muted">## 課程目標
+
+- 能夠寫出國家資訊與地圖應用程式
+
+## 課程內容
+
+開發應用程式時，經常需要把多種 API 組合起來使用！
+
+如果各種 API 有提供 Vue 包裝的元件版本，通常會容易許多
+
+如果沒有，那就自己想辦法管理好狀態，在 Vue 裡面使用，通常也沒問題
+
+---
+
+這一課來寫各國資訊查詢
+
+使用這服務來取得各國資料
+
+https://restcountries.com/
+
+內含每個國家「中心點」的經緯度
+
+---
+
+接著要用地圖套件 Leaflet
+
+https://leafletjs.com/
+
+底層圖資，使用 OpenStreetMap
+
+https://www.openstreetmap.org/
+
+## 課後作業
+
+請使用 https://replit.com/ 來寫作業
+
+這次作業的規格如下：
+
+- 顯示世界地圖，上面有上百個代表國家的大頭針（marker），放在國家「中心點」的經緯度
+- 點擊大頭針，會跳出一個視窗，視窗內含以下資訊：
+  - 國旗圖案
+  - 國家名稱
+  - 首都名稱
+  - 貨幣符號
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="183" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/Ex2GE3" class="text-muted">16留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/Ex2GE3" class="text-muted">
+                1,026瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/B3bD2q" class="text-muted" title="2023-02-16 14:19:22">
+                    02月16日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/B3bD2q" class="text-default">JavaScript 系列八：結語</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/B3bD2q" class="text-muted">恭喜你完成了一系列的專案開發挑戰
+
+放眼市面上的新手教材，應該沒人會把作業設定到這麼困難！
+
+但我認為時機差不多了，所以要求一些有挑戰性、有趣的專案來讓你做，應該難不倒你
+
+而且這種只用基本功能，就完成複雜專案的經驗，有助於掌握框架的本質、熟練框架基礎
+
+既然你通通順利完成了，代表你的學習狀況「相當不錯」...... 再次跟你說聲恭喜！
+
+---
+
+這些專案內容，已經相當接近實務上、職場上會遇到的開發需求
+
+也就是說，你的開發經驗已經「大大提升」了不少
+
+事實上，光是目前的技能與經驗，已經可以應付職場上絕大多數的功能要求
+
+你已經離「進入職場工作」，又大大靠近了一步！
+
+但是呢，要能夠與團隊共同開發中大型專案，還是需要學習框架進階觀念、生態系、以及 JavaScript 生態系各種工具
+
+坊間補習班，通常會在課程很早期開始教上述這些內容。我認為這會令學習者非常眼花撩亂
+
+所以我讓你僅僅學完 `Essentials` 的內容，就立刻動手開發複雜、好玩的應用程式
+
+我認為這樣才能清楚認識框架的強大，以及知道「工具不是導入越多、搞得越複雜就越好」
+
+而是要視情況，只導入必要的、大小適宜的技術工具，這樣才能收放自如
+
+那麼更大型的專案，又該引入哪些進階觀念、生態系工具呢？
+
+這些會在後續的課程提到！
+
+---
+
+消化、研究完本課程之後，關於 JavaScript 更多必學的基本觀念
+
+請接著前往「自學網頁の嬰兒教材：JavaScript（九）」開始學習吧！
+
+https://codelove.tw/@howtomakeaturn/course/QxMYx5</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="184" data-type="post">
+            <i class="far fa-heart"></i> <span>1</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/B3bD2q" class="text-muted">0留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/B3bD2q" class="text-muted">
+                421瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                    </div>
+        <div class="col-lg-3 d-none d-lg-block">
+            <div class="mt-3 ml-3">
+                <div class="bg-white rounded border p-3">
+    <div class="d-flex align-items-center">
+        <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none mr-2">
+            <img src="https://i.imgur.com/UCzsTDX.png" class="profile-photo" style="width: 50px; height: 50px;">
+        </a>
+        <div class="font-weight-bold h5 m-0"><a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a></div>
+    </div>
+    <hr>
+    <div class="text-muted text-break">👉 身份：資深全端工程師、指導過無數人半路出家轉職
+👉 使命：打造 CodeLove 成為優質新手村，讓非本科也有地方自學＆討論</div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="bg-dark text-white" id="layout-footer">
+    <div class="container mt-5">
+        <div class="mt-4 pt-4 pb-4">
+            <div class="row">
+                <div class="col">
+                    <div class="mr-n2">
+                        <a href="/trending-keywords" class="text-white">熱門搜尋</a>：
+                                                    <a href="/search?q=1&from=trending" class="mr-2 text-white">1</a>
+                                                    <a href="/search?q=題&from=trending" class="mr-2 text-white">題</a>
+                                                    <a href="/search?q=使用&from=trending" class="mr-2 text-white">使用</a>
+                                                    <a href="/search?q=開發&from=trending" class="mr-2 text-white">開發</a>
+                                                    <a href="/search?q=2&from=trending" class="mr-2 text-white">2</a>
+                                                    <a href="/search?q=%&from=trending" class="mr-2 text-white">%</a>
+                                                    <a href="/search?q=go&from=trending" class="mr-2 text-white">go</a>
+                                                    <a href="/search?q=c&from=trending" class="mr-2 text-white">c</a>
+                                                    <a href="/search?q=前&from=trending" class="mr-2 text-white">前</a>
+                                                    <a href="/search?q=4&from=trending" class="mr-2 text-white">4</a>
+                                                    <a href="/search?q=作業&from=trending" class="mr-2 text-white">作業</a>
+                                                    <a href="/search?q=分享&from=trending" class="mr-2 text-white">分享</a>
+                                                    <a href="/search?q=專案&from=trending" class="mr-2 text-white">專案</a>
+                                                    <a href="/search?q=JS&from=trending" class="mr-2 text-white">JS</a>
+                                                    <a href="/search?q=api&from=trending" class="mr-2 text-white">api</a>
+                                                    <a href="/search?q=學習&from=trending" class="mr-2 text-white">學習</a>
+                                                    <a href="/search?q=?&from=trending" class="mr-2 text-white">?</a>
+                                                    <a href="/search?q=.&from=trending" class="mr-2 text-white">.</a>
+                                                    <a href="/search?q=自學&from=trending" class="mr-2 text-white">自學</a>
+                                                    <a href="/search?q=工作&from=trending" class="mr-2 text-white">工作</a>
+                                                    <a href="/search?q=ＣＳＳ&from=trending" class="mr-2 text-white">ＣＳＳ</a>
+                                                    <a href="/search?q=結構&from=trending" class="mr-2 text-white">結構</a>
+                                                    <a href="/search?q=技術&from=trending" class="mr-2 text-white">技術</a>
+                                                    <a href="/search?q=作為&from=trending" class="mr-2 text-white">作為</a>
+                                                    <a href="/search?q=網站&from=trending" class="mr-2 text-white">網站</a>
+                                                    <a href="/search?q=研究&from=trending" class="mr-2 text-white">研究</a>
+                                                    <a href="/search?q=第一&from=trending" class="mr-2 text-white">第一</a>
+                                                    <a href="/search?q=語言&from=trending" class="mr-2 text-white">語言</a>
+                                                    <a href="/search?q=C&from=trending" class="mr-2 text-white">C</a>
+                                                    <a href="/search?q=工程師&from=trending" class="mr-2 text-white">工程師</a>
+                                                    <a href="/search?q=%&#039;&from=trending" class="mr-2 text-white">%&#039;</a>
+                                                    <a href="/search?q=系列&from=trending" class="mr-2 text-white">系列</a>
+                                                    <a href="/search?q=研&from=trending" class="mr-2 text-white">研</a>
+                                                    <a href="/search?q=10&from=trending" class="mr-2 text-white">10</a>
+                                                    <a href="/search?q=Ai&from=trending" class="mr-2 text-white">Ai</a>
+                                                    <a href="/search?q=github&from=trending" class="mr-2 text-white">github</a>
+                                                    <a href="/search?q=Line&from=trending" class="mr-2 text-white">Line</a>
+                                                    <a href="/search?q=ci&from=trending" class="mr-2 text-white">ci</a>
+                                                    <a href="/search?q=git&from=trending" class="mr-2 text-white">git</a>
+                                                    <a href="/search?q=&#039;&from=trending" class="mr-2 text-white">&#039;</a>
+                                                    <a href="/search?q=測試&from=trending" class="mr-2 text-white">測試</a>
+                                                    <a href="/search?q=CSS&from=trending" class="mr-2 text-white">CSS</a>
+                                                    <a href="/search?q=app&from=trending" class="mr-2 text-white">app</a>
+                                                    <a href="/search?q=網頁&from=trending" class="mr-2 text-white">網頁</a>
+                                                    <a href="/search?q=jav&from=trending" class="mr-2 text-white">jav</a>
+                                                    <a href="/search?q=前端&from=trending" class="mr-2 text-white">前端</a>
+                                                    <a href="/search?q=套件&from=trending" class="mr-2 text-white">套件</a>
+                                                    <a href="/search?q=Java&from=trending" class="mr-2 text-white">Java</a>
+                                                    <a href="/search?q=`&from=trending" class="mr-2 text-white">`</a>
+                                                    <a href="/search?q=fetch&from=trending" class="mr-2 text-white">fetch</a>
+                                                    <a href="/search?q=後端&from=trending" class="mr-2 text-white">後端</a>
+                                                    <a href="/search?q=搜尋&from=trending" class="mr-2 text-white">搜尋</a>
+                                                    <a href="/search?q=ui&from=trending" class="mr-2 text-white">ui</a>
+                                                    <a href="/search?q=20&from=trending" class="mr-2 text-white">20</a>
+                                                    <a href="/search?q=CD&from=trending" class="mr-2 text-white">CD</a>
+                                                    <a href="/search?q=資料庫&from=trending" class="mr-2 text-white">資料庫</a>
+                                                    <a href="/search?q=javascript&from=trending" class="mr-2 text-white">javascript</a>
+                                                    <a href="/search?q=id&from=trending" class="mr-2 text-white">id</a>
+                                                    <a href="/search?q=Git&from=trending" class="mr-2 text-white">Git</a>
+                                                    <a href="/search?q=with&from=trending" class="mr-2 text-white">with</a>
+                                                    <a href="/search?q=AI&from=trending" class="mr-2 text-white">AI</a>
+                                                    <a href="/search?q=for&from=trending" class="mr-2 text-white">for</a>
+                                                    <a href="/search?q=練習&from=trending" class="mr-2 text-white">練習</a>
+                                                    <a href="/search?q=GIT&from=trending" class="mr-2 text-white">GIT</a>
+                                                    <a href="/search?q=非同步&from=trending" class="mr-2 text-white">非同步</a>
+                                                    <a href="/search?q=html&from=trending" class="mr-2 text-white">html</a>
+                                                    <a href="/search?q=node.js&from=trending" class="mr-2 text-white">node.js</a>
+                                                    <a href="/search?q=vscode&from=trending" class="mr-2 text-white">vscode</a>
+                                                    <a href="/search?q=create&from=trending" class="mr-2 text-white">create</a>
+                                                    <a href="/search?q=Vue&from=trending" class="mr-2 text-white">Vue</a>
+                                                    <a href="/search?q=架構&from=trending" class="mr-2 text-white">架構</a>
+                                                    <a href="/search?q=資料結構&from=trending" class="mr-2 text-white">資料結構</a>
+                                                    <a href="/search?q=import&from=trending" class="mr-2 text-white">import</a>
+                                                    <a href="/search?q=50&from=trending" class="mr-2 text-white">50</a>
+                                                    <a href="/search?q=console&from=trending" class="mr-2 text-white">console</a>
+                                                    <a href="/search?q=result&from=trending" class="mr-2 text-white">result</a>
+                                                    <a href="/search?q=面試&from=trending" class="mr-2 text-white">面試</a>
+                                                    <a href="/search?q=REACT&from=trending" class="mr-2 text-white">REACT</a>
+                                                    <a href="/search?q=Node&from=trending" class="mr-2 text-white">Node</a>
+                                                    <a href="/search?q=Response&from=trending" class="mr-2 text-white">Response</a>
+                                                    <a href="/search?q=熱情&from=trending" class="mr-2 text-white">熱情</a>
+                                                    <a href="/search?q=.NET&from=trending" class="mr-2 text-white">.NET</a>
+                                                    <a href="/search?q=JavaScript&from=trending" class="mr-2 text-white">JavaScript</a>
+                                                    <a href="/search?q=react&from=trending" class="mr-2 text-white">react</a>
+                                                    <a href="/search?q=user&from=trending" class="mr-2 text-white">user</a>
+                                                    <a href="/search?q=local&from=trending" class="mr-2 text-white">local</a>
+                                                    <a href="/search?q=PHP&from=trending" class="mr-2 text-white">PHP</a>
+                                                    <a href="/search?q=java&from=trending" class="mr-2 text-white">java</a>
+                                                    <a href="/search?q=日期&from=trending" class="mr-2 text-white">日期</a>
+                                                    <a href="/search?q=履歷&from=trending" class="mr-2 text-white">履歷</a>
+                                                    <a href="/search?q=登入&from=trending" class="mr-2 text-white">登入</a>
+                                                    <a href="/search?q=module&from=trending" class="mr-2 text-white">module</a>
+                                                    <a href="/search?q=API&from=trending" class="mr-2 text-white">API</a>
+                                                    <a href="/search?q=新創&from=trending" class="mr-2 text-white">新創</a>
+                                                    <a href="/search?q=javascript 系列&from=trending" class="mr-2 text-white">javascript 系列</a>
+                                                    <a href="/search?q=css&from=trending" class="mr-2 text-white">css</a>
+                                                    <a href="/search?q=Can&from=trending" class="mr-2 text-white">Can</a>
+                                                    <a href="/search?q=docker&from=trending" class="mr-2 text-white">docker</a>
+                                                    <a href="/search?q=遊戲&from=trending" class="mr-2 text-white">遊戲</a>
+                                                    <a href="/search?q=謝謝&from=trending" class="mr-2 text-white">謝謝</a>
+                                            </div>
+                    <hr style="border-color: #666;" />
+                    <div style="font-size: 0.875rem;"><a href="/" class="text-white">CodeLove 愛寫扣論壇 © 2024</a></div>
+                    <div class="mt-2 pb-5" style="font-size: 0.875rem;">🛡️ 隱私及網站安全：本站註冊過程「不須提供任何個資」，只要 E-Mail 與帳密即可註冊，請安心註冊！線上付款過程使用「綠界科技 ECPay 」第三方專業金流廠商，全程在「綠界科技 ECPay 」網站進行付款程序，本站「不會紀錄任何信用卡資訊」，請放心付款、解鎖課程！您隨時可以透過 FB 粉專或者 Email 聯絡站長，請求刪除網站上的個人資料。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- Modal -->
+<div class="modal fade" id="ctaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">歡迎來到 CodeLove 愛寫扣論壇</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- <p>本論壇提供「新手友善」的 JavaScript 前端自學教材！在您報名10萬元程式補習班之前，請先來看看！</p> -->
+            <p>你的轉職路上，還缺少一份自學作業包！寫完這幾包，直接拿作品去面試上班！</p>
+                        <div class="row no-gutters mt-n1">
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/gARwK32.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/633R6Ai.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/STB7y0E.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/um7gM5P.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/QqYL9Gc.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/WS30bkX.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/AmEhiEz.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/eLkh90D.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/CVU7cCr.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                            </div>
+            <a href="/courses?cta=welcome-modal" class="mt-2 btn btn-primary btn-block">👉 前端自學作業包：何必花10萬去補習？寫作業包就能轉職！</a>
+            <hr>
+            <p>本論壇另有附設一個 LINE 新手發問＆交流群組！歡迎加入討論！</p>
+            <a href="https://line.me/ti/g2/nipkjq2WoZPKX5dTn9tE9266aEOt6EOICFGa1g" class="btn btn-success btn-block">👉 來加 LINE 討論群組</a>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(() => {
+        const key = 'cta-showed';
+
+        if (!Cookies.get(key)) {
+            Cookies.set(key, '1', { expires: 7 });
+
+            $('#ctaModal').modal('show');
+        }
+    });
+</script>
+
+    <div class="alert alert-success mb-0 text-center alert-cta fixed-bottom" role="alert" style="display: none;">
+        <i class="fas fa-bullhorn"></i>&nbsp;
+        <a href="/courses?cta=top-link" class="alert-link">HTML + JavaScript 前端自學作業包：何必花10萬去補習？寫作業包就能轉職！</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <script>
+        $(document).ready(() => {
+            const key = 'alert-cta-showed';
+
+            if (!Cookies.get(key)) {
+                $('.alert-cta').show();
+            }
+
+            $('.alert-cta .close').on('click', () => {
+                Cookies.set(key, '1', { expires: 7 });
+            });
+        });
+    </script>
+
+<style>
+    @media (min-width: 768px) {
+        .alert-cta {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+
+    <script>
+        $(document).ready(function(){
+
+            toastr.options = {
+                //"positionClass": "toast-top-center",
+            }
+
+            
+            autosize(document.querySelectorAll('.autosize'));
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            twemoji.parse(document.body);
+        });
+
+        $(document).ajaxComplete(function () {
+            twemoji.parse(document.body);
+        });
+    </script>
+
+    <script>
+        var initLikeButtons = function(){
+            $('.btn-like').off('click');
+            $('.btn-like').click(function(){
+                if ($(this).hasClass('clicked')) {
+                    $(this).removeClass('clicked');
+                    $(this).find('span').eq(0).text(parseInt($(this).find('span').eq(0).text()) - 1);
+                    $(this).find('i').removeClass('fas');
+                    $(this).find('i').addClass('far');
+                    $.post('/ajax-cancel-like', {
+                        id: $(this).data('id'),
+                        type: $(this).data('type'),
+                        _token: 'jdlMGGuVsVXzIv29N15OT53GKoPpDNiQCy7ycDed'
+                    });
+                } else {
+                    $(this).addClass('clicked');
+                    $(this).find('span').eq(0).text(parseInt($(this).find('span').eq(0).text()) + 1);
+                    $(this).find('i').removeClass('far');
+                    $(this).find('i').addClass('fas');
+                    $.post('/ajax-like', {
+                        id: $(this).data('id'),
+                        type: $(this).data('type'),
+                        _token: 'jdlMGGuVsVXzIv29N15OT53GKoPpDNiQCy7ycDed'
+                    });
+                }
+            });
+        };
+
+        $(document).ready(initLikeButtons);
+        $(document).ajaxComplete(initLikeButtons);
+    </script>
+</body>
+</html>

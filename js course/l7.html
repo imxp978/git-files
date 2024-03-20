@@ -1,0 +1,2193 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>自學網頁の嬰兒教材：JavaScript（七）—— 不想教你 Vue，只想教你怎麼學框架</title>
+    <meta name="description" content="網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！">
+
+    <meta property='og:title' content="自學網頁の嬰兒教材：JavaScript（七）—— 不想教你 Vue，只想教你怎麼學框架">
+    <meta property='og:description' content="網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！">
+    <meta property='og:image' content="https://i.imgur.com/AmEhiEz.png">
+
+    <meta name="twitter:card" content="photo" />
+    <meta name="twitter:title" content="自學網頁の嬰兒教材：JavaScript（七）—— 不想教你 Vue，只想教你怎麼學框架" />
+    <meta name="twitter:description" content="網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！" />
+    <meta name="twitter:image" content="https://i.imgur.com/AmEhiEz.png" />
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="jdlMGGuVsVXzIv29N15OT53GKoPpDNiQCy7ycDed">
+
+    <link href="https://codelove.tw/css/app.css?v=2" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/vendor/css/open-color.css">
+
+    <script src='/vendor/js/jquery-3.3.1.min.js'></script>
+    <script src='/vendor/js/popper-1.14.0.min.js'></script>
+    <script src='/vendor/js/bootstrap.min.js'></script>
+
+    <script src="/vendor/toastr/toastr.min.js" defer></script>
+    <link href="/vendor/toastr/toastr.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/vendor/fontawesome-5.6.3/css/all.css">
+
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+
+    <script src="/vendor/autosize/autosize.min.js"></script>
+    <script src="/vendor/js-cookie/js.cookie.min.js"></script>
+
+    <script src="/vendor/linkify/linkify.min.js"></script>
+    <script src="/vendor/linkify/linkify-jquery.min.js"></script>
+
+    <script src="/vendor/fitvids/jquery.fitvids.min.js"></script>
+
+    <script>
+        // The `parsedown` library already handled it.?
+        $(document).ready(function(){
+            $('.linkify').linkify({
+                target: "_blank"
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $(".youtube-rwd").fitVids();
+        });
+    </script>
+
+    <script src="/vendor/lazyload/lazyload.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <style>
+        .text-break {
+            word-break: break-all;
+        }
+    </style>
+
+    <style>
+    img.emoji {
+        height: 1.3em;
+        width: 1.3em;
+        margin: 0 .05em 0 .1em;
+        vertical-align: -0.3em;
+    }
+</style>
+
+<style>
+    .visited-box {
+        height: 40px;
+        margin-top: 0.5rem;
+        /*
+        white-space: nowrap;
+        */
+        overflow: hidden;
+    }
+    .visited-box a {
+        margin-left: 5px;
+    }
+    .visited-box a:first-child {
+        margin-left: 0px;
+    }
+    .visited-box a:hover {
+        text-decoration: none;
+    }
+    .visited-avatar {
+        object-fit: cover;
+    }
+
+    #loading {
+        position: fixed; /* Sit on top of the page content */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #loading-icon {
+        color: white;
+    }
+</style>
+
+<style>
+    .text-default {
+        color: #212529 !important;
+    }
+    .text-break {
+        word-break: break-all;
+    }
+    .text-clamp-2 {
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+    .text-clamp-3 {
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+    .text-clamp-4 {
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+    .post-card {
+        border-top: 1px solid #dee2e6;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .post-card .image-box {
+        text-align: center;
+        overflow: hidden;
+        background: repeating-linear-gradient( 45deg, var(--oc-gray-2), var(--oc-gray-2) 10px, var(--oc-gray-3) 10px, var(--oc-gray-3) 20px );
+    }
+    .post-card .image {
+        /* width: 100%;
+        height: 200px; */
+        max-width: 100%;
+        max-height: 40vh;
+        object-fit: cover;
+        object-position: center;
+    }
+    @media (min-width: 576px) {
+        .post-card {
+            border-left: 1px solid #dee2e6;
+            border-right: 1px solid #dee2e6;
+            border-radius: .25rem;
+        }
+        .post-card .image-box {
+            border-top-right-radius: .25rem;
+            border-top-left-radius: .25rem;
+        }
+    }
+    .btn-like.clicked {
+        color: var(--oc-red-5) !important;
+    }
+</style>
+
+<style>
+    .post-core-title {
+        font-size: 27px;
+        font-weight: bold;
+    }
+    .post-core {
+        line-height: 1.6;
+    }
+    .post-core h1 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-top: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    .post-core h2 {
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    .post-core h3 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    .post-core h1:first-child, .post-core h2:first-child, .post-core h3:first-child {
+        margin-top: 0;
+    }
+    .post-core p {
+        font-size: 18px;
+        margin-bottom: 1rem;
+    }
+    .post-core pre {
+        padding: 1rem;
+    }
+    .post-core img:not(.emoji) {
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+    /* ref: https://codepen.io/anthony-liddle/pen/eYpRavv */
+    .post-core hr {
+        margin: 2rem auto;
+        position: relative;
+        height: 9px;
+        width: 9px;
+        border: transparent;
+        overflow: visible;
+        /* background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="0.75" y="0.5" width="8" height="8" rx="4" fill="%231CB0A8" /></svg>'); */
+    }
+    .post-core hr:before {
+        position: absolute;
+        height: 9px;
+        width: 10px;
+        content: '';
+        /* background-image: url('data:image/svg+xml;utf8,<svg width="10" height="9" viewBox="0 0 10 9" xmlns="http://www.w3.org/2000/svg"><path d="M3.91043 1.29752C4.30449 0.688518 5.19551 0.688519 5.58957 1.29752L9.25143 6.95675C9.68196 7.62211 9.20436 8.5 8.41186 8.5H1.08814C0.29564 8.5 -0.181954 7.62211 0.248574 6.95675L3.91043 1.29752Z" fill="%23FCB643" /></svg>'); */
+        left: -20px;
+    }
+    .post-core hr:after {
+        position: absolute;
+        height: 9px;
+        width: 9px;
+        content: '';
+        /* background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="0.75" y="0.5" width="8" height="8" rx="1" fill="%23EF4056" /></svg>'); */
+        right: -20px;
+    }
+    @media (min-width: 768px) {
+        .post-core-title {
+            font-size: 30px;
+        }
+        .post-core {
+            line-height: 1.8;
+        }
+        .post-core h1 {
+            font-size: 30px;
+            margin-top: 2.25rem;
+        }
+        .post-core h2 {
+            font-size: 27px;
+            margin-top: 1.5rem;
+        }
+        .post-core h3 {
+            font-size: 24px;
+            margin-top: 1.25rem;
+        }
+        .post-core p {
+            font-size: 20px;
+        }
+    }
+</style>
+
+<style>
+    .post-core pre {
+        background-color: #f1f3f5;
+    }
+    .post-core hr {
+        background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="3" height="3" rx="1.5" fill="%23212529" /></svg>');
+    }
+    .post-core hr:before {
+        background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="3" height="3" rx="1.5" fill="%23212529" /></svg>');
+    }
+    .post-core hr:after {
+        background-image: url('data:image/svg+xml;utf8,<svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="3" height="3" rx="1.5" fill="%23212529" /></svg>');
+    }
+</style>
+
+<!-- full markdown support -->
+<style>
+    .post-core li {
+        font-size: 18px;
+    }
+    .post-core h4 {
+        font-size: 20px;
+    }
+    .post-core h5 {
+        font-size: 18px;
+    }
+    .post-core h6 {
+        font-size: 16px;
+    }
+    @media (min-width: 768px) {
+        .post-core li {
+            font-size: 20px;
+        }
+        .post-core h4 {
+            font-size: 22px;
+        }
+        .post-core h5 {
+            font-size: 20px;
+        }
+        .post-core h6 {
+            font-size: 18px;
+        }
+    }
+    .post-core blockquote {
+        padding-left: calc(1rem - 4px);
+        border-left: solid 4px var(--oc-gray-3);
+    }
+    .post-core p code, .post-core li code {
+        background-color: var(--oc-gray-2);
+        color: var(--oc-gray-9);
+        /* background-color: var(--oc-pink-1); */
+        border-radius: 5px;
+        font-size: 80%;
+        padding: 0.1em 0.25em;
+    }
+</style>
+
+<style>
+    .post-core table {
+        margin-bottom: 1rem;
+    }
+
+    .post-core table th, .post-core table td {
+        border: 1px solid var(--oc-gray-3);
+        padding: 8px 8px;
+        min-width: 60px;
+        font-size: 18px;
+    }
+
+    @media (min-width: 768px) {
+        .post-core table th, .post-core table td {
+            font-size: 20px;
+        }
+    }
+</style>
+
+<style>
+    .btn.btn-default {
+        color: #292b2c;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    .btn.btn-default:hover {
+        color: #292b2c;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+    }
+    .btn.btn-default:active {
+        color: #292b2c;
+        background-color: #e6e6e6;
+        background-image: none;
+        border-color: #adadad;
+    }
+</style>
+
+<style>
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .user-photo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+</style>
+
+<style>
+    .thumbnail {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+    .thumbnail img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        max-height: 100%;
+        width: auto;
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+    @media (min-width: 768px) {
+        .thumbnail {
+            height: 180px;
+        }
+    }
+
+</style>
+
+<style>
+    .tags-container {
+        margin-bottom: -5px;
+    }
+    .post-tag {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        background-color: var(--oc-gray-7) !important;
+        color: var(--oc-gray-4) !important;
+        margin-bottom: 5px;
+        border-radius: 3px;
+    }
+    .post-tag:hover {
+        cursor: pointer;
+        background-color: var(--oc-gray-8) !important;
+        color: #616161;
+        text-decoration: none;
+    }
+    .post-tag.sub {
+        /* margin-bottom: 0; */
+        padding: 0.2rem 0.4rem;
+        font-size: 0.875rem;
+    }
+</style>
+
+<style>
+    .badge-sales {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 1;
+        font-size: 1.5rem;
+    }
+    html {
+        scroll-padding-top: 80px;
+    }
+</style>
+
+    
+
+    <script src="/vendor/mobile-detect/mobile-detect.min.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DDHVBL1ZHK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-DDHVBL1ZHK');
+    </script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+    <div id="loading" style="display: none;">
+        <span id="loading-icon" class="fa-10x">
+            <i class="fas fa-spinner fa-spin"></i>
+        </span>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark _navbar-light _bg-white sticky-top">
+    <a class="navbar-brand" href="/">CodeLove 愛寫扣論壇</a>
+
+    <div>
+                                    <a href="/my-notifications" class="btn btn-link d-lg-none text-decoration-none">
+                    <i class="far fa-bell text-secondary"></i>
+                </a>
+                    
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <!-- <a class="nav-link" href="/">網站首頁</a> -->
+                <a class="nav-link" href="/articles">技術文章</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/discuss">討論專區</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/courses">自學作業包</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    自學作業包
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/courses/frontend-beginner">轉職前端：半路出家，入門必備教材！</a>
+                    <a class="dropdown-item" href="/courses/frontend-advanced">現役前端：業界人士，邁向資深之路！</a>
+                </div>
+            </li> -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    學員心得
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="https://codelove.tw/@pchun2330/post/AqJ6rq">轉職成功案例分享一：pchun</a>
+                    <a class="dropdown-item" href="https://codelove.tw/@birdie2019/post/jalr5x">轉職成功案例分享二：birdie</a>
+                    <a class="dropdown-item" href="https://codelove.tw/@howtomakeaturn/post/k31dYx">求職前的準備＆簡易指南</a>
+                </div>
+            </li>
+
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="https://codelove.tw/@howtomakeaturn/post/Aq5yVq">寫作計畫</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/search?q=作業分享">學員作業分享</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/trending-keywords">熱門搜尋</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="https://line.me/ti/g2/nipkjq2WoZPKX5dTn9tE9266aEOt6EOICFGa1g">LINE 群組</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="https://codelove.tw/@howtomakeaturn/post/jqeDka">文章 API</a>
+            </li> -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    社群與 API
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/search?q=作業分享">學員作業分享</a>
+                    <a class="dropdown-item" href="https://line.me/ti/g2/nipkjq2WoZPKX5dTn9tE9266aEOt6EOICFGa1g">LINE 群組</a>
+                    <a class="dropdown-item" href="https://codelove.tw/@howtomakeaturn/post/jqeDka">文章 API</a>
+                    <a class="dropdown-item" href="https://www.facebook.com/codelove.tw">FB 粉專</a>
+                </div>
+            </li>
+
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    技術文件
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/docs/vue3">Vue 3 台灣繁體中文文件</a>
+                    <a class="dropdown-item" href="/docs/laravel10">Laravel 10 台灣繁體中文文件</a>
+                </div>
+            </li> -->
+
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    社群連結
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="https://discord.gg/T5kgD6z9FR">Discord 交流群</a>
+                    <a class="dropdown-item" href="https://t.me/+1q6v3PkXp3AyZTRl">Telegram 交流群</a>
+                    <a class="dropdown-item" href="https://www.facebook.com/profile.php?id=100088031242230">Facebook 粉專</a>
+                    <a class="dropdown-item" href="https://www.facebook.com/groups/823853158867425">Facebook 社團</a>
+                </div>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a href="/coaching" class="btn btn-success btn my-2 my-lg-0 mx-lg-2">
+                   <i class="fas fa-comments"></i>&nbsp;
+                    線上指導
+                </a>
+            </li> -->
+            <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0" method="get" action="/search">
+                    <input class="form-control mx-lg-2" style="max-width: 150px;" type="search" placeholder="Search" aria-label="Search" name="q" >
+                    <input type="hidden" name="from" value="search">
+                    <button class="btn btn-default _mt-2 my-sm-0 _ml-sm-2 ml-2 ml-lg-0" type="submit">
+                        <i class="fas fa-search"></i>&nbsp;
+                        搜尋
+                    </button>
+                </form>
+            </li>
+        </ul>
+
+        <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <!-- <a href="/coaching" class="btn btn-warning btn my-2 my-lg-0 mr-lg-2">
+                    教練服務
+                </a> -->
+                <a href="/courses" class="btn btn-warning btn my-2 my-lg-0 mr-lg-2">
+                    自學教材
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/how-to-ask" class="btn btn-success btn my-2 my-lg-0 mr-lg-2">
+                    如何發問
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/new-post" class="btn btn-primary btn my-2 my-lg-0 mr-lg-2">
+                    發佈貼文
+                </a>
+            </li>
+
+                            <li class="nav-item">
+                    <a class="nav-link" href="/my-notifications" class="text-decoration-none">
+                                                    <i class="far fa-bell text-secondary"></i>
+                                            </a>
+                </li>
+            
+                            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://avatars.githubusercontent.com/u/103916953?v=4" width="40" height="40" class="d-inline-block align-top" alt="" style="margin-top: -8px; margin-bottom: -8px; border-radius: 50%; object-fit: cover;">&nbsp;
+                        <!-- <span class="d-lg-none d-xl-inline-block">
+                            <span class="d-inline-block text-truncate" style="vertical-align:middle; max-width: 80px;">
+                                
+                            </span>
+                        </span> -->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="https://codelove.tw/@imxp978">
+                            <br>
+                            <span class="username" style="font-size: 0.875rem;">@imxp978<br></span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/edit-photo">
+                            改大頭貼
+                        </a>
+                        <a class="dropdown-item" href="/edit-name">
+                            修改名稱
+                        </a>
+                        <a class="dropdown-item" href="/edit-intro">
+                            編輯簡介
+                        </a>
+                                                <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://codelove.tw/logout" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            登出
+                        </a>
+                        <form id="frm-logout" action="https://codelove.tw/logout" method="POST" style="display: none;">
+                            <input type="hidden" name="to" value="/">
+                            <input type="hidden" name="_token" value="jdlMGGuVsVXzIv29N15OT53GKoPpDNiQCy7ycDed">
+                        </form>
+                    </div>
+                </li>
+            
+        </ul>
+
+    </div>
+</nav>
+
+<style>
+    .navbar {
+        box-shadow: 0 2px 4px rgb(0 0 0 / 4%);
+    }
+    .navbar .username {
+        color: #6c757d;
+    }
+    .navbar .dropdown-item:active .username {
+        color: white;
+    }
+</style>
+
+    
+<div class="container px-0">
+    <div class="row no-gutters">
+        <div class="col-12 mb-n3">
+            <div class="d-none d-lg-block">
+                <h1 class="mt-5 h1 text-center px-3"><b>自學網頁の嬰兒教材：JavaScript（七）—— 不想教你 Vue，只想教你怎麼學框架</b></h1>
+                <h3 class="mt-3 h3 mb-5 text-center px-3">網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！</h3>
+            </div>
+            <div class="d-lg-none">
+                <h1 class="mt-5 h2 text-center px-3"><b>自學網頁の嬰兒教材：JavaScript（七）—— 不想教你 Vue，只想教你怎麼學框架</b></h1>
+                <h3 class="mt-3 h4 mb-5 text-center px-3">網站前端、後端工程師必備技能，最萬用的程式語言之一，新手必學的入門教材！</h3>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3 _d-none d-md-block">
+            <div class="mt-3 mr-md-3">
+                <div class="bg-white rounded border p-3">
+        <div class="font-weight-bold h5">課程內容</div>
+        <hr>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/8xXYN3">JavaScript 系列七：前言</a></div> -->
+        <div class="mt-2">
+                            👉
+                        <a href="https://codelove.tw/@howtomakeaturn/post/8xXYN3">JavaScript 系列七：前言</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/PamZgq">JavaScript 系列七：第1課 ── 認識 Vue 基本環境與 render state</a></div> -->
+        <div class="mt-2">
+                            👉
+                        <a href="https://codelove.tw/@howtomakeaturn/post/PamZgq">JavaScript 系列七：第1課 ── 認識 Vue 基本環境與 render state</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/d3ojVx">JavaScript 系列七：第2課 ── 體驗一下 Reactivity 的效果與便利</a></div> -->
+        <div class="mt-2">
+                            👉
+                        <a href="https://codelove.tw/@howtomakeaturn/post/d3ojVx">JavaScript 系列七：第2課 ── 體驗一下 Reactivity 的效果與便利</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/Eag2M3">JavaScript 系列七：第3課 ── 學習 Vue 條件判斷式的寫法</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/Eag2M3">JavaScript 系列七：第3課 ── 學習 Vue 條件判斷式的寫法</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/LaRKGq">JavaScript 系列七：第4課 ── 學習 Vue 迴圈的寫法</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/LaRKGq">JavaScript 系列七：第4課 ── 學習 Vue 迴圈的寫法</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/r3DR6q">JavaScript 系列七：第5課 ── 學習 Vue 事件處理的寫法</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/r3DR6q">JavaScript 系列七：第5課 ── 學習 Vue 事件處理的寫法</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/jal51q">JavaScript 系列七：第6課 ── 認識 Lifecycle Hooks 與 Watchers</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/jal51q">JavaScript 系列七：第6課 ── 認識 Lifecycle Hooks 與 Watchers</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/GqP5bx">JavaScript 系列七：第7課 ── 認識 Template Refs</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx">JavaScript 系列七：第7課 ── 認識 Template Refs</a>
+        </div>
+            <!-- <div class="mt-2">🔒 <a href="http://codelove.tw/@howtomakeaturn/post/pxdjma">JavaScript 系列七：結語</a></div> -->
+        <div class="mt-2">
+                            🔒
+                        <a href="https://codelove.tw/@howtomakeaturn/post/pxdjma">JavaScript 系列七：結語</a>
+        </div>
+    </div>
+            </div>
+        </div>
+        <div class="col col-md-8 col-lg-6">
+                            <div class="mt-3 d-none">
+                    <div class="card border-dark text-center">
+    <!-- <div class="card-header">
+        Featured
+    </div> -->
+    <div class="card-body">
+        <h5 class="card-title">本課程為付費解鎖教材</h5>
+        <p class="card-text">站長獨家研發的新手友善、專案導向教材！</p>
+        <a href="/courses/frontend-beginner/pricing" class='btn btn-success btn-lg' style="width: 240px;">
+            <!-- <i class="fas fa-unlock-alt"></i>&nbsp;
+            付費解鎖 -->
+            查看方案
+        </a>
+    </div>
+</div>
+                </div>
+                                        <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/8xXYN3" class="text-muted" title="2023-02-10 16:12:06">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/8xXYN3" class="text-default">JavaScript 系列七：前言</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/8xXYN3" class="text-muted">我知道你們很多人，來上這門課程，都是希望可以儘快去上班、賺錢
+
+所以... 我們來學 Vue 吧！
+
+---
+
+在開始之前，我必須再次強調
+
+與坊間很多補習班不同，我們已經花了六門課程的時間，在練習原生 JavaScript 與網頁基本觀念
+
+也就是説，就算完全不使用任何套件，只用最原始的開發方式，你也已經可以寫出各種前端功能了
+
+就算現在直接拿職場上的客戶需求給你，請你做出來，其實很多需求「你已經可以直接寫出來」了
+
+只是有些客戶要求的功能，畫面上的 `狀態` 與 `互動行為` 太多，原生 JavaScript 寫起來會很吃力
+
+就算引入 data model + render function 的觀念來輔助，還是很難寫
+
+所以我們要學習「框架」，讓應用程式的 `狀態` 與 `互動行為` 變得更好管理
+
+---
+
+我想說的是，不管你被要求去學習哪種框架
+
+你都要知道，不管寫起來多花俏、或者語法看起法多晦澀難懂，追根究底，都只是在管理 `狀態` 與 `互動行為`
+
+然後底層就只是一堆 `變數` 跟 `各種對於 DOM 的增減操作` 而已
+
+不要把框架想得太神奇，都是你已經會寫的東西，只是為了方便而進一步包裝而已。業界術語叫：抽象化（abstraction）
+
+---
+
+最後，我想說明一下學習複雜工具該有的心態
+
+即便是在同一個社群內（例如 Vue 社群）
+
+對於完成一個任務，該把語法設計成什麼樣，都有各種不同意見
+
+也就是想要解決一個問題，看起來寫法 A 就可以做到
+
+有人會說不夠好，要用寫法 B 才算是漂亮
+
+有人會說都不行，要用花俏的寫法 C 才算是真正完成
+
+我個人的建議是：先從最單純、好理解的寫法開始學起！工作上也只使用這些即可！就算程式碼會因此冗長一點，也沒關係！
+
+---
+
+在學習任何框架的路上，面對某個部份，經常會出現這種感覺：
+
+「這部份好複雜，雖然好像可以解決問題，但我有點不懂，這好像用更簡單的 XX 寫法就可以，不是嗎？」
+
+一旦出現這種感覺，一律就只用 XX 寫法就好，不用管別人怎麼說
+
+用簡易好懂的寫法 A 如果可以完成一堆任務，就通通都用寫法 A 就好
+
+更進階的寫法 B 以及更花俏的寫法 C，只要「知道有他們的存在」就好，不用急著搞懂
+
+在未來，真的遇到寫法 A 的瓶頸時，你自然會想起 B 跟 C，也才會終於了解他們的價值
+
+也很有可能，整個職業生涯都用不到 B 跟 C，那本來就是一些花俏人士的個人偏好而已，你不用在意
+
+所以，能解決問題就好，不要被框架的龐大文件，與社群的各種五花八門意見所迷惑了！
+
+話不多說，讓我們馬上開始來寫 Vue 吧！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="161" data-type="post">
+            <i class="far fa-heart"></i> <span>4</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/8xXYN3" class="text-muted">0留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/8xXYN3" class="text-muted">
+                660瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/PamZgq" class="text-muted" title="2023-02-10 16:12:30">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/PamZgq" class="text-default">JavaScript 系列七：第1課 ── 認識 Vue 基本環境與 render state</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/PamZgq" class="text-muted">## 課程目標
+
+- 能夠運行 Vue 基本環境
+- 能夠 render state
+
+## 課程內容
+
+身為工程師，要習慣到處翻閱各種技術文件
+
+這次的課程，我不會手把手帶領，細談所有觀念
+
+我會一次提供一個官網連結。請你一邊閱讀，一邊把其中的範例貼到 jsfiddle 跑跑看
+
+我會額外提供簡單介紹＆關鍵字，然後補充一些注意事項
+
+官網文件內容是英文，如果對英文沒把握，就去翻中文官網
+
+https://cn.vuejs.org/guide/introduction.html
+
+但是，長遠來說，還是要逐漸提升自己的英語閱讀能力才行
+
+---
+
+先學基本的安裝＆運行
+
+- https://vuejs.org/guide/quick-start.html
+
+這系列課程，我們用最簡單的 CDN 環境來跑就好了，先只學 CDN 那一段就好
+
+---
+
+接著來學 Vue 最基本觀念
+
+- https://vuejs.org/guide/essentials/application.html
+- https://vuejs.org/guide/essentials/template-syntax.html
+
+內容很多，大部份看不懂沒關係，稍微有個印象就好
+
+如同我在前言所說，同一件事有很多種花俏寫法，你根本不用全部學會
+
+這一課我們只要學會如何 render state 就好了
+
+```
+&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;app&quot;&gt;
+  {{ user.name }} 喜歡吃 {{ fruits[0].name }} 以及 {{ fruits[1].name }}
+&lt;/div&gt;
+
+&lt;script&gt;
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        user: {
+          name: &quot;John Doe&quot;
+        },
+        fruits: [
+          {
+            name: &quot;Apple&quot;,
+          },
+          {
+            name: &quot;Banana&quot;,
+          },
+        ]
+      }
+    }
+  }).mount(&#039;#app&#039;)
+&lt;/script&gt;
+```
+
+上面這段範例，在 `data()` 函式將 application state 準備好
+
+然後只要將一段作為 UI 的 html 寫好，我們稱之為模板（template）
+
+接著 Vue 就會把 state 放進 template 裡面，把結果給 render 出來
+
+貼到 jsfiddle 跑跑看吧，你會發現非常簡單、好理解
+
+## 課後作業
+
+這系列課程，我們要模仿 Google Keep 製作一個應用程式
+
+請先把玩一下 Google Keep https://keep.google.com/
+
+作業使用 jsfiddle 來寫
+
+---
+
+這一課先簡單呈現 UI 就好
+
+請使用以下這段 code 作為 application state
+
+```
+data() {
+  return {
+    notes: [
+      {
+        title: &quot;春節行程安排&quot;,
+        content: &quot;吃飽睡，睡飽吃&quot;,
+        color: &quot;red&quot;,
+      },
+      {
+        title: &quot;工作待辦事項&quot;,
+        content: &quot;詢問各家廠商報價&quot;,
+        color: &quot;green&quot;,
+      },
+      {
+        title: &quot;運動健身計畫&quot;,
+        content: &quot;每天早上六點去健身&quot;,
+        color: &quot;blue&quot;,
+      },
+    ]
+  }
+}
+```
+
+使用以下這段 code 作為 template
+
+```
+&lt;div id=&quot;app&quot;&gt;
+  &lt;div class=&quot;note&quot;&gt;
+    &lt;h3 class=&quot;title&quot;&gt;
+      &lt;!-- 請顯示第一個項目的標題 --&gt;
+    &lt;/h3&gt;
+    &lt;p class=&quot;content&quot;&gt;
+      &lt;!-- 請顯示第一個項目的內容 --&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;note&quot;&gt;
+    &lt;h3 class=&quot;title&quot;&gt;
+      &lt;!-- 請顯示第二個項目的標題 --&gt;
+    &lt;/h3&gt;
+    &lt;p class=&quot;content&quot;&gt;
+      &lt;!-- 請顯示第二個項目的內容 --&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;note&quot;&gt;
+    &lt;h3 class=&quot;title&quot;&gt;
+      &lt;!-- 請顯示第三個項目的標題 --&gt;
+    &lt;/h3&gt;
+    &lt;p class=&quot;content&quot;&gt;
+      &lt;!-- 請顯示第三個項目的內容 --&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+```
+
+- 陣列內容就只有三筆資料，就只要顯示這三筆資料就好
+- 在 application state 裡面的陣列，直接用 `索引` 來取出值就好，這一課先不用寫 for 迴圈
+- color 這一課還不會用到，可以先忽略沒關係
+- 請在 `&lt;style&gt;` 加上一些樣式，讓整個頁面漂亮一點
+- 每則記事可以單純的放進網頁就好，不用像 Google Keep 那樣花式的排版（那種叫瀑布流排版，很難寫）
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="162" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/PamZgq" class="text-muted">19留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/PamZgq" class="text-muted">
+                1,253瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/d3ojVx" class="text-muted" title="2023-02-10 16:13:00">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/d3ojVx" class="text-default">JavaScript 系列七：第2課 ── 體驗一下 Reactivity 的效果與便利</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/d3ojVx" class="text-muted">## 課程目標
+
+- 體驗一下 Reactivity 的效果與便利
+
+## 課程內容
+
+來學 Vue 之中 Reactivity 的基本觀念
+
+- https://vuejs.org/guide/essentials/reactivity-fundamentals.html
+
+老樣子，大部份看不懂沒關係，稍微有個印象就好
+
+記得之前的課程，每次更新完 state，你都要接著去執行 `render()` 函式嗎？
+
+所謂 Reactivity 就只是說：當你更新完 application state 之後，Vue 會自動幫你更新 UI 上的內容
+
+就只是這樣，不要把它想得太複雜
+
+```
+&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;app&quot;&gt;
+  嗨，我是 {{ user.name }}
+  &lt;button @click=&quot;changeNewName&quot;&gt;
+    改名字
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        user: {
+          name: &quot;John Doe&quot;
+        }
+      }
+    },
+    mounted() {
+      this.user.name = &quot;Frank&quot;
+    },
+    methods: {
+      changeNewName() {
+        this.user.name = &quot;Kevin&quot;
+      }
+    }
+  }).mount(&#039;#app&#039;)
+&lt;/script&gt;
+```
+
+到 jsfiddle 跑跑看，看看畫面上出現什麼
+
+`mounted` 是 vue 將畫面第一次載入之後，可以安排任務的地方，通常會放一些「系統初始化任務」
+
+`@click` 跟 `methods` 那些，就只是操作事件的寫法而已，先照做就好
+
+以上兩點，後面課程會詳談
+
+---
+
+在 Vue 文件中，你會到處看到 `this` 這個關鍵字
+
+要存取 application state，有時前面要加 `this.` 有時又不用
+
+關於 `this` 關鍵字，它是一個 JavaScript 程式語言裡面過時又晦澀難懂的觀念
+
+我不想細談，你也先不用研究。就先照做、程式能跑就好了
+
+反正改天你真的遇到問題，大概知道要往這方向研究就是了
+
+---
+
+接著來學 Vue 之中 Computed 屬性的觀念
+
+- https://vuejs.org/guide/essentials/computed.html
+
+老話一句，看不懂沒關係
+
+雖然大家都說用這寫法，效能會比較好、程式碼會比較優雅
+
+但實際上，我自己在好幾個專案，就完全不使用任何 `computed` 功能
+
+一律通通只用 `methods` 來寫程式，根本也不會怎麼樣
+
+---
+
+在整門系列課程，會常常像這樣，我叫你讀官網文件的很多內容
+
+但我接著又會說，看不懂沒差，其中 XXX 根本沒用，其中 YYY 也沒必要用，只學 ZZZ 就好
+
+這些都是我個人的主觀意見。如果你在網路上找資料，會看到許多工程師，有跟我完全相反的建議
+
+這是軟體工程師圈子的常態，充滿各種主觀喜好、偏見，你要習慣一下
+
+（如果你很好奇我是怎麼做出這些判斷的，請重新閱讀此系列課程，第一篇文章：前言，裡面的最後一段）
+
+你不需要完全同意我的觀點，在研究過程中，如果你有發現比較喜歡的寫法，就直接用沒關係
+
+如同我多次提醒過：只要能解決問題就好，你就隨便寫沒關係
+
+各種做法細微的差異，將來有一天你會慢慢理解
+
+## 課後作業
+
+承接上一課的作業
+
+這一課來簡單體驗一下 reactivity 的效果就好
+
+也就是簡單更新一下 application state 就好
+
+請加入 `mounted` 函式，在裡面把「第一個記事」的內容更新為「多出門、到處走走、也要多運動」
+
+完成之後，你會發現，你的春節行程安排，看起來積極多了～
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="163" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/d3ojVx" class="text-muted">17留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/d3ojVx" class="text-muted">
+                890瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/Eag2M3" class="text-muted" title="2023-02-10 16:13:14">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/Eag2M3" class="text-default">JavaScript 系列七：第3課 ── 學習 Vue 條件判斷式的寫法</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/Eag2M3" class="text-muted">## 課程目標
+
+- 學習條件判斷式的寫法
+
+## 課程內容
+
+先來學一下管理 css class 與 style 的一些寫法
+
+- https://vuejs.org/guide/essentials/class-and-style.html
+
+老樣子，這些寫法比較進階，稍微有個印象就好
+
+你也可以發揮創意，使用 Vue 的一些其他方法寫，反正能把正確的 css class 跟 style 加上去就行了
+
+---
+
+再來學一下 Vue 之中關於條件判斷式的寫法
+
+- https://vuejs.org/guide/essentials/conditional.html
+
+老話一句，文件中提供你很多不同選項的寫法
+
+隨便挑一個你覺得順眼的、好理解的方式來寫即可
+
+## 課後作業
+
+承接上一課的作業
+
+在 state 裡面，有個 `color` 屬性一直沒有用到
+
+這次作業要來使用它
+
+請讓每個記事，根據 color 的值，來顯示為不同顏色
+
+如果不知道什麼意思，請再把玩一下 Google Keep，其中有變色的功能
+
+提示：為了簡單起見，可以用 `:style` 的方式，直接加入顏色即可
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="164" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/Eag2M3" class="text-muted">13留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/Eag2M3" class="text-muted">
+                956瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/LaRKGq" class="text-muted" title="2023-02-10 16:13:28">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/LaRKGq" class="text-default">JavaScript 系列七：第4課 ── 學習 Vue 迴圈的寫法</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/LaRKGq" class="text-muted">## 課程目標
+
+- 學習迴圈的寫法
+
+## 課程內容
+
+來學一下在 Vue 模板裡面，如何寫迴圈、顯示陣列內容
+
+- https://vuejs.org/guide/essentials/list.html
+
+老樣子，同一件任務，有很多種不同的寫法
+
+隨便挑一個你覺得順眼的、好理解的方式來寫即可
+
+## 課後作業
+
+承接上一課的作業
+
+之前我們在 template 都是用索引的方式，直接從陣列取得元素 `notes[0]`
+
+這一次的作業，請把 template 的內容，使用 for 迴圈來改寫
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="165" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/LaRKGq" class="text-muted">13留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/LaRKGq" class="text-muted">
+                788瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/r3DR6q" class="text-muted" title="2023-02-10 16:13:40">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/r3DR6q" class="text-default">JavaScript 系列七：第5課 ── 學習 Vue 事件處理的寫法</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/r3DR6q" class="text-muted">## 課程目標
+
+- 學習事件處理的寫法
+
+## 課程內容
+
+來學一下事件處理的寫法
+
+- https://vuejs.org/guide/essentials/event-handling.html
+
+眼花撩亂沒關係，我已經多次告訴過你應該用什麼心態去面對
+
+不用把這些東西看得太神奇，這些東西的背後，就只是你已經寫過的 html `onclick` 那些東西而已，只是多加一層「抽象化」，由 Vue 中介在中間管理 DOM
+
+我們在寫 Vue 的時候，就是「完全不親自操作 DOM」了，通通交由 Vue 處理
+
+我們負責專心管理 application state 就好，不用費心思去管理 DOM
+
+用了框架，就不要再去直接操作 DOM，否則會跟框架起衝突、讓程式充滿 bug
+
+---
+
+有件事我必須說一下，就是 `@click` 後面可以放函式名稱，也可以直接執行函式
+
+這個設計，實在很糟糕！我非常不喜歡！
+
+```
+&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;app&quot;&gt;
+  &lt;button @click=&quot;hello1&quot;&gt;
+    hello 1
+  &lt;/button&gt;
+  &lt;button @click=&quot;hello2(&#039;John&#039;)&quot;&gt;
+    hello 2
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const { createApp } = Vue
+
+  createApp({
+    methods: {
+      hello1() {
+        alert(&#039;hi&#039;);
+      },
+      hello2(name) {
+        alert(&#039;hello &#039; + name)
+      }
+    }
+  }).mount(&#039;#app&#039;)
+&lt;/script&gt;
+```
+
+以上範例，在 `@click` 裡面的內容，到底要不要加上小括號 `()`？
+
+乍看之下，根本無法理解。要翻閱文件，才發現原來兩種寫法都可以
+
+我認為這違反了程式碼風格應該要 `保持一致性（consistency）` 的原則
+
+Vue 這種彈性設計，讓程式碼變得令人困惑、難以理解
+
+---
+
+再提一件事，Vue 的 template 中，雙引號的內容，到底是 `變數` 還是 `字串`？
+
+```
+&lt;button @click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
+```
+
+這個 greet 是函式名稱，是變數
+
+```
+&lt;div :class=&quot;{ active: isActive }&quot;&gt;&lt;/div&gt;
+```
+
+這裡在雙引號內容，宣告 JSON 物件，所以是變數
+
+```
+&lt;template v-if=&quot;ok&quot;&gt;
+```
+
+這裡是變數，變數型態大概是布林
+
+```
+&lt;div class=&quot;active text-danger&quot;&gt;&lt;/div&gt;
+```
+
+這裡是字串
+
+```
+&lt;input
+  :value=&quot;text&quot;
+  @input=&quot;event =&gt; text = event.target.value&quot;&gt;
+```
+
+這邊的 `text` 到底是字串還是變數？
+
+```
+&lt;input ref=&quot;input&quot;&gt;
+```
+
+這邊的 `input` 到底是字串還是變數？
+
+透過觀察可以發現，冒號開頭 `:`，或者小老鼠開頭 `@` 或者縮寫法 `v-` 開頭的，雙引號裡面是變數
+
+不然的話，就跟普通 html attribute 一樣，雙引號裡面就只是字串而已
+
+對於 Vue 這種彈性設計，我一樣「非常不喜歡」！
+
+當然，這些都是我個人主觀看法，一定很多人覺得又好寫、又彈性
+
+這對於只想快速開發、懶得追根究底的新手，可能很方便
+
+但在深入思考、試著搞懂資料型別、試著像資深工程師一樣思考的時候，會造成很多額外的困惑
+
+---
+
+我想說的是，遇到這類問題，你就多試一下、多翻官網文件
+
+然後不要覺得自己很笨、被框架嚇傻了
+
+要知道複雜的工具，本身背後就代表多種不同的主觀偏好，然後那些主流觀點，可能真的不怎麼樣，所以不是你的問題
+
+隨著更有經驗之後，你會能夠做出各種主觀的判斷、能夠比較各種設計的優劣之處
+
+目前階段，你就先想辦法讓程式能跑、能完成任務就好了！
+
+---
+
+再來學一下表單欄位內容的處理
+
+- https://vuejs.org/guide/essentials/forms.html
+
+在上個系列課程中，我們學過 data model + render function 的寫法
+
+使用框架之後，則變成，就連表單欄位內容，也是 data model 的一部份
+
+乍聽之下有點怪，其實，實際寫過之後，會發現還滿方便的！
+
+```
+&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;app&quot;&gt;
+  &lt;input v-model=&quot;username&quot;&gt;
+  &lt;button @click=&quot;greet&quot;&gt;
+    Greet
+  &lt;/button&gt;
+  &lt;h1&gt;
+    {{ username }}
+  &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        username: &quot;John Doe&quot;
+      }
+    },
+    methods: {
+      greet() {
+        alert(&#039;Hello, &#039; + this.username);
+      }
+    }
+  }).mount(&#039;#app&#039;)
+&lt;/script&gt;
+```
+
+正因為把 `欄位中目前輸入的值` 視為 `當前應用程式的狀態` 的一部份
+
+所以可以隨時取得表單欄位內容，而不用像以前那樣，要透過 DOM selector 之類的，去找到元素、才拿到內容！
+
+一樣，表單欄位內容的取得，寫法多種，就挑順眼、簡單的來用即可
+
+## 課後作業
+
+承接上一課的作業
+
+這次要來開發「新增」與「刪除」功能囉！
+
+請在記事列表的上方：
+
+- 新增一個 `input` 來輸入「記事標題」
+- 新增一個 `textarea` 來輸入「記事內容」
+- 新增一個 `select` 來選擇顏色
+- 新增一個「新增」按鈕，點擊之後，會新增記事
+- 請將這些欄位的內容，放在 application state 裡面管理
+
+然後，請在每則記事的裡面，新增一個「刪除」按鈕。點擊之後，會刪除記事
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="166" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/r3DR6q" class="text-muted">14留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/r3DR6q" class="text-muted">
+                735瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/jal51q" class="text-muted" title="2023-02-10 16:13:50">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/jal51q" class="text-default">JavaScript 系列七：第6課 ── 認識 Lifecycle Hooks 與 Watchers</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/jal51q" class="text-muted">## 課程目標
+
+- 認識 Lifecycle Hooks 與 Watchers
+
+## 課程內容
+
+來認識一下 Lifecycle Hooks
+
+- https://vuejs.org/guide/essentials/lifecycle.html
+
+簡單來說，在 vue 執行階段，又可分為 `mounted` `updated` `unmounted` 等等，將近十個時間點
+
+根據應用程式的需要，可以在這十個時間點，進行必要的檢查＆執行特定任務
+
+但是，實務上，除了 `mounted` 經常用來跑一些初始化任務之外，其餘的時間點，幾乎不會用到
+
+所謂 Lifecycle Hooks 是一個有點過時的觀念！稍微讀一下就好，相關功能大多被 Watchers 取代了
+
+---
+
+接著就來認識一下 Watchers
+
+- https://vuejs.org/guide/essentials/watchers.html
+
+簡單講，在 Vue 中，所謂的 Reactivity 已經很好用了：
+
+「某些變數在更新之後，其他相關變數、以及畫面 UI，會跟著自動更新」
+
+除此之外，還可以進一步使用更進階功能：
+
+「隨時監控某些變數，如果發現它們更新，就執行一些相關的任務」
+
+這些任務我們稱之為 `副作用（side effects）`
+
+關於 side effects 怎麼解釋，是一個比較困難的主題
+
+這邊先不詳談，目前有點困惑沒關係，作業中會讓你練習一下，先有點小感覺就好
+
+## 課後作業
+
+承接上一課的作業
+
+這一課要來做自動儲存功能
+
+請使用 Watchers 去監聽 `notes` 狀態
+
+每次 `notes` 有更新，就自動儲存到 Local Storage 裡面！
+
+接著，在 `mounted` 裡面檢查 Local Storage
+
+如果有資料，就把資料更新到 `notes` 裡面
+
+如此一來，就完成了自動儲存功能，連儲存按鈕都不用做！
+
+---
+
+提示：普通的 watchers 不夠用，要使用 Deep Watchers
+
+這部份有點難解釋，你先知道：普通的 data 變數型態，例如字串、數字、布林，可以用普通的 watcher
+
+但如果是陣列或物件型態的 data，就要使用 Deep Watchers
+
+先知道這樣就好
+
+---
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="167" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/jal51q" class="text-muted">13留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/jal51q" class="text-muted">
+                639瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-muted" title="2023-02-10 16:14:00">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-default">JavaScript 系列七：第7課 ── 認識 Template Refs</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-muted">## 課程目標
+
+- 認識 Template Refs
+
+## 課程內容
+
+來讀一下 Template Refs 的說明
+
+- https://vuejs.org/guide/essentials/template-refs.html
+
+簡單來說，在我們使用了任何前端框架之後，就已經把「所有 DOM 更新相關」的工作，委託給了框架處理
+
+我們從此只要寫框架提供的語法就好了，不要直接去操作 DOM！
+
+不然的話，框架已經接手了整個 DOM，你又在某些地方對 DOM 做出更新，會引起衝突，會造成很多 bug！
+
+而且這種 bug 很難處理，因為你不知道框架實際上是怎麼更新 DOM 的，需要深入研究框架背後的機制才行
+
+所以才會說，用了框架，就請避免操作 DOM
+
+但是，很多時候，會需要用一些現成的第三方套件（例如你學過的一堆 jQuery 外掛套件），那些套件初始化設定時，又都需要提供一個 selector
+
+這種情況下，Vue 提供了 ref 功能，讓你可以存取「vue 底下真正的 DOM」，可以拿來跟其他小套件整合
+
+---
+
+看到這邊，你可能會心想：
+
+「那我如果不使用 ref，我就是要直接使用 `document.querySelector()` 來抓取 DOM 元素，然後作為參數放進其他小套件執行，會怎樣？」
+
+老實講，根據我個人經驗，在絕大多數情況下，其實也根本不會怎麼樣，程式還是可以順利運作的
+
+所以，你真的要這樣做，也是可以的
+
+但如果真的遇到很難解決的 bug，例如抓不到 DOM 元素、抓錯 DOM 元素時，記得往這方向研究一下就是了！
+
+## 課後作業
+
+承接上一課的作業
+
+在輸入記事內容的地方，為了加強 UX，我們來加上 autosize 功能
+
+請使用此款套件 https://github.com/jackmoore/autosize
+
+將 textarea 加上 autosize 功能吧！
+
+做出以上功能，你就完成這次的課程目標了！</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="168" data-type="post">
+            <i class="far fa-heart"></i> <span>0</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-muted">21留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-muted">
+                931瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                            <div class="bg-white mt-3 post-card">
+        <div class="p-3">
+        <div class="" style="font-size: 0.875rem;">
+            <span class="text-muted">
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a>
+                <a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>
+                &nbsp;·&nbsp;
+                <a href="https://codelove.tw/@howtomakeaturn/post/pxdjma" class="text-muted" title="2023-02-10 16:14:13">
+                    02月10日
+                </a>
+            </span>
+        </div>
+        <h4 class="font-weight-bold mt-2">
+            <a href="https://codelove.tw/@howtomakeaturn/post/pxdjma" class="text-default">JavaScript 系列七：結語</a>
+        </h4>
+        <p class="text-clamp-2 text-muted mb-0">
+            <a href="https://codelove.tw/@howtomakeaturn/post/pxdjma" class="text-muted">恭喜你完成這份奇怪的 Vue 入門課程
+
+如同我在這門課程中不斷強調的
+
+任何的技術工具，其實都充滿了大量的過時觀念、多餘觀念、錯誤觀念
+
+也就是很多小功能、小語法，要嘛是已經很少人在用了，要嘛是重複設計了，要嘛是根本設計失敗了。這些學了也用不到
+
+偏偏你在補習班或者上網自學的時候，沒有人敢跟你這樣講。因為講的人自己也不太確定、沒有真正深入了解
+
+所以我在這門課程只引導你使用最基本的語法、用最基本的功能
+
+你已經完成了所有作業，代表這些基本功你都順利掌握了
+
+不要小看這種只專注在基本功的學習方法
+
+把基本功摸熟的人，在有必要學習任何進階觀念的時候，會比別人更快融會貫通
+
+---
+
+偷偷跟你說一句，即便是業界工程師、業界講師，大多數人對於程式設計、大型工具的許多觀念，也都是一知半解的
+
+這沒有什麼問題，我也總是跟你說：能解決問題就好
+
+比較有問題的是：不確定的東西，要知道自己不懂、承認自己也不確定。在有必要的時候，要知道往哪個方向去深究
+
+除此之外，既然自己也不太確定，就不要跟別人說 XXX 寫法一定比 YYY 寫法好，諸如此類的話
+
+在程式開發這個圈子，絕大多數意見，都只是主觀意見，卻被講得好像是科學證明過的公認客觀意見、有對錯之分。這絕非事實
+
+請積極學習，但也請保持懷疑＆批判的態度。面對新工具、新觀念，不需要感到太困擾或者焦慮
+
+---
+
+翻閱 Vue 官方文件，你會發現 `Essentials` 這個段落，你幾乎通通讀完了
+
+這些就是 Vue 的基礎觀念，已足夠你開發出各種易於維護、架構彈性的中型應用程式了
+
+那麼該如何開發大型應用程式呢？那就需要更進一步學習模組化、元件等等的觀念
+
+這些會在後續的課程提到！
+
+---
+
+消化、研究完本課程之後，關於 JavaScript 更多必學的基本觀念
+
+請接著前往「自學網頁の嬰兒教材：JavaScript（八）」開始學習吧！
+
+https://codelove.tw/@howtomakeaturn/course/jqe6xX</a>
+        </p>
+        <div class="d-flex justify-content-between mt-3">
+    <div class="align-self-center">
+        <button class="btn btn-default btn-like" data-id="169" data-type="post">
+            <i class="far fa-heart"></i> <span>3</span><span>個讚</span>
+        </button>
+            <span class="d-inline-block ml-3 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="https://codelove.tw/@howtomakeaturn/post/pxdjma" class="text-muted">2留言</a>
+        </span>
+        <span class="d-inline-block ml-2 text-muted _font-weight-bold" style="-font-size: 0.875rem;">
+            <!-- <i class="fas fa-fire-alt"></i>&nbsp; -->
+            <a href="https://codelove.tw/@howtomakeaturn/post/pxdjma" class="text-muted">
+                428瀏覽
+            </a>
+        </span>
+    </div>
+    <span class="align-self-center">
+        <div>
+                                </div>
+    </span>
+</div>
+    </div>
+</div>
+                    </div>
+        <div class="col-lg-3 d-none d-lg-block">
+            <div class="mt-3 ml-3">
+                <div class="bg-white rounded border p-3">
+    <div class="d-flex align-items-center">
+        <a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none mr-2">
+            <img src="https://i.imgur.com/UCzsTDX.png" class="profile-photo" style="width: 50px; height: 50px;">
+        </a>
+        <div class="font-weight-bold h5 m-0"><a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a></div>
+    </div>
+    <hr>
+    <div class="text-muted text-break">👉 身份：資深全端工程師、指導過無數人半路出家轉職
+👉 使命：打造 CodeLove 成為優質新手村，讓非本科也有地方自學＆討論</div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="bg-dark text-white" id="layout-footer">
+    <div class="container mt-5">
+        <div class="mt-4 pt-4 pb-4">
+            <div class="row">
+                <div class="col">
+                    <div class="mr-n2">
+                        <a href="/trending-keywords" class="text-white">熱門搜尋</a>：
+                                                    <a href="/search?q=1&from=trending" class="mr-2 text-white">1</a>
+                                                    <a href="/search?q=題&from=trending" class="mr-2 text-white">題</a>
+                                                    <a href="/search?q=使用&from=trending" class="mr-2 text-white">使用</a>
+                                                    <a href="/search?q=開發&from=trending" class="mr-2 text-white">開發</a>
+                                                    <a href="/search?q=2&from=trending" class="mr-2 text-white">2</a>
+                                                    <a href="/search?q=%&from=trending" class="mr-2 text-white">%</a>
+                                                    <a href="/search?q=go&from=trending" class="mr-2 text-white">go</a>
+                                                    <a href="/search?q=c&from=trending" class="mr-2 text-white">c</a>
+                                                    <a href="/search?q=前&from=trending" class="mr-2 text-white">前</a>
+                                                    <a href="/search?q=4&from=trending" class="mr-2 text-white">4</a>
+                                                    <a href="/search?q=作業&from=trending" class="mr-2 text-white">作業</a>
+                                                    <a href="/search?q=分享&from=trending" class="mr-2 text-white">分享</a>
+                                                    <a href="/search?q=專案&from=trending" class="mr-2 text-white">專案</a>
+                                                    <a href="/search?q=JS&from=trending" class="mr-2 text-white">JS</a>
+                                                    <a href="/search?q=api&from=trending" class="mr-2 text-white">api</a>
+                                                    <a href="/search?q=學習&from=trending" class="mr-2 text-white">學習</a>
+                                                    <a href="/search?q=?&from=trending" class="mr-2 text-white">?</a>
+                                                    <a href="/search?q=.&from=trending" class="mr-2 text-white">.</a>
+                                                    <a href="/search?q=自學&from=trending" class="mr-2 text-white">自學</a>
+                                                    <a href="/search?q=工作&from=trending" class="mr-2 text-white">工作</a>
+                                                    <a href="/search?q=ＣＳＳ&from=trending" class="mr-2 text-white">ＣＳＳ</a>
+                                                    <a href="/search?q=結構&from=trending" class="mr-2 text-white">結構</a>
+                                                    <a href="/search?q=技術&from=trending" class="mr-2 text-white">技術</a>
+                                                    <a href="/search?q=作為&from=trending" class="mr-2 text-white">作為</a>
+                                                    <a href="/search?q=網站&from=trending" class="mr-2 text-white">網站</a>
+                                                    <a href="/search?q=研究&from=trending" class="mr-2 text-white">研究</a>
+                                                    <a href="/search?q=第一&from=trending" class="mr-2 text-white">第一</a>
+                                                    <a href="/search?q=語言&from=trending" class="mr-2 text-white">語言</a>
+                                                    <a href="/search?q=C&from=trending" class="mr-2 text-white">C</a>
+                                                    <a href="/search?q=工程師&from=trending" class="mr-2 text-white">工程師</a>
+                                                    <a href="/search?q=%&#039;&from=trending" class="mr-2 text-white">%&#039;</a>
+                                                    <a href="/search?q=系列&from=trending" class="mr-2 text-white">系列</a>
+                                                    <a href="/search?q=研&from=trending" class="mr-2 text-white">研</a>
+                                                    <a href="/search?q=10&from=trending" class="mr-2 text-white">10</a>
+                                                    <a href="/search?q=Ai&from=trending" class="mr-2 text-white">Ai</a>
+                                                    <a href="/search?q=github&from=trending" class="mr-2 text-white">github</a>
+                                                    <a href="/search?q=Line&from=trending" class="mr-2 text-white">Line</a>
+                                                    <a href="/search?q=ci&from=trending" class="mr-2 text-white">ci</a>
+                                                    <a href="/search?q=git&from=trending" class="mr-2 text-white">git</a>
+                                                    <a href="/search?q=&#039;&from=trending" class="mr-2 text-white">&#039;</a>
+                                                    <a href="/search?q=測試&from=trending" class="mr-2 text-white">測試</a>
+                                                    <a href="/search?q=CSS&from=trending" class="mr-2 text-white">CSS</a>
+                                                    <a href="/search?q=app&from=trending" class="mr-2 text-white">app</a>
+                                                    <a href="/search?q=網頁&from=trending" class="mr-2 text-white">網頁</a>
+                                                    <a href="/search?q=jav&from=trending" class="mr-2 text-white">jav</a>
+                                                    <a href="/search?q=前端&from=trending" class="mr-2 text-white">前端</a>
+                                                    <a href="/search?q=套件&from=trending" class="mr-2 text-white">套件</a>
+                                                    <a href="/search?q=Java&from=trending" class="mr-2 text-white">Java</a>
+                                                    <a href="/search?q=`&from=trending" class="mr-2 text-white">`</a>
+                                                    <a href="/search?q=fetch&from=trending" class="mr-2 text-white">fetch</a>
+                                                    <a href="/search?q=後端&from=trending" class="mr-2 text-white">後端</a>
+                                                    <a href="/search?q=搜尋&from=trending" class="mr-2 text-white">搜尋</a>
+                                                    <a href="/search?q=ui&from=trending" class="mr-2 text-white">ui</a>
+                                                    <a href="/search?q=20&from=trending" class="mr-2 text-white">20</a>
+                                                    <a href="/search?q=CD&from=trending" class="mr-2 text-white">CD</a>
+                                                    <a href="/search?q=資料庫&from=trending" class="mr-2 text-white">資料庫</a>
+                                                    <a href="/search?q=javascript&from=trending" class="mr-2 text-white">javascript</a>
+                                                    <a href="/search?q=id&from=trending" class="mr-2 text-white">id</a>
+                                                    <a href="/search?q=Git&from=trending" class="mr-2 text-white">Git</a>
+                                                    <a href="/search?q=with&from=trending" class="mr-2 text-white">with</a>
+                                                    <a href="/search?q=AI&from=trending" class="mr-2 text-white">AI</a>
+                                                    <a href="/search?q=for&from=trending" class="mr-2 text-white">for</a>
+                                                    <a href="/search?q=練習&from=trending" class="mr-2 text-white">練習</a>
+                                                    <a href="/search?q=GIT&from=trending" class="mr-2 text-white">GIT</a>
+                                                    <a href="/search?q=非同步&from=trending" class="mr-2 text-white">非同步</a>
+                                                    <a href="/search?q=html&from=trending" class="mr-2 text-white">html</a>
+                                                    <a href="/search?q=node.js&from=trending" class="mr-2 text-white">node.js</a>
+                                                    <a href="/search?q=vscode&from=trending" class="mr-2 text-white">vscode</a>
+                                                    <a href="/search?q=create&from=trending" class="mr-2 text-white">create</a>
+                                                    <a href="/search?q=Vue&from=trending" class="mr-2 text-white">Vue</a>
+                                                    <a href="/search?q=架構&from=trending" class="mr-2 text-white">架構</a>
+                                                    <a href="/search?q=資料結構&from=trending" class="mr-2 text-white">資料結構</a>
+                                                    <a href="/search?q=import&from=trending" class="mr-2 text-white">import</a>
+                                                    <a href="/search?q=50&from=trending" class="mr-2 text-white">50</a>
+                                                    <a href="/search?q=console&from=trending" class="mr-2 text-white">console</a>
+                                                    <a href="/search?q=result&from=trending" class="mr-2 text-white">result</a>
+                                                    <a href="/search?q=面試&from=trending" class="mr-2 text-white">面試</a>
+                                                    <a href="/search?q=REACT&from=trending" class="mr-2 text-white">REACT</a>
+                                                    <a href="/search?q=Node&from=trending" class="mr-2 text-white">Node</a>
+                                                    <a href="/search?q=Response&from=trending" class="mr-2 text-white">Response</a>
+                                                    <a href="/search?q=熱情&from=trending" class="mr-2 text-white">熱情</a>
+                                                    <a href="/search?q=.NET&from=trending" class="mr-2 text-white">.NET</a>
+                                                    <a href="/search?q=JavaScript&from=trending" class="mr-2 text-white">JavaScript</a>
+                                                    <a href="/search?q=react&from=trending" class="mr-2 text-white">react</a>
+                                                    <a href="/search?q=user&from=trending" class="mr-2 text-white">user</a>
+                                                    <a href="/search?q=local&from=trending" class="mr-2 text-white">local</a>
+                                                    <a href="/search?q=PHP&from=trending" class="mr-2 text-white">PHP</a>
+                                                    <a href="/search?q=java&from=trending" class="mr-2 text-white">java</a>
+                                                    <a href="/search?q=日期&from=trending" class="mr-2 text-white">日期</a>
+                                                    <a href="/search?q=履歷&from=trending" class="mr-2 text-white">履歷</a>
+                                                    <a href="/search?q=登入&from=trending" class="mr-2 text-white">登入</a>
+                                                    <a href="/search?q=module&from=trending" class="mr-2 text-white">module</a>
+                                                    <a href="/search?q=API&from=trending" class="mr-2 text-white">API</a>
+                                                    <a href="/search?q=新創&from=trending" class="mr-2 text-white">新創</a>
+                                                    <a href="/search?q=javascript 系列&from=trending" class="mr-2 text-white">javascript 系列</a>
+                                                    <a href="/search?q=css&from=trending" class="mr-2 text-white">css</a>
+                                                    <a href="/search?q=Can&from=trending" class="mr-2 text-white">Can</a>
+                                                    <a href="/search?q=docker&from=trending" class="mr-2 text-white">docker</a>
+                                                    <a href="/search?q=遊戲&from=trending" class="mr-2 text-white">遊戲</a>
+                                                    <a href="/search?q=謝謝&from=trending" class="mr-2 text-white">謝謝</a>
+                                            </div>
+                    <hr style="border-color: #666;" />
+                    <div style="font-size: 0.875rem;"><a href="/" class="text-white">CodeLove 愛寫扣論壇 © 2024</a></div>
+                    <div class="mt-2 pb-5" style="font-size: 0.875rem;">🛡️ 隱私及網站安全：本站註冊過程「不須提供任何個資」，只要 E-Mail 與帳密即可註冊，請安心註冊！線上付款過程使用「綠界科技 ECPay 」第三方專業金流廠商，全程在「綠界科技 ECPay 」網站進行付款程序，本站「不會紀錄任何信用卡資訊」，請放心付款、解鎖課程！您隨時可以透過 FB 粉專或者 Email 聯絡站長，請求刪除網站上的個人資料。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- Modal -->
+<div class="modal fade" id="ctaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">歡迎來到 CodeLove 愛寫扣論壇</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- <p>本論壇提供「新手友善」的 JavaScript 前端自學教材！在您報名10萬元程式補習班之前，請先來看看！</p> -->
+            <p>你的轉職路上，還缺少一份自學作業包！寫完這幾包，直接拿作品去面試上班！</p>
+                        <div class="row no-gutters mt-n1">
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/gARwK32.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/633R6Ai.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/STB7y0E.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/um7gM5P.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/QqYL9Gc.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/WS30bkX.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/AmEhiEz.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/eLkh90D.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-6 col-lg-4">
+                    <div class="p-1">
+                        <a href="/courses?cta=welcome-modal">
+                            <img src="https://i.imgur.com/CVU7cCr.png" class="img-fluid rounded">
+                        </a>
+                    </div>
+                </div>
+                            </div>
+            <a href="/courses?cta=welcome-modal" class="mt-2 btn btn-primary btn-block">👉 前端自學作業包：何必花10萬去補習？寫作業包就能轉職！</a>
+            <hr>
+            <p>本論壇另有附設一個 LINE 新手發問＆交流群組！歡迎加入討論！</p>
+            <a href="https://line.me/ti/g2/nipkjq2WoZPKX5dTn9tE9266aEOt6EOICFGa1g" class="btn btn-success btn-block">👉 來加 LINE 討論群組</a>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(() => {
+        const key = 'cta-showed';
+
+        if (!Cookies.get(key)) {
+            Cookies.set(key, '1', { expires: 7 });
+
+            $('#ctaModal').modal('show');
+        }
+    });
+</script>
+
+    <div class="alert alert-success mb-0 text-center alert-cta fixed-bottom" role="alert" style="display: none;">
+        <i class="fas fa-bullhorn"></i>&nbsp;
+        <a href="/courses?cta=top-link" class="alert-link">HTML + JavaScript 前端自學作業包：何必花10萬去補習？寫作業包就能轉職！</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <script>
+        $(document).ready(() => {
+            const key = 'alert-cta-showed';
+
+            if (!Cookies.get(key)) {
+                $('.alert-cta').show();
+            }
+
+            $('.alert-cta .close').on('click', () => {
+                Cookies.set(key, '1', { expires: 7 });
+            });
+        });
+    </script>
+
+<style>
+    @media (min-width: 768px) {
+        .alert-cta {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+
+    <script>
+        $(document).ready(function(){
+
+            toastr.options = {
+                //"positionClass": "toast-top-center",
+            }
+
+            
+            autosize(document.querySelectorAll('.autosize'));
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            twemoji.parse(document.body);
+        });
+
+        $(document).ajaxComplete(function () {
+            twemoji.parse(document.body);
+        });
+    </script>
+
+    <script>
+        var initLikeButtons = function(){
+            $('.btn-like').off('click');
+            $('.btn-like').click(function(){
+                if ($(this).hasClass('clicked')) {
+                    $(this).removeClass('clicked');
+                    $(this).find('span').eq(0).text(parseInt($(this).find('span').eq(0).text()) - 1);
+                    $(this).find('i').removeClass('fas');
+                    $(this).find('i').addClass('far');
+                    $.post('/ajax-cancel-like', {
+                        id: $(this).data('id'),
+                        type: $(this).data('type'),
+                        _token: 'jdlMGGuVsVXzIv29N15OT53GKoPpDNiQCy7ycDed'
+                    });
+                } else {
+                    $(this).addClass('clicked');
+                    $(this).find('span').eq(0).text(parseInt($(this).find('span').eq(0).text()) + 1);
+                    $(this).find('i').removeClass('far');
+                    $(this).find('i').addClass('fas');
+                    $.post('/ajax-like', {
+                        id: $(this).data('id'),
+                        type: $(this).data('type'),
+                        _token: 'jdlMGGuVsVXzIv29N15OT53GKoPpDNiQCy7ycDed'
+                    });
+                }
+            });
+        };
+
+        $(document).ready(initLikeButtons);
+        $(document).ajaxComplete(initLikeButtons);
+    </script>
+</body>
+</html>

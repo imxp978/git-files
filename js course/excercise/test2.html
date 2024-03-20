@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            
+        }
+
+        ul {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            grid-auto-rows: minmax(100px, auto);
+            list-style: none;
+          }
+
+        li {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        img {
+            height: 150px;
+        } 
+    </style>
+</head>
+
+<body>
+    <button id="load">Load Products</button>
+    <hr>
+    <ul id="list">    </ul>
+    <script>
+        const list = document.querySelector('ul');
+        const load = document.querySelector('#load');
+        load.addEventListener('click', function () {
+            fetch('https://fakestoreapi.com/products/')
+                .then(res => res.json())
+                .then( (json) => {
+                    var a = json;
+                    console.log(a);
+                    console.log(a[0]);
+                    console.log(a[0]['title']);
+
+                    for (let i = 0; i < a.length; i++) {
+                        
+                        const li = document.createElement('li');
+                        const span = document.createElement('span');
+                        const button = document.createElement('button');
+                        const img = document.createElement('img');
+                        const br = document.createElement('br');
+    
+                        span.innerHTML = a[i]['title'];
+                        button.innerHTML = 'Details';
+                        img.src = a[i]['image'];
+                        
+                        li.appendChild(img);
+                        li.appendChild(br);
+                        li.appendChild(button);
+                        li.appendChild(span);
+    
+                        list.appendChild(li);
+
+
+                        button.addEventListener ('click', function () {
+                            alert(a[i]['id']);
+                            alert(a[i]['category']);
+                            alert(a[i]['description']);
+                        })
+                    }
+                })
+                .catch( () => {
+                    alert('Error 請稍後重新試');
+                })
+
+        })
+    </script>
+</body>
+
+</html>
