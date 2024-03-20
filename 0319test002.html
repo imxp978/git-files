@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var name = "chun";
+        var seat = rand(1,30);
+        var age = rand(1,50);
+        var tall = 171.5;
+        var student = false;
+        var hobby = null;
+        var want; 
+        var score = [70,80,90];
+        var mobile = {
+            tel: "0987654321",
+            os: "android",
+            brand: "sony",
+            size: "6.5inch",
+        }
+
+        if (seat < 17) {
+            var seat_a = Math.floor(seat / 8) + 1;
+            var seat_b = seat % 8;
+        } else {
+            var seat_a = Math.floor((seat + 1) / 8) + 1;
+            var seat_b = (seat + 1)% 8;
+        }
+
+        if (seat_b == 0) {
+            seat_a -= 1;
+            seat_b = 8;
+        }
+
+        function bg(seat) {
+            var select = document.getElementById(seat);
+            select.style.backgroundColor = 'orange';
+            select.style.color = 'white';
+            select.style.fontWeight = 'bolder';
+        }
+
+        window.onload = function () {
+            bg(seat);
+        };
+
+        function rand(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+    </script>    
+    <table border="1">
+        <tr>
+            <td>姓名</td>
+            <td><script>document.write(name);</script></td>
+            <td><script>document.write(typeof(name));</script></td>
+        </tr>
+        <tr>
+            <td>座號</td>
+            <td><script>document.write(seat);</script></td>
+            <td><script>document.write(typeof(seat));</script></td>
+        </tr>
+        <tr>
+            <td>教室位置</td>
+            <td><script>document.write('位置：第' + seat_a + '排，第' + seat_b + '位');</script></td>
+            <td><script>document.write(typeof(name));</script></td>
+        </tr>
+        <tr>
+            <td>年齡</td>
+            <td><script>document.write(age);</script></td>
+            <td><script>document.write(typeof(age));</script></td>
+        </tr>
+        <tr>
+            <td>身高</td>
+            <td><script>document.write(tall);</script></td>
+            <td><script>document.write(typeof(tall));</script></td>
+        </tr>
+        <tr>
+            <td>是否在學</td>
+            <td><script>document.write(student);</script></td>
+            <td><script>document.write(typeof(student));</script></td>
+        </tr>
+        <tr>
+            <td>興趣</td>
+            <td><script>document.write(hobby);</script></td>
+            <td><script>document.write(typeof(hobby));</script></td>
+        </tr>
+        <tr>
+            <td>希望在JS課程得到什麼</td>
+            <td><script>document.write(want);</script></td>
+            <td><script>document.write(typeof(want));</script></td>
+        </tr>
+        <tr>
+            <td>成績</td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td>國文</td>
+                        <td>英文</td>
+                        <td>數學</td>
+                    </tr>
+                    <tr>
+                        <td><script>document.write(score[0]);</script></td>
+                        <td><script>document.write(score[1]);</script></td>
+                        <td><script>document.write(score[2]);</script></td>
+                    </tr>
+                </table>
+            </td>
+            <td><script>document.write(typeof(score));</script></td>
+        </tr>
+        <tr>
+            <td>使用手機規格</td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td>電話</td>
+                        <td>系統</td>
+                        <td>品牌</td>
+                        <td>大小</td>
+                    </tr>                    
+                    <tr>
+                        <td><script>document.write(mobile['tel']);</script></td>
+                        <td><script>document.write(mobile['os']);</script></td>
+                        <td><script>document.write(mobile['brand']);</script></td>
+                        <td><script>document.write(mobile['size']);</script></td>
+                    </tr>
+                </table>
+            </td>
+            <td><script>document.write(typeof(mobile));</script></td>
+        </tr>
+    </table>
+    <br>
+    <!-- <table border="1">
+        <tr>
+            <td id="1">1</td>
+            <td id="2">2</td>
+            <td id="3">3</td>
+            <td id="4">4</td>
+            <td id="5">5</td>
+            <td id="6">6</td>
+            <td id="7">7</td>
+            <td id="8">8</td>
+        </tr>
+        <tr>
+            <td id="9">9</td>
+            <td id="10">10</td>
+            <td id="11">11</td>
+            <td id="12">12</td>
+            <td id="13">13</td>
+            <td id="14">14</td>
+            <td id="15">15</td>
+            <td id="16">16</td>
+        </tr>
+        <tr>
+            <td>NA</td>
+            <td id="17">17</td>
+            <td id="18">18</td>
+            <td id="19">19</td>
+            <td id="20">20</td>
+            <td id="21">21</td>
+            <td id="22">22</td>
+            <td id="23">23</td>
+        </tr>
+        <tr>
+            <td id="24">24</td>
+            <td id="25">25</td>
+            <td id="26">26</td>
+            <td id="27">27</td>
+            <td id="28">28</td>
+            <td id="29">29</td>
+            <td id="30">30</td>
+            <td>NA</td>
+        </tr>
+    </table> -->
+    <script>
+        const plan = document.querySelector('#id');
+        var tr = document.createElement('tr');
+        </script>
+    <div id="plan">
+        <table border="1">
+            <script>
+                function add(i,j) {
+                    var td = document.createElement('td');
+                    td.innerHTML = i;
+                    td.setAttribute('id', i);
+                    document.getElementById("row" + j).appendChild(td); 
+                }
+            </script>
+            <tr id="row1">
+                <script>for (let i =1; i < 9; i++) {add(i, 1);}</script>
+            </tr>
+            <tr id="row2">
+                <script>for (let i =9; i < 17; i++) {add(i, 2);}</script>
+            </tr>
+            <tr id="row3">
+                <td>NA</td>
+                <script>for (let i =17; i < 24; i++) {add(i, 3);}</script>
+            </tr>
+            <tr id="row4">
+                <script>
+                    for (let i =24; i < 31; i++) {add(i, 4);} 
+                    var row4 = document.querySelector('#row4');
+                    var tds = row4.querySelectorAll('td')
+
+                    while (tds.length < 8) {
+                        var td = document.createElement('td');
+                        td.innerHTML='NA';
+                        row4.appendChild(td);
+                        tds =row4.querySelectorAll('td');
+                    }                  
+                </script>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
