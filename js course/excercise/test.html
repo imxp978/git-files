@@ -1,89 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <a href="https://www.explainthis.io/zh-hant/swe/javascript"> JS interview FAQ</a>
-<br>
-<a href="https://www.explainthis.io/zh-hant/swe/js-equality"> JS >>> '==' &'===' </a>
-<br>
+  </head>
+  <body>
+    <a href="https://www.explainthis.io/zh-hant/swe/javascript">
+      JS interview FAQ</a
+    >
+    <br />
+    <a href="https://www.explainthis.io/zh-hant/swe/js-equality">
+      JS >>> '==' &'==='
+    </a>
+    <br />
 
-<p>
-<button onclick="action1()"> global scope </button>
-<button onclick="action2()"> local scope </button>
-</p>
-<hr>
-<p>
-<button id='minus'>-</button> <button id='plus'>+</button> 
-<br>
-第一個應用程式，是簡單的計數器
+    <p>
+      <button onclick="action1()">global scope</button>
+      <button onclick="action2()">local scope</button>
+    </p>
+    <hr />
+    <p>
+      <button id="minus">-</button> <button id="plus">+</button>
+      <br />
+      第一個應用程式，是簡單的計數器 - 第一次點擊 + 號按鈕，會用 alert 跳出 1 -
+      第二次點擊 + 號按鈕，會用 alert 跳出 2 - 依此類推，每次點 +
+      都會遞增，每次點 - 都會遞減 -
+      你會宣告一個全域變數，記錄這個累積的值，才能完成此功能
+    </p>
+    <br />
+    <input id="a" type="text" /> <input id="b" type="text" />
+    <button id="c">加/減/乘/除</button>
+    <br />
+    第二個應用程式，是簡單的計算機 - 有兩個欄位可以輸入數字 -
+    點擊按鈕，連續跳出四個 alert，分別顯示「加/減/乘/除」的計算結果 - 例如：輸入
+    6 與 2 -&gt; alert 顯示 8 -&gt; alert 顯示 4 -&gt; alert 顯示 12 -&gt; alert
+    顯示 3 -
+    你會宣告兩個區域變數，分別記錄兩個輸入的值，接著用來進行四種計算，才能完成此功能
 
-- 第一次點擊 + 號按鈕，會用 alert 跳出 1
-- 第二次點擊 + 號按鈕，會用 alert 跳出 2
-- 依此類推，每次點 + 都會遞增，每次點 - 都會遞減
-- 你會宣告一個全域變數，記錄這個累積的值，才能完成此功能
-</p>
-<br>
-<input id="a" type="text" /> <input id="b" type="text" /> <button id="c">加/減/乘/除</button> 
-<br>
-第二個應用程式，是簡單的計算機
+    <script>
+      const minus_btn = document.querySelector("#minus");
+      const plus_btn = document.querySelector("#plus");
+      var count = 0;
+      minus_btn.addEventListener("click", function () {
+        count -= 1;
+        alert(count);
+      });
 
-- 有兩個欄位可以輸入數字
-- 點擊按鈕，連續跳出四個 alert，分別顯示「加/減/乘/除」的計算結果
-- 例如：輸入 6 與 2 -&gt; alert 顯示 8 -&gt; alert 顯示 4 -&gt; alert 顯示 12 -&gt; alert 顯示 3
-- 你會宣告兩個區域變數，分別記錄兩個輸入的值，接著用來進行四種計算，才能完成此功能
+      plus_btn.addEventListener("click", function () {
+        count += 1;
+        alert(count);
+      });
 
-<script>
-    var counterA = 0;
+      const c_btn = document.querySelector("#c");
 
-function action1()
-{
-  counterA = counterA + 1;
-  alert(counterA);
-}
+      c_btn.addEventListener("click", function () {
+        var a = parseInt(document.querySelector("#a").value);
+        var b = parseInt(document.querySelector("#b").value);
+        var a1 = a + b;
+        var a2 = a - b;
+        var a3 = a * b;
+        var a4 = a / b;
 
-function action2()
-{
-  var counterB = 0;
-  counterB = counterB + 1;
-  alert(counterB);
-}
-
-
-const minus_btn = document.querySelector('#minus');
-const plus_btn = document.querySelector('#plus');
-var count = 0;
-minus_btn.addEventListener('click', function() {
-	count -= 1;
-	alert(count);
-})
-
-plus_btn.addEventListener('click', function() {
-	count += 1;
-	alert(count);
-} )
-
-
-const c_btn = document.querySelector('#c');
-
-c_btn.addEventListener('click', function() {
-	var a = parseInt(document.querySelector('#a').value);
-	var b = parseInt(document.querySelector('#b').value);
-	var a1 = a + b;
-	var a2 = a - b;
-	var a3 = a * b;
-	var a4 = a / b;
-	
-    alert(a1);
-    alert(a2);
-    alert(a3);
-    alert(a4);
-})
-
-
-</script>
-</body>
+        alert(a1);
+        alert(a2);
+        alert(a3);
+        alert(a4);
+      });
+    </script>
+  </body>
 </html>
