@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="add" type="text" /> <button onclick="add()">新增</button>
+    <button onclick="render()">算</button>
+    <div id="root"></div>
+
+    <script>
+      let root = document.querySelector("#root");
+
+      var todos = [
+        {
+          title: "倒垃圾",
+        },
+        {
+          title: "繳電話費",
+        },
+        {
+          title: "採買本週食材",
+        },
+      ];
+
+      function add() {
+        let input = document.querySelector("#add");
+        let task = { title: input.value };
+        console.log(task);
+        todos.push(task);
+        input.value = "";
+        render();
+      }
+
+      function render() {
+        // 請寫出此函式內容
+        root.innerHTML = "";
+        const ul = document.createElement("ul");
+
+        for (let i = 0; i < todos.length; i++) {
+          const li = document.createElement("li");
+          const span = document.createElement("span");
+          span.innerText = todos[i].title;
+          console.log(span.innerText);
+          li.appendChild(span);
+          ul.appendChild(li);
+        }
+        root.appendChild(ul);
+      }
+
+      render();
+    </script>
+  </body>
+</html>
