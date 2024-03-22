@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a;
+        var a01=100;
+        document.write("<h1>設定變數a，沒有設定值為" + a + "</h1>");
+        document.write("<h1>設定變數a01=" + a01 + "</h1>");
+        document.write("<hr>");
+        showVar();
+        var b01; 
+        b01 += 200;
+        document.write("<h1>在函數內使用變數a01+200=" + a01 + "</h1>");
+        
+        function showVar() {
+            a01 += 200;
+            document.write("<h1>在函數內使用變數a01+200=" + a01 + "</h1>");
+            let b01 = 800;
+            document.write("<h1>在函數內使用let宣告變數b01=" + b01 + "</h1>");
+        }
+
+        document.write("請文字輸出網頁 <br>") ;
+        document.write('2024/03/19 Chun');
+    </script>
+</body>
+</html>

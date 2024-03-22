@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="comlib.js"></script>
+  </head>
+  <body>
+    <script>
+      var score = rand(1, 99);
+      document.write("<h1>測試成績:", score, "</h1>");
+      if (score < 60) {
+        document.write("<h3>測試成績判斷為不及格</h3>");
+      }
+
+      if (score >= 60) {
+        document.write("<h3>測試成績判斷為及格</h3>");
+      }
+    </script>
+  </body>
+</html>
