@@ -52,15 +52,18 @@
                         const button = document.createElement('button');
                         const img = document.createElement('img');
                         const br = document.createElement('br');
+                        const delete_btn = document.createElement('button';)
 
                         span.innerHTML = a[i]['title'];
                         button.innerHTML = 'Details';
                         img.src = a[i]['image'];
+                        delete_btn.innerHTML = 'Delete';
 
                         li.appendChild(img);
                         li.appendChild(br);
                         li.appendChild(button);
                         li.appendChild(span);
+                        li.appendChild(delete_btn);
 
                         list.appendChild(li);
 
