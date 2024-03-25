@@ -7,6 +7,21 @@
     <script src="comlib.js"></script>
   </head>
   <body>
+    <h3>
+      <script>
+        var grade = rand(1,99);
+        document.write("<h1>測試成績"+grade+"</h1>");
+        if (grade >= 80) {
+          document.write("測試成績判斷為A:取得4.0積分");
+        } else if (grade >= 70) {
+          document.write("測試成績判斷為B:取得3.0積分")
+        } else {
+          document.write("測試成績判斷為C:取得2.0積分")
+        }
+      
+
+      </script>
+    </h3>
     <script>
       var score = rand(1, 99);
       document.write("<h1>測試成績:", score, "</h1>");
