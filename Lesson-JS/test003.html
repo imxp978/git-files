@@ -10,6 +10,64 @@
 
 <body>
 
+  <h1 id="time">yo</h1>
+
+<script>
+  let hour = 11;
+  let min = 56;
+  let sec = 20;
+
+  document.write(hour +":"+min + ":" + sec)
+  
+  function runTimer() {
+    if (sec === 59) {
+      sec = 0;
+      if (min === 59) {
+        min = 0;
+        hour ++;
+        if (hour === 24) {
+          hour = 0;
+        let str1 = str();
+        if (hour > 12) {
+          hour -= 12;
+        }
+        }
+      } else {
+        min ++;
+      }
+    } else {
+      sec++;
+    }
+    time.innerHTML = "Current Time is: " + addZero(hour) + ":" + addZero(min) + ":" + addZero(sec) +" "+ str();
+    window.setTimeout('runTimer()', 1);
+  }
+
+  function str() {
+    if (hour > 11) {
+      return "PM";
+    } else {
+      return "AM";
+    }
+  }
+
+  // let str = "AM";
+  // (hour > 11) ? str = "PM" : str = "AM";
+  // hour > 12 ? hour = hour - 12 : hour;
+
+  function addZero(num) {
+    if (num < 10) {
+      return num = "0"+num;
+    }
+    else {
+      return num;
+    }     
+  }
+
+  const time = document.getElementById('time');
+  runTimer();
+
+</script>
+
 <h3>
 
   <script>

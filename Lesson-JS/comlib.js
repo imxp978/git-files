@@ -1,3 +1,15 @@
+// single digit => double digits //
+function addZero(num) {
+  if (num < 10) {
+    return num = "0"+num;
+  }
+  else {
+    return num;
+  }     
+}
+
+////////////////////////////////////////////////
+
 var name = "Chun";
 var seat = rand(1, 30);
 var age = rand(1, 50);
@@ -81,6 +93,7 @@ function bg(seat) {
   select.style.color = "white";
   select.style.fontWeight = "bolder";
 }
+
 
 window.onload = function () {
   bg(seat);
