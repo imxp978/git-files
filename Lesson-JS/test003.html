@@ -9,6 +9,20 @@
 </head>
 
 <body>
+
+<h3>
+
+  <script>
+    let hour = rand(1,24);
+    document.write(hour+"<br>");
+    let str = (hour >= 12)?"PM":"AM";
+    hour = (hour==24)?hour-24:hour; 
+    hour = (hour>12)?hour-12:hour;
+    document.write("current time: "+hour+" "+str)
+    </script>
+</h3>
+  <hr>
+
   <p id="lottery" name="lottery" style="font-size:100px;">1</p>
   <button type="button" id="btn01" name="btn01" onclick="getPrize();">抽獎</button>
 
@@ -42,7 +56,7 @@
     }
 
   </script>
-
+<hr>
 
   <h3>
     <script>
