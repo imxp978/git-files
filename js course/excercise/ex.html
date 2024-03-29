@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+            display: block;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+			
+        }
+
+        h1 {
+            width: 80%;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 5px solid black;
+        }
+
+        input {
+            width: 60%;
+            box-sizing: border-box;
+            border: 0px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 2px 2px 2px gray;
+        }
+
+        input:hover {
+            outline: 1px solid orange;
+            transition: all 0.3s;
+            box-shadow: 0px 0px 0px gray
+        }
+
+        select {
+            border: 0px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 9px;
+            box-shadow: 2px 2px 2px gray;
+            cursor: pointer;
+        }
+
+        select:hover {
+            outline: 1px solid orange;
+            transition: all 0.3s;
+            box-shadow: 0px 0px 0px gray
+        }
+
+        button {
+            color: black;
+            background-color: orange;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+            border: 0px solid black;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px gray;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: white;
+            background-color: darkorange;
+            outline: 1px solid orange;
+            
+            transition: all 0.2s;
+        }
+		
+		button:active {
+			box-shadow: 0px 0px 0px gray;
+		}
+
+        button+button {
+            margin: 10px;
+        }
+
+        li {
+            width: 95%;
+            padding: 5px;
+            border-bottom: 2px dotted black;
+            display: flex;
+            align-items: baseline;
+			text-align: left;
+        }
+		
+        span {
+            flex: 2;
+            transition: 0.3s;
+			float: left;
+        }
+
+        #wrap {
+            margin: 0 auto;
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            border: 1px dotted black;
+            border-radius: 15px;
+            background-color: lightgray;
+            padding: 20px;
+
+        }
+
+        #main {
+            display: block;
+            text-align: center;
+            width: 100%;
+            border-radius: 5px;
+            margin: 20px;
+        }
+
+        #joblist {
+            display: block;
+            text-align: left;
+            width: 100%;
+            line-height: 2em;
+        }
+
+        #list {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+
+        }
+
+        .normal {
+            color: black;
+        }
+
+        .important {
+            font-weight: bold;
+        }
+
+        .urgent {
+            font-weight: bolder;
+            color: darkred;
+        }
+
+        .normal_input {
+            width: 60%;
+            box-sizing: border-box;
+            border: 0px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 2px 2px 2px gray;
+            color: black;
+        }
+
+        .important_input {
+            width: 60%;
+            box-sizing: border-box;
+            border: 0px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 2px 2px 2px gray;
+            font-weight: bolder;
+            color: black;
+        }
+
+        .urgent_input {
+            width: 60%;
+            box-sizing: border-box;
+            border: 0px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 2px 2px 2px gray;
+            font-weight: bolder;
+            color: darkred;
+        }
+
+        .mark_done {
+            margin-right: 5px;
+            text-align: right;
+            flex: 0.5;
+            font-size: 12px;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+        <div id="main">
+            <input type="text">
+    
+            <select id="level">
+              <option value="normal">一般</option>
+              <option value="important">重要</option>
+              <option value="urgent">緊急</option>
+            </select>
+    
+            <button onclick="add()">新增</button>
+            <h1>待辦事項</h1>
+            <div id="root">
+            </div>
+    
+            <button onclick="export1()">匯出</button>
+            <button onclick="save()">儲存</button>
+        </div>
+    </div>
+    
+    <script>
+var todos = [
+  {
+    title: "倒垃圾",
+    category: "normal",
+    isCompleted: false
+  },
+  {
+    title: "繳電話費",
+    category: "important",
+    isCompleted: false
+  },
+  {
+    title: "採買本週食材",
+    category: "urgent",
+    isCompleted: false
+  },
+];
+
+var importance = {
+	normal: "black",
+	important: "orange",
+	urgent: "red",
+}
+
+var complete = {
+	true: "待辦",
+	false: "完成",
+}
+
+var done = {
+	true: "",
+	false: "none",
+}
+
+var delete_line = {
+	true: "3px line-through rgba(255, 0, 0, 0.6)",
+	false: "",
+}
+
+var export_stars = {
+	normal: "",
+	important: "*",
+	urgent: "**",
+}
+
+function add()
+{
+  const input = document.querySelector('input');
+  const level = document.querySelector('#level');
+  
+  if (!input.value) {
+  	alert('請輸入待辦事項');
+	return;
+  }
+  todos.push({title: input.value, category: level.value, isCompleted: false, });
+  /* console.log(todos[todos.length - 1].isCompleted); */
+  render();
+  input.value="";
+}
+
+function export1()
+{
+	let export_content = "";
+	for (const i in todos) {
+		let star = export_stars[todos[i].category];
+		let export_text = (parseInt(i) + 1) + ". " + star + todos[i].title + star + "\n";
+		export_content += export_text;
+	}
+	alert(export_content);
+}
+
+function save() 
+{
+	localStorage.clear();
+	let save_content = JSON.stringify(todos);
+	localStorage.setItem('todos', save_content);
+	let json = JSON.parse(localStorage.getItem('todos'));
+	console.log(json);
+	alert('已儲存');
+}
+
+function checkLocalStorage() 
+{
+	let ls = localStorage.getItem('todos')
+	if (ls != "[]") {
+	  todos = JSON.parse(ls);
+	}
+}
+
+function render()
+{
+  const root = document.querySelector('#root');
+  const level = document.querySelector('#level');
+  root.innerHTML="";
+  let ul = document.createElement('ul');
+  /* for (let i = 0; i < todos.length; i++) { */
+  for (const i in todos) {
+	let li = document.createElement('li');
+	let span = document.createElement('span');
+	let btn = document.createElement('button');
+	let btn_done = document.createElement('button');
+	let span_done = document.createElement('span');
+	span.innerText = todos[i].title;
+/* 	if (todos[i].category === "important") {
+		span.style.color = "orange";
+	} else if (todos[i].category === "urgent") {
+		span.style.color = "red";
+	} */
+	
+	/* 也可以不用if判斷 直接做出一個key value object, 根據key來取得value 效率會快一點; */
+	span.style.color = importance[todos[i].category];
+	span.style.textDecoration = delete_line[todos[i].isCompleted];
+	
+	span_done.textContent = "(已完成)";
+	span_done.style.display = done[todos[i].isCompleted];
+	span_done.style.color = importance[todos[i].category];
+	
+	btn_done.classList.add('done');
+	btn_done.innerText = complete[todos[i].isCompleted];
+	
+	btn.classList.add('del');
+	btn.innerText = '刪除';
+	
+	li.append(span, span_done, btn_done, btn);
+	ul.append(li);
+	root.append(ul);
+	
+    btn_done.addEventListener('click', () => {
+		todos[i].isCompleted = !todos[i].isCompleted;
+		btn_done.innerText = complete[todos[i].isCompleted];
+		span_done.style.display = done[todos[i].isCompleted];
+		span.style.textDecoration = delete_line[todos[i].isCompleted];
+	}); 
+	
+	btn.onclick = () => {
+		todos.splice(i,1);
+		render();
+	}
+  }
+}
+
+checkLocalStorage(); 
+render();
+        </script>
+  </body>
+</html>

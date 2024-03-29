@@ -1,374 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        body {
-            display: block;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: sans-serif;
-        }
+      body {
+        display: block;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
 
-        h1 {
-            width: 80%;
-            text-align: center;
-            padding-bottom: 10px;
-            border-bottom: 5px solid black;
-        }
+      h1 {
+        width: 80%;
+        text-align: center;
+        padding-bottom: 10px;
+        border-bottom: 5px solid black;
+      }
 
-        input {
-            width: 60%;
-            box-sizing: border-box;
-            border: 0px solid black;
-            border-radius: 5px;
-            font-size: 16px;
-            margin: 10px;
-            padding: 10px;
-            box-shadow: 2px 2px 2px gray;
-        }
+      input {
+        width: 60%;
+        box-sizing: border-box;
+        border: 0px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: 2px 2px 2px gray;
+      }
 
-        input:hover {
-            outline: 1px solid orange;
-            transition: all 0.3s;
-            box-shadow: 0px 0px 0px gray
-        }
+      input:hover {
+        outline: 1px solid orange;
+        transition: all 0.3s;
+        box-shadow: 0px 0px 0px gray;
+      }
 
-        select {
-            border: 0px solid black;
-            border-radius: 5px;
-            font-size: 16px;
-            padding: 9px;
-            box-shadow: 2px 2px 2px gray;
-            cursor: pointer;
-        }
+      select {
+        border: 0px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+        padding: 9px;
+        box-shadow: 2px 2px 2px gray;
+        cursor: pointer;
+      }
 
-        select:hover {
-            outline: 1px solid orange;
-            transition: all 0.3s;
-            box-shadow: 0px 0px 0px gray
-        }
+      select:hover {
+        outline: 1px solid orange;
+        transition: all 0.3s;
+        box-shadow: 0px 0px 0px gray;
+      }
 
-        button {
-            color: black;
-            background-color: orange;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-top: 9px;
-            padding-bottom: 9px;
-            border: 0px solid black;
-            border-radius: 5px;
-            box-shadow: 2px 2px 2px gray;
-            cursor: pointer;
-        }
+      button {
+        color: black;
+        background-color: orange;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+        border: 0px solid black;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px gray;
+        cursor: pointer;
+      }
 
-        button:hover {
-            color: white;
-            background-color: darkorange;
-            outline: 1px solid orange;
-            box-shadow: 0px 0px 0px gray;
-            transition: all 0.2s;
-        }
+      button:hover {
+        color: white;
+        background-color: darkorange;
+        outline: 1px solid orange;
+        transition: all 0.2s;
+      }
 
-        button+button {
-            margin: 10px;
-        }
+      button:active {
+        box-shadow: 0px 0px 0px gray;
+      }
 
-        li {
-            width: 95%;
-            padding: 5px;
-            border-bottom: 2px dotted black;
-            display: flex;
-            justify-content: flex-end;
-            align-items: baseline;
-        }
+      button + button {
+        margin: 10px;
+      }
 
-        span {
-            flex: 2;
-            transition: 0.3s;
-        }
+      li {
+        width: 95%;
+        padding: 5px;
+        border-bottom: 2px dotted black;
+        display: flex;
+        justify-content: flex-end;
+        align-items: baseline;
+      }
 
-        #wrap {
-            margin: 0 auto;
-            width: 75%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 60%;
-            border: 1px dotted black;
-            border-radius: 15px;
-            background-color: lightgray;
-            padding: 20px;
-        }
+      span {
+        flex: 2;
+        transition: 0.3s;
+      }
 
-        #main {
-            display: block;
-            text-align: center;
-            width: 100%;
-            border-radius: 5px;
-            margin: 20px;
-        }
+      #wrap {
+        margin: 0 auto;
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        border: 1px dotted black;
+        border-radius: 15px;
+        background-color: lightgray;
+        padding: 20px;
+      }
 
-        #joblist {
-            display: block;
-            text-align: left;
-            width: 100%;
-            line-height: 2em;
-        }
+      #main {
+        display: block;
+        text-align: center;
+        width: 100%;
+        border-radius: 5px;
+        margin: 20px;
+      }
 
-        #list {
+      #joblist {
+        display: block;
+        text-align: left;
+        width: 100%;
+        line-height: 2em;
+      }
 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
+      #list {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
 
-        .normal {
-            color: black;
-        }
+      .normal {
+        color: black;
+      }
 
-        .important {
-            font-weight: bold;
-        }
+      .important {
+        font-weight: bold;
+      }
 
-        .urgent {
-            font-weight: bolder;
-            color: darkred;
-        }
+      .urgent {
+        font-weight: bolder;
+        color: darkred;
+      }
 
-        .normal_input {
-            width: 60%;
-            box-sizing: border-box;
-            border: 0px solid black;
-            border-radius: 5px;
-            font-size: 16px;
-            margin: 10px;
-            padding: 10px;
-            box-shadow: 2px 2px 2px gray;
-            color: black;
-        }
+      .normal_input {
+        width: 60%;
+        box-sizing: border-box;
+        border: 0px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: 2px 2px 2px gray;
+        color: black;
+      }
 
-        .important_input {
-            width: 60%;
-            box-sizing: border-box;
-            border: 0px solid black;
-            border-radius: 5px;
-            font-size: 16px;
-            margin: 10px;
-            padding: 10px;
-            box-shadow: 2px 2px 2px gray;
-            font-weight: bolder;
-            color: black;
-        }
+      .important_input {
+        width: 60%;
+        box-sizing: border-box;
+        border: 0px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: 2px 2px 2px gray;
+        font-weight: bolder;
+        color: black;
+      }
 
-        .urgent_input {
-            width: 60%;
-            box-sizing: border-box;
-            border: 0px solid black;
-            border-radius: 5px;
-            font-size: 16px;
-            margin: 10px;
-            padding: 10px;
-            box-shadow: 2px 2px 2px gray;
-            font-weight: bolder;
-            color: darkred;
-        }
+      .urgent_input {
+        width: 60%;
+        box-sizing: border-box;
+        border: 0px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: 2px 2px 2px gray;
+        font-weight: bolder;
+        color: darkred;
+      }
 
-        .mark_done {
-            margin-right: 5px;
-            text-align: right;
-            flex: 0.5;
-            font-size: 12px;
-        }
+      .mark_done {
+        margin-right: 5px;
+        text-align: right;
+        flex: 0.5;
+        font-size: 12px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="wrap">
-        <div id="main">
-            <select id="type">
-                <option value="" selected disabled>選擇重要性</option>
-                <option value="normal">一般</option>
-                <option value="important">重要</option>
-                <option value="urgent">緊急</option>
-            </select>
-            <input type="text" id="todo" placeholder="新增工作項目" autofocus>
-            <button id="add">新增</button>
-        </div>
-        <h1>待辦事項</h1>
-        <div id="joblist">
-            <ul id="list">
-            </ul>
-        </div>
-        <div>
-            <button id="export">匯出</button> 
-            <button id="save">儲存</button>
-        </div>
+      <div id="main">
+        <select id="type">
+          <option value="" selected disabled>選擇重要性</option>
+          <option value="normal">一般</option>
+          <option value="important">重要</option>
+          <option value="urgent">緊急</option>
+        </select>
+        <input type="text" id="todo" placeholder="新增工作項目" autofocus />
+        <button id="add">新增</button>
+      </div>
+      <h1>待辦事項</h1>
+      <div id="joblist">
+        <ul id="list"></ul>
+      </div>
+      <div>
+        <button id="export">匯出</button>
+        <button id="save">儲存</button>
+      </div>
     </div>
     <script>
-        var list = document.querySelector('#list');
-        var newjob = document.createElement('li');
-        var text = document.createElement('span');
+      var list = document.querySelector("#list");
+      var newjob = document.createElement("li");
+      var text = document.createElement("span");
 
-        window.onload = function () {
-            check_localStorage();
-        };
+      window.onload = function () {
+        check_localStorage();
+      };
 
-        function check_localStorage() {
-            if ((localStorage.getItem('tasks')) != []) {
-                var tasks = JSON.parse(localStorage.getItem('tasks'));
-                for (let i = 0; i < tasks.length; i++) {
-
-                    type = tasks[i].level;
-                    todo = tasks[i].content;
-
-                    add_job(type, todo);
-                }
-            }
-        }
-
-        function change_type() {
-            var input = document.querySelector('#todo');
-            var type = document.querySelector('#type');
-            if (type.value == "normal") {
-                input.className = 'normal_input';
-            } else if (type.value == "important") {
-                input.className = 'important_input';
-            } else if (type.value == "urgent") {
-                input.className = 'urgent_input';
-            }
-        }
-
-        function add_job(type, todo) {
-
-            var list = document.querySelector('#list');
-            var newjob = document.createElement('li');
-            var text = document.createElement('span');
-            var button = document.createElement('button');
-            var done_btn = document.createElement('button');
-            var br = document.createElement('br');
-            var mark_done = document.createElement('span');
-
-            if (!type || !todo) {
-                alert('請填寫重要性及工作項目');
-            } else {
-
-                list.append(newjob);
-                newjob.append(text);
-                text.textContent = todo;
-
-                if (type == "normal") {
-                    newjob.classList.add("normal");
-                } else if (type == "important") {
-                    newjob.classList.add("important");
-                } else {
-                    newjob.classList.add("urgent");
-                }
-
-                newjob.append(mark_done);
-                mark_done.className = "mark_done";
-                mark_done.textContent = "[已完成] "
-                mark_done.style.display = "none";
-                
-
-                newjob.append(done_btn);
-                done_btn.textContent = '完成';
-                done_btn.onclick = function () {
-                    if (mark_done.style.display == "none") {
-                        mark_done.style.display = "block";
-                        done_btn.textContent = "待辦";
-                        text.style.textDecoration = "3px line-through rgba(255, 0, 0, 0.6)";
-                    } else {
-                        mark_done.style.display = "none";
-                        done_btn.textContent = "完成";
-                        text.style.textDecoration = "none";
-                    }
-                }
-                newjob.append(button);
-                button.textContent = '刪除';
-                button.onclick = function () {
-                    button.closest('li').remove();
-                }
-            }
-            //reset input values  
-            document.querySelector('#todo').value = '';
-            document.querySelector('#type').value = 'normal';
-            document.querySelector('#todo').className = 'normal_input';
-        }
-
-        function export_job() {
-            var list = document.querySelectorAll('li');
-
-            if (list.length == 0) {
-                alert('無待辦事項')
-            } else {
-                var number = 1;
-                var text = '';
-                var star = '';
-                for (var item of list) {
-                    if (item.className == 'important') {
-                        star = '**';
-                    } else if (item.className == 'urgent') {
-                        star = '***';
-                    } else {
-                        star = '';
-                    }
-                    var textpart = item.querySelector('span')
-                    text = text + '(' + number + ') ' + star + textpart.textContent + star + ' \n';
-                    number = number + 1;
-                }
-                alert('待辦事項: \n' + text);
-            }
-        }
-
-        const save_btn = document.querySelector('#save');
-
-        function save() {
-            if (localStorage['tasks']) {
-                localStorage.removeItem('tasks');
-            }
-
-            const jobs = document.querySelectorAll('li');
-            var tasks = [];
-            for (let i = 0; i < jobs.length; i++) {
-                const level_value = jobs[i].className;
-                const content_value = jobs[i].querySelector('span').textContent;
-                var task = {
-                    'level': level_value,
-                    'content': content_value,
-                };
-                tasks.push(task);
-            }
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            alert('儲存成功');
-        }
-
-        save_btn.addEventListener('click', function () {
-            localStorage.removeItem('tasks');
-            save();
-        })
-
-        //main function
-        var type_slt = document.querySelector('#type');
-        type_slt.onchange = change_type;
-
-        var export_btn = document.querySelector('#export');
-        export_btn.onclick = export_job;
-
-        var add_btn = document.querySelector('#add');
-        add_btn.addEventListener('click', function () {
-            type = document.querySelector('#type').value;
-            todo = document.querySelector('#todo').value;
+      function check_localStorage() {
+        if (localStorage.getItem("tasks") != []) {
+          var tasks = JSON.parse(localStorage.getItem("tasks"));
+          for (let i = 0; i < tasks.length; i++) {
+            type = tasks[i].level;
+            todo = tasks[i].content;
 
             add_job(type, todo);
+          }
         }
-        );
-</script>
-</body>
+      }
 
+      function change_type() {
+        var input = document.querySelector("#todo");
+        var type = document.querySelector("#type");
+        if (type.value == "normal") {
+          input.className = "normal_input";
+        } else if (type.value == "important") {
+          input.className = "important_input";
+        } else if (type.value == "urgent") {
+          input.className = "urgent_input";
+        }
+      }
+
+      function add_job(type, todo) {
+        var list = document.querySelector("#list");
+        var newjob = document.createElement("li");
+        var text = document.createElement("span");
+        var button = document.createElement("button");
+        var done_btn = document.createElement("button");
+        var br = document.createElement("br");
+        var mark_done = document.createElement("span");
+
+        if (!type || !todo) {
+          alert("請填寫重要性及工作項目");
+        } else {
+          list.append(newjob);
+          newjob.append(text);
+          text.textContent = todo;
+
+          if (type == "normal") {
+            newjob.classList.add("normal");
+          } else if (type == "important") {
+            newjob.classList.add("important");
+          } else {
+            newjob.classList.add("urgent");
+          }
+
+          newjob.append(mark_done);
+          mark_done.className = "mark_done";
+          mark_done.textContent = "[已完成] ";
+          mark_done.style.display = "none";
+
+          newjob.append(done_btn);
+          done_btn.textContent = "完成";
+          done_btn.onclick = function () {
+            if (mark_done.style.display == "none") {
+              mark_done.style.display = "block";
+              done_btn.textContent = "待辦";
+              text.style.textDecoration =
+                "3px line-through rgba(255, 0, 0, 0.6)";
+            } else {
+              mark_done.style.display = "none";
+              done_btn.textContent = "完成";
+              text.style.textDecoration = "none";
+            }
+          };
+          newjob.append(button);
+          button.textContent = "刪除";
+          button.onclick = function () {
+            button.closest("li").remove();
+          };
+        }
+        //reset input values
+        document.querySelector("#todo").value = "";
+        document.querySelector("#type").value = "normal";
+        document.querySelector("#todo").className = "normal_input";
+      }
+
+      function export_job() {
+        var list = document.querySelectorAll("li");
+
+        if (list.length == 0) {
+          alert("無待辦事項");
+        } else {
+          var number = 1;
+          var text = "";
+          var star = "";
+          for (var item of list) {
+            if (item.className == "important") {
+              star = "**";
+            } else if (item.className == "urgent") {
+              star = "***";
+            } else {
+              star = "";
+            }
+            var textpart = item.querySelector("span");
+            text =
+              text +
+              "(" +
+              number +
+              ") " +
+              star +
+              textpart.textContent +
+              star +
+              " \n";
+            number = number + 1;
+          }
+          alert("待辦事項: \n" + text);
+        }
+      }
+
+      const save_btn = document.querySelector("#save");
+
+      function save() {
+        if (localStorage["tasks"]) {
+          localStorage.removeItem("tasks");
+        }
+
+        const jobs = document.querySelectorAll("li");
+        var tasks = [];
+        for (let i = 0; i < jobs.length; i++) {
+          const level_value = jobs[i].className;
+          const content_value = jobs[i].querySelector("span").textContent;
+          var task = {
+            level: level_value,
+            content: content_value,
+          };
+          tasks.push(task);
+        }
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        alert("儲存成功");
+      }
+
+      save_btn.addEventListener("click", function () {
+        localStorage.removeItem("tasks");
+        save();
+      });
+
+      //main function
+      var type_slt = document.querySelector("#type");
+      type_slt.onchange = change_type;
+
+      var export_btn = document.querySelector("#export");
+      export_btn.onclick = export_job;
+
+      var add_btn = document.querySelector("#add");
+      add_btn.addEventListener("click", function () {
+        type = document.querySelector("#type").value;
+        todo = document.querySelector("#todo").value;
+
+        add_job(type, todo);
+      });
+    </script>
+  </body>
 </html>

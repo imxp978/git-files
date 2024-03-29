@@ -843,12 +843,12 @@
 如果電商網站上有這樣的內容
 
 ```
-&lt;div&gt;
-  商品名稱：&lt;span id=&quot;name&quot;&gt;冬季外套&lt;/span&gt;
-  價格：&lt;span id=&quot;price&quot;&gt;$1,990&lt;/span&gt;
-  分類：&lt;span id=&quot;category&quot;&gt;女裝&lt;/span&gt;
-  剩餘數量：&lt;span id=&quot;remain&quot;&gt;5&lt;/span&gt;
-&lt;/div&gt;
+<div>
+  商品名稱：<span id="name">冬季外套</span>
+  價格：<span id="price">$1,990</span>
+  分類：<span id="category">女裝</span>
+  剩餘數量：<span id="remain">5</span>
+</div>
 ```
 
 在網站上的任何操作，菜鳥工程師會覺得就直接去更新 DOM 就好了
@@ -871,9 +871,9 @@
 
 ```
 var product = {
-  name: &quot;冬季外套&quot;,
+  name: "冬季外套",
   price: 1990,
-  category: &quot;women&quot;,
+  category: "women",
   remain: 5
 }
 ```
@@ -903,18 +903,18 @@ var product = {
 請在 jsfiddle 嘗試以下範例
 
 ```
-&lt;div id=&quot;root&quot;&gt;
+<div id="root">
 
-&lt;/div&gt;
-&lt;button onclick=&quot;decrease()&quot;&gt;decrese&lt;/button&gt;
-&lt;button onclick=&quot;increase()&quot;&gt;increase&lt;/button&gt;
+</div>
+<button onclick="decrease()">decrese</button>
+<button onclick="increase()">increase</button>
 ```
 
 ```
 var product = {
-  name: &quot;冬季外套&quot;,
+  name: "冬季外套",
   price: 1990,
-  category: &quot;women&quot;,
+  category: "women",
   remain: 5
 };
 
@@ -922,17 +922,17 @@ render();
 
 function render()
 {
-  var root = document.querySelector(&#039;#root&#039;);
-  root.textContent = &quot;&quot;;
+  var root = document.querySelector('#root');
+  root.textContent = "";
 
-  var name = document.createElement(&#039;div&#039;);
-  name.textContent = &#039;商品名稱：&#039; + product.name;
-  var price = document.createElement(&#039;div&#039;);
-  price.textContent = &#039;價格：&#039; + product.price;
-  var category = document.createElement(&#039;div&#039;);
-  category.textContent = &#039;分類：&#039; + product.category;
-  var remain = document.createElement(&#039;div&#039;);
-  remain.textContent = &#039;剩餘數量：&#039; + product.remain;
+  var name = document.createElement('div');
+  name.textContent = '商品名稱：' + product.name;
+  var price = document.createElement('div');
+  price.textContent = '價格：' + product.price;
+  var category = document.createElement('div');
+  category.textContent = '分類：' + product.category;
+  var remain = document.createElement('div');
+  remain.textContent = '剩餘數量：' + product.remain;
 
   root.append(name);
   root.append(price);
@@ -982,8 +982,8 @@ function increase()
 請使用以下 html 作為 root 元素
 
 ```
-&lt;div id=&quot;root&quot;&gt;
-&lt;/div&gt;
+<div id="root">
+</div>
 ```
 
 然後複製以下 js 使用，將 `render` 函式完成
@@ -991,13 +991,13 @@ function increase()
 ```
 var todos = [
   {
-    title: &quot;倒垃圾&quot;
+    title: "倒垃圾"
   },
   {
-    title: &quot;繳電話費&quot;
+    title: "繳電話費"
   },
   {
-    title: &quot;採買本週食材&quot;
+    title: "採買本週食材"
   },
 ];
 
@@ -1014,19 +1014,19 @@ render();
 最後，在畫面上，應該會出現以下內容
 
 ```
-&lt;div id=&quot;root&quot;&gt;
-  &lt;ul&gt;
-    &lt;li&gt;
-        &lt;span&gt;倒垃圾&lt;/span&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-        &lt;span&gt;繳電話費&lt;/span&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-        &lt;span&gt;採買本週食材&lt;/span&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
+<div id="root">
+  <ul>
+    <li>
+        <span>倒垃圾</span>
+    </li>
+    <li>
+        <span>繳電話費</span>
+    </li>
+    <li>
+        <span>採買本週食材</span>
+    </li>
+  </ul>
+</div>
 ```
 
 做出以上功能，你就完成這次的課程目標了！</a>
@@ -1083,17 +1083,17 @@ render();
 這一課來學學新增元素到陣列的方法
 
 ```
-&lt;button onclick=&quot;more()&quot;&gt;
+<button onclick="more()">
   more
-&lt;/button&gt;
+</button>
 ```
 
 ```
-var fruits = [&quot;apple&quot;, &quot;banana&quot;];
+var fruits = ["apple", "banana"];
 
 function more()
 {
-  fruits.push(&quot;orange&quot;);
+  fruits.push("orange");
   console.log(fruits);
 }
 ```
@@ -1111,10 +1111,10 @@ function more()
 請在 html 的部份加入「輸入資料的 UI」，大概類似這樣
 
 ```
-&lt;input type=&quot;text&quot;&gt;
-&lt;button onclick=&quot;add()&quot;&gt;新增&lt;/button&gt;
-&lt;div id=&quot;root&quot;&gt;
-&lt;/div&gt;
+<input type="text">
+<button onclick="add()">新增</button>
+<div id="root">
+</div>
 ```
 
 接著請將 `add` 函式完成，過程中不能直接更新 DOM，而是先去更新 data model，接著 render，用這種方式間接更新 DOM
@@ -1184,7 +1184,7 @@ function add()
 這邊介紹一種根據索引刪除的方法
 
 ```
-var fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;];
+var fruits = ["apple", "banana", "orange"];
 
 var index = 1;
 
@@ -1204,7 +1204,7 @@ console.log(fruits)
 之前我們介紹過 for of 的寫法，很簡單好用
 
 ```
-var fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;];
+var fruits = ["apple", "banana", "orange"];
 
 for (const fruit of fruits) {
   console.log(fruit)
@@ -1214,7 +1214,7 @@ for (const fruit of fruits) {
 這邊多介紹一個 for in 的寫法，需要索引時可以用
 
 ```
-var fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;];
+var fruits = ["apple", "banana", "orange"];
 
 for (const index in fruits) {
   const fruit = fruits[index];
@@ -1234,26 +1234,26 @@ for (const index in fruits) {
 ```
 function hello1()
 {
-  alert(&quot;hello1&quot;);
+  alert("hello1");
 }
 
-var hello2 = () =&gt; {
-  alert(&quot;hello2&quot;);
+var hello2 = () => {
+  alert("hello2");
 }
 ```
 
 以下是沒有名字的函式
 
 ```
-&lt;button&gt;
+<button>
   hello
-&lt;/button&gt;
+</button>
 ```
 
 ```
-var button = document.querySelector(&#039;button&#039;);
+var button = document.querySelector('button');
 
-button.onclick = () =&gt; {
+button.onclick = () => {
   alert(123)
 };
 ```
@@ -1275,20 +1275,20 @@ button.onclick = () =&gt; {
 請更新 `render` 函式，讓 UI 看起來像這樣
 
 ```
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;span&gt;倒垃圾&lt;/span&gt;
-    &lt;button&gt;刪除&lt;/button&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;span&gt;繳電話費&lt;/span&gt;
-    &lt;button&gt;刪除&lt;/button&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;span&gt;採買本週食材&lt;/span&gt;
-    &lt;button&gt;刪除&lt;/button&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>
+    <span>倒垃圾</span>
+    <button>刪除</button>
+  </li>
+  <li>
+    <span>繳電話費</span>
+    <button>刪除</button>
+  </li>
+  <li>
+    <span>採買本週食材</span>
+    <button>刪除</button>
+  </li>
+</ul>
 ```
 
 然後在過程中，動態產生 button 的時候，將 `.onclick` 屬性設定為一個 arrow function
@@ -1296,7 +1296,7 @@ button.onclick = () =&gt; {
 這個 arrow function 不能直接更新 DOM，而是先去更新 data model，接著 render，用這種方式間接更新 DOM
 
 ```
-deleteBtn.onclick = () =&gt; {
+deleteBtn.onclick = () => {
   // 請寫出此 arrow function 內容（更新 todos 陣列）
 
   render();
@@ -1365,20 +1365,20 @@ render function 雖然只是將 data model 轉換成 UI 呈現在 root 裡面
 但是根據資料內容的不同，render function 當然也可以有各種條件判斷、巢狀結構等等，較複雜的邏輯
 
 ```
-&lt;div id=&quot;root&quot;&gt;
+<div id="root">
 
-&lt;/div&gt;
+</div>
 ```
 
 ```
 var products = [
   {
-    name: &quot;冬季外套&quot;,
-    category: &quot;women&quot;,
+    name: "冬季外套",
+    category: "women",
   },
   {
-    name: &quot;男士大衣&quot;,
-    category: &quot;men&quot;,
+    name: "男士大衣",
+    category: "men",
   },
 ]
 
@@ -1386,16 +1386,16 @@ render();
 
 function render()
 {
-  var root = document.querySelector(&#039;#root&#039;);
-  root.textContent = &quot;&quot;;
+  var root = document.querySelector('#root');
+  root.textContent = "";
 
   for (product of products) {
-    var name = document.createElement(&#039;div&#039;);
-    name.textContent = &#039;商品名稱：&#039; + product.name;
-    if (product.category == &#039;men&#039;) {
-      name.style.color = &#039;blue&#039;;
-    } else if (product.category == &#039;women&#039;) {
-      name.style.color = &#039;red&#039;;
+    var name = document.createElement('div');
+    name.textContent = '商品名稱：' + product.name;
+    if (product.category == 'men') {
+      name.style.color = 'blue';
+    } else if (product.category == 'women') {
+      name.style.color = 'red';
     }
     root.append(name);
   }
@@ -1418,16 +1418,16 @@ data model 的結構請更新成這樣
 ```
 var todos = [
   {
-    title: &quot;倒垃圾&quot;,
-    category: &quot;normal&quot;
+    title: "倒垃圾",
+    category: "normal"
   },
   {
-    title: &quot;繳電話費&quot;,
-    category: &quot;important&quot;
+    title: "繳電話費",
+    category: "important"
   },
   {
-    title: &quot;採買本週食材&quot;,
-    category: &quot;urgent&quot;
+    title: "採買本週食材",
+    category: "urgent"
   },
 ];
 ```
@@ -1435,15 +1435,15 @@ var todos = [
 然後 html 的部份會變成像這樣
 
 ```
-&lt;input type=&quot;text&quot;&gt;
-&lt;button onclick=&quot;add()&quot;&gt;新增&lt;/button&gt;
-&lt;select&gt;
-  &lt;option value=&quot;normal&quot;&gt;一般&lt;/option&gt;
-  &lt;option value=&quot;important&quot;&gt;重要&lt;/option&gt;
-  &lt;option value=&quot;urgent&quot;&gt;緊急&lt;/option&gt;
-&lt;/select&gt;
-&lt;div id=&quot;root&quot;&gt;
-&lt;/div&gt;
+<input type="text">
+<button onclick="add()">新增</button>
+<select>
+  <option value="normal">一般</option>
+  <option value="important">重要</option>
+  <option value="urgent">緊急</option>
+</select>
+<div id="root">
+</div>
 ```
 
 請更新 `render` 函式，將重要事項顯示為「橘色」，緊急事項顯示為「紅色」
@@ -1506,11 +1506,11 @@ var x = true;
 var y = false;
 
 if (x) {
-  alert(&#039;hello x&#039;);
+  alert('hello x');
 }
 
 if (y) {
-  alert(&#039;hello y&#039;);
+  alert('hello y');
 }
 ```
 
@@ -1525,9 +1525,9 @@ if (y) {
 這邊介紹一種根據索引更新的方法
 
 ```
-var fruits = [&#039;apple&#039;, &#039;banana&#039;, &#039;orange&#039;];
+var fruits = ['apple', 'banana', 'orange'];
 
-fruits[2] = &#039;lemon&#039;;
+fruits[2] = 'lemon';
 
 console.log(fruits)
 ```
@@ -1543,18 +1543,18 @@ data model 的結構請更新成這樣
 ```
 var todos = [
   {
-    title: &quot;倒垃圾&quot;,
-    category: &quot;normal&quot;,
+    title: "倒垃圾",
+    category: "normal",
     isCompleted: false
   },
   {
-    title: &quot;繳電話費&quot;,
-    category: &quot;important&quot;,
+    title: "繳電話費",
+    category: "important",
     isCompleted: false
   },
   {
-    title: &quot;採買本週食材&quot;,
-    category: &quot;urgent&quot;,
+    title: "採買本週食材",
+    category: "urgent",
     isCompleted: false
   },
 ];
@@ -1581,7 +1581,7 @@ var todos = [
 這個 arrow function 不能直接更新 DOM，而是先去更新 data model，接著 render，用這種方式間接更新 DOM
 
 ```
-toggleBtn.onclick = () =&gt; {
+toggleBtn.onclick = () => {
   // 請寫出此 arrow function 內容（更新 todos 陣列）
 
   render();
@@ -1650,7 +1650,7 @@ toggleBtn.onclick = () =&gt; {
 請加入類似這樣的按鈕
 
 ```
-&lt;button onclick=&quot;export()&quot;&gt;匯出&lt;/button&gt;
+<button onclick="export()">匯出</button>
 ```
 
 接著請將 `export` 函式完成，過程中不能去讀取 DOM，只能去讀取 data model
@@ -1794,11 +1794,11 @@ function export()
 
 在課程中，我多次說過以下這段描述：
 
-&gt; 原本那種寫法，我稱之為「在各處胡亂更新各處 DOM」的寫法
+> 原本那種寫法，我稱之為「在各處胡亂更新各處 DOM」的寫法
 
-&gt; 新的那種寫法，只有在寫 render 時，腦中要思考 DOM
+> 新的那種寫法，只有在寫 render 時，腦中要思考 DOM
 
-&gt; 在應用程式的其他地方，腦中都是思考 data model 就好
+> 在應用程式的其他地方，腦中都是思考 data model 就好
 
 現在你懂我描述的感覺了嗎？
 
@@ -1942,7 +1942,7 @@ https://codelove.tw/@howtomakeaturn/course/AqJGxd</a>
                                                     <a href="/search?q=語言&from=trending" class="mr-2 text-white">語言</a>
                                                     <a href="/search?q=C&from=trending" class="mr-2 text-white">C</a>
                                                     <a href="/search?q=工程師&from=trending" class="mr-2 text-white">工程師</a>
-                                                    <a href="/search?q=%&#039;&from=trending" class="mr-2 text-white">%&#039;</a>
+                                                    <a href="/search?q=%'&from=trending" class="mr-2 text-white">%'</a>
                                                     <a href="/search?q=系列&from=trending" class="mr-2 text-white">系列</a>
                                                     <a href="/search?q=研&from=trending" class="mr-2 text-white">研</a>
                                                     <a href="/search?q=10&from=trending" class="mr-2 text-white">10</a>
@@ -1951,7 +1951,7 @@ https://codelove.tw/@howtomakeaturn/course/AqJGxd</a>
                                                     <a href="/search?q=Ai&from=trending" class="mr-2 text-white">Ai</a>
                                                     <a href="/search?q=ci&from=trending" class="mr-2 text-white">ci</a>
                                                     <a href="/search?q=git&from=trending" class="mr-2 text-white">git</a>
-                                                    <a href="/search?q=&#039;&from=trending" class="mr-2 text-white">&#039;</a>
+                                                    <a href="/search?q='&from=trending" class="mr-2 text-white">'</a>
                                                     <a href="/search?q=測試&from=trending" class="mr-2 text-white">測試</a>
                                                     <a href="/search?q=CSS&from=trending" class="mr-2 text-white">CSS</a>
                                                     <a href="/search?q=app&from=trending" class="mr-2 text-white">app</a>

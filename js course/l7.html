@@ -915,33 +915,33 @@ https://cn.vuejs.org/guide/introduction.html
 這一課我們只要學會如何 render state 就好了
 
 ```
-&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-&lt;div id=&quot;app&quot;&gt;
+<div id="app">
   {{ user.name }} 喜歡吃 {{ fruits[0].name }} 以及 {{ fruits[1].name }}
-&lt;/div&gt;
+</div>
 
-&lt;script&gt;
+<script>
   const { createApp } = Vue
 
   createApp({
     data() {
       return {
         user: {
-          name: &quot;John Doe&quot;
+          name: "John Doe"
         },
         fruits: [
           {
-            name: &quot;Apple&quot;,
+            name: "Apple",
           },
           {
-            name: &quot;Banana&quot;,
+            name: "Banana",
           },
         ]
       }
     }
-  }).mount(&#039;#app&#039;)
-&lt;/script&gt;
+  }).mount('#app')
+</script>
 ```
 
 上面這段範例，在 `data()` 函式將 application state 準備好
@@ -971,19 +971,19 @@ data() {
   return {
     notes: [
       {
-        title: &quot;春節行程安排&quot;,
-        content: &quot;吃飽睡，睡飽吃&quot;,
-        color: &quot;red&quot;,
+        title: "春節行程安排",
+        content: "吃飽睡，睡飽吃",
+        color: "red",
       },
       {
-        title: &quot;工作待辦事項&quot;,
-        content: &quot;詢問各家廠商報價&quot;,
-        color: &quot;green&quot;,
+        title: "工作待辦事項",
+        content: "詢問各家廠商報價",
+        color: "green",
       },
       {
-        title: &quot;運動健身計畫&quot;,
-        content: &quot;每天早上六點去健身&quot;,
-        color: &quot;blue&quot;,
+        title: "運動健身計畫",
+        content: "每天早上六點去健身",
+        color: "blue",
       },
     ]
   }
@@ -993,38 +993,38 @@ data() {
 使用以下這段 code 作為 template
 
 ```
-&lt;div id=&quot;app&quot;&gt;
-  &lt;div class=&quot;note&quot;&gt;
-    &lt;h3 class=&quot;title&quot;&gt;
-      &lt;!-- 請顯示第一個項目的標題 --&gt;
-    &lt;/h3&gt;
-    &lt;p class=&quot;content&quot;&gt;
-      &lt;!-- 請顯示第一個項目的內容 --&gt;
-    &lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;note&quot;&gt;
-    &lt;h3 class=&quot;title&quot;&gt;
-      &lt;!-- 請顯示第二個項目的標題 --&gt;
-    &lt;/h3&gt;
-    &lt;p class=&quot;content&quot;&gt;
-      &lt;!-- 請顯示第二個項目的內容 --&gt;
-    &lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;note&quot;&gt;
-    &lt;h3 class=&quot;title&quot;&gt;
-      &lt;!-- 請顯示第三個項目的標題 --&gt;
-    &lt;/h3&gt;
-    &lt;p class=&quot;content&quot;&gt;
-      &lt;!-- 請顯示第三個項目的內容 --&gt;
-    &lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+<div id="app">
+  <div class="note">
+    <h3 class="title">
+      <!-- 請顯示第一個項目的標題 -->
+    </h3>
+    <p class="content">
+      <!-- 請顯示第一個項目的內容 -->
+    </p>
+  </div>
+  <div class="note">
+    <h3 class="title">
+      <!-- 請顯示第二個項目的標題 -->
+    </h3>
+    <p class="content">
+      <!-- 請顯示第二個項目的內容 -->
+    </p>
+  </div>
+  <div class="note">
+    <h3 class="title">
+      <!-- 請顯示第三個項目的標題 -->
+    </h3>
+    <p class="content">
+      <!-- 請顯示第三個項目的內容 -->
+    </p>
+  </div>
+</div>
 ```
 
 - 陣列內容就只有三筆資料，就只要顯示這三筆資料就好
 - 在 application state 裡面的陣列，直接用 `索引` 來取出值就好，這一課先不用寫 for 迴圈
 - color 這一課還不會用到，可以先忽略沒關係
-- 請在 `&lt;style&gt;` 加上一些樣式，讓整個頁面漂亮一點
+- 請在 `<style>` 加上一些樣式，讓整個頁面漂亮一點
 - 每則記事可以單純的放進網頁就好，不用像 Google Keep 那樣花式的排版（那種叫瀑布流排版，很難寫）
 
 做出以上功能，你就完成這次的課程目標了！</a>
@@ -1087,36 +1087,36 @@ data() {
 就只是這樣，不要把它想得太複雜
 
 ```
-&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-&lt;div id=&quot;app&quot;&gt;
+<div id="app">
   嗨，我是 {{ user.name }}
-  &lt;button @click=&quot;changeNewName&quot;&gt;
+  <button @click="changeNewName">
     改名字
-  &lt;/button&gt;
-&lt;/div&gt;
+  </button>
+</div>
 
-&lt;script&gt;
+<script>
   const { createApp } = Vue
 
   createApp({
     data() {
       return {
         user: {
-          name: &quot;John Doe&quot;
+          name: "John Doe"
         }
       }
     },
     mounted() {
-      this.user.name = &quot;Frank&quot;
+      this.user.name = "Frank"
     },
     methods: {
       changeNewName() {
-        this.user.name = &quot;Kevin&quot;
+        this.user.name = "Kevin"
       }
     }
-  }).mount(&#039;#app&#039;)
-&lt;/script&gt;
+  }).mount('#app')
+</script>
 ```
 
 到 jsfiddle 跑跑看，看看畫面上出現什麼
@@ -1393,31 +1393,31 @@ data() {
 這個設計，實在很糟糕！我非常不喜歡！
 
 ```
-&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-&lt;div id=&quot;app&quot;&gt;
-  &lt;button @click=&quot;hello1&quot;&gt;
+<div id="app">
+  <button @click="hello1">
     hello 1
-  &lt;/button&gt;
-  &lt;button @click=&quot;hello2(&#039;John&#039;)&quot;&gt;
+  </button>
+  <button @click="hello2('John')">
     hello 2
-  &lt;/button&gt;
-&lt;/div&gt;
+  </button>
+</div>
 
-&lt;script&gt;
+<script>
   const { createApp } = Vue
 
   createApp({
     methods: {
       hello1() {
-        alert(&#039;hi&#039;);
+        alert('hi');
       },
       hello2(name) {
-        alert(&#039;hello &#039; + name)
+        alert('hello ' + name)
       }
     }
-  }).mount(&#039;#app&#039;)
-&lt;/script&gt;
+  }).mount('#app')
+</script>
 ```
 
 以上範例，在 `@click` 裡面的內容，到底要不要加上小括號 `()`？
@@ -1433,39 +1433,39 @@ Vue 這種彈性設計，讓程式碼變得令人困惑、難以理解
 再提一件事，Vue 的 template 中，雙引號的內容，到底是 `變數` 還是 `字串`？
 
 ```
-&lt;button @click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
+<button @click="greet">Greet</button>
 ```
 
 這個 greet 是函式名稱，是變數
 
 ```
-&lt;div :class=&quot;{ active: isActive }&quot;&gt;&lt;/div&gt;
+<div :class="{ active: isActive }"></div>
 ```
 
 這裡在雙引號內容，宣告 JSON 物件，所以是變數
 
 ```
-&lt;template v-if=&quot;ok&quot;&gt;
+<template v-if="ok">
 ```
 
 這裡是變數，變數型態大概是布林
 
 ```
-&lt;div class=&quot;active text-danger&quot;&gt;&lt;/div&gt;
+<div class="active text-danger"></div>
 ```
 
 這裡是字串
 
 ```
-&lt;input
-  :value=&quot;text&quot;
-  @input=&quot;event =&gt; text = event.target.value&quot;&gt;
+<input
+  :value="text"
+  @input="event => text = event.target.value">
 ```
 
 這邊的 `text` 到底是字串還是變數？
 
 ```
-&lt;input ref=&quot;input&quot;&gt;
+<input ref="input">
 ```
 
 這邊的 `input` 到底是字串還是變數？
@@ -1507,34 +1507,34 @@ Vue 這種彈性設計，讓程式碼變得令人困惑、難以理解
 乍聽之下有點怪，其實，實際寫過之後，會發現還滿方便的！
 
 ```
-&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-&lt;div id=&quot;app&quot;&gt;
-  &lt;input v-model=&quot;username&quot;&gt;
-  &lt;button @click=&quot;greet&quot;&gt;
+<div id="app">
+  <input v-model="username">
+  <button @click="greet">
     Greet
-  &lt;/button&gt;
-  &lt;h1&gt;
+  </button>
+  <h1>
     {{ username }}
-  &lt;/h1&gt;
-&lt;/div&gt;
+  </h1>
+</div>
 
-&lt;script&gt;
+<script>
   const { createApp } = Vue
 
   createApp({
     data() {
       return {
-        username: &quot;John Doe&quot;
+        username: "John Doe"
       }
     },
     methods: {
       greet() {
-        alert(&#039;Hello, &#039; + this.username);
+        alert('Hello, ' + this.username);
       }
     }
-  }).mount(&#039;#app&#039;)
-&lt;/script&gt;
+  }).mount('#app')
+</script>
 ```
 
 正因為把 `欄位中目前輸入的值` 視為 `當前應用程式的狀態` 的一部份
@@ -1924,7 +1924,7 @@ https://codelove.tw/@howtomakeaturn/course/jqe6xX</a>
                                                     <a href="/search?q=語言&from=trending" class="mr-2 text-white">語言</a>
                                                     <a href="/search?q=C&from=trending" class="mr-2 text-white">C</a>
                                                     <a href="/search?q=工程師&from=trending" class="mr-2 text-white">工程師</a>
-                                                    <a href="/search?q=%&#039;&from=trending" class="mr-2 text-white">%&#039;</a>
+                                                    <a href="/search?q=%'&from=trending" class="mr-2 text-white">%'</a>
                                                     <a href="/search?q=系列&from=trending" class="mr-2 text-white">系列</a>
                                                     <a href="/search?q=研&from=trending" class="mr-2 text-white">研</a>
                                                     <a href="/search?q=10&from=trending" class="mr-2 text-white">10</a>
@@ -1933,7 +1933,7 @@ https://codelove.tw/@howtomakeaturn/course/jqe6xX</a>
                                                     <a href="/search?q=Line&from=trending" class="mr-2 text-white">Line</a>
                                                     <a href="/search?q=ci&from=trending" class="mr-2 text-white">ci</a>
                                                     <a href="/search?q=git&from=trending" class="mr-2 text-white">git</a>
-                                                    <a href="/search?q=&#039;&from=trending" class="mr-2 text-white">&#039;</a>
+                                                    <a href="/search?q='&from=trending" class="mr-2 text-white">'</a>
                                                     <a href="/search?q=測試&from=trending" class="mr-2 text-white">測試</a>
                                                     <a href="/search?q=CSS&from=trending" class="mr-2 text-white">CSS</a>
                                                     <a href="/search?q=app&from=trending" class="mr-2 text-white">app</a>
