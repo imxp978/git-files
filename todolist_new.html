@@ -299,7 +299,7 @@
         let ls = localStorage.getItem("todos");
         if (ls !== "[]") {
           todos = JSON.parse(ls);
-          render();
+          return
         }
       }
 
