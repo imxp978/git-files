@@ -303,7 +303,7 @@ function save()
 function checkLocalStorage() 
 {
 	let ls = localStorage.getItem('todos')
-	if (ls != "[]") {
+	if (ls) {
 	  todos = JSON.parse(ls);
 	}
 }
