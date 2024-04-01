@@ -230,28 +230,28 @@
         },
       ];
 
-      var importance = {
+      const importance = {
         normal: "black",
         important: "orange",
         urgent: "red",
       };
 
-      var complete = {
+      const complete = {
         true: "待辦",
         false: "完成",
       };
 
-      var done = {
+      const done = {
         true: "",
         false: "none",
       };
 
-      var delete_line = {
+      const delete_line = {
         true: "3px line-through rgba(255, 0, 0, 0.6)",
         false: "",
       };
 
-      var export_stars = {
+      const export_stars = {
         normal: "",
         important: "*",
         urgent: "**",
@@ -291,7 +291,7 @@
         let save_content = JSON.stringify(todos);
         localStorage.setItem("todos", save_content);
         let json = JSON.parse(localStorage.getItem("todos"));
-        console.log(json);
+        // console.log(json);
         alert("已儲存");
       }
 
