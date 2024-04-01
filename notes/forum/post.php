@@ -77,8 +77,14 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 </head>
 
 <body>
-<h1>討論區</h1>
-<p><a href="index.php">回首頁</a></p>
+<h1 align="center">討論區</h1>
+<p>&nbsp;</p>
+<table width="65%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <th align="left" scope="col"><a href="index.php">回首頁</a></th>
+  </tr>
+</table>
+<p>&nbsp;</p>
 <form id="form1" name="form1" method="POST" action="<?php echo $editFormAction; ?>">
   <table class="input" width="800" align="center" cellpadding="0" cellspacing="0">
     <tr>

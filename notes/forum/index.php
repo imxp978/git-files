@@ -106,7 +106,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$maxRows_Recordset1 = 2;
+$maxRows_Recordset1 = 5;
 $pageNum_Recordset1 = 0;
 if (isset($_GET['pageNum_Recordset1'])) {
   $pageNum_Recordset1 = $_GET['pageNum_Recordset1'];
@@ -139,59 +139,62 @@ a {
 	text-decoration: none;
 }
 
-table {
-	line-height: 2em;
-	}
 .title {
-	background-color: blue;
+	background-color: lightblue;
 	color: white;
 }
 
-.content {
-	line-height: 2em;
+#content {
+	line-height: 3em;
 	border-radius: 5px;
-	border: 1px dotted black;
-	
+	bo/rder-bottom: 1px dotted black;
+	background: #F7F7F7	
 }
 
-.content td {
-	bo/rder-bottom: 1px dotted black; 
+#content td {
+	border-bottom: 1px dotted black; 
+	padding: 5px;
 }
 </style>
 </head>
 
 <body>
-<h1>首頁</h1>
+<h1 align="center">討論區</h1>
 <div id="container" align="center">
 
   <table width="65%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td align="right" scope="col"><p><a href="post.php">發表主題</a> | 搜尋</p></td>
+      <td align="right" scope="col"><p><a href="post.php">發表主題</a> | <a href="search.php">搜尋</a></p></td>
     </tr>
   </table>
   <br />
   <table width="65%" border="0" cellspacing="0" cellpadding="0">
     <tr class="title">
       <td scope="col">主題</td>
-      <td scope="col">發表人</td>
-      <td scope="col">時間</td>
+      <td width="15%" scope="col">發表人</td>
+      <td width="15%" scope="col">時間</td>
     </tr>
     <?php do { ?>
-      <tr>
+      <tr id="content">
         <td><a href="topic.php?TopicID=<?php echo $row_Recordset1['TopicID']; ?>"><?php echo $row_Recordset1['Title']; ?></a></td>
         <td><?php echo $row_Recordset1['Nickname']; ?></td>
         <td><?php echo $row_Recordset1['Time']; ?></td>
       </tr>
       <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
   </table>
-  <br />
-  
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p><br />
+    
+  </p>
   <table width="65%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td align="right" scope="col"><?php 
+      <td align="right" scope="col">
+	  
+	  <?php 
 # variable declaration
-$prev_Recordset1 = "« previous";
-$next_Recordset1 = "next »";
+$prev_Recordset1 = "« Previous";
+$next_Recordset1 = "Next »";
 $separator = " | ";
 $max_links = 10;
 $pages_navigation_Recordset1 = buildNavigation($pageNum_Recordset1,$totalPages_Recordset1,$prev_Recordset1,$next_Recordset1,$separator,$max_links,true); 

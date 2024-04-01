@@ -46,7 +46,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   mysql_select_db($database_forum, $forum);
   $Result1 = mysql_query($insertSQL, $forum) or die(mysql_error());
 
-  $insertGoTo = "topic.php?TopicID=" . $row_Recordset1['TopicID'] . "";
+  $insertGoTo = "topic.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -76,25 +76,36 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
       });
     </script>
 <style>
-*{
-	border: 1px dotted black;
-}
+	table {
+		b/order: 1px dotted black;
+		}
 </style>
 </head>
 
 <body>
+<h1 align="center">討論區</h1>
 <div class="container" align="center">
-  <form id="form1" name="form1" method="POST" action="<?php echo $editFormAction; ?>"><table width="65%" border="0" cellspacing="0" cellpadding="0">
+<p>&nbsp;</p>
+  <form id="form1" name="form1" method="POST" action="<?php echo $editFormAction; ?>">
+    <p>&nbsp;</p>
+    <table width="65%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th align="left" scope="col">Re: <?php echo $row_Recordset1['Title']; ?></th>
+    </tr>
     <tr>
       <th align="left" scope="col">
-          <label for="reply_nickname"></label>
-          暱稱:
-          <input type="text" name="reply_nickname" id="reply_nickname" /> 
-          email: 
-          <label for="email"></label>
-          <input type="text" name="email" id="email" />
-</th>
+          <p>
+            <label for="reply_nickname"></label>
+          </p>
+          <p>暱稱:
+  <input type="text" name="reply_nickname" id="reply_nickname" /> 
+            email: 
+            <label for="email"></label>
+            <input type="text" name="email" id="email" />
+          </p>
+        <p>&nbsp;</p></th>
     </tr>
+    <br />
     <tr>
       <td><label for="textarea"></label>
         <textarea name="textarea" id="mytextarea" cols="45" rows="5"></textarea></td>
@@ -106,7 +117,9 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
    <input type="hidden" name="TopicID" value="<?php echo $row_Recordset1['TopicID']; ?>" />
     <input type="hidden" name="MM_insert" value="form1" />
   </form>
+  <div><a href="topic.php?TopicID=<?php echo $row_Recordset1['TopicID']; ?>">返回 <?php echo $row_Recordset1['Title']; ?></a></div>
 </div>
+
 </body>
 </html>
 <?php
