@@ -19,7 +19,7 @@
       }
 
       table.border-primary td {
-        width: 50%;
+        wi/dth: 50%;
       }
     </style>
   </head>
@@ -96,7 +96,7 @@
                 <button
                   type="button"
                   class="btn btn-success"
-                  onclick="autoChoice()"
+                  onclick="autoChoiceNewfromTeacher()"
                 >
                   電腦選號(12號碼)
                 </button>
@@ -138,48 +138,211 @@
                 <button
                   type="button"
                   class="btn btn-danger"
-                  onclick="openWinner()"
+                  onclick= openWinner()
                 >
                   進行開獎
                 </button>
               </td>
-              <td>開獎號碼:</td>
+              <td id="winner">開獎號碼:
+                
+              </td>
             </tr>
             <tr>
-              <td colspan="2">開獎狀態</td>
+              <td id="result" colspan="2">開獎狀態</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <script src="comlib.js"></script>
     <script>
-      structurize();
 
-      function structurize() {
+      var prize = {
+        0: "頭獎: $15000000",
+        1: "二獎: $1000000",
+        2: "三獎: $500",
+        3: "四獎: $100",
+        4: "無中獎",
+        5: "無中獎",
+        6: "無中獎",
+        7: "無中獎",
+        8: "無中獎",
+        9: "四獎: $100",
+        10: "三獎: $500",
+        11: "二獎: $100000",
+        12: "頭獎: $15000000",
+      }
+
+
+      var importance = {
+        normal: "black",
+        important: "orange",
+        urgent: "red",
+      };
+      
+      const chk_arr = document.getElementsByName('chkRights[]');
+      
+      function reset () {
+        for (let i = 0; i < 24; i++) {
+          chk_arr[i].checked = false;
+        }
+      }
+
+      function autoChoice () {
+        reset();
+        for(let i = 0; i < 12; i++) {
+          let number = rand(0,23);
+          if (chk_arr[number].checked === false) {
+            chk_arr[number].checked = true;
+            console.log(number);
+          } else {
+            i--;
+          }
+        }
+      }
+
+      function render() {
         const wrap = document.querySelector("#wrap");
         for (let i = 1; i < 25; i++) {
           let j = i;
           j < 10 ? (j = "0" + j) : j;
-
+          
           const div = document.createElement("div");
           div.classList.add("form-check", "form-check=inline");
-
+          
           const input = document.createElement("input");
           input.classList.add("form-check-input");
           input.type = "checkbox";
           input.value = i;
           input.name = "chkRights[]";
           input.id = "Check" + i;
-
+          
           const label = document.createElement("label");
           label.classList.add("form-check-label");
           label.setAttribute("for", "Check" + i);
           label.innerText = j;
-
+          
           wrap.append(div);
           div.append(input, label);
         }
       }
+      
+      render();
+
+      var picked = [];
+      function autoChoiceNew () {
+        for(let i = 0; i < 24; i++) {
+
+          if ((chk_arr[i].checked === true) && (!picked.includes(i + 1))) {
+            picked.push(i + 1);
+          }
+        }
+        console.log('已勾選的array: '+ picked);
+
+        while(picked.length < 12) {
+            let r = rand(1,24);
+            while (picked.includes(r)) {
+               r = rand(1,24);
+            }
+            if (chk_arr[r].checked === false)  {
+              chk_arr[r].checked = true;
+              //console.log('r=' + (r));
+              picked.push(r);
+            }
+            //console.log(picked);
+        }
+      }
+
+      function autoChoiceNewfromTeacher () {
+        var count = 0;
+        for(let i = 0; i <= 23; i++) {
+          if (chk_arr[i].checked == true) {
+            count ++;
+          }
+        }
+
+        if (count >= 12) {
+          alert('more than 12 number');
+          return false;
+        }
+
+        for (let i = 0; i <= (11-count); i++) {
+          let chkData = rand(0,23);
+          if (chk_arr[chkData].checked == false) {
+            chk_arr[chkData].checked = true;
+            picked.push(chkData+1);
+          } else {
+            i--;
+          }
+        }
+      }
+
+
+      var selected = [];
+      var match = [];
+
+      function openWinner () {
+        
+        var winnerNumber = "";
+        const winner = document.querySelector('#winner');
+        const result = document.querySelector('#result');
+        for (let i = 0; i < 12; i ++) {
+          r = rand(1, 24);
+          while(selected.includes(r)) {
+            r = rand(1,24);
+          }
+          selected.push(r);
+          winnerNumber += (r+", ");
+          //console.log(winnerNumber);
+        } 
+
+        //console.log('unsorted: '+selected);
+        selected.sort(function(a, b) {
+          return a - b; // a - b > 0
+        });
+
+        //console.log('sorted: '+selected);
+        var selectedSorted = selected;
+        //console.log(selectedSorted);
+
+        var winnerNumberSorted = "";
+        for (let i = 0; i < selectedSorted.length; i++) { 
+          winnerNumberSorted += (selectedSorted[i] + ", ")
+        }
+        
+        let counter = 0;
+        let pickedlist = "";
+        console.log('selected: ' + selected);
+        console.log('picked: ' + picked);
+        for (let i = 0; i < 12; i++) {
+          if (picked.includes(selected[i])) {
+            counter ++;
+            match.push(selected[i]);
+          }
+        }
+        console.log('中獎數: '+counter);
+        console.log(match);
+
+        for (let i = 0; i < picked.length; i++) {
+          pickedlist += (picked[i] + ', ');
+        }
+
+        let matchlist = "";
+
+        for (let i = 0; i < match.length; i++) {
+          matchlist += (match[i] + ', ');
+        }
+        
+        console.log(prize[match.length]);
+
+        //render
+        winner.innerHTML = '開獎號碼: ' + winnerNumber + '<br>排序號碼: ' + winnerNumberSorted;
+        result.innerHTML = '投注號碼: ' + pickedlist + '<br>對中獎號: ' + match.length + ' 中獎號碼: ' + matchlist + '<br>中獎狀態: ' + prize[match.length]; 
+      }
+      
+
+
+
     </script>
   </body>
 </html>

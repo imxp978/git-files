@@ -72,29 +72,29 @@ if (m >= 6) {
 var current_age = age + y;
 var current_month = 6 + m;
 
-var seat_a;
-var seat_b;
+// var seat_a;
+// var seat_b;
 
-if (seat < 17) {
-  seat_a = Math.ceil(seat / 8);
-  seat_b = seat % 8;
-} else {
-  seat_a = Math.ceil((seat + 1) / 8);
-  seat_b = (seat + 1) % 8;
-}
+// if (seat < 17) {
+//   seat_a = Math.ceil(seat / 8);
+//   seat_b = seat % 8;
+// } else {
+//   seat_a = Math.ceil((seat + 1) / 8);
+//   seat_b = (seat + 1) % 8;
+// }
 
-if (seat_b == 0) {
-  seat_b = 8;
-}
+// if (seat_b == 0) {
+//   seat_b = 8;
+// }
 
-function bg(seat) {
-  var select = document.getElementById(seat);
-  select.style.backgroundColor = "orange";
-  select.style.color = "white";
-  select.style.fontWeight = "bolder";
-}
+// function bg(seat) {
+//   var select = document.getElementById(seat);
+//   select.style.backgroundColor = "orange";
+//   select.style.color = "white";
+//   select.style.fontWeight = "bolder";
+// }
 
 
-window.onload = function () {
-  bg(seat);
-};
+// window.onload = function () {
+//   bg(seat);
+// };
