@@ -12,16 +12,25 @@
     />
 
     <style>
+
+      * {
+        bo/rder: 1px dotted black;
+      }
       body {
         background-color: orange;
-        font-family: "標楷體", "Arial", sans-serif;
+        font-family:  sans-serif;
         padding-top: 2%;
+        border: 1px dotted black;
+        line-height: 2em;
       }
 
       .container {
-        background-color: #ffff11;
+        width: 66%;
+        padding: 30px;
+        background-color: #ffff;
         border-radius: 30px;
-        border: 1px dotted black;
+        overflow: hidden;
+        margin: 20px auto;
       }
 
       table.border-primary td {
@@ -39,7 +48,7 @@
 
     <div class="container">
       <div class="row">
-        <table class="table table-bordered border-primary">
+        <table class="table table-borderless border-primary">
           <thead>
             <tr>
               <th colspan="2">
@@ -70,7 +79,7 @@
                 ></div>
               </td>
               <td>
-                基本玩法<br />
+                <b>基本玩法</b><br />
                 今彩539是一種樂透型遊戲，您必須從01~39的號碼中任選5個號碼進行投注。開獎時，開獎單位將隨機開出五個號碼，這一組號碼就是該期今彩539的中獎號碼，也稱為「獎號」。您的五個選號中，如有二個以上（含二個號碼）對中當期開出之五個號碼，即為中獎，並可依規定兌領獎金。各獎項的中獎方式如下表：
                 <table class="table-bordered border-danger">
                   <tr>
@@ -115,7 +124,7 @@
                 </button>
               </td>
               <td>
-                獎金分配方式<br />
+                <b>獎金分配方式</b><br />
                 雙贏彩所有獎項皆為固定獎項，各獎項金額如下：<br />
                 <table class="table-bordered border-info">
                   <thead>
@@ -154,7 +163,7 @@
               </td>
             </tr>
             <tr>
-              <td id="result" colspan="2">開獎狀態</td>
+              <td id="result" colspan="2"><br>投注號碼:<br>對中號碼: <br>中獎狀態:</td>
             </tr>
           </tbody>
         </table>
@@ -255,6 +264,7 @@
       }
 
       function autoChoiceNewfromTeacher () {
+        //reset
         var count = 0;
         picked = [];
         selected = [];
@@ -286,8 +296,10 @@
       var match = [];
 
       function openWinner () {
+        //reset
         selected = [];
         var winnerNumber = "";
+
         const winner = document.querySelector('#winner');
         const result = document.querySelector('#result');
         for (let i = 0; i < 5; i ++) {
