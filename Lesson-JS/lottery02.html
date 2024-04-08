@@ -36,6 +36,49 @@
       table.border-primary td {
         wi/dth: 50%;
       }
+
+      .coin {
+        position: absolute;
+        /* https://developer.mozilla.org/zh-CN/docs/Web/CSS/position */
+        height: 200px;
+        top: -200px;
+        
+        /* animation: 時長 速度軌跡 重複次數 動畫方向 動畫名稱 */
+        /* https://developer.mozilla.org/zn-CN/docs/Web/CSS/animation */
+      }
+      
+      .coin2 {
+        position: absolute;
+        /* https://developer.mozilla.org/zh-CN/docs/Web/CSS/position */
+        height: 300px;
+        top: -1300px;
+        left: 1200px
+        
+        /* animation: 時長 速度軌跡 重複次數 動畫方向 動畫名稱 */
+        /* https://developer.mozilla.org/zn-CN/docs/Web/CSS/animation */
+      }
+
+      .coin3 {
+        position: absolute;
+        /* https://developer.mozilla.org/zh-CN/docs/Web/CSS/position */
+        height: 150px;
+        top: -600px;
+        left: 900px;
+        
+        /* animation: 時長 速度軌跡 重複次數 動畫方向 動畫名稱 */
+        /* https://developer.mozilla.org/zn-CN/docs/Web/CSS/animation */
+      }
+
+      /* https://developer.mozilla.org/zh-CN/docs/Web/CSS/@keyframes */
+      @keyframes drop {
+        from {
+          top: -300px; 視窗最上面是0, 更上面就是負的
+        }
+        to {
+          rotate: 720deg; 
+          top: 1100px; 
+        }
+      }
     </style>
   </head>
 
@@ -168,6 +211,9 @@
           </tbody>
         </table>
       </div>
+      <img class="coin" src="https://www.mint.ca/globalassets/products/2023/l8/208123-dollar100-pure-gold-coin-lunar-year-dragon/208123_obv-1198.png">
+      <img class="coin2" src="https://www.mint.ca/globalassets/products/2023/l8/208123-dollar100-pure-gold-coin-lunar-year-dragon/208123_obv-1198.png">
+      <img class="coin3" src="https://www.mint.ca/globalassets/products/2023/l8/208123-dollar100-pure-gold-coin-lunar-year-dragon/208123_obv-1198.png">
     </div>
     <script src="comlib.js"></script>
     <script>
@@ -291,7 +337,9 @@
         }
       }
 
-
+      const coin = document.querySelector(".coin");
+      const coin2 = document.querySelector(".coin2");
+      const coin3 = document.querySelector(".coin3");
       var selected = [];
       var match = [];
 
@@ -339,6 +387,13 @@
         //console.log('中獎數: '+counter);
         //console.log(match);
 
+        // check if win? coindrop
+        
+        if (match.length > 0) {
+          coinDrop();
+        }
+
+
         for (let i = 0; i < picked.length; i++) {
           pickedlist += (picked[i] + ', ');
         }
@@ -348,12 +403,15 @@
         for (let i = 0; i < match.length; i++) {
           matchlist += (match[i] + ', ');
         }
-        
+
+
         //console.log(prize[match.length]);
 
         //render and reset
         winner.innerHTML = '開獎號碼: ' + winnerNumber + '<br>排序號碼: ' + winnerNumberSorted;
         result.innerHTML = '投注號碼: ' + pickedlist + '<br>對中獎號: ' + match.length + ' 中獎號碼: ' + matchlist + '<br>中獎狀態: ' + prize[match.length]; 
+
+        
 
         winnerNumber = "";
         pickedlist = "";
@@ -363,7 +421,13 @@
         match = [];
       }
       
+      function coinDrop() {
+        coin.style.animation === "" ? coin.style.animation = "1s linear infinite normal drop" : coin.style.animation = "";
+        coin2.style.animation === "" ? coin2.style.animation = "1s linear infinite normal drop" : coin2.style.animation = "";
+        coin3.style.animation === "" ? coin3.style.animation = "1s linear infinite normal drop" : coin3.style.animation = "";
 
+
+      }
 
 
     </script>
