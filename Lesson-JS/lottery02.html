@@ -51,6 +51,7 @@
         height: 200px;
         top: -200px;
         left: 17%;
+        transition: 0.9s;
         
         /* animation: 時長 速度軌跡 重複次數 動畫方向 動畫名稱 */
         /* https://developer.mozilla.org/zn-CN/docs/Web/CSS/animation */
@@ -61,7 +62,7 @@
         height: 300px;
         top: -1300px;
         left: 33%;
-        transition: 2s;
+        transition: 0.5s;
       }
 
       .coin3 {
@@ -449,10 +450,12 @@
         //金幣個數
         let coins = 5;
 
+        //reset animation
         for (let i = 1; i <= coins; i++) {
           const coin = document.querySelector(`.coin${i}`);
           coin.style.animation = "";
         }
+        // start animation
         if (match.length > 1) {
 
           for (let j = 1; j <= coins; j++) {
