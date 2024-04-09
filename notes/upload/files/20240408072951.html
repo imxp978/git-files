@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+          }
+          
+          h1 {
+            width: 80%;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 5px solid black;
+            lett/er-spacing: 1.5em;
+          }
+          
+          input {
+            width: 70%;
+            box-sizing: border-box;
+            border: 0px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 2px 2px 2px gray
+          }
+          
+          input:hover {
+            outline: 1px solid orange;
+            transition: all 0.3s;
+            box-shadow: 0px 0px 0px gray
+          }
+          
+          button {
+            color: black;
+            background-color: orange;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+            border: 0px solid black;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px gray;
+            cursor: pointer;
+          }
+          
+          button:hover {
+            color: white;
+            background-color: darkorange;
+            outline: 1px solid orange;
+            box-shadow: 0px 0px 0px gray;
+            transition: all 0.3s;
+          }
+          
+          li {
+            width: 95%;
+            padding-top: 5px;
+            pad/ding-bottom: 5px;
+            border-bottom: 2px dotted black;
+            display: flex;
+            justify-content: space-between;
+          }
+          
+          #wrap {
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            border: 1px dotted black;
+            border-radius: 5px;
+            background-color: lightgray;
+           
+          }
+          
+          
+          #main {
+            display: block;
+            text-align: center;
+            width: 100%;
+            bo/rder: 1px dotted black;
+            border-radius: 5px;
+            margin: 20px;
+            
+          }
+          
+          #joblist {
+            display: block;
+            
+            text-align: left;
+            width: 100%;
+            line-height: 2em;
+          }
+    </style>
+    <script>
+
+            function add() {
+                var todo = document.getElementById('todo').value;
+                var list = document.getElementById('list');
+                var newjob = document.createElement('li');
+                var button = document.createElement('button');
+                newjob.textContent = todo;
+                
+                
+                if(!todo) {
+                 alert('請填寫工作項目');
+                } else {
+                    list.append(newjob);
+                  newjob.append(button);
+                  button.textContent = '刪除';
+                  button.onclick = function () {
+                      button.parentElement.remove();
+                  }
+                  document.getElementById('todo').value = '';
+                }
+                
+              }
+              
+              function remove () {
+              
+              }
+
+    </script>
+</head>
+<body>
+
+    <div id="wrap">
+
+        <div id="main">
+     
+          <input type="text" id="todo" placeholder="新增工作項目" autofocus>
+          <button onclick="add()">新增</button>
+        </div>
+        <h1>待辦事項</h1>
+        <div id="joblist">
+         <ul id="list">
+         </ul>
+        </div>
+      </div>
+
+</body>
+</html>
