@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="comlib.js"></script>
+</head>
+<body>
+    <table border="1">
+        <tr><td>*</td>
+            <script>
+                for(let i = 1; i <= 9; i++) {
+                    document.write("<td>"+ i + "</td>")
+                }
+            </script>
+        </tr>
+        <script>
+            for(let i = 1; i <= 9; i ++) {
+                document.write("<tr>")
+                    document.write("<td>"+i+"</td>")
+                for (let j = 1; j <= 9; j ++) {
+                    let k = i*j;
+                    
+                    document.write("<td>");
+                    document.write(i+" * "+j+" = "+k+"<br>");
+                    document.write("</td>");
+                }
+                document.write("</tr>");
+            }
+        </script>
+
+    </table>
+    
+    <script>
+        let j = 1;
+        let total2 = 0;
+        let limit = 30;
+        do {
+            if ((j%2) == 0) {
+                j ++;
+                continue;
+            }
+            document.write("|"+j);
+            total2 += j;
+            j += 2;
+            if (j > limit) {
+                break;
+            }
+        }while(true);
+        document.write("|<br>計算1加到"+limit+"的奇數總和="+total2);
+
+    </script>
+    <hr>
+    <script>
+        let i = 1;
+        let total = 0;
+        do {
+            document.write("|"+i);
+            total += i;
+            i++;
+            if (i > 15) {
+                break;
+            }
+        }while(true);
+        document.write("|<br>計算1加到15的總和="+total);
+
+    </script>
+
+<hr>
+
+    <script>
+        let level = 1;
+        let n = 1;
+        countLevel=rand(5,15);
+        while(level <= countLevel) {
+            n = n * (n - 1);
+            document.write(level+"!="+n+"<br>");
+            level++
+        }
+    </script>
+<hr>
+    <script>
+        let i = 1
+        let numero = rand(5,15);
+        for(i = 1; i <= numero; i++) {
+            i *= (i+1);
+            document.write("i: "+i+"<br>");
+        }
+        document.write("numero: "+numero+", numero!=" + i ); 
+    </script>
+    <hr>
+    <script>
+        c = 100;
+        document.write("攝氏 ==> 華氏<br>");
+
+        do {
+            f = (9.0 * c) / 5.0 + 32.0;
+            document.write(c + "====>" + f + "<br>");
+            c = rand(10,100);
+            <!-- document.write("c: "+ c +"<br>") -->
+        } while (c < 100);
+    </script>
+
+    
+</body>
+</html>
