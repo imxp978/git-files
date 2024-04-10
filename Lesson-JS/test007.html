@@ -38,16 +38,14 @@
             for(let j=1; j<=level2; j++) {
                 td=tableTr.insertCell(tableTr.cells.length);
                 td.innerHTML=i + "*" +j+ "=" + i*j;
-                if (i == 5) {
+                // 錯誤二
+                if (i == 5 && j !== 5) {
                     td.classList.add('bgYellow');
                 } 
-                if (j == 5) {
+                else if (j == 5 && i !== 5) {
                     td.classList.add('bgRed');
                 }
-                // 錯誤二
-                if ((i == 5) && (j == 5)) {
-                    td.classList.remove('bgYellow', 'bgRed');
-                }
+
             }
         }
     </script>
