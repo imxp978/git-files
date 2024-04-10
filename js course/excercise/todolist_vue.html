@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .note {
+            background-color: lightgray;
+            width: 33%;
+            text-align: center;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px auto;
+        }
+
+        .inputs {
+
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <div id="app">
+        <div class="inputs">
+            <input name="title" id="title" type="text" v-model="newTitle" placeholder="Enter title..."><br>
+            <textarea name="content" id="content" v-model="newContent" placeholder="Enter content..."></textarea><br>
+            <select name="color" id="color" v-model="newColor">
+                <option>red</option>
+                <option>green</option>
+                <option>blue</option>
+            </select><br>
+            <input name="add" id="add" type="button" value="新增" v-on:click=add>
+        </div>
+        <hr>
+        <div class="note" v-for="(note, index) in notes" v-bind:style="{color:note.color}">
+            <h3 class="title"> {{note.title}}</h3>
+            <p class="content"> {{note.content}}</p>
+            <input name="del" id="del" class="del" type="button" value="刪除" v-on:click=del(index)>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+        createApp({
+            data() {
+                return {
+                    notes: [
+                        {
+                            title: "春節行程安排",
+                            content: "吃飽睡，睡飽吃",
+                            color: "red",
+                        },
+                        {
+                            title: "工作待辦事項",
+                            content: "詢問各家廠商報價",
+                            color: "green",
+                        },
+                        {
+                            title: "運動健身計畫",
+                            content: "每天早上六點去健身",
+                            color: "blue",
+                        },
+                    ],
+
+                }
+            },
+            methods: {
+                add: function () {
+                    if (this.newTitle && this.newContent && this.newColor) {
+
+                        let newTask =
+                        {
+                            title: this.newTitle,
+                            content: this.newContent,
+                            color: this.newColor,
+                        }
+                        // ADD TO the array
+                        this.notes.unshift(newTask);
+                    } else {
+                        alert('insert all data');
+                    }
+
+                    // reset input
+                    this.newTitle = '';
+                    this.newContent = '';
+                    this.newColor = '';
+                },
+                del: function (index) {
+                    this.notes.splice(index, 1);
+                },
+                save: function () {
+                    watch(this.notes, () => {
+                        localStorage.setItem("notes", JSON.stringify(this.notes));
+                    })
+                },
+            },
+            watch: {
+                notes: {
+                    handler(new1, old1) {
+                        localStorage.setItem("notes", JSON.stringify(new1));
+                    },
+                    deep: true
+                }
+            },
+            mounted() {
+                this.notes[0].content = "多出門、到處走走、也要多運動"
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
