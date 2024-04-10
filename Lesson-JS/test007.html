@@ -25,8 +25,12 @@
         for(let i = 1; i <=level1; i++) {
             var td=tableTr.insertCell(tableTr.cells.length);
             td.innerHTML= i;
+            //錯誤一
+            if (i == 5) {
+                td.classList.add('bgRed');
+            }
         }
-        for (let i = 1; 1<=level1; i++) {
+        for(let i = 1; i<=level1; i++) {
             var lastRow=document.getElementById('multipli').rows.length;
             var tableTr=document.getElementById('multipli').insertRow(lastRow);
             var td=tableTr.insertCell(tableTr.cells.length);
@@ -34,7 +38,16 @@
             for(let j=1; j<=level2; j++) {
                 td=tableTr.insertCell(tableTr.cells.length);
                 td.innerHTML=i + "*" +j+ "=" + i*j;
-
+                if (i == 5) {
+                    td.classList.add('bgYellow');
+                } 
+                if (j == 5) {
+                    td.classList.add('bgRed');
+                }
+                // 錯誤二
+                if ((i == 5) && (j == 5)) {
+                    td.classList.remove('bgYellow', 'bgRed');
+                }
             }
         }
     </script>
