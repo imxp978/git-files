@@ -20,48 +20,43 @@
       let scoreSheet = [];
       let avgArray = [];
       let objArray = [];
-      let people = 20;
-      let subjects = 4;
+      let people = 10;
+      let subjects = 5;
       for (let i = 0; i < people; i++) {
-        let score = [
-        rand(1, 100),
-        rand(1, 100),
-        rand(1, 100),
-        rand(1, 100),
-        0,
-        0,
-        ];
-        scoreSheet.push(score);
+        // 要填入的是array, 所以要先宣告array中的array;
+        scoreSheet.push([]);
+        for (let j = 0; j < subjects; j++) {
+            scoreSheet[i][j] = rand(1, 100);
+        }
+        // console.log(scoreSheet);
 
         let sum = 0;
         let avg = 0;
         for (let j = 0; j < subjects; j++){
             sum += scoreSheet[i][j];
         }
-        console.log(sum);
-        avg = sum / subjects;
-        score[4] = avg;
+        // console.log(sum);
+        avg = (sum / subjects).toFixed(2);
+        scoreSheet[i][subjects] = avg;
         avgArray[i] = avg;
         let object = {};
         object.key = avgArray[i];
         object.value = i+1;
         objArray.push(object);
-        //console.log(typeof(object.key));
+        // console.log(typeof(object.key));
     }
 
-    console.log(avgArray);
-
+    // console.log(avgArray);
     sort(objArray);
 
     for (let i = 0; i < people; i++) {
-        //scoreSheet[i][4] = 
+        // scoreSheet[i][4] = 
         let rank = i + 1;
-        scoreSheet[objArray[i].value -1][5] = rank;
+        scoreSheet[objArray[i].value -1][subjects+1] = rank;
     }
 
-    console.log(scoreSheet);
+    // console.log(scoreSheet);
     render();
-
 
     function sort(array) {
         for (let i = 0; i < array.length; i++) {
@@ -74,24 +69,22 @@
                 }
             }
         }
-        console.log(array);
+        // console.log(array);
     }
-
 
     function render() {
         const sheet = document.querySelector('#sheet');
         for (let i = 0; i < people; i++) {
             const tr = document.createElement('tr');
+            // 科目+2 (平均&排名)
             for(let j = 0; j < subjects+2; j++) {
                 const td = document.createElement('td');
                 td.textContent = scoreSheet[i][j];
                 tr.append(td);
             }
             sheet.append(tr);
-
         }
     }
-    
     
     </script>
   </body>
