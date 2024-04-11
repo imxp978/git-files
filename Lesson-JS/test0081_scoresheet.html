@@ -56,7 +56,7 @@
             }
         }
 
-        // ranking 
+        // ***RANKING*** 
         let rankArray = [];
         let tempArray = [];
         // fill tempArray with avg
@@ -71,10 +71,15 @@
             scoreSheet[i][9] = (tempArray.indexOf(scoreSheet[i][8]) + 1);
         }
 
-
-        console.log(scoreSheet);
-        console.log(fail);
+        //console.log(scoreSheet);
+        //console.log(fail);
         render();
+
+
+
+
+
+
 
         //render (fill the table)
         function render() {
@@ -106,15 +111,13 @@
                 } else if (((parseInt(tds[i].textContent) > 90) && (parseInt(tds[i].textContent) < 95))) {
                     tds[i].style.color = "green";
                 }
-                // reset rank field bgc
+                // reset rank field's bgc
                 const rankTd = document.querySelectorAll('.rank');
                 for (let i = 0; i < 30; i++) {
                     rankTd[i].style.color = "black"
                 }
 
             }
-
-
 
             // failed counts 
             const tr = document.createElement('tr');
@@ -133,13 +136,7 @@
             }
             scoreList.append(tr);
         }
-
-
-
-
     </script>
-
-
 </body>
 
 </html>
