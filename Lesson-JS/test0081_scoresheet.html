@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="comlib.js"></script>
+</head>
+
+<body>
+    <table id="scoreList" border="1">
+        <tr>
+            <td colspan="10">學生成績測試資料產生</td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>國文</td>
+            <td>英文</td>
+            <td>數學</td>
+            <td>計算機概論</td>
+            <td>工廠實習</td>
+            <td>微積分</td>
+            <td>體育</td>
+            <td>平均成績</td>
+            <td>排名</td>
+        </tr>
+    </table>
+    <script>
+        var scoreSheet = new Array();
+        var fail = new Array(0, 0, 0, 0, 0, 0, 0);
+        //var rank = new Array();
+        var avg = 0;
+        var rank = 0;
+        for (let i = 0; i < 30; i++) {
+
+            let scoreData = Array("student" + (i + 1), rand(1, 100), rand(1, 100), rand(1, 100), rand(1, 100), rand(1, 100), rand(1, 100), rand(1, 100), avg, rank)
+
+            scoreSheet.push(scoreData);
+
+            // average
+            let sum = 0;
+            for (let j = 1; j < scoreData.length - 2; j++) {
+                //console.log('i: ' + i + " j: " + j);
+                //console.log(scoreSheet[i][j]);
+                sum += (scoreSheet[i][j]);
+                scoreSheet[i][scoreData.length - 2] = (sum / (scoreData.length - 3)).toFixed(2);;
+
+            }
+
+            //計算各科不及格人數
+            for (let j = 1; j < 8; j++) {
+                if (scoreSheet[i][j] < 60) {
+                    fail[j - 1]++;
+                }
+            }
+        }
+
+        // ranking 
+        let rankArray = [];
+        let tempArray = [];
+        // fill tempArray with avg
+        for (let i = 0; i < 30; i++) {
+            tempArray[i] = scoreSheet[i][8];
+        }
+        // 排序tempArray 大 to 小
+        tempArray.sort(function (a, b) { return b - a; });
+        console.log(tempArray);
+
+        for (let i = 0; i < 30; i++) {
+            scoreSheet[i][9] = (tempArray.indexOf(scoreSheet[i][8]) + 1);
+        }
+
+
+        console.log(scoreSheet);
+        console.log(fail);
+        render();
+
+        //render (fill the table)
+        function render() {
+            const scoreList = document.querySelector('#scoreList');
+
+            for (let i = 0; i < 30; i++) {
+                const tr = document.createElement('tr');
+
+                for (let j = 0; j < 10; j++) {
+                    const td = document.createElement('td');
+                    td.textContent = scoreSheet[i][j];
+                    if (j == 9) {
+                        td.classList.add('rank');
+                        td.style.color = "black"
+                    }
+                    tr.append(td);
+                }
+                scoreList.append(tr);
+            }
+            // set background-color
+            const tds = document.querySelectorAll('td');
+            for (let i = 0; i < tds.length; i++) {
+                if (parseInt(tds[i].textContent) < 60) {
+                    tds[i].style.color = "red";
+                } else if (parseInt(tds[i].textContent) > 95) {
+                    tds[i].style.color = "green";
+                    tds[i].textContent = '*' + tds[i].textContent;
+                    tds[i].style.fontWeight = "bolder";
+                } else if (((parseInt(tds[i].textContent) > 90) && (parseInt(tds[i].textContent) < 95))) {
+                    tds[i].style.color = "green";
+                }
+                // reset rank field bgc
+                const rankTd = document.querySelectorAll('.rank');
+                for (let i = 0; i < 30; i++) {
+                    rankTd[i].style.color = "black"
+                }
+
+            }
+
+
+
+            // failed counts 
+            const tr = document.createElement('tr');
+            const td = document.createElement('td')
+            td.textContent = '不及格人數';
+            tr.append(td);
+            for (let i = 0; i < 9; i++) {
+                const td = document.createElement('td');
+                if (i > 6) {
+                    td.textContent = '---';
+                    td.classList.add('none');
+                } else {
+                    td.textContent = fail[i];
+                }
+                tr.append(td);
+            }
+            scoreList.append(tr);
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

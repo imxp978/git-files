@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="comlib.js"></script>
+</head>
+
+<body>
+    <table id="record" border="1">
+        <tr>
+            <td colspan="10">學生成績測試資料產生</td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>國文</td>
+            <td>英文</td>
+            <td>數學</td>
+            <td>計算機概論</td>
+            <td>工廠實習</td>
+            <td>微積分</td>
+            <td>體育</td>
+            <td>平均成績</td>
+            <td>排名</td>
+        </tr>
+        <script>
+
+            var dataset = {
+                name: 'name',
+                mandarin: rand(1, 100),
+                english: rand(1, 100),
+                math: rand(1, 100),
+                cs: rand(1, 100),
+                stage: rand(1, 100),
+                calculus: rand(1, 100),
+                pe: rand(1, 100),
+
+            }
+
+
+            for (let i = 0; i < 30; i++) {
+                const tr = document.createElement('tr');
+                const name = document.createElement('td');
+                const mandarin = document.createElement('td');
+                const english = document.createElement('td');
+                const math = document.createElement('td');
+                const cs = document.createElement('td');
+                const stage = document.createElement('td');
+                const calculus = document.createElement('td');
+                const pe = document.createElement('td');
+                const avg = document.createElement('td');
+                const rank = document.createElement('td');
+
+                name.textContent = 'student' + (i + 1);
+                mandarin.textContent = rand(1, 100);
+                english.textContent = rand(1, 100);
+                math.textContent = rand(1, 100);
+                cs.textContent = rand(1, 100);
+                stage.textContent = rand(1, 100);
+                calculus.textContent = rand(1, 100);
+                pe.textContent = rand(1, 100);
+
+                name.classList.add('name');
+                mandarin.classList.add('mandarin');
+                english.classList.add('english');
+                math.classList.add('math');
+                cs.classList.add('cs');
+                stage.classList.add('stage');
+                calculus.classList.add('calculus');
+                pe.classList.add('pe');
+
+                let score = [
+                    mandarin.textContent, english.textContent, math.textContent, cs.textContent, stage.textContent, calculus.textContent, pe.textContent]
+
+                let score_int = [];
+
+                for (let i = 0; i < score.length; i++) {
+                    score_int[i] = parseInt(score[i])
+                }
+
+                let j = 0;
+                let sum = 0;
+                while (j < score.length) {
+                    //console.log('score[j]: ' + j + ' ' + score[j]);
+                    sum += score_int[j];
+                    j++
+                }
+                //console.log('sum: ' + sum);
+
+                let average = (sum / 7).toFixed(2);
+                avg.textContent = average;
+                avg.classList.add('avg');
+
+                rank.textContent = 0;
+
+                //render
+                tr.append(name, mandarin, english, math, cs, stage, calculus, pe, avg, rank);
+                tr.classList.add('tr');
+                record.append(tr);
+
+            }
+
+            const avgs = document.querySelectorAll('avg');
+            let avg_array = [];
+
+            const tds = document.querySelectorAll('td');
+            for (let i = 0; i < tds.length; i++) {
+                let td_int = parseInt(tds[i].textContent);
+                if (td_int < 60) {
+                    tds[i].style.color = "red";
+                }
+                if (td_int >= 95) {
+                    tds[i].style.color = "green";
+                    tds[i].style.fontWeight = "bolder";
+                    tds[i].textContent = '*' + tds[i].textContent;
+                }
+                if (90 <= td_int && td_int < 95) {
+                    tds[i].style.color = "green";
+                    tds[i].style.fontWeight = "bolder";
+                }
+            }
+
+            const mandarinF = document.querySelectorAll('.mandarin');
+            let counter1 = 0;
+            for (let i = 0; i < mandarinF.length; i++) {
+                let mF_int = parseInt(mandarinF[i].textContent);
+                if (mF_int < 60) {
+                    counter1++;
+                }
+            }
+
+
+            //render last row 
+            const tr = document.createElement('tr');
+            const title = document.createElement('td');
+            const mF = document.createElement('td');
+            title.textContent = '不及格小記';
+            mF.textContent = counter1;
+            tr.append(title, mF);
+            record.append(tr);
+
+
+
+
+        </script>
+        <!-- <tr>
+            <td>不及格小計</td>
+        </tr> -->
+    </table>
+</body>
+
+</html>
