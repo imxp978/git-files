@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <table id="scoreList" border="1">
+    <table  id="scoreList" border="1" style="text-align:center">
         <tr>
             <td colspan="10">學生成績測試資料產生</td>
         </tr>
@@ -32,10 +32,10 @@
         //var rank = new Array();
         var avg = 0;
         var rank = 0;
+        var rankArray = [];
         for (let i = 0; i < 30; i++) {
 
             let scoreData = Array("student" + (i + 1), rand(1, 100), rand(1, 100), rand(1, 100), rand(1, 100), rand(1, 100), rand(1, 100), rand(1, 100), avg, rank)
-
             scoreSheet.push(scoreData);
 
             // average
@@ -43,10 +43,10 @@
             for (let j = 1; j < scoreData.length - 2; j++) {
                 //console.log('i: ' + i + " j: " + j);
                 //console.log(scoreSheet[i][j]);
-                sum += (scoreSheet[i][j]);
-                scoreSheet[i][scoreData.length - 2] = (sum / (scoreData.length - 3)).toFixed(2);;
-
+                sum += scoreSheet[i][j];
+                scoreSheet[i][scoreData.length - 2] = (sum / (scoreData.length - 3)).toFixed(2);
             }
+            rankArray[i] = (sum / (scoreData.length - 3)).toFixed(2);
 
             //計算各科不及格人數
             for (let j = 1; j < 8; j++) {
@@ -55,33 +55,20 @@
                 }
             }
         }
+        console.log(rankArray);
 
         // ***RANKING*** *** indexOf***
-        let rankArray = [];
         let tempArray = [];
-        // fill tempArray with avg
-        for (let i = 0; i < 30; i++) {
-            tempArray[i] = scoreSheet[i][8];
-        }
-        // 排序tempArray 大 to 小
-        tempArray.sort(function (a, b) { return b - a; });
-        console.log(tempArray);
+        // 排序rankArray 大 to 小
+        rankArray.sort(function (a, b) { return b - a; });
 
         for (let i = 0; i < 30; i++) {
-            scoreSheet[i][9] = (tempArray.indexOf(scoreSheet[i][8]) + 1);
+            scoreSheet[i][9] = (rankArray.indexOf(scoreSheet[i][8]) + 1);
         }
-
         //console.log(scoreSheet);
         //console.log(fail);
         render();
 
-
-
-
-
-
-
-        //render (fill the table)
         function render() {
             const scoreList = document.querySelector('#scoreList');
 
@@ -116,7 +103,6 @@
                 for (let i = 0; i < 30; i++) {
                     rankTd[i].style.color = "black"
                 }
-
             }
 
             // failed counts 
@@ -138,5 +124,4 @@
         }
     </script>
 </body>
-
 </html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table id="sheet" border="1">
+        
+    </table>
+    <script>
+      function rand(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+    </script>
+    <script>
+      let scoreSheet = [];
+      let avgArray = [];
+      let objArray = [];
+      let people = 20;
+      let subjects = 4;
+      for (let i = 0; i < people; i++) {
+        let score = [
+        rand(1, 100),
+        rand(1, 100),
+        rand(1, 100),
+        rand(1, 100),
+        0,
+        0,
+        ];
+        scoreSheet.push(score);
+
+        let sum = 0;
+        let avg = 0;
+        for (let j = 0; j < subjects; j++){
+            sum += scoreSheet[i][j];
+        }
+        console.log(sum);
+        avg = sum / subjects;
+        score[4] = avg;
+        avgArray[i] = avg;
+        let object = {};
+        object.key = avgArray[i];
+        object.value = i+1;
+        objArray.push(object);
+        //console.log(typeof(object.key));
+    }
+
+    console.log(avgArray);
+
+    sort(objArray);
+
+    for (let i = 0; i < people; i++) {
+        //scoreSheet[i][4] = 
+        let rank = i + 1;
+        scoreSheet[objArray[i].value -1][5] = rank;
+    }
+
+    console.log(scoreSheet);
+    render();
+
+
+    function sort(array) {
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array.length - 1 - i; j++) {
+                let temp = 0;
+                if (array[j].key < array[j + 1].key) {
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+        console.log(array);
+    }
+
+
+    function render() {
+        const sheet = document.querySelector('#sheet');
+        for (let i = 0; i < people; i++) {
+            const tr = document.createElement('tr');
+            for(let j = 0; j < subjects+2; j++) {
+                const td = document.createElement('td');
+                td.textContent = scoreSheet[i][j];
+                tr.append(td);
+            }
+            sheet.append(tr);
+
+        }
+    }
+    
+    
+    </script>
+  </body>
+</html>
