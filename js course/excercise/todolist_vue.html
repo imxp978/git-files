@@ -66,9 +66,10 @@
                             color: "blue",
                         },
                     ],
-
                 }
             },
+
+
             methods: {
                 add: function () {
                     if (this.newTitle && this.newContent && this.newColor) {
@@ -92,11 +93,6 @@
                 },
                 del: function (index) {
                     this.notes.splice(index, 1);
-                },
-                save: function () {
-                    watch(this.notes, () => {
-                        localStorage.setItem("notes", JSON.stringify(this.notes));
-                    })
                 },
             },
             watch: {

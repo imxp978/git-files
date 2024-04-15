@@ -1,37 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #app {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .control {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+    }
+
+    .control input,
+    .control textarea,
+    .control section,
+    .control button {
+      margin: 10px 0;
+      padding: 5px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .control textarea {
+      text-align: justify;
+      line-height: 1.5;
+    }
+
+    .result {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 75%;
+    }
+
+    .note {
+      margin: 20px 0;
+      border: 1px solid #ccc;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      position: relative;
+    }
+
+    .result button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+    }
+  </style>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js"></script>
 </head>
+
 <body>
-    <script>
-        fetch('https://fakestoreapi.com/users', {
-            method: "POST",
-            body: JSON.stringify({
-              email: '<span class="__cf_email__" data-cfemail="7b311413153b1c161a121755181416">[email&#160;protected]</span>',
-              username: 'johnd',
-              password: 'm38rmF$',
-              name: {
-                firstname: 'John',
-                lastname: 'Doe'
-              },
-              address: {
-                city: 'kilcoole',
-                street: '7835 new road',
-                number: 3,
-                zipcode: '12926-3874',
-                geolocation: {
-                  lat: '-37.3159',
-                  long: '81.1496'
-                }
-              },
-              phone: '1-570-236-7033'
-            })
-          })
-          .then(res => res.json())
-          .then(json => console.log(json))
-    </script>
+  <h1 style="text-align: center;">JavaScript 系列七：第7課 ── 認識 Template Refs</h1>
+
+  <div id="app">
+    <div class="control">
+      <input type="text" v-model="newTitle" placeholder="標題">
+      <!-- 為方便觀察autosize第三方套件，故將rows設為3 -->
+      <textarea cols="30" rows="3" v-model="newContent" placeholder="內容" ref="textarea"></textarea>
+      <select v-model="newColor">
+        <option value="" disabled selected>選擇顏色</option>
+        <option value="red">紅色</option>
+        <option value="green">綠色</option>
+        <option value="blue">藍色</option>
+      </select>
+      <button @click="addNote">新增</button>
+    </div>
+
+    <div class="result">
+      <div class="note" v-for="(note, index) of notes" :style="{ color: note.color ,'border-color': note.color }">
+        <h3 class="title">{{ note.title }}</h3>
+        <p class="content">{{ note.content }}</p>
+        <button @click="deleteNote(note, index)" :style="{ color: note.color}">X</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          newTitle: "",
+          newContent: "",
+          newColor: "",
+          notes: [
+            {
+              title: "春節行程安排",
+              content: "吃飽睡，睡飽吃",
+              color: "red"
+            },
+            {
+              title: "工作待辦事項",
+              content: "詢問各家廠商報價",
+              color: "green"
+            },
+            {
+              title: "運動健身計畫",
+              content: "每天早上六點去健身",
+              color: "blue"
+            }
+          ]
+        };
+      },
+      watch: {
+        notes: {
+          handler(newValue, oldValue) {
+            localStorage.setItem("notes", JSON.stringify(newValue));
+          },
+          deep: true
+        }
+      },
+      methods: {
+        addNote() {
+          if (
+            this.newTitle !== "" &&
+            this.newContent !== "" &&
+            this.newColor !== ""
+          ) {
+            let newNote = {
+              title: this.newTitle,
+              content: this.newContent,
+              color: this.newColor
+            };
+            this.notes.unshift(newNote);
+            this.newTitle = "";
+            this.newContent = "";
+            this.newColor = "";
+          } else {
+            alert("請輸入所有資料");
+          }
+        },
+        deleteNote(note, index) {
+          this.notes.splice(index, 1);
+        }
+      },
+      mounted() {
+        this.notes[0].content = "多出門、到處走走、也要多運動";
+
+        if (localStorage.getItem("notes")) {
+          this.notes = JSON.parse(localStorage.getItem("notes"));
+        }
+
+        // autosize
+        autosize(this.$refs.textarea);
+      }
+    }).mount("#app");
+
+  </script>
 </body>
+
 </html>

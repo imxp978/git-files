@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>房間資料</h1>
+        <h2>名稱 {{roomdata.name}}</h2>
+        <h2>價錢 {{roomdata.price}}</h2>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                roomdata: {
+                    name: "經濟雙人房",
+                    eng: "Economy Double Room",
+                    price: 7000,
+                    amount: 0,
+                    cover: url(img),
+                    discount: 0.9,
+                    equipment: {
+                        wifi: false,
+                        bathtub: true,
+                        breakfast: true
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
