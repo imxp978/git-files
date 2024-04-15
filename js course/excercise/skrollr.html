@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #skrollr {
+            height: 100vh;
+            width: 100vw;
+            b/ackground-color: rgb(0, 0, 0);
+            position: fixed;
+            top: 0;
+
+        }
+
+        .spacer {
+            height: 1000px;
+            ba/ckground-color: lightgreen;
+        }
+
+        .content {
+            width: 30vw;
+            font-size: 80px;
+            font-weight: bolder;
+            color: white;
+        }
+    </style>
+</head>
+
+
+
+<body style="height:3000px">
+    <div class="spacer" style="height:1000px">
+        spacer
+    </div>
+    <div id="skrollr" data-0="background-color:rgba(0,0,0,0);" data-800="background-color:rgba(255,255,255,1)"
+        style="background-color:rgb(0,0,0);">
+        <div class="content" data-0="top:5vh; left:-80vw; background-color:rgb(255,255,255); color:rgba(255,255,255,0)"
+            data-800="top:35vh; left:35vw; background-color:rgb(100,100,100); color:rgba(255,255,255,1)"
+            style="top:500px; height:200px; width:500px; position:absolute; background-color:orange; border-radius:25px; padding:20px; text-align:center">
+            <span align="center" data-500="top:-50px;" data-800="top:50px"
+                style="position:fixed; position:absolute">很棒</span>
+        </div>
+    </div>
+    <div class="spacer">
+        spacer
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"
+        integrity="sha512-A2+khatRDWHUE2VUtN4xUTkr1nc4YfDBw9Sg3ea6x0aRPfpcYieDZji4D2edDHy/yF5NsYzP7kL8sSM8s5EqCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var s = skrollr.init();
+    </script>
+</body>
+
+</html>
