@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Clock</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <style>
+        .clockArea {
+            width: 100%;
+            height: 400px;
+            background-image: radial-gradient(#000, #555);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .digital-clock {
+            width: 60%;
+            padding: 20px;
+            color: white;
+            border: 2px solid #999;
+            font-family: 'Rowdies', Arial, Helvetica, sans-serif;
+            font-size: 5vw;
+            background-image: linear-gradient(180deg, #000, #555);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <div class="card col-sm-8 mx-auto" style="width: 18rem;">
+                <div class="clockArea">
+                    <h5 name="title">Hellow, world!</h5>
+                    <div class="digital-clock">00:00:00:AM</div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">JS測試:系統時鐘小城市</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                    <button class="btn btn-primary">24時制更換</button>
+                    <button class="btn btn-success">停止</button>
+                    <button class="btn btn-warning">隱藏日期標題</button>
+                    <button class="btn btn-info">變更民國日期標題</button>
+                    <button class="btn btn-danger">變更背景顏色</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="comlib.js"></script>
+    <script>
+        var months = [
+            'January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepetmber', 'October', 'November', 'December'
+        ];
+
+        var days = [
+            'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+        ]
+
+        var cdays = [
+            '星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六',
+        ]
+
+        var timeFormat = 12; //12/24 hrs
+        var interval;
+        var dateHide = true;
+        var cdate = false;
+        document.getElementsByClassName('btn-primary')[0].addEventListener('click', chgFormat);
+        document.getElementsByClassName('btn-success')[0].addEventListener('click', timeStop);
+        document.getElementsByClassName('btn-warning')[0].addEventListener('click', showDate);
+        document.getElementsByClassName('btn-info')[0].addEventListener('click', chgCdate);
+        document.getElementsByClassName('btn-danger')[0].addEventListener('click', chgBackground);
+
+
+        document.getElementsByTagName('body')[0].onload = function () {
+            document.getElementsByClassName('digital-clock')[0].setAttribute('style', 'color:#fff; text-shadow:0 0 6px #ff0;');
+            document.getElementsByName('title')[0].style.color = '#fff';
+            clockUpdate();
+            interval = setInterval(clockUpdate, 1000);
+        }
+
+        function clockUpdate() {
+            var date = new Date();
+            var day = date.getDate();
+            var year = date.getFullYear();
+            var s = addZero(date.getSeconds());
+            var m = addZero(date.getMinutes());
+            var h = addZero(date.getHours());
+
+            if (timeFormat == 12) {
+                var h = addZero(twelveHour(date.getHours()));
+                var formatStr = h + ':' + m + ':' + s + ((date.getHours() >= 12) ? 'pm' : 'am');
+            } else {
+                var h = addZero(date.getHours());
+                var formatStr = h + ':' + m + ':' + s;
+            }
+            document.getElementsByClassName('digital-clock')[0].innerText = formatStr;
+            var dayOfWeek = days[date.getDay()];
+            var month = months[date.getMonth()];
+            if (cdate) {
+                var dateString = '民國' + (year - 1911) + '年' + (date.getMonth() + 1) + '月' + day + '日' + '，' + cdays[date.getDay()];
+            } else {
+                var dateString = dayOfWeek + ', ' + month + ' ' + day + ', ' + year;
+            }
+
+
+            document.getElementsByName('title')[0].innerText = dateString;
+        }
+
+        // 12/24 switching 
+        function chgFormat() {
+            if (timeFormat == 12) {
+                timeFormat = 24;
+                document.getElementsByClassName('btn-primary')[0].innerText = '12時制更換';
+            } else {
+                timeFormat = 12;
+                document.getElementsByClassName('btn-primary')[0].innerText = '24時制更換';
+            }
+        }
+        // in 12 hour mode, if HOUR > 12, switching
+        function twelveHour(hour) {
+            return ((hour > 12) ? hour - 12 : hour);
+        }
+
+        function timeStop() {
+            if (interval != 0) {
+                clearInterval(interval);
+                interval = 0;
+                document.getElementsByClassName('btn-success')[0].innerText = '啟動'
+            } else {
+                interval = setInterval(clockUpdate, 1000);
+                document.getElementsByClassName('btn-success')[0].innerText = '停止'
+            }
+        }
+
+        function showDate() {
+            if (dateHide) {
+                dateHide = false;
+                document.getElementsByClassName('btn-warning')[0].innerText = '顯示日期標題';
+                document.getElementsByName('title')[0].style.display = 'none';
+            } else {
+                dateHide = true;
+                document.getElementsByClassName('btn-warning')[0].innerText = '隱藏日期標題';
+                document.getElementsByName('title')[0].style.display = 'block'
+            }
+        }
+        function chgCdate() {
+            if (cdate) {
+                cdate = false;
+                document.getElementsByClassName('btn-info')[0].innerText = '變更民國日期標題';
+            } else {
+                cdate = true;
+                document.getElementsByClassName('btn-info')[0].innerText = '變更西園日期標題';
+            }
+        }
+
+        function chgBackground() {
+            var color1 = 'rgb(' + rand(1, 255) + ',' + rand(1, 255) + ', ' + rand(1, 255) + ')';
+            var color2 = 'rgb(' + rand(1, 255) + ',' + rand(1, 255) + ', ' + rand(1, 255) + ')';
+            var bgset = 'background-image:radial-gradient(' + color1 + ', ' + color2 + ')';
+            document.getElementsByClassName('clockArea')[0].setAttribute('style', bgset)
+        }
+
+
+    </script>
+</body>
+
+</html>
