@@ -360,15 +360,31 @@
                         alert('Hello, ' + this.username);
                     }
                 }
-            }).mount('#app') </script>``` 正因為把 `欄位中目前輸入的值` 視為 `當前應用程式的狀態` 的一部份 所以可以隨時取得表單欄位內容，而不用像以前那樣，要透過 DOM selector 之類的，去找到元素、才拿到內容！ 一樣，表單欄位內容的取得，寫法多種，就挑順眼、簡單的來用即可 ## 課後作業 承接上一課的作業 這次要來開發「新增」與「刪除」功能囉！ 請在記事列表的上方： - 新增一個 `input` 來輸入「記事標題」 - 新增一個 `textarea` 來輸入「記事內容」 - 新增一個 `select` 來選擇顏色 - 新增一個「新增」按鈕，點擊之後，會新增記事 - 請將這些欄位的內容，放在 application state 裡面管理 然後，請在每則記事的裡面，新增一個「刪除」按鈕。點擊之後，會刪除記事 做出以上功能，你就完成這次的課程目標了！</a></p><h4 class="font-weight-bold mt-2"><a href="https://codelove.tw/@howtomakeaturn/post/jal51q" class="text-default">
+            }).mount('#app') </script>
+            
+            
+            ``` 
+            正因為把 `欄位中目前輸入的值` 視為 `當前應用程式的狀態` 的一部份 所以可以隨時取得表單欄位內容，而不用像以前那樣，要透過 DOM selector 之類的，去找到元素、才拿到內容！ 一樣，表單欄位內容的取得，寫法多種，就挑順眼、簡單的來用即可 ## 課後作業 承接上一課的作業 這次要來開發「新增」與「刪除」功能囉！ 請在記事列表的上方： - 新增一個 `input` 來輸入「記事標題」 - 新增一個 `textarea` 來輸入「記事內容」 - 新增一個 `select` 來選擇顏色 - 新增一個「新增」按鈕，點擊之後，會新增記事 - 請將這些欄位的內容，放在 application state 裡面管理 然後，請在每則記事的裡面，新增一個「刪除」按鈕。點擊之後，會刪除記事 做出以上功能，你就完成這次的課程目標了！</a></p><h4 class="font-weight-bold mt-2"><a href="https://codelove.tw/@howtomakeaturn/post/jal51q" class="text-default">
+                
+                
+                
+                
+                
+                
                 
                 JavaScript 系列七：第6課 ── 認識 Lifecycle Hooks 與 Watchers</a></h4><p class="text-clamp-2 text-muted mb-0"><a href="https://codelove.tw/@howtomakeaturn/post/jal51q" class="text-muted">## 課程目標 - 認識 Lifecycle Hooks 與 Watchers ## 課程內容 來認識一下 Lifecycle Hooks - https: //vuejs.org/guide/essentials/lifecycle.html
 
             簡單來說，在 vue 執行階段，又可分為 `mounted` `updated` `unmounted` 等等，將近十個時間點 根據應用程式的需要，可以在這十個時間點，進行必要的檢查＆執行特定任務 但是，實務上，除了 `mounted` 經常用來跑一些初始化任務之外，其餘的時間點，幾乎不會用到 所謂 Lifecycle Hooks 是一個有點過時的觀念！稍微讀一下就好，相關功能大多被 Watchers 取代了 --- 接著就來認識一下 Watchers - https: //vuejs.org/guide/essentials/watchers.html
 
-            簡單講，在 Vue 中，所謂的 Reactivity 已經很好用了： 「某些變數在更新之後，其他相關變數、以及畫面 UI，會跟著自動更新」 除此之外，還可以進一步使用更進階功能： 「隨時監控某些變數，如果發現它們更新，就執行一些相關的任務」 這些任務我們稱之為 `副作用（side effects）` 關於 side effects 怎麼解釋，是一個比較困難的主題 這邊先不詳談，目前有點困惑沒關係，作業中會讓你練習一下，先有點小感覺就好 ## 課後作業 承接上一課的作業 這一課要來做自動儲存功能 請使用 Watchers 去監聽 `notes` 狀態 每次 `notes` 有更新，就自動儲存到 Local Storage 裡面！ 接著，在 `mounted` 裡面檢查 Local Storage 如果有資料，就把資料更新到 `notes` 裡面 如此一來，就完成了自動儲存功能，連儲存按鈕都不用做！ --- 提示：普通的 watchers 不夠用，要使用 Deep Watchers 這部份有點難解釋，你先知道：普通的 data 變數型態，例如字串、數字、布林，可以用普通的 watcher 但如果是陣列或物件型態的 data，就要使用 Deep Watchers 先知道這樣就好 --- 做出以上功能，你就完成這次的課程目標了！</a></p><h4 class="font-weight-bold mt-2"><a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-default">JavaScript 系列七：第7課 ── 認識 Template Refs</a></h4><p class="text-clamp-2 text-muted mb-0"><a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-muted">## 課程目標 - 認識 Template Refs ## 課程內容 來讀一下 Template Refs 的說明 - https: //vuejs.org/guide/essentials/template-refs.html
+            簡單講，在 Vue 中，所謂的 Reactivity 已經很好用了： 「某些變數在更新之後，其他相關變數、以及畫面 UI，會跟著自動更新」 除此之外，還可以進一步使用更進階功能： 「隨時監控某些變數，如果發現它們更新，就執行一些相關的任務」 這些任務我們稱之為 `副作用（side effects）` 關於 side effects 怎麼解釋，是一個比較困難的主題 這邊先不詳談，目前有點困惑沒關係，作業中會讓你練習一下，先有點小感覺就好 
+            ## 課後作業 承接上一課的作業 這一課要來做自動儲存功能 請使用 Watchers 去監聽 `notes` 狀態 每次 `notes` 有更新，就自動儲存到 Local Storage 裡面！ 接著，在 `mounted` 裡面檢查 Local Storage 如果有資料，就把資料更新到 `notes` 裡面 如此一來，就完成了自動儲存功能，連儲存按鈕都不用做！ --- 提示：普通的 watchers 不夠用，要使用 Deep Watchers 這部份有點難解釋，你先知道：普通的 data 變數型態，例如字串、數字、布林，可以用普通的 watcher 但如果是陣列或物件型態的 data，就要使用 Deep Watchers 先知道這樣就好 --- 做出以上功能，你就完成這次的課程目標了！</a></p>
+            
+            
+            <h4 class="font-weight-bold mt-2"><a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-default">
+                JavaScript 系列七：第7課 ── 認識 Template Refs</a></h4><p class="text-clamp-2 text-muted mb-0"><a href="https://codelove.tw/@howtomakeaturn/post/GqP5bx" class="text-muted">## 課程目標 - 認識 Template Refs ## 課程內容 來讀一下 Template Refs 的說明 - https: //vuejs.org/guide/essentials/template-refs.html
 
-            簡單來說，在我們使用了任何前端框架之後，就已經把「所有 DOM 更新相關」的工作，委託給了框架處理 我們從此只要寫框架提供的語法就好了，不要直接去操作 DOM！ 不然的話，框架已經接手了整個 DOM，你又在某些地方對 DOM 做出更新，會引起衝突，會造成很多 bug！ 而且這種 bug 很難處理，因為你不知道框架實際上是怎麼更新 DOM 的，需要深入研究框架背後的機制才行 所以才會說，用了框架，就請避免操作 DOM 但是，很多時候，會需要用一些現成的第三方套件（例如你學過的一堆 jQuery 外掛套件），那些套件初始化設定時，又都需要提供一個 selector 這種情況下，Vue 提供了 ref 功能，讓你可以存取「vue 底下真正的 DOM」，可以拿來跟其他小套件整合 --- 看到這邊，你可能會心想： 「那我如果不使用 ref，我就是要直接使用 `document.querySelector()` 來抓取 DOM 元素，然後作為參數放進其他小套件執行，會怎樣？」 老實講，根據我個人經驗，在絕大多數情況下，其實也根本不會怎麼樣，程式還是可以順利運作的 所以，你真的要這樣做，也是可以的 但如果真的遇到很難解決的 bug，例如抓不到 DOM 元素、抓錯 DOM 元素時，記得往這方向研究一下就是了！ ## 課後作業 承接上一課的作業 在輸入記事內容的地方，為了加強 UX，我們來加上 autosize 功能 請使用此款套件 https: //github.com/jackmoore/autosize
+            簡單來說，在我們使用了任何前端框架之後，就已經把「所有 DOM 更新相關」的工作，委託給了框架處理 我們從此只要寫框架提供的語法就好了，不要直接去操作 DOM！ 不然的話，框架已經接手了整個 DOM，你又在某些地方對 DOM 做出更新，會引起衝突，會造成很多 bug！ 而且這種 bug 很難處理，因為你不知道框架實際上是怎麼更新 DOM 的，需要深入研究框架背後的機制才行 所以才會說，用了框架，就請避免操作 DOM 但是，很多時候，會需要用一些現成的第三方套件（例如你學過的一堆 jQuery 外掛套件），那些套件初始化設定時，又都需要提供一個 selector 這種情況下，Vue 提供了 ref 功能，讓你可以存取「vue 底下真正的 DOM」，可以拿來跟其他小套件整合 --- 看到這邊，你可能會心想： 「那我如果不使用 ref，我就是要直接使用 `document.querySelector()` 來抓取 DOM 元素，然後作為參數放進其他小套件執行，會怎樣？」 老實講，根據我個人經驗，在絕大多數情況下，其實也根本不會怎麼樣，程式還是可以順利運作的 所以，你真的要這樣做，也是可以的 但如果真的遇到很難解決的 bug，例如抓不到 DOM 元素、抓錯 DOM 元素時，記得往這方向研究一下就是了！ 
+            ## 課後作業 承接上一課的作業 在輸入記事內容的地方，為了加強 UX，我們來加上 autosize 功能 請使用此款套件 https: //github.com/jackmoore/autosize
 
             將 textarea 加上 autosize 功能吧！ 做出以上功能，你就完成這次的課程目標了！</a></p><div class="bg-white mt-3 post-card"><div class="p-3"><div class="" style="font-size: 0.875rem;"><span class="text-muted"><a href="https://codelove.tw/@howtomakeaturn" class="text-decoration-none"><img src="https://i.imgur.com/UCzsTDX.png" class="user-photo mr-1" style="height: 30px; width: 30px;"></a><a href="https://codelove.tw/@howtomakeaturn" class="text-default">站長阿川</a>&nbsp;
             ·&nbsp;
