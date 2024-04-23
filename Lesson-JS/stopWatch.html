@@ -22,10 +22,13 @@
         font-family: arial;
       }
       .card {
+        height: 100vh;
         margin: 200px, auto;
         background-color: black;
         color: white;
         width: 100%;
+        transition: 0.1s;
+        transform: (90deg);
       }
     </style>
   </head>
@@ -58,7 +61,7 @@
       set.addEventListener("click", function () {
         if (!timerInterval) {
           timerInterval = setInterval(timer, 10);
-          bgInterval = setInterval(bgChg, 10);
+          bgInterval = setInterval(bgChg, 2000);
           set.innerHTML = "暫停";
         } else {
           clearInterval(timerInterval);
@@ -100,9 +103,11 @@
           rand(1, 255) +
           ")";
         var bgset =
-          "background:radial-gradient(" + color1 + ", " + color2 + ")";
-        //card.setAttribute("style", bgset);
-        //card.style.opacity = "0.8";
+          "background:linear-gradient(" + color1 + ", " + color2 + ")";
+        card.setAttribute("style", bgset);
+        card.style.fontsize = '500%';
+        card.style('transform', 'rotate(deg90)');
+        card.style.opacity = "0.66";
       }
 
       function timer() {
