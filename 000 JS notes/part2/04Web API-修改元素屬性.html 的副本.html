@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <img src="/images/cake001.png" alt="cake001"> -->
+
+  <script>
+    // 透過JS設置/修改標籤元素屬性，比如透過src更換圖片
+    // 語法
+    // 對象.屬性 = 值
+    // 1.獲取圖片元素
+    const img = document.querySelector('img')
+    // 2.修改屬性
+    img.src = './images/1.jpg'
+    img.title = 'background'
+  </script>
+
+  <hr>
+
+  <img src="/images/1.jpg" alt="">
+
+  <script>
+    // 練習-刷新換圖片
+    // 1.隨機數
+    function getRandom(n, m) {
+      return Math.floor(Math.random() * (m - n + 1)) + n
+    }
+    const random = getRandom(1,6)
+    // 2.獲取元素
+    const img2 = document.querySelector('img')
+    // 3.更換路徑
+    img2.src = `/images/${random}.jpg`
+  </script>
+</body>
+
+</html>

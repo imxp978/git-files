@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      height: 3000px;
+    }
+
+    div {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      margin: 100px;
+    }
+    p{
+      width: 100px;
+      height: 100px;
+      background-color: purple;
+      margin: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div><p></p></div>
+
+  <script>
+    // 1.頁面加載事件
+    // 加載外部資源完成後，在觸發事件
+    // 事件名:load
+    // 監聽頁面所有資源加載完畢,在執行回調函數
+    // 給window添加load事件
+    // window.addEventListener('load',function(){})
+    // 不光監聽頁面，也可以綁定某個元素加載完畢再執行
+
+    // 當初始的HTML文檔被完全加載和解析完成後
+    // DOMContentLoaded事件被觸發，無需等待樣式表、圖像等完全加載
+
+    // 事件名:DOMContentLoaded
+    // 監聽頁面DOM加載完畢
+    // 給 document添加DOMContentLoaded事件
+    // document.addEventListener('DOMContentLoaded',function(){})
+
+    // 2.元素滾動事件
+    // 滾動調在滾動時持續觸發的事件
+    // 事件名:scroll
+    window.addEventListener('scroll', function () {
+      console.log('滾了')
+
+      // 獲取HTML寫法
+      // document.documentElement
+      // 得知頁面滾動多少
+      console.log(document.documentElement.scrollTop)
+    })
+    // 給window或document添加
+
+    // 3.頁面尺寸事件
+    // 會在窗口尺寸改變發生的事件
+    // resize
+    // window.addEventListener('resize',function(){})
+
+    // 檢測螢幕尺寸
+    // 獲取元素的可見不分寬高(不包含邊框、margin、滾動條等)
+    // clientWidth 和 clientHeight
+    const div = document.querySelector('div')
+    console.log(div.clientWidth)
+
+
+    // 4.元素尺寸及位置
+
+    // 1.元素尺寸
+    // 獲取元素自身的寬高，包含元素自身設置的寬高、padding、border
+    // offsetWidth 和 offsetHeight
+    // 獲取的是可視寬高，若是隱藏，結果為0
+
+
+    // 2.元素位置
+    // 獲取元素距離自己定位父級元素的左、上距離
+    // offsetLeft 和 offsetTop 注意是唯獨屬性
+    const p = document.querySelector('p')
+    // console.log(div.offsetLeft)
+    // 受帶有定位父級元素影響
+    console.log(p.offsetLeft)
+
+    // 2.2元素位置-可視窗口
+    console.log(div.getBoundingClientRect())
+
+
+
+  </script>
+</body>
+
+</html>

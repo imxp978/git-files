@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+
+  <script>
+    const ul = document.querySelector('ul')
+
+    // 1.克隆節點
+    // 元素.cloneNode(布爾值)
+    // 若為ture 則代表克隆時會包含後代節點一起克隆
+    // 若為false 則代表克隆時會不包含後代節點
+    // 默認為false
+
+    // const li1 = ul.children[0].cloneNode(true)
+    // ul.appendChild(li1)
+    ul.appendChild(ul.children[0].cloneNode(true))
+    ul.appendChild(ul.children[0].cloneNode())
+
+    // 2.刪除節點
+    // 刪除元素必須通過父元素
+    // 父元素.removeChild(要刪除的元素)
+    // 若不存在父子關係，則刪除不成功
+
+    // 刪除節點與隱藏節點的區別
+    // 2.1刪除節點-從html中刪除節點
+    // 2.2隱藏節點-節點還是存在
+    ul.removeChild(ul.children[0])
+    
+
+
+  </script>
+</body>
+
+</html>

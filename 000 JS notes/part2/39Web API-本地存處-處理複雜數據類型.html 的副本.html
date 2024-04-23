@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    // 本地存儲只能儲存字符串數據類型，無法儲存複雜數據類型
+    const obj = {
+      uname: 'Jack',
+      age: 18,
+      gender: '男'
+    }
+    localStorage.setItem('obj', obj)  
+    //不能直接存對象-[object,object]
+    console.log(localStorage.getItem('obj')) //無法直接使用
+
+    // 解決:需要將複雜數據類型轉換成 JSON字符串，再儲存
+    // 語法:JSON.stringify(複雜數據類型)
+    localStorage.setItem('obj', JSON.stringify(obj))
+
+    console.log(localStorage.getItem('obj'))
+    console.log(typeof (localStorage.getItem('obj')))
+    // JSON對象-屬性與值都有引號，且統一都是雙引號
+    // {"uname":"Jack","age":18,"gender":"男"}
+
+    // 複雜數據類型讀取
+    // 把JSON字符串轉換回對象-JSON.parse()
+    console.log(JSON.parse(localStorage.getItem('obj')))
+
+  </script>
+</body>
+
+</html>

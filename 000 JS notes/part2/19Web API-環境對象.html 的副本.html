@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>點擊</button>
+  <script>
+    // 環境變量-函數內部特殊的變量-this
+    // 代表著函數運行時所處的環境
+    // 每個函數都有this-環境對象
+    // 誰調用，this就是誰
+    // 直接調用函數，相當於window.函數，所以this指向window
+    const btn = document.querySelector('button')
+    btn.addEventListener('click', function () {
+      // 指向函數的調用者
+      console.log(this)  //btn 對象
+
+      this.style.color = 'red'
+    })
+
+    // 回調函數
+    // 如果函數A作為參數船寄給函數B時，函數A為回調函數
+
+
+  </script>
+</body>
+
+</html>

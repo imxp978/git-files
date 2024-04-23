@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+</ul>
+
+  <script>
+    // 其實字符串、數值、布爾、等基本類型也都有專門的構造函數，這些稱之為包裝類型
+    // JS中幾乎所有的數據都可以基於構造函數創建
+
+
+    // 內置構造函數
+
+    // 1.引用類型
+    // Object、Array、RegExp、Date 等
+
+
+    // 1.1 Object是內置的構造函數，用於創建普通對象
+    // 常用的3種靜態方法
+    // (靜態方法就是值有Object構造函數才能調用的)
+
+    const o = { uname: 'pink', age: 18 }
+
+    // 1.1.1 Object.keys獲取對象中的所有屬性名
+    // 獲得所有的屬性名
+    console.log(Object.keys(o))  //返回數組
+
+    // 1.1.2 Object.values獲取對象中的所有屬性值
+    // 獲得所有的屬性值
+    console.log(Object.values(o))  //返回數組
+
+    // 1.1.3 Object.assign 用於對象拷貝
+    // 經常使用場合給對象添加屬性
+    const oo = {}
+    Object.assign(oo, o) //貼上對象為第一位，複製對象為第二位
+    console.log(oo)
+
+
+
+
+    // 1.2 Array 是內置的構造函數，用於創建數組
+
+    // 核心方法
+    // 1.2.1 forEach 遍歷數組-不返回數組，經查用於查找遍歷數組元素
+
+    // 1.2.2 filter 過濾數組-返回新數組，返回的是篩選滿足條件的數組元素
+
+    // 1.2.3 map 迭代數組-返回新數組，返回的是處理後的數組元素，想要使用返回的新數組
+
+    // 1.2.4 reduce 累計器-返回累計處理的結果，經常用於求和等
+    const arr = [1, 2, 3, 4]
+    // arr.reduce(function(){},起始值)
+    // arr.reduce(function(上一次值,當前值){},起始值)
+    // 參數:如果有起始值，則會把初始值累加到裡面
+
+    // 沒有初始值
+    const total = arr.reduce(function (prev, current) {
+      return prev + current
+    })
+    console.log(total)  //14
+
+    // 有初始值
+    const total2 = arr.reduce(function (prev, current) {
+      return prev + current
+    }, 10)
+    console.log(total2) //24
+
+    // 箭頭函數寫法
+    const total3 = arr.reduce((prev, current) => prev + current, 10)
+
+    // 練習-計算當月薪資
+    const arr2 = [
+      {
+        name: '張三',
+        salary: 10000
+      },
+      {
+        name: '李四',
+        salary: 10000
+      },
+      {
+        name: '王五',
+        salary: 10000
+      }
+    ]
+    const total4 = arr2.reduce((prev, current) => {
+      return prev + current.salary
+    }, 0)
+    console.log(total4)
+
+    // 需求:每個人漲薪30%
+    const total5 = arr2.reduce((prev, current) => {
+      return prev + current.salary * 1.3
+    }, 0)
+    console.log(total5)
+
+    // 數組中常見的方法
+    // 1.join-拼接為字符串，返回字符串
+
+    // 2.find-查找元素，返回符合測試條件的第一個元素，否則返回undefind
+    const one = [
+      {
+        name: '小米',
+        price: 1999
+      },
+      {
+        name: '華為',
+        price: 3999
+      }
+    ]
+    const mi = one.find(item => item.name === '小米')
+    console.log(mi)
+    // 返回數組元素
+
+    // 3.every-檢測所有元素是否都符合指定條件，如果所有元素都通過則返回true，否則false
+    const two = [10, 20, 30]
+    const flag = two.every(item => item >= 10)
+    console.log(flag)
+
+    // 4.some-檢測元素是否都符合指定條件，如數組中有元素滿足條件返回true，否則false
+    const flag2 = two.some(item => item >= 20)
+    console.log(flag2)
+
+    // 5.concat-合併兩個數組，返回生成新數組
+
+    // 6.sort-對原數組單元值排序
+
+    // 7.splice-刪除或替換原數組單元
+
+    // 8.reverse-反轉數組
+
+    // 9.findIndex-查找元素索引值
+
+    // 練習
+    const spec = {
+      size:'40cm*40cm',
+      color:'黑色'
+    }
+    // 將size與color 拼接字符串
+
+    // 1.獲取所有的屬性值:
+    // Object.values(spec)
+    // 2.使用join拼接
+    console.log(Object.values(spec).join('/'))
+
+    // 1.2.5 偽數組轉換真數組
+    // 靜態方法 Array.from()
+    const lis = document.querySelectorAll('ul li')
+    console.log(lis)
+    const liss = Array.from(lis)
+    console.log(liss)
+
+
+    // 2.包裝類型
+    // String、Number、Boolean 等
+
+    //  String常見的實例方法
+    // 1.length-用來獲取字符串長度
+
+    // 2.slipt-用來將字符串拆分成數組
+    const str = 'pink,red'
+    const str2 = '2022-4-8'
+    // 把字符串轉換為字符 與 join()相反
+    const arr3 = str.split(',') 
+    const arr4 = str2.split('-') 
+    console.log(arr3)
+    console.log(arr4)
+
+    // 3.substring(需要擷取的第一個字符的索引[,結束的索引號(不包含在擷取的字符串)])-用於字符串擷取
+    const str3 = '今天又要做核酸了'
+    console.log(str3.substring(5))
+    console.log(str3.substring(5,7))
+
+    // 4.startsWith(檢測字符串[,檢測位置索引號])-檢測是否以某字符為開頭
+    const str4 = 'pink老師上課中'
+    console.log(str4.startsWith('pink'))
+    console.log(str4.startsWith('老師'))
+    console.log(str4.startsWith('老師',4))
+
+    // 5.includes(搜索的字符串[,檢測位置索引號])-判斷一個字符串是否包含在另一個字符串中，根據情況返回true或false
+    const str5 = '我是pink老師'
+    console.log(str5.includes('pink'))
+
+    // 6.toUpperCase-用於將字母轉換為大寫
+
+    // 7.toLowerCase-用於將字母轉換為小寫
+
+    // 8.indexof-檢測是否包含某字符
+
+    // 9.endsWith-檢測是否以某字符為結尾
+
+    // 10.replace-用於替換字符串，支持正則匹配
+
+    // 11.match-用於查找字符串，支持正則匹配
+
+
+
+
+    // Number常用方法
+    // toFixed()設置保留小位數長度(四捨五入)
+    const num = 10.923
+    console.log(num.toFixed())
+    console.log(num.toFixed(1))
+    
+    const num1 = 10
+    console.log(num1.toFixed(2))
+    
+
+  </script>
+</body>
+
+</html>

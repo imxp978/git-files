@@ -50,16 +50,14 @@
 <body>
     <div class="container">
         <div class="row text-center">
-            <div class="card col-sm-8 mx-auto" style="width: 18rem;">
+            <div class="card col-sm-12 mx-auto">
                 <div class="clockArea">
                     <h5 name="title">Hellow, world!</h5>
                     <div class="digital-clock">00:00:00:AM</div>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">JS測試:系統時鐘小城市</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
+                    <p class="card-text">good time</p>
                     <button class="btn btn-primary">24時制更換</button>
                     <button class="btn btn-success">停止</button>
                     <button class="btn btn-warning">隱藏日期標題</button>
@@ -130,7 +128,7 @@
             document.getElementsByName('title')[0].innerText = dateString;
         }
 
-        // 12/24 switching 
+        // 12/24 switching
         function chgFormat() {
             if (timeFormat == 12) {
                 timeFormat = 24;

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <p>不變色</p>
+  </ul>
+  <script>
+    // 事件委託
+    // 利用事件流特性解決開發需求的知識技巧
+    // 優點:減少註冊次數，提高程序性能
+    // 原理:事件委託其實是利用事件冒泡特點
+        // 給父元素註冊事件，當我們觸發子元素時，會冒泡到父元素身上，從而觸發父元素事件
+    const ul = document.querySelector('ul')
+    ul.addEventListener('click',function(e){
+    console.log(e.target)  // 點擊的那個對象
+    // e.target.style.color = 'red'
+
+    // 只點擊li會變色
+    console.dir(e.target) 
+    // 事件對象.target.tagName 可以獲得真正觸發事件的元素
+    // tagName 大寫
+    if (e.target.tagName === 'LI') {
+      e.target.style.color = 'red'
+    }
+
+    })
+
+  </script>
+</body>
+</html>

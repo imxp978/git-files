@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+// 1.while循環
+  // 在滿足條件期間，重複執行代碼
+  // 條件為true時執行
+
+  // while語法
+    // while (循環條件) {
+    //   重複執行的代碼(循環體)
+    // }
+    
+    // while循環三要素
+        // 1.變量起始值
+        let i = 1
+        // 2.終止條件(沒有終止條件，會造成死循環)
+        while (i <= 3) {  
+          document.write('循環<br>')  
+        // 3.變量變化量(用自增或自減)
+          i++ 
+        }
+
+// 練習
+        let m = 1
+        let num = +prompt('輸入數字')
+        while (m <= num ) {
+          document.write('月薪十萬<br>')
+          m++
+        }
+
+// 練習2 
+        // 1.頁面輸出1-100
+        let num1 = 1
+        while (num1 <= 100) {
+          document.write(`${num1}<br>`)
+          num1++
+        }
+        // 2.計算1-100總和輸出
+        let num2 = 1 //變量起始值
+        let sum = 0  //累加和變量
+        while (num2 <= 100) {
+          // sum = sum + num2
+          sum += num2
+          num2++
+        }
+        document.write(`${sum}`)
+        // 3.計算1-100偶數和
+        let num3 = 1
+        let sum2 = 0
+        while (num3 <= 100) {
+           // 篩選偶數
+          if (num3 %2 === 0) {
+            sum2 += num3
+          }
+          num3++
+        }
+        document.write(sum2)
+
+
+// 2.循環退出
+        // continue 與 break 區別
+        // 1.break 退出整個循環，後續不須使用時 可使用
+        let i2 = 1
+        while (i2 <= 5) {
+          if (i2 === 3) {
+            break  //退出整個循環
+          }
+          console.log(`我要${i2}包子`)
+          i2++
+        }
+        // 2.continue 結束本次循環，繼續下次循環，用於排除或跳過某個選項
+        let i3 = 1
+        while (i3 <= 5) {
+          if (i3 === 3) {
+            i3++
+           continue  //結束本次循環，繼續下次循環
+          }
+          console.log(`我要${i3}包子`) //當i3 === 3 代碼就不再循環
+          i3++  //當i3 === 3 代碼就不再循環
+        }
+
+
+        // 練習
+        // 彈出頁面談框'你愛我嗎' 輸入愛則結束，其餘繼續
+        while (true) {
+          let str = prompt('你愛我嗎')
+          if (str === '愛') {
+            break
+          }
+        }
+  </script>
+</body>
+</html>

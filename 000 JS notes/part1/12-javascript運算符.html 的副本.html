@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    // 1.賦值運算符 += -= *= /=
+    let num = 1
+    // num = num + 1
+    // 採取賦值運算符
+    num += 1
+
+    // 2.一元運算符 +正號,-負號
+    let num2 = 10
+
+    // 符號 ++ 作用:讓變量 + 1
+    // 符號 -- 作用:讓變量 - 1
+    // 前置自增:
+    ++num2
+    // 後置自增:
+    num2++
+    // 前置自增 與 後置自增 單獨使用 無區別
+
+    // 3.比較運算符
+    // > , < , >= ,　<= , == , === , !==
+    console.log(3 > 5)
+    console.log(3 >= 5)
+    console.log(2 == 2)
+
+    // 比較運算符有隱式轉換
+    console.log(2 == '2')
+
+    // === 全等 判斷 值 和 數據類型都一樣
+    // 判斷是否相等 用===
+    console.log(2 === '2')
+    console.log(2 !== '2')
+
+    // NaN不等於任何值 包括本身 涉及NaN 都是fales
+    console.log(NaN === NaN)
+
+    // 1.= 是 賦值
+    // 2.== 是 判斷
+    // 3.=== 是 全等
+
+    // 4.邏輯運算符 
+    // 用於多重條件判斷 
+
+    // 1. && 與 兩邊結果皆為true 才為true
+    console.log(3 < 5 && 3 < 2)
+    console.log(5 > 2 && 5 > 2)
+
+    // 2. || 或 一邊結果為true 即為true
+    console.log(5 > 2 || 5 > 2)
+    console.log(3 < 5 || 3 < 2)
+
+    // 3. ! 取反 true變false , false變true 一元運算符
+    console.log(!true)
+    console.log(!false)
+
+    // 練習
+    let num3 = +prompt('請輸入數字')
+    alert(
+      num3 % 4 === 0 && num3 % 100 !== 0
+      )
+      
+
+    // 5.運算符優先級
+          // 1.()
+          // 2.一元運算符 ++ -- !
+          // 3.算數運算符 + - * /
+          // 4.關係運算符 > >= < <=
+          // 5.相等運算符 == != === !==
+          // 6.邏輯運算符 先&& 後||
+          // 7.賦值運算符 =
+          // 8.逗號運算符 ,
+
+
+
+
+  </script>
+</body>
+
+</html>

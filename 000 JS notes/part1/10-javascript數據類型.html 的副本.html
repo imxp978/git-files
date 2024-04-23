@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+//  1.數字類型-整數、小數、正、負數
+    
+    // 算術運算符
+    console.log(1 + 1) //  +求和 == 2
+    console.log(1 - 1) //  -求差 == 0
+    console.log(1 * 1) //  *求積 == 1
+    console.log(1 / 1) //  /求商 == 1
+
+    console.log(4 % 2) //  %求餘數 == 0
+    console.log(5 % 3) //  %求餘數 == 2
+
+    // NaN-not a number
+    // 任何對NaN 操作 皆返回NaN
+    console.log('老師' - 2)
+
+    // 練習
+    let num = prompt('請輸入圓的半徑')
+    let result = 3.14 * num * num
+    document.write(result)
+
+// 2.字符串類型
+    // 透過 '' , "" ,  ``  包裹的數據皆為字符串
+    let str = 'pink'
+    let str1 = "pink"
+    let str2 = `pink`
+    let str3 = '123123' //使用''符號包裹 視為字符串類型
+    let str4 = '' //視為空字串
+
+    // 字符串拼接- +運算符可用於字符串拼接
+    let str5 = 'pink' + '123123'
+
+// 3.模板字符串
+    // 用於拼接字符串及變量
+    // 語法 - 反引號 ``
+    let age = 18 
+    // 模板字符串 外面用`` 裡面 ${變量}
+    document.write(`我今年${age}歲了`)
+
+// 4.布爾類型boolean
+  // 表示 肯定 及 否定 類型
+  // 固定 true , false 兩個值
+  // true , false 為布爾型字面量
+    let isCool = true
+    console.log(isCool)
+
+// 5.未定義類型undefind
+    // 聲明一個變量 未賦值
+    let num1 //未賦值
+    console.log(num1)
+
+// 6.null空類型
+    let obg = null
+    console.log(obg)
+
+// 7.檢測數據類型 typeof
+    let num2 = 10
+    console.log(typeof num2)
+    let str6 = 'pink'
+    console.log(typeof str6)
+    let flag = false
+    console.log(typeof flag)
+    let un 
+    console.log(typeof un)
+    let obg1 = null
+    console.log(typeof obg1)
+
+// 8.類型轉換
+      // 1.隱式轉換
+        console.log(1 + 1)
+        console.log("123" + 1) 
+    // =console.log("123" + "1")
+
+    console.log(+"123" ) //+號 轉換為數字型
+
+      // 2.顯式轉換-轉換數字型
+        let str7 = '123'
+        console.log(Number(str7))
+        // 1.
+        let num3 = prompt('請輸入年薪')
+        console.log(Number(num3))
+        // 2.
+        let num4 = Number(prompt('請輸入年薪'))
+        // 3.
+        let num5 = +prompt('請輸入年薪')
+
+        // parsIent 只保留整數
+        console.log(parseInt('12px'))  //12
+        console.log(parseInt('abc12px'))  //NaN
+
+        // parsFloat 保留小數點
+        console.log(parseFloat('12.999px'))   //12.999
+        console.log(parseFloat('abc12.999px'))   //NaN
+
+  </script>
+</body>
+</html>

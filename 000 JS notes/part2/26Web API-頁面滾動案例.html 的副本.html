@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+html{
+  /* 讓滾動條添加滑動效果 */
+  scroll-behavior: smooth;
+}
+  </style>
+</head>
+
+<body>
+  <div class="xtx-elevator">
+    <ul class="xtx-elevator-list">
+      <li><a href="javascript:;" data-name="new">新鮮好物</a></li>
+      <li><a href="javascript:;" data-name="popular">人氣推薦</a></li>
+      <li><a href="javascript:;" data-name="brand">熱門品牌</a></li>
+      <li><a href="javascript:;" data-name="topic">最新專題</a></li>
+      <li><a href="javascript:;" id="backtop"><i class="spript"></i>頂部</a></li>
+
+    </ul>
+  </div>
+  <script>
+    // 顯示側邊欄
+    // 當頁面滾動超過300像素，顯示側邊欄
+
+    const elevator = document.querySelector('.xtx-elevator')
+    const entry = document.querySelector('.xtx-entry')
+
+
+    // 1.頁面添加滾動事件
+    window.addEventListener('scroll', function () {
+      const n = document.documentElement.scrollTop
+      // if(n >= entry.offsetTop){
+      //   elevator.style.opacity = 1
+      // }else{
+      //   elevator.style.opacity = 0
+      // }
+      elevator.style.opacity = n >= entry.offsetTop ? 1 : 0
+    })
+
+    // 返回頂部
+    const backtop = document.querySelector('#backtop')
+    backtop.addEventListener('click', function () {
+      document.documentElement.scrollTop = 0
+    })
+
+
+  </script>
+</body>
+
+</html>

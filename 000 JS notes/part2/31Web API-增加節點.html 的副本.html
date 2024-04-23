@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+
+  <ul>
+    <li>第二</li>
+  </ul>
+
+
+  <script>
+
+    const ul = document.querySelector('ul')
+
+    // 增加節點
+    // 1.創建節點
+    // 2.將創建的新節點放到指定元素中
+
+
+    // 1創建節點
+    // 方法:
+    // document.createElement('標籤名')
+    const div = document.createElement('div')
+    const li = document.createElement('li')
+    const li2 = document.createElement('li')
+
+    // 2.追加節點
+    // 2.1插入到父元素中的最後一個子元素
+    // 父元素.appendChild(要插入的元素)
+    document.body.appendChild(div)
+    li.innerHTML = '最後'
+    ul.appendChild(li)
+
+
+    // 2.2插入到父元素中的某一個子元素的前面
+    // 父元素.insertBerore(要插入的元素,在哪一個元素前面)
+    li2.innerHTML = '第一'
+    ul.insertBefore(li2, ul.children[0])
+
+
+
+
+
+  </script>
+</body>
+
+</html>

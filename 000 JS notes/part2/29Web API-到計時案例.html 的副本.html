@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .countdown {
+      width: 240px;
+      height: 305px;
+      text-align: center;
+      line-height: 1;
+      color: #fff;
+      background-color: brown;
+      overflow: hidden;
+    }
+
+    .countdown .next {
+      font-size: 16px;
+      margin: 25px 0 14px;
+    }
+
+    .countdown .title {
+      font-size: 33px;
+    }
+
+    .countdown .tip {
+      margin-top: 80px;
+      font-size: 23px;
+    }
+
+    .countdown small {
+      font-size: 17px;
+    }
+
+    .countdown .clock {
+      width: 142px;
+      margin: 18px auto 0;
+      overflow: hidden;
+    }
+
+    .countdown .clock span,
+    .countdown .clock i {
+      display: block;
+      text-align: center;
+      line-height: 34px;
+      font-size: 23px;
+      float: left;
+    }
+
+    .countdown .clock span {
+      width: 34px;
+      height: 34px;
+      border-radius: 2px;
+      background-color: #303430;
+    }
+
+    .countdown .clock i {
+      width: 20px;
+      font-style: normal;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="countdown">
+
+    <p class="next">今天是2024年3月17日</p>
+
+    <p class="title">下班到計時</p>
+
+    <p class="clock">
+
+      <span id="hour">00</span>
+      <i>:</i>
+      <span id="minutes">00</span>
+      <i>:</i>
+      <span id="second">00</span>
+
+    </p>
+
+    <p class="tip">18:30:00下課</p>
+
+  </div>
+
+
+
+  <script>
+    
+    // 5.封裝函數
+    function getTime() {
+      // 1.得到現在的時間戳
+      const now = +new Date()
+
+      // 2.得到將來的時間戳
+      const last = +new Date('2024-4-1 18:30:00')
+
+      // 得到剩餘的時間戳-轉換為秒數
+      const count = (last - now) / 1000
+
+      // let d = parseInt(count / 60 / 60 / 24)
+      let h = parseInt(count / 60 / 60 % 24)
+      h = h < 10 ? '0' + h : h
+
+      let m = parseInt(count / 60 % 60)
+      m = m < 10 ? '0' + m : m
+
+      let s = parseInt(count % 60)
+      s = s < 10 ? '0' + s : s
+
+      // 3.得到時分秒
+      document.querySelector('#hour').innerHTML = h
+      document.querySelector('#minutes').innerHTML = m
+      document.querySelector('#second').innerHTML = s
+    }
+
+    // 6.先調用，後開啟定時器
+    getTime()
+    setInterval(getTime,1000)
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <p>123</p>
+
+  <script>
+    // 1.throw拋異常
+    function fn(x, y) {
+      if (!x || !y) {
+        console.log(11)
+        // throw '異常'
+        throw new Error('異常')
+      }
+      return x + y
+    }
+    console.log(fn())
+    // 總結:
+    // 1.throw拋出異常訊息，程序也會中止執行
+    // 2.throw後面跟的是錯誤提示訊息
+    // 3.Error對象配合throw使用，能夠設置更詳細錯誤訊息
+
+
+
+    // 2.try / catch 捕獲異常
+    // 通過try / catch 捕獲錯誤訊息
+    function fn2() {
+      try {
+        // 可能發生錯誤的代碼寫到try裡面
+        const p = document.querySelector('.p')
+        p.style.color = 'red'
+      } catch (err) {
+        // err 為形參
+        // 攔截錯誤，提示瀏覽器提供的錯誤訊息
+        // 但不中斷程序
+        console.log(err.message)
+        // 需要加上 return 中斷程序
+        return
+      }
+      finally {
+        // 不管程序對不對
+        // 一定會執行的代碼
+        alert('彈出對話框')
+      }
+      console.log(11)
+    }
+    fn()
+    // 總結:
+    // 1.tyr...catch用於捕獲錯誤訊息
+    // 2.將預估可能發生錯誤的代碼寫在try代碼段中
+    // 3.如果try代碼中出現錯誤後，會執行catch代碼段，並攔截錯誤訊息
+    // 4.finally不管是否有錯誤,都會執行
+
+
+
+    // 3.dubugger
+    // 類似於打斷點
+    
+
+
+  </script>
+</body>
+
+</html>

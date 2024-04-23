@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #999;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <script src="./node_modules/lodash/lodash.min.js"></script>
+  <script>
+    // 防抖(debounce):
+    // 單位時間內，頻繁觸發事件，只執行最後一次
+
+    // 使用場景:
+    // 搜索框搜索輸入:只需用戶最後一次輸入完，在發送請求
+
+    // 練習:鼠標在盒子上移動，裡面的數字就變化一次+1
+    // 鼠標在停止500ms，數字才+1
+
+    // 實現方式:
+    // lodash 提供的防抖處理
+    // 手寫防抖函數
+
+    const box = document.querySelector('.box')
+    let i = 1
+    function mouseMove() {
+      box.innerHTML = i++
+    }
+    // box.addEventListener('mousemove', mouseMove)
+
+    // 利用lodash
+    // 語法:_.debounce(fun,時間)
+    // box.addEventListener('mousemove', _.debounce(mouseMove, 500))
+
+
+    // 防抖函數
+
+    // 核心思路:定時器setTimeout
+    // 1.聲明定時器
+    // 2.當鼠標滑動，判斷有無定時器，有就清除
+    // 3.沒有就開啟，儲存到變量裡面
+    // 4.在定時器裡面調用函數
+
+    function debounce(fn, time) {
+      let timer
+      // return 返回一個匿名函數
+      return function () {
+        if (timer) {
+          clearTimeout(timer)
+        }
+        timer = setTimeout(function () {
+          fn()  //加小括號調用
+        }, t)
+      }
+    }
+    box.addEventListener('mousemove', debounce(mouseMove, 500))
+
+    // debounce(mouseMove,500) 調用函數
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

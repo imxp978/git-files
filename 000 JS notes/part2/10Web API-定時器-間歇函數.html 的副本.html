@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button disabled class="btn">已閱讀用戶協議(60)</button>
+  <script>
+    // 定時器函數-間歇函數
+    // 1.開啟定時器
+    // setInterval(函數名-不加(),間隔時間)
+    // 作用:每間隔一段時間調用這個函數
+    // 間隔單位是毫秒
+    setInterval(function () { console.log('1') }, 1000)
+
+    function fn() {
+      console.log(2)
+    }
+    setInterval(fn, 1000)  //函數不調用 不加()
+
+
+    // 2.關閉定時器
+    // let 變量名 = setInterval(函數名,間隔時間)
+    // clearInterval(變量名)
+    let timer = setInterval(function () { console.log(123) }, 1000)
+    clearInterval(timer)
+
+    // 練習
+    // 按鈕60秒後可以使用
+    // 1.獲取
+    const btn = document.querySelector('.btn')
+    // 獲取button文字時 用inner.HTML
+    // 2.倒計時
+    let i = 60
+    let n = setInterval(function () {
+      i--
+      btn.innerHTML = `已閱讀用戶協議(${i})`
+      if (i === 0) {
+        clearInterval(n) //關閉定時器
+        btn.disabled = false
+      }
+    }, 1000)
+
+  </script>
+</body>
+
+</html>

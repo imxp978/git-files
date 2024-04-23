@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      width: 100%;
+    }
+
+    .item {
+      width: 300px;
+      height: 300px;
+      margin: 10px;
+      background: linear-gradient(#d1e795,#97f7f7);
+      border: 1px solid #000;
+    }
+
+    .list {
+      display: flex;
+      width: 1300px;
+      flex-wrap: wrap;
+      background: linear-gradient(#d1e795,#97f7f7);
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="list">
+    <!-- <div class="item">
+    <img src="" alt="">
+    <p class="name"></p>
+    <p class="price"></p>
+  </div> -->
+  </div>
+
+
+
+  <script>
+    const goodslist = [
+      {
+        id: '4001172',
+        name: 'no.1',
+        price: '289.00',
+        picture: './images/1.jpg'
+      },
+      {
+        id: '4001594',
+        name: 'no.2',
+        price: '288.00',
+        picture: './images/2.jpg'
+      },
+      {
+        id: '4001009',
+        name: 'no.3',
+        price: '109.00',
+        picture: './images/3.jpg'
+      },
+      {
+        id: '4001874',
+        name: 'no.4',
+        price: '488.00',
+        picture: './images/4.jpg'
+      },
+      {
+        id: '4001649',
+        name: 'no.5',
+        price: '139.00',
+        picture: './images/5.jpg'
+      },
+      {
+        id: '4001662',
+        name: 'no.6',
+        price: '255.00',
+        picture: './images/1.jpg'
+      },
+      {
+        id: '4001444',
+        name: 'no.7',
+        price: '2999.00',
+        picture: './images/2.jpg'
+      },
+      {
+        id: '4001239',
+        name: 'no.8',
+        price: '502.00',
+        picture: './images/3.jpg'
+      }
+    ]
+    // 1.利用forEach遍歷數組
+    // 2.利用字符串拼接生成結構添加到頁面中
+    // 注意:傳遞參數時，可以使用對象解構
+
+    // 1.聲明一個字符串變量
+    let str = ''
+    // 2.遍歷數據
+    goodslist.forEach(item => {
+      console.log(item)  //可以得到所有數組對象,對象
+      const { name, price, picture } = item
+      str += `
+      <div class="item">
+      <img src="${picture}" alt="">
+      <p class="name">${name}</p>
+      <p class="price">${price}</p>
+      </div>`
+    })
+    document.querySelector('.list').innerHTML = str
+  </script>
+</body>
+
+</html>

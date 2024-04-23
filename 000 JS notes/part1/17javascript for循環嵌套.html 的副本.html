@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // for(外部聲明循環變量;循環條件;變化值){
+    //   for(內部聲明循環變量;循環條件;變化值){
+    //   循環體
+    //  }
+    // }
+
+    //每天記5個單詞 共三天 
+    // 外層循環打印 第幾天
+      for(let day = 1;day <= 3; day++){
+        document.write(`第${day}天<br>`)
+        // 內部循環打印 第幾個單詞
+        for(let lter = 1; lter <= 5; lter++){
+          document.write(`記住第${lter}單字<br>`)
+        }
+      }
+  </script>
+</body>
+</html>

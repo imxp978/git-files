@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .container {
+      margin: 10px;
+
+    }
+
+    .xtx-form-item {
+      margin: 10px 0;
+    }
+
+    .msg {
+      color: red;
+    }
+
+    .icon-queren {
+      border: 1px solid #000;
+      width: 10px;
+      height: 10px;
+      margin-top: 5px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .icon-queren2 {
+      background-color: green;
+      cursor: pointer;
+    }
+
+    .p150 {
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="xtx-wrapper">
+    <div class="container">
+      <div class="xtx-card">
+
+        <h3>新用戶註冊</h3>
+
+        <form action="" class="xtx-form">
+          <div class="xtx-form-item" data-prop="username">
+            <input type="text" name="username" placeholder="用戶名稱">
+            <span class="msg"></span>
+          </div>
+
+          <div class="xtx-form-item" data-prop="phone">
+            <input type="text" name="phone" placeholder="手機號碼">
+            <span class="msg"></span>
+          </div>
+
+          <div class="xtx-form-item" data-prop="code">
+            <input type="text" name="code" placeholder="短信驗證">
+            <span class="msg"></span>
+            <a href="javascript:;" class="code">發送驗證碼</a>
+          </div>
+
+          <div class="xtx-form-item" data-prop="password">
+            <input type="text" name="password" placeholder="6-20位字母、數字和符號">
+            <span class="msg"></span>
+          </div>
+
+          <div class="xtx-form-item" data-prop="confirm">
+            <input type="text" name="confirm" placeholder="再次輸入">
+            <span class="msg"></span>
+          </div>
+
+          <div class="xtx-form-item p150">
+            <div class="iconfont icon-queren "></div>
+            以閱讀並同意<i>*用戶服務協議*</i>
+          </div>
+
+          <div class="xtx-form-item ">
+            <button class="submit">下一步</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1.發送驗證碼模塊
+    const code = document.querySelector('.code')
+    let flag = true // 透過變量控制點擊時間  節流閥
+    // 1.1點擊事件
+    code.addEventListener('click', function () {
+
+      if (flag) {
+        // 點擊後關閉flag
+        flag = false
+
+        let i = 5
+
+        // 1.4點擊完畢立馬觸發
+        code.innerHTML = `0${i}後重新獲取`
+
+        // 1.2設置時間
+        let timerId = setInterval(function () {
+          i--
+          code.innerHTML = `0${i}後重新獲取`
+          if (i === 0) {
+            clearInterval(timerId)
+            // 1.3重新獲取
+            code.innerHTML = `重新獲取`
+            // 時間到，開啟flag
+            flag = true
+          }
+        }, 1000)
+
+      }
+
+    })
+
+    // 2.表單驗證效果
+
+    // 2.1用戶名驗證-(封裝函數)
+    const username = document.querySelector('[name=username]')
+
+    // 2.1.1change 事件:內容發生變化，觸發事件
+    username.addEventListener('change', verifyName)
+
+    // 2.1.2封裝函數-username
+    function verifyName() {
+      const span = username.nextElementSibling
+      // 2.1.3驗證表單-規則-用戶名
+      const reg = /^[a-zA-Z0-9_-]{6,10}$/
+      if (!reg.test(username.value)) {
+        span.innerHTML = '輸入不合法，請輸入6-10位字母、數字或符號'
+        return false
+      }
+      // 2.1.4用戶名合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 2.2手機驗證
+    const phone = document.querySelector('[name=phone]')
+    phone.addEventListener('change', verifyphone)
+    // 2.2.1封裝函數-phone
+    function verifyphone() {
+      const span = phone.nextElementSibling
+      // 2.2.2驗證表單-規則-手機號
+      const reg = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/
+      if (!reg.test(phone.value)) {
+        span.innerHTML = '輸入不合法，請輸入正確手機號'
+        return false
+      }
+      // 2.2.3手機號合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 2.3驗證碼驗證
+    const codeInput = document.querySelector('[name=code]')
+    codeInput.addEventListener('change', verifycodeInput)
+    // 2.3.1封裝函數-codeInput
+    function verifycodeInput() {
+      const span = codeInput.nextElementSibling
+      // 2.3.2驗證表單-規則-驗證碼
+      const reg = /^\d{6}$/
+      if (!reg.test(codeInput.value)) {
+        span.innerHTML = '輸入不合法'
+        return false
+      }
+      // 2.3.3驗證碼合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 2.4密碼驗證
+    const password = document.querySelector('[name=password]')
+    password.addEventListener('change', verifypassword)
+    // 2.4.1封裝函數-password
+    function verifypassword() {
+      const span = password.nextElementSibling
+      // 2.4.2驗證表單-規則-密碼
+      const reg = /^[a-zA-z0-9-_]{6,20}$/
+      if (!reg.test(password.value)) {
+        span.innerHTML = '輸入不合法'
+        return false
+      }
+      // 2.4.3密碼合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 2.5再次密碼驗證
+    const confirm = document.querySelector('[name=confirm]')
+    confirm.addEventListener('change', verifyconfirm)
+    // 2.4.1封裝函數-password
+    function verifyconfirm() {
+      const span = confirm.nextElementSibling
+      // 2.4.2驗證表單-規則-再次密碼
+      const reg = /^[a-zA-z0-9-_]{6,20}$/
+      if (confirm.value !== password.value) {
+        span.innerHTML = '輸入不一致'
+        return false
+      }
+      // 2.4.3再次密碼合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 3.同意模塊
+    const agree = document.querySelector('.icon-queren')
+    agree.addEventListener('click', function () {
+      this.classList.toggle('icon-queren2')
+    })
+
+    
+    // 4.表單提交模塊
+    const form = document.querySelector('form')
+    // 4.1同意區塊
+    form.addEventListener('submit', function (e) {
+      // classList.contains()檢測有沒有包含這個類
+      // 有返回true，沒有返回false
+      if (!agree.classList.contains('icon-queren2')) {
+        alert('請勾選同意')
+        //  阻止提交表單
+        e.preventDefault()
+      }
+      // 4.2 input檢測
+      // console.log(verifyName())
+
+      // 只要false就不提交
+      if (!verifyName()) e.preventDefault()
+      if (!verifyphone()) e.preventDefault()
+      if (!verifycodeInput()) e.preventDefault()
+      if (!verifypassword()) e.preventDefault()
+      if (!verifyconfirm()) e.preventDefault()
+    })
+  </script>
+</body>
+
+</html>

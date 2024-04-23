@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 300px;
+      height: 40px;
+      text-align: center;
+      border: 1px solid pink;
+      line-height: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+
+
+  <script>
+    // 日期對象-表示時間的對象
+    // 作用:得到當前系統時間
+
+    // 在代碼中發現new關鍵字時，一般稱之為實例化
+    // 創建一個時間並獲取時間
+
+    // 獲得時間
+    const date = new Date()
+    console.log(date)
+    // 指定時間
+    const date1 = new Date('2024-5-1 8:30:30')
+    console.log(date1)
+
+    // 日期對象方法
+    // getFullYear() 獲得年份-四位數年份
+    // getMonth() 獲得月份-取值為0~11
+    // getDate() 獲取月份中的每一天-不同月份取值不同
+    // getDay() 獲取星期-取值為0~6
+    // getHours() 獲取小時-取值為0~23
+    // getMinutes() 獲取分鐘-取值為0~59
+    // getSeconds() 獲取秒-取值為0~59
+
+    console.log(date.getFullYear())
+    console.log(date.getMonth() + 1) //需要加1
+    console.log(date.getDate())
+    console.log(date.getDay()) //返回星期-星期天為0
+
+    // 練習
+    const div = document.querySelector('div')
+    function getMyDate() {
+      const date = new Date()
+
+      // 補零
+      let h = date.getHours()
+      h = h < 10 ? '0' + h : h
+
+      let m = date.getMinutes()
+      m = m < 10 ? '0' + m : m
+
+      let s = date.getSeconds()
+      s = s < 10 ? '0' + s : s
+
+
+      return `今天是: ${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}號 ${h}:${m}:${s}`
+    }
+
+    // 頁面刷新顯示
+    div.innerHTML = getMyDate()
+
+    // 每隔時間刷新
+    setInterval(function(){
+      div.innerHTML = getMyDate()
+    },1000)
+
+
+    // 方法2
+    // div.innerHTML= date.toLocaleString()
+    // 2024/3/17 00:00:00
+
+    // 方法3
+    // div.innerHTML= date.toLocaleDateString()
+    // 2024/3/17
+    
+    // 方法3
+    // div.innerHTML= date.toLocaleTimeString()
+    // 2024/3/17
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -101,11 +101,17 @@
           clickAlert: function () {
             alert("被觸發了");
           },
-          numPlus: function (num) {
-            num.cash += 100;
+          numPlus: function (item) {
+            item.cash += 100;
           },
         },
-        mounted: function () {},
+        mounted: function () {
+          console.log(this.text)
+          console.log(this.name)
+          console.log(this)
+          this.text = '您好呢?'
+          // AJAX取得的資料放這邊
+        },
       }).mount("#app");
     </script>
   </body>

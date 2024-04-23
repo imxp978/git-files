@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.數組(Array) 按順序保存 數據類型
+      // 聲明語法
+      // let 數組名 = ['數據1','數據2',....'數據N']
+      
+      // 取值語法
+      // 數組名[下標]
+
+      // 術語
+      // 元素:數組中保存的每個數據
+      // 下標:數組中數據的編號
+      // 長度:數組中數據的各數，透過數組的lenght屬性獲得
+
+      // 遍歷數組
+      // 遍歷輸出數組每個元素
+          // 使用循環把數組中每隔元素訪問到,一般使用for循環
+          // 語法
+          // for (i = 0;i < 數組名.length ; i++){
+
+          // }
+
+            // 練習-求數組[2,6,1,7,4] 和 及 平均
+          let arr = [2,6,1,7,4]
+          let sum = 0
+          for(i = 0;i < arr.length; i++){
+            // sum = sum + arr[i]
+            sum += arr[i] //數組寫法
+          }
+          document.write(`${sum}<br>`)
+          document.write(sum / arr.length)
+
+          // 求數組最大及最小
+          // 1.最大
+          let arr2 = [2,6,1,77,52,25,7]
+          let sum2 = arr2[0] //寫在循環外面，否則數值會被循環賦予 arr2[0] 
+          for(j = 0; j < arr2.length; j++){
+            if (sum2 < arr2[j]) {
+              sum2 = arr2[j]
+            }
+          }
+          document.write(sum2)
+          // 2.最小
+          let sum3 = arr2[0] //寫在循環外面，否則數值會被循環賦予 arr2[0] 
+          for(j = 0; j < arr2.length; j++){
+            if (sum3 > arr2[j]) {
+              sum2 = arr2[j]
+            }
+          }
+          document.write(sum3)
+  </script>
+</body>
+</html>

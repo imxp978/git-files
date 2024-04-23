@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 50px;
+      height: 50px;
+      background-color: #333;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="box">123</div>
+  <div class="box">abc</div>
+  <p id="nav">導航欄</p>
+  <ul class="nav">
+    <li>測試1</li>
+    <li>測試2</li>
+    <li>測試3</li>
+  </ul>
+  <script>
+    // 1.根據CSS選擇器來獲取DOM元素
+    // 選擇匹配的第一個元素
+    // 語法
+    // document.querySelector('CSS選擇器')
+    // const box = document.querySelector('div')
+    const box = document.querySelector('.box')
+    console.log(box)
+    
+    const nav = document.querySelector('#nav')
+    console.log(nav)
+
+    // 獲取第1個li
+    const li = document.querySelector('ul li:first-child')
+    console.log(li)
+
+    // 參數:包含一個或多個有效的CSS選擇器 字符串
+
+    // 返回值:CSS選擇器匹配的 第一個元素,一個HTMLElement對象
+    // 如果沒有匹配到,則返回null
+    // 可以做修改
+
+    // 2.選擇匹配的多個元素
+    // 語法
+    // document.querySelectorAll('CSS選擇器')
+    // 返回值:CSS選擇器匹配的Nodelist 對象集合-數組
+    const allLi = document.querySelectorAll('ul li')
+    console.log(allLi)
+    // 不可直接修改
+
+    // document.querySelectorAll('CSS選擇器')
+    // 得到的是 一個偽數組:
+      // 1.有長度有索引號的數組
+      // 2.但沒有pop(),push()等數組方法
+      // 3.想要得到裡面的每一個對象,則需要遍歷(for)的方式獲得
+
+      // 1.獲取元素
+      const lis = document.querySelectorAll('.nav li')
+      // console.log(lis)
+      for (let i = 0;i < lis.length;i++){
+        console.log(li[i]) //每個li對象
+      }
+
+      // 透過 querySelectorAll()獲取的,都是一個偽數組
+
+
+
+  </script>
+</body>
+
+</html>

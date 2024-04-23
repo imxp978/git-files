@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //學生分數數組 求學生分數總分
+    function getArrSum( arr = [] ){
+      let sum = 0
+      for (let i = 0;i < arr.length ; i++){
+        sum += arr[i] //***
+      }
+      console.log(sum); //***
+    }
+    getArrSum([1,2,3,4,5])
+
+    // 實參變量
+    // 求n-m累加和
+    function getSum(n = 0,m = 0){
+      let sum = 0
+      for(i = n;i < m ;i++){
+        sum += i
+      }
+      console.log(sum)
+    }
+    let num1 = +prompt('數字1')
+    let num2 = +prompt('數字2')
+    getArrSum(num1,num2)
+
+
+
+
+  </script>
+</body>
+</html>

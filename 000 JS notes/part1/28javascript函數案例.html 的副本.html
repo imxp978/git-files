@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 練習-用樹輸入秒數 轉換時分秒
+
+    // 1.用戶輸入時間
+    let sceond = +prompt('請輸入秒數')
+
+    // 2.計算時分秒，裡面包含補0
+    function getTime(t){
+
+       let h =parseInt(t / 60 / 60 % 24)
+       let m =parseInt(t / 60 % 60)
+       let s =parseInt(t % 60)
+
+       h = h < 10 ? '0' + h : h  //記住重新賦值
+       m = m < 10 ? '0' + m : m  //記住重新賦值
+       s = s < 10 ? '0' + s : s  //記住重新賦值
+       return `轉換後為${h}小時${m}分${s}秒`
+    }
+
+    // 3.打印輸出
+    let str = getTime(sceond)
+    document.write(str)
+
+
+// ***計算公式:計算時分秒***
+// 1.時
+// h=parseInt(總秒數 / 60 / 60 % 24)
+
+// 2.分
+// m=parseInt(總秒數 / 60 % 60)
+
+// 3.秒
+// s=parseInt(總秒數 % 60)
+
+  </script>
+</body>
+
+</html>

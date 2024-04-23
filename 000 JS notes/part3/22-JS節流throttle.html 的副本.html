@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #999;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <script src="./node_modules/lodash/lodash.min.js"></script>
+  <script>
+    // 節流(throttle):時間單位內頻繁觸發事件，只執行一次
+    // 使用場景:高頻事件mousemove,resize,scroll
+
+    // 練習:鼠標在盒子上移動，不管多少次 500ms 才+1
+    // 實現方法
+    // 1.lodash
+    // 2.手寫
+    const box = document.querySelector('.box')
+    let i = 1
+    function mouseMove() {
+      box.innerHTML = i++
+    }
+
+    // 1.lodash
+    // box.addEventListener('mousemove',_.throttle(mouseMove,3000))
+
+
+
+    // 2.節流函數
+    // 核心思路:定時器setTimeout
+    // 1.聲明定時器
+    // 2.當鼠標滑動，判斷有無定時器，有就不開啟
+    // 3.沒有就開啟，儲存到變量裡面
+    // 4.在定時器裡面調用函數
+    // 5.定時器裡面要把定時器清空
+    function throttle(fn, time) {
+      let timer = null
+      return function () {
+        if (!timer) {
+          timer = setTimeout(function () {
+            fn()
+            timer = null
+            // 在setTimeout裡面市府法刪除定時器的，因為定時器還在運作，所以使用 timer = null
+          }, time)
+        }
+      }
+    }
+    box.addEventListener('mousemove', throttle(mouseMove, 500))
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

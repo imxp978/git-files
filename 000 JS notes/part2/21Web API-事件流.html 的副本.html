@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      width: 200px;
+      height: 200px;
+      background-color: aqua;
+    }
+
+    .son {
+      width: 100px;
+      height: 100px;
+      background-color: bisque;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="father">
+    <div class="son"></div>
+  </div>
+
+  <form action="http://www.yahoo.com">
+    <input type="submit" value="註冊">
+  </form>
+
+  <script>
+    // 事件流
+    // 事件完整執行過程中的流動路徑
+
+    // 1.補獲階段
+
+    // 2.冒泡階段
+    // 當一個元素觸發事件後，會依次向上調用所有父級元素的同名事件
+
+    // 阻止冒泡
+    // 若想打事件限制在當前元素，就需阻止事件冒泡
+    // 前提:必須先拿到事件對象
+    // 語法
+    // 事件對象.stopPropagation()
+    // 阻止事件流動
+
+    const fa = document.querySelector('.father')
+    const son = document.querySelector('.son')
+    // document.addEventListener('click', function () {
+    //   alert('爺爺')
+    // })
+    fa.addEventListener('click', function () {
+      alert('爸爸')
+    })
+    son.addEventListener('click', function (e) {
+      alert('兒子')
+      // 阻止冒泡  事件對象.stopPropagation()
+      e.stopPropagation()
+    })
+
+    
+    // 阻止默認行為
+    // 語法
+    // e.preventDefault()
+      const form = document.querySelector('form')
+      form.addEventListener('submit',function(e){
+        e.preventDefault()
+      })
+  </script>
+</body>
+
+</html>

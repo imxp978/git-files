@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>後退</button>
+  <button>前進</button>
+  <script>
+
+    // navigator對象
+    // 1.userAgent-檢測用戶瀏覽器版本
+    // navigator.userAgent
+
+    // history對象
+    // 主要管理歷史紀錄
+    // 1.back()-後退
+    // 2.forwand()-前進
+    // 3.go(參數)-前進後退功能，如果是1就前進，-1後退
+    const back = document.querySelector('button:fist-child')
+    const forward = back.nextElementSibling
+    
+    back.addEventListener('click', function () {
+      history.back
+      // history.go(-1)
+
+    })
+    forward.addEventListener('click', function () {
+      history.forward
+      // history.go(1)
+
+    })
+
+  </script>
+</body>
+
+</html>

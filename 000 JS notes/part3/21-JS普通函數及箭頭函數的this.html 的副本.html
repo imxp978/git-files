@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>點擊</button>
+
+  <script>
+    // this
+    // 1.this指向
+
+    // 普通函數的this指向-調用者
+    // 普通函數沒有明確的調用者時，this指向window
+    console.log(this)  //window
+
+    function fn() {
+      console.log(this)  //window
+    }
+
+    setTimeout(function () {
+      console.log(this)  //window
+    }, 1000)
+
+    document.querySelector('button').addEventListener('click', function () {
+      console.log(this)  //button
+    })
+
+    const obj = {
+      sayHi: function () {
+        console.log(this)  //obj
+      }
+    }
+    obj.sayHi()
+
+
+    // 箭頭函數不受調用方式影響
+    // 箭頭函數會默認綁定外層this的值
+    // 會引用最近作用域的this
+    // 向外層作用域查找，直到有this的定義
+
+    // 箭頭函數不適用:構造函數、圓形函數、dom事件函數、字面量對象中函數
+
+
+    // 2.改變this指向
+    // 三種方法改變this指向
+    // 1.call()
+    // 使用call方法調用函數，同時指定被調用函數中this的值
+
+    // 語法:
+    // fun.call(thisArg,arg1,arg2,...)
+
+    // 1.thisArg:在fun函數中運行時指定的this值
+    // 2.arg1,arg2:傳遞的其他參數
+    // 3.返回值就是函數的返回值
+    const obj2 = {
+      uname: 'pink'
+    }
+
+    function fun(x, y) {
+      console.log(x + y)
+      console.log(this) //window
+    }
+
+    fun.call(obj2, 1, 2)
+
+
+
+
+    // 2.apply()
+    // 語法:
+    // fun.apply(thisArg,[argArray])
+    // 1.thisArg:在fun函數中運行時指定的this值
+    // 2.argArray:傳遞的值，必須包含在數組裡面
+    // 3.返回值就是函數的返回值
+    fun.apply(obj2, [1, 2])
+    // apply主要跟數組有關，比如使用Math.max()求數組最大值
+    const arr = [100, 100, 200, 300]
+    const max = Math.max.apply(null, arr)
+    console.log(max)
+
+
+
+
+    // 3.bind()
+    // 不會調用函數，但是能改變函數內部this指向
+    // 語法:
+    // fun.bind(thisArg, arg1, arg2)
+
+    // 不調用函數
+    const fun1 = fun.bind(obj2, 1, 2)
+    fun1()
+    // 1.thisArg:在fun函數中運行時指定的this值
+    // 2.arg1,arg2:傳遞的其他參數
+    // 3.返回值由指定的this值和初始化參數改造的 原函數拷貝(新函數)
+    // 因此我們只想改變ˋthis指向，並且不想調用這個函數時，可以使用bind，比如改變定時器內部的this指向
+
+
+    // 需求 有一個按鈕，點擊裡面就禁用，2秒鐘後開啟
+    document.querySelector('button').addEventListener('click', function () {
+      this.disabled = true
+      setTimeout(function(){
+        // window 調用定時器
+        this.disabled = false
+        // 改變this指向
+      }.bind(this), 2000)
+    })
+
+
+
+    // 總結
+    
+    // 1.相同點
+    // 改變this指向
+
+    // 2.區別點
+    // call 和 apply 會調用函數
+    // call 和 apply 傳遞參數不一樣
+    // call傳遞參數arg1,arg2..形式
+    // apply必須數組形式
+    // bind不會調用函數
+
+    // 主要應用場景
+    // call調用函數並可以傳遞參數
+    // apply經常與數組相關
+    // bind不調用函數，但可以改變指向
+
+
+
+  </script>
+</body>
+
+</html>

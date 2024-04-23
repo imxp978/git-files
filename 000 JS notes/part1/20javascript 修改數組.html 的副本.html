@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+      // 修改數組
+      // 數組[下標]=新數值
+      let arr = []
+      arr[0] = 10
+      arr[1] = 15
+      console.log(arr[0])
+
+      let arr2 = [10,20,30,40,50]
+      arr[0] = 80
+      arr[2] = 100
+      console.log(arr[2])
+
+      // 修改全修改
+      let arr3 = [10,20,30,40]
+      for (i = 0; i < arr3.length; i++){
+        arr3[i] = arr3[i]+'元'
+      }
+      console.log(arr3);
+
+
+      // 新增數組
+      // push() 將一個或多個添加到數組末尾 *並返回數組長度*
+      // 語法
+      // 數組.push(元素1,元素2,...元素n)
+      let arr4 = [10,20,30,40,50,60]
+      arr4.push(70,80,90)
+      console.log(arr4);
+      // console.log(arr4.push(100))
+
+      // unshift() 將一個或多個添加到數組開頭 *並返回數組長度*
+      // 語法
+      // 數組.unshift(元素1,元素2,...元素n)
+      arr4.unshift(0,-10,-20)
+      console.log(arr4);
+      // console.log(arr4.unshift(-30))
+
+      // 練習
+        // 數組篩選
+        // [2,0,6,1,77,0,50,25,7]篩選大於10 放入新數組
+        arr5 = [2,0,6,1,77,0,50,25,7]
+        arr6 = []
+        num = arr5[0]
+        for(i = 0;i < arr5.length; i++){
+          if(arr5[i] > 10){
+            arr6.push(arr5[i])
+          }
+        }
+        document.write(arr6)
+
+
+
+
+      
+      // 刪除數組
+      let arr7 = [1,2,3,4,5,6,8,9]
+         // pop() 刪除數組最後一個元素 *並返回刪除元素*
+      // 語法
+      // 數組.pop()
+          arr7.pop()  //刪除最後一個
+
+       // shift() 刪除數組第一個元素 *並返回刪除元素*
+      // 語法
+      // 數組.shift()
+          arr7.shift()  //刪除第一個
+
+       // splice() 刪除數組指定元素
+      // 語法
+      // 數組.shift(起始位置,刪除幾個元素)
+      // 若無指定刪除個數,會刪除到最後
+          arr7.slice(3,1)  //刪除指定元素
+
+
+        
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

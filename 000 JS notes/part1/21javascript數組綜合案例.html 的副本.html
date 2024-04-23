@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 練習
+    // 1.四次彈框
+    // 2.聲明數組
+    let arr = []
+    for (i = 1; i <= 4; i++) {
+      // let num = prompt(`請輸入入第${i}次`)
+      // arr.push(num)
+      arr.push(prompt(`請輸入入第${i}次`))
+    }
+    // 3.遍歷數組
+      for (i = 0;i <arr.length;i++){
+        document.write(
+          `<div style="height: ${arr[i]}px;">
+            <span>${arr[i]}</span>            
+              <h4>第${i+1}季度</h4>
+              `)
+      }
+
+      // 冒泡排序
+      // 1.外層排序:五個數排序四次
+      let arr2 = [1,2,3,4,5]
+      for (i=0;i<arr2<length-1;i++){
+        // 內層排序次數從0開始，arr.length-j-1
+        for(j = 0;j < arr2.length-j-1;j++){
+          // 交換變量
+          if(arr2[j] > arr2[j+1]){
+            let temp = arr2[j]
+            arr2[j] = arr2[j+1]
+            arr2[j+1] = temp
+          }
+        }
+      }
+
+      // arr2.sort() 
+      //sort排序-升序
+      arr.sort(function (a,b){
+        return a - b
+      })
+      //sort排序-降序
+      arr.sort(function (a,b){
+        return b - a
+      })
+
+
+
+  </script>
+</body>
+
+</html>

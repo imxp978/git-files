@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 對象(object):一種數據類型
+    // 一種 無序 的 數據集合
+
+    // 對象使用-保存多個數據
+    // 對象聲明語法
+    // 1.let 對象名 = {}
+    // 2.let 對象名 = new Object()
+
+    // 對象由屬性及方法組成
+    // let 對象名 = 
+    // {
+    //   屬性名:屬性值,
+    //   方法名:函數
+    // }
+    let obj =
+    {
+      uname: 'AA',   //屬性名:屬性值
+      age: 18,       //屬性名:屬性值
+      gender: '男'   //屬性名:屬性值
+
+    }
+
+
+    // 練習
+    let goods = {
+      name: '小米10青春版',
+      'goods-name': '小米青春版',
+      num: 100012816024,
+      weight: '0.55kg',
+      address: '中國大陸'
+    }
+
+    // 對象使用:增刪改查-語法
+
+    // 1.查-語法
+    // 1.對象名.屬性名
+    console.log(goods.name)
+    // 2.對象名['屬性名']--(屬性名為字符串)
+    console.log(goods['goods-name'])
+
+    // 2.改-語法
+    // 對象名.屬性名=新值
+    goods.name = '中國'
+    console.log(goods)
+
+    // 3.增-語法
+    // 對象名.新屬性=新值
+    goods.price = '$3890'
+    console.log(goods)
+
+    // ***4.刪-語法(理解即可)
+    delete goods.name
+    console.log(goods)
+
+    //對象使用-方法
+    let obj2 = {
+      uname: '劉德華',
+      // 方法
+      song: function (x, y) {
+        console.log('冰雨')
+        console.log(x + y)
+      }
+    }
+    // 方法調用
+    // 對象名.方法名(實參)
+    obj2.song(1, 2)
+
+    // 練習-對象唱歌跳舞
+    let obj3 = {
+      uname: 'aa',
+      singDance: function () {
+        document.write('唱歌跳舞')
+      }
+    }
+    obj3.singDance()
+  </script>
+</body>
+
+</html>

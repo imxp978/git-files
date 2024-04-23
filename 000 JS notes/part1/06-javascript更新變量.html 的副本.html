@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+  
+    let age = 18
+
+    //更新變量
+    age = 19
+    console.log(age)
+
+    // 錯誤情況:重新聲明(let)
+    // let 相同變量僅能聲明一次,不允許多次聲明
+    // let age =18 -出錯
+
+
+    // 聲明多個變量,用逗號分隔
+    let age2 = 18, uname='老師'
+    console.log(age2,uname)
+
+
+    // 練習
+    // 1.用戶輸入
+    // 2.內部處理,保存數據
+    let uname2 = prompt('請輸入姓名')
+    
+    // 3.打印輸出
+    document.write(uname2)
+
+    // 案例-交換變量
+    //使用臨時變量作為中間儲存
+    let num1 = 10
+    let num2 = 20
+    let temp = num1 /*設置臨時變量，將num1設置給temp*/
+    num1 = num2/*將unm2設置給num1*/
+    num2 = temp/*將temp設置給num2
+    */
+    console.log(num1, num2)
+  </script>
+
+</body>
+</html>

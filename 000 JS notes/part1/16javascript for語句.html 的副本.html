@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //for循環
+    // 1.語法
+    // for (變量起始值; 終止條件;變量變化量) { 循環體 }
+    for (let i = 1; i <= 3; i++) {
+      document.write('月薪過萬<br>')
+    }
+    for (let o = 1; o <= 10; o++) {
+      document.write('月薪過萬<br>')
+    }
+
+    // 1.練習 循環1-100
+    for (let num = 1; num <= 100; num++) {
+      document.write(`今年我${num}歲<br>`)
+    }
+    // 2.練習 循環1-100 偶數和
+    let sum = 0
+    for (let num2 = 1; num2 <= 100; num2++) {
+      if (num2 % 2 === 0) {
+        sum += num2
+      }
+    }
+    document.write(sum) //求和寫在循環外面
+    
+    // 3.練習 頁面打印五個星星
+    // for (let p = 1; P <= 5; p++) {
+    //   document.write('★')
+    // }
+
+    // 4.練習 打印數組
+    let arr = ['黃', '林', '陳', '張', '葉']
+    // arr.length-1 數組長度-1
+    // 遍歷數組
+    for (u = 0; u <= arr.length-1; u++) {
+      document.write(`${arr[u]}`)
+    }
+
+    // 2.退出循環
+    for (let y = 1; y <= 5; y++){
+      if(y === 3){
+        continue   //退出本次循環 ，直奔y++
+      }
+      console.log(y);
+    }
+    for (let t = 1; t <= 5; t++){
+      if(t === 3){
+        break   //退出循環
+      }
+      console.log(t);
+    }
+    // for(;;){}無限循環(死循環)
+
+    // for循環 與 while循環 區別
+    // 1.有明確循環次數使用for
+    // 2.不明確循環次數使用while
+
+  </script>
+</body>
+
+</html>

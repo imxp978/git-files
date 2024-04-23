@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.箭頭函數
+    // 箭頭函數不綁定this
+    // 箭頭函數語法比函數表達式更簡潔
+    // 箭頭函數更適用於那些本來需要 匿名函數 的地方
+    // 箭頭函數 屬於表達式函數，不存在函數提升
+
+
+
+    // 2.語法
+    // 2.1.基本語法
+    const fn = function () {
+      console.log(123)
+    }
+
+    // 2.2箭頭函數 語法
+    const fn2 = () => {
+      console.log(123)
+    }
+    //箭頭函數 調用方法
+    fn2()
+
+    // 2.3若只有一個形參，可以省略小括號
+    const fn3 = x => {
+      console.log(x)
+    }
+    fn3(x)
+
+    // 2.4若只有一行代碼，可以省略大括號
+    const fn4 = x => console.log(x)
+    fn4(x)
+
+    // 2.5若只有一行代碼，可以省略return
+    const fn5 = x => x + x
+    console.log(fn5(x))
+
+    // 2.6箭頭函數可以直接返回一個對象
+    // 大括號為對象的括號
+    // 需要用小括號包裹
+    // 加括號的函數體返回對象字面量表達式
+    const fn6 = uname => ({ uname: uname })
+    console.log(fn6('劉德華'))
+
+
+
+    // 3.箭頭函數參數
+    // 箭頭函數沒有arguments動態參數
+    // 但是有 剩餘參數 ...args
+    const fn7 = (...args) => {
+      let sum = 0
+      for (let i = 0; i < args.length; i++) {
+        sum += arr[i]
+      }
+      return sum
+    }
+    const result = fn7(2, 3)
+    console.log(result)
+
+
+
+    // 4.箭頭函數this
+    // 4.1.普通函數
+    // 誰調用函數，this就指向誰
+    function fn8() {
+      console.log(this)  //指向window
+    }
+    wondow.fn8()
+
+    const obj = {
+      name: 'andy',
+      sayHi: function () {
+        console.log(this)  //指向obj
+      }
+    }
+    obj.sayHi()
+
+    // 4.2.箭頭函數不會創建自己得this，他只會從自己的作用域鏈的上一層沿用this
+    const fn9 = () => {
+      console.log(this) //指向window
+    }
+    fn9()
+    //因為此作用域的上一階層為window，股指向window
+
+    // 對象方法的箭頭函數 this
+    const obj2 = {
+      uname: 'andy',
+      sayHi: () => {
+        console.log(this)  //this 指向window
+      }
+    }
+    obj2.sayHi()
+    // 由於obj是window調用，所以this還是指向window
+
+    const obj3 = {
+      uname: 'andy',
+      sayHi: function () {
+        console.log(this)  //指向obj
+        let i = 10
+        const count = () => {
+          console.log(this)  //指向obj
+          // 由於上層普通函數有this，故指向obj
+        }
+        count()
+      }
+    }
+    obj3.sayHi()
+
+
+  </script>
+</body>
+
+</html>

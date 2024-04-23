@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .slider {
+      width: 560px;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .slider-wrapper {
+      width: 100%;
+      height: 320px;
+    }
+
+    .slider-wrapper img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .slider-footer {
+      height: 80px;
+      background-color: rgb(100, 67, 68);
+      padding: 12px 12px 0 12px;
+      position: relative;
+    }
+
+    .slider-footer .toggle {
+      position: absolute;
+      right: 0;
+      top: 12px;
+      display: flex;
+    }
+
+    .slider-footer .toggle button {
+      margin-right: 12px;
+      width: 28px;
+      height: 28px;
+      appearance: none;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .slider-footer .toggle button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .slider-footer p {
+      margin: 0;
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .slider-indicator {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .slider-indicator li {
+      width: 8px;
+      height: 8px;
+      margin: 4px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.4;
+      cursor: pointer;
+    }
+
+    .slider-indicator li.active {
+      width: 12px;
+      height: 12px;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slider">
+    <div class="slider-wrapper">
+      <img src="./images/1.jpg" alt="">
+    </div>
+    <div class="slider-footer">
+      <p>11111</p>
+      <ul class="slider-indicator">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div class="toggle">
+        <button class="prev">&lt;</button>
+        <button class="next">&gt;</button>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const sliderData = [
+      { url: './images/1.jpg', title: '11111', color: 'rgb(100,67,68)' },
+      { url: './images/2.jpg', title: '22222', color: 'rgb(43,35,26)' },
+      { url: './images/3.jpg', title: '33333', color: 'rgb(36,31,33)' },
+      { url: './images/4.jpg', title: '44444', color: 'rgb(67,92,90)' },
+      { url: './images/5.jpg', title: '55555', color: 'rgb(53,29,25)' }
+    ]
+    // 1.next按鈕
+
+    // 1.1.獲取元素
+    const img = document.querySelector('.slider-wrapper img')
+    const p = document.querySelector('.slider-footer p')
+    const footer = document.querySelector('.slider-footer')
+    const next = document.querySelector('.next')
+    // 1.2.點擊事件
+
+    let i = 0  //控制播放-全局變量
+
+    next.addEventListener('click', function () {
+      i++
+      // 1.5判斷條件-歸零 
+      if (i >= sliderData.length) {
+        i = 0
+      }
+      // 調用函數
+      toggle()
+    })
+    // 2.prev按鈕
+    const prev = document.querySelector('.prev')
+
+    prev.addEventListener('click', function () {
+      i--
+      // 1.5判斷條件-歸零 如過小於0 則回到最後一張圖片(lenght-1)
+      if (i < 0) {
+        i = sliderData.length - 1
+      }
+      // 調用函數
+      toggle()
+    })
+
+    function toggle() {
+      // 1.3渲染頁面
+      img.src = sliderData[i].url
+      p.innerHTML = sliderData[i].title
+      footer.style.backgroundColor = sliderData[i].color
+
+      // 1.4圓點-移除當前類別 當前li再添加類別
+      document.querySelector('.slider-indicator .active').classList.remove('active')
+
+      document.querySelector(`.slider-indicator li:nth-child(${i + 1})`).classList.add('active')
+    }
+
+    // 自動播放
+    let timeID = setInterval(function(){
+      // 利用JS自動點擊事件
+      next.click()
+    },1000)
+    const slider = document.querySelector('.slider')
+
+    slider.addEventListener('mouseenter',function(){
+      // 停止計時器
+      clearInterval(timeID)
+    })
+
+    slider.addEventListener('mouseleave',function(){
+
+      // 停止計時器--先關在開
+      clearInterval(timeID)
+
+      // 開啟定時器
+      timeID = setInterval(function(){
+      // 利用JS自動點擊事件
+      next.click()
+    },1000)
+    })
+
+
+
+
+  </script>
+</body>
+
+</html>

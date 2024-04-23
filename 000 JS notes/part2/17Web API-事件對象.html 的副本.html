@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>點擊</button>
+  <input type="text">
+  <script>
+    // 獲取事件對象
+    // 也是個對象，裡面有事件觸發時的相關訊息
+
+    // 使用場景
+    // 1.判斷用戶按下哪個按鍵
+    // 2.判斷鼠標點擊了哪個元素
+
+    // 語法:如何獲取
+    // 1.事件綁定的回調函數的第一個參數就是事件對象
+    // 2.一般命名為event、ev、e
+    // 元素.addEventListener('click',function( e ) {  })
+    const btn = document.querySelector('button')
+    btn.addEventListener('click', function (e) {
+      console.log(e)
+    })
+
+    // 事件對象屬性
+    // 部分常用屬性
+    // 1.type 當前事件類型
+    // 2.clientX/clientY 鼠標位置-瀏覽器可見窗口左上角的位置
+    // 3.offsetX/offsetY 鼠標位置-2; 當前DOM元素左上角的位置
+
+    // 4.Key 用戶按下鍵盤鑑的值
+    const input = document.querySelector('input')
+    input.addEventListener('keyup', function (e) {
+      console.log(e.key)
+
+      if (e.key === 'enter') {
+        console.log('enter')
+      }
+
+    })
+  </script>
+</body>
+
+</html>

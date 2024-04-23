@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const arr = ['red', 'yellow', 'green', 'blue']
+
+    // 字符串拼接新思路:
+    // 利用map()和join()數組方式實現字符串拼接
+
+    // 1.map可以遍歷數組處裡數據，並返回新的數組
+    // 語法:
+    const newArr = arr.map(function (ele, index) {
+      console.log(ele)  //數組元素
+      console.log(index)  //數組索引號
+      return ele + '顏色'
+    })
+    console.log(newArr) //['red顏色', 'yellow顏色', 'green顏色', 'blue顏色']
+
+    // map重點在於有返回值，forEach沒有返回值
+
+
+    // 2.join可以把數組中的所有元素轉換成一個字符串
+    console.log(newArr.join()) // red顏色,yellow顏色,green顏色,blue顏色
+    console.log(newArr.join('')) // red顏色yellow顏色green顏色blue顏色
+    console.log(newArr.join('|')) // red顏色|yellow顏色|green顏色|blue顏色
+
+    // 參數:數組元素是透過參數裡面指定的分割符進行分割
+    // 括號為空-則逗號分隔
+    // 空字符串('')-則所有元素之間沒有任何字符
+
+    
+
+  </script>
+</body>
+
+</html>

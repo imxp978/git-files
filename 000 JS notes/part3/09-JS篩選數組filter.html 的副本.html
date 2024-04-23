@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const arr = [10, 20, 30, 40, 50]
+    // 篩選數組filter()方法
+    // 1.filter()方法創建一個新數組，新數組中的元素是透過檢查指定數組中符合條件的所有元素
+    // 2.主要使用場景:篩選數組符合條件的元素，並返回篩選之後元素的 新數組
+
+    // 語法:
+    // 被遍歷數組.filter(function(item,index){
+    //   return 篩選條件
+    // })
+
+
+
+    // const newArr = arr.filter(function (item, index) {
+    //   // console.log(item)
+    //   // console.log(index)
+    //   return item >= 20
+    // })
+    console.log(newArr)
+    const newArr = arr.filter(item => item >= 20 )
+    console.log(newArr)
+
+  </script>
+</body>
+
+</html>

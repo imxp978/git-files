@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // 本地存儲
+    // 數據儲存在瀏覽器當中
+    // 設置、讀取方便、頁面刷新不丟失數據
+    // 本地存儲只能存 字符串數據類型
+    
+    // 1.本地存儲分類-localStorage
+    // 作用:將數據存儲在本地(用戶的電腦中)，除非手動刪除，否則關閉頁面也存在
+    // 可以多窗口(頁面)共享(同一瀏覽器可以共享)
+
+    // 語法:
+    // 1.1儲存數據:localStorage.setItem('key','value')
+    // 'key','value' 需要加引號
+
+    // 練習-儲存一個名字
+    localStorage.setItem('uname','Jack')
+    // 瀏覽器 右鍵-檢查-Application
+
+    // 1.2.讀取數據:localStorage.getItem()
+    console.log(localStorage.getItem('uname'))
+
+    // 1.3.刪除數據:localStorage.removeItem()
+    localStorage.removeItem('uname')
+    
+    // **練習-儲存年齡**
+    localStorage.setItem('age',18)
+    console.log(localStorage.getItem('age'))
+
+
+    // 2.本地存儲分類-sessionStorage
+    // 關閉瀏覽器就消失
+    // 用法與localStorage一致
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 函數參數
+
+    // 1.動態參數
+    // argument是函數內部的偽數組變量，它包括了調用函數時傳入的所有實參
+    // 可以動態獲取實參傳遞的參數
+    function getSum() {
+      // 動態參數，只存在於函數裡面
+      // 是個偽數組
+      console.log(arguments)
+      // 求和
+      let sum = 0
+      for (let i = 0; i < arguments.length; i++) {
+        sum += arguments[i]
+      }
+      console.log(sum)
+    }
+    getSum(2, 3, 4)
+
+
+    // 2.剩餘參數
+    // 剩餘參數允許我們將一個不定數量的參數表示為一個數組
+    // 只存在於函數裡面
+    // 形參為- ...變量名
+    function getCount(a, b, ...arr) {
+      console.log(arr)
+
+    }
+    getCount(1, 2)
+    getCount(1, 2, 3, 4)
+    getCount(1, 2, 3, 4, 5)
+    // 2.1-...是一個語法符號，置於最末函數形參之前，用於獲取多餘的實參
+    // 2.2 借助...獲取的剩餘實參，是一個真數組
+    // 2.3 開發中，提倡使用剩餘參數
+
+
+    // 3.展開運算符(...)
+    // 在數組中使用
+    const arr1  = [1,2,3,4]
+    // 將一個數組進行展開
+    console.log(...arr1)
+
+    // 不會修改原素組
+    // 典型運用場景-3.1求最大最小值
+    console.log(Math.max(...arr1))
+    // 3.2 合併數組
+    const arr2  = [1,2,3]
+    const arr = [...arr1,...arr2]
+    console.log(arr)
+
+
+
+
+  </script>
+</body>
+
+</html>

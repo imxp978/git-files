@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .wrapper {
+      min-width: 400px;
+      max-width: 800px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .wrapper textarea {
+      outline: none;
+      border-color: transparent;
+      resize: none;
+      background: #f5f5f5;
+      border-radius: 4px;
+      flex: 1;
+      padding: 10px;
+      transition: all 0.5s;
+      height: 30px;
+    }
+
+    .wrapper textarea:focus {
+      border-color: #e4e4ee;
+      background: #fff;
+      height: 50px;
+    }
+
+    .wrapper button {
+      background: #00aeec;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      margin-left: 10px;
+      width: 70px;
+      cursor: pointer;
+    }
+
+    .wrapper .total {
+      margin-right: 80px;
+      color: #999;
+      margin-top: 5px;
+      opacity: 0;
+      transition: all 0.5s;
+    }
+
+    .list {
+      min-width: 400px;
+      max-width: 800px;
+      display: flex;
+    }
+
+    .list .item {
+      width: 100%;
+      display: flex;
+    }
+
+    .item .item .info {
+      flex: 1;
+      border-bottom: 1px dashed #e4e4e4;
+      padding-bottom: 10px;
+    }
+
+    .list .item {
+      margin: 0;
+    }
+
+    .list .item .name {
+      color: #fb7299;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .list .item .text {
+      color: #333;
+      padding: 10px 0;
+    }
+
+    .list .item .time {
+      color: #999;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <textarea name="" id="tx" cols="30" rows="2" maxlength="200"></textarea>
+    <button>發布</button>
+  </div>
+  <div class="wrapper">
+    <span class="total">0/200</span>
+  </div>
+
+
+  <script>
+    // 鍵盤觸發
+    // 1.Keydown 鍵盤按下觸發
+    // 2.Keyup 鍵盤抬起觸發
+
+    // const input = document.querySelector('input')
+    // input.addEventListener('Keydown',function(){
+    //   console.log('按下')
+    // })
+    // input.addEventListener('Keyup',function(){
+    //   console.log('彈起')
+    // })
+
+    // 表單輸入觸發
+    // 1.input 用戶輸入事件
+
+    // input.addEventListener('input',function(){
+    //   console.log(input.value)
+    // })
+
+    // 練習-用戶輸入，計算用戶輸入自數
+      // 1.文字域獲得焦點 total 顯示
+      const tx = document.querySelector('#tx')
+      const total = document.querySelector('.total')
+
+      tx.addEventListener('focus',function(){
+        total.style.opacity = 1
+      })
+      // 2.文字域失去焦點 total 消失
+      tx.addEventListener('blur',function(){
+        total.style.opacity = 0
+      })
+
+      // 3.檢測用戶輸入
+      tx.addEventListener('input',function(){
+        total.innerHTML = `${tx.value.length}/200`
+      })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      width: 800px;
+      text-align: center;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+    }
+
+    caption {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    tr {
+      height: 40px;
+      cursor: pointer;
+    }
+
+    table tr:nth-child(1) {
+      background-color: #ddd;
+    }
+
+    table tr:not(:first-child):hover {
+      background-color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>學生訊息</h2>
+  <p>將數據渲染到頁面中</p>
+
+
+  <table>
+    <caption>學生列表</caption>
+    <tr>
+      <th>序號</th>
+      <th>姓名</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>家鄉</th>
+    </tr>
+
+    <!-- 案例2 -->
+    <!-- 數組對象-打印頁面表格中 -->
+
+    <script>
+      // 1.數據準備
+      let student = [
+        { name: '小明', age: '18', gender: '男', hometown: '河北省' },
+        { name: '小紅', age: '19', gender: '女', hometown: '河南省' },
+        { name: '小剛', age: '17', gender: '男', hometown: '山西省' },
+        { name: '小麗', age: '18', gender: '女', hometown: '山東省' },
+        { name: '小張', age: '20', gender: '女', hometown: '山東省' }
+      ]
+
+
+      // 2.渲染頁面
+      for (let i = 0; i < student.length; i++) {
+
+        document.write(`
+        <tr>
+          <td>${i + 1}</td>
+          <td>${student[i].name}</td>
+          <td>${student[i].age}</td>
+          <td>${student[i].gender}</td>
+          <td>${student[i].hometown}</td>
+        </tr>
+        `)
+        
+      }
+
+    </script>
+
+  </table>
+
+  <script>
+    // 案例
+    // 數組對象-打印
+    let students = [
+      { name: '小明', age: '18', gender: '男', hometown: '河北省' },
+      { name: '小紅', age: '19', gender: '女', hometown: '河南省' },
+      { name: '小剛', age: '17', gender: '男', hometown: '山西省' },
+      { name: '小麗', age: '18', gender: '女', hometown: '山東省' }
+    ]
+
+    for (let i = 0; i < students.length; i++) {
+      console.log(students[i]) //所有對象
+      console.log(students[i].name) //指定屬性
+      console.log(students[i].hometown) //指定屬性
+    }
+
+
+  </script>
+</body>
+
+</html>

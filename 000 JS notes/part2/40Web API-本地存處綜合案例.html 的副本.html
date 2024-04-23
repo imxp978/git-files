@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      text-align: center;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    th {
+      width: 100px;
+    }
+
+    thead {
+      background-color: rgb(173, 173, 243);
+    }
+
+    select {
+      width: 100px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>新增學員</h1>
+  <form action="" autocapitalize="off" class="info">
+    姓名: <input type="text" class="uname" name="uname">
+    年齡: <input type="text" class="age" name="age">
+    性別:
+    <select name="gender" class="gender">
+      <option value="男">男</option>
+      <option value="女">女</option>
+    </select>
+    薪資: <input type="text" class="salary" name="salary">
+    就業城市:
+    <select name="city" class="city">
+      <option value="北京">北京</option>
+      <option value="上海">上海</option>
+      <option value="廣州">廣州</option>
+      <option value="深圳">深圳</option>
+      <option value="曹縣">曹縣</option>
+    </select>
+    <button class="add">錄入</button>
+  </form>
+
+  <h1>就業榜</h1>
+
+  <h2 class="title">共有0條數據</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>學號</th>
+        <th>姓名</th>
+        <th>年齡</th>
+        <th>性別</th>
+        <th>薪資</th>
+        <th>就業城市</th>
+        <th>時間</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <script>
+    const tbody = document.querySelector('tbody')
+    const h2 = document.querySelector('h2')
+
+    // 1.渲染模塊
+    // 1.1讀取本地數據
+    // localStorage.setItem('data', JSON.stringify(initData))
+    // 1.2如果有數據，就讀取數據
+    // 1.3如果沒有，就 用空數據來代替
+    const arr = JSON.parse(localStorage.getItem('data')) || []
+
+    // 1.4利用map和join方法渲染頁面
+    function render() {
+
+      // 1.5 利用map遍歷數組，返回對應tr的數組
+      const trArr = arr.map(function (ele, index) {
+        return `
+        <tr>
+          <td>${ele.stuid}</td>
+          <td>${ele.uname}</td>
+          <td>${ele.age}</td>
+          <td>${ele.gender}</td>
+          <td>${ele.salary}</td>
+          <td>${ele.city}</td>
+          <td>${ele.time}</td>
+          <td>
+              <a href="javescript:;" data-id = "${index}">刪除</a>
+          </td>
+       </tr>
+        `
+      })
+      console.log(trArr)
+      // 1.6把數組轉換為字符串 join
+      // 1.7追加給tbody
+      tbody.innerHTML = trArr.join('')
+
+      // 1.8顯示數據
+      h2.innerHTML = `共有${arr.length}條數據`
+    }
+    render()
+
+    // 2.新增模塊
+    // 2.1form扁擔註冊事件，阻止默認行為
+    const info = document.querySelector('.info')
+    const uname = document.querySelector('.uname')
+    const age = document.querySelector('.age')
+    const gender = document.querySelector('.gender')
+    const salary = document.querySelector('.salary')
+    const city = document.querySelector('.city')
+
+    info.addEventListener('submit', function (e) {
+      // 阻止默認行為
+      e.preventDefault()
+      // 2.2非空判斷
+      if (!uname.value || !age.value || !salary.value) {
+        return alert('不能為空')
+      }
+      // 2.3 arr數組追加對象
+      arr.push({
+        // 處理stuid，數組最後一位+1
+        // arr[arr.length - 1]數組最後一位
+        // 判斷數組是否有數據，如果沒有，則直接賦值為1
+        stuid: arr.length ? arr[arr.length - 1].stuid + 1 : 1,
+        uname: uname.value,
+        age: age.value,
+        gender: gender.value,
+        salary: salary.value,
+        city: city.value,
+        time: new Date().toLocaleString()
+      })
+      //new Date().toLocaleString() 現在時間
+
+      // 2.4渲染頁面
+      render()
+
+      // 2.5清空表單
+      info.reset()
+
+      // 2.6儲存數據
+      localStorage.setItem('data', JSON.stringify(arr))
+
+    })
+
+    // 3.刪除模塊
+    // 3.1事件委託，註冊事件
+    tbody.addEventListener('click', function (e) {
+      // 3.2判斷是否點擊刪除按鈕
+      if (e.target.tagName === 'A') {
+        // 3.3.得到當前點擊索引號
+        // 渲染數據時，動態給a連結使用 參數index 添加自定義屬性
+        // console.log(e.target.dataset.id)
+
+        if (confirm('確認要刪除嗎')) {
+          // 3.4刪除對應數據
+          arr.splice(e.target.dataset.id, 1)
+
+          // 3.5重新渲染頁面
+          render()
+
+          // 3.6儲存最新數據
+          localStorage.setItem('data', JSON.stringify(arr))
+        }
+      }
+    })
+
+
+
+  </script>
+</body>
+
+</html>

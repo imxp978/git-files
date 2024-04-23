@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .box {
+      width: 600px;
+      margin: 50px auto;
+      display: flex;
+      font-size: 25px;
+      line-height: 40px;
+
+    }
+
+    .qs {
+      width: 450px;
+      height: 40px;
+      color: red;
+
+    }
+
+    .btns {
+      text-align: center;
+    }
+
+    .btns button {
+      width: 120px;
+      height: 35px;
+      margin: 0 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>隨機點名</h2>
+  <div class="box">
+    <span>名字是:</span>
+    <div class="qs">顯示姓名</div>
+  </div>
+  <div class="btns">
+    <button class="start">開始</button>
+    <button class="end">結束</button>
+  </div>
+  <script>
+    // 隨機點名案例
+
+    // 1.6聲明定時器全局變量-供關閉定時器使用
+    let timeID = 0
+    // 1.7聲明隨機變量-供刪除按鈕使用
+    let random = 0
+
+    // 數據數組
+    const arr = ['馬超', '關羽', '張飛', '劉備', '趙雲', '黃忠']
+
+    // 1.開始按鈕模塊
+    // 1.1獲取開始按鈕,文字
+    const start = document.querySelector('.start')
+    const qs = document.querySelector('.qs')
+    // 1.2添加事件
+    start.addEventListener('click', function () {
+      // 1.4添加定時器
+      timeID = setInterval(function () {
+        // 1.3隨機抽取-隨機數
+        random = parseInt(Math.random() * arr.length)
+        qs.innerHTML = arr[random]
+      }, 35)
+
+      
+      // 3數組剩下一個，關閉按鈕功能
+      if(arr.length === 1){
+        start.disabled = true
+        end.disabled = true
+      }
+    })
+
+    // 2.開始按鈕模塊
+    // 2.1獲取關閉按鈕
+    const end = document.querySelector('.end')
+    end.addEventListener('click', function () {
+      // 2.2關閉定時器變量
+      clearInterval(timeID)
+      // 2.3刪除當前抽取元素
+      arr.splice(random, 1)
+    })
+    
+
+
+
+
+  </script>
+</body>
+
+</html>

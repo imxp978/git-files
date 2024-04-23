@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 深入對象
+    // 1.創建對象的3種方式
+    // 1.1.利用對象字面量創建對象
+    // 1.2.利用 new Object 創建對象
+    const obj = new Object({ uname: 'pink' })
+    console.log(obj)
+    // 1.3.利用構造函數創建對象
+
+    // 2.構造函數
+    // 是一種特殊的函數，主要用來初始化對象
+    // 使用場景:常規的{...}語法允許創建一個對象，透過構造函數來可以快速創造多個類似的對象
+
+
+    // 構造函數在技術上是常規函數
+    // 特殊規範:
+    // 1.命名通常以大寫開頭
+    // 2.只能由"new"操作符來執行
+
+    function Pig(uname, age) {
+      this.name = uname
+      this.age = age
+    }
+    new Pig('佩琪', 6)
+
+    // 說明:
+    // 1.使用new關鍵字調用函數的行為稱之為實例化
+    // 2.實例化構造函數時沒有參數時可以省略()
+    // 3.構造函數內部不需要寫return，返回值即為新創建的對象
+    // 4.構造函數內部的return返回的值無效，所以不要寫return
+    // 5.new Object() , new Date() 也是實例化構造函數
+
+    // 練習
+    // 1.寫一個good構造函數
+    // 2.屬性包含 name,price,count
+    function Good(name, price, count) {
+      this.name = name
+      this.price = price
+      this.count = count
+    }
+    const mi = new Good('小米', 1998, 20)
+    console.log(mi)
+    const hw = new Good('華為', 3999, 59)
+    console.log(hw)
+
+    // 實例化執行過程
+    // 說明:
+    // 1.創建新的空對象
+    // 2.構造函數this指向新對象
+    // 3.執行構造函數代碼,修改this,添加新的屬性
+    // 4.返回新對象
+
+
+    // 3.實例成員&靜態成員
+
+    // 3.1.實例成員
+    // 透過構造函數創建的對象稱之為實例對象
+    // 實例對象中的屬性和方法稱之為實例成員(實例屬性及實例方法)
+
+    // 說明:
+    // 3.1.1為構造函數傳入參數，創建結構相同但值不同的對象
+    // 3.1.2構造函數創建的實例對象彼此獨立互不影響
+    function Dog(name) {
+      this.name = name
+    }
+    const peiqi = new Dog('佩琪')
+    const qiaozhi = new Dog('喬治')
+
+    peiqi.name = "小豬"  //實例屬性
+
+    peiqi.sayHi = () => {
+      // 實例方法
+      console.log('hi~~')
+    }
+
+    console.log(peiqi === qiaozhi)  //fales
+
+    // 3.2靜態成員
+    // 構造函數中的屬性和方法稱之為靜態成員(靜態屬性和靜態方法)
+
+    // 說明:
+    // 3.2.1靜態成員只能構造函數來訪問
+    // 3.2.2靜態方法中的this指向構造函數
+    // 比如 Date.now()、Math.PI、Math.random()
+    function Cat(name) {
+      this.name = name
+    }
+    Cat.eyes = 2 //靜態屬性
+    
+    Cat.sayHi = function(){
+      //靜態方法
+      console.log(this)
+    }
+
+    Cat.sayHi()
+
+    console.log(Cat.eyes) //2
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+<script>
+  // 匿名函數
+  // 沒有名字的函數無法直接使用
+
+  // 使用方式
+    // 1.函數表達式
+      // 將匿名函數賦值給一個變量，透過變量名稱進行調用
+      let fn = function() {}
+      fn()  //調用
+    //函數表達式 及 具名函數  的不同
+      // 1.具名函數的調用可寫在任何位置
+      // 2.函數表達式 必需先寫表達式後調用
+      
+    // 2.立即執行函數
+    // 避免全局變量的汙染
+    // 語法
+        // 1.方式1
+            // (function(){})();
+            (function(x,y) {
+              console.log(x + y)  //立即執行
+            })(1,2);
+            // 後方小括號 為調用函數，內為實參
+            // 立即執行函數最後須加上分號結束
+
+        // 2.方式2
+            // (function(){}());
+            (function(x,y){
+              console.log(x + y)
+            }(1,2));
+
+
+</script>
+</body>
+
+</html>

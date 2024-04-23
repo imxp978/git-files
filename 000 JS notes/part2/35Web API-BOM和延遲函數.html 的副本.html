@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <script>
+    // 1.BOM-是瀏覽器對象模型
+    //  window對象-是一個全局對象
+
+    // 延時函數
+    // 語法
+    // setTimeout(回掉函數,等待的毫秒)
+    // 僅執行一次
+    let timer = setTimeout(function () {
+      console.log('時間到了')
+    }, 2000)
+    // 清除時間函數
+    // 語法
+    // clearTimeout(timer)
+
+
+    // 練習
+    const box = document.querySelector('.box')
+    setTimeout(function () {
+      box.style.display = 'none'
+    }, 3000)
+
+  </script>
+</body>
+
+</html>

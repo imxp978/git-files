@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    span {
+      display: inline-block;
+      border: 1px solid #000;
+      padding: 5px 10px;
+      width: 60px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // 1.練習一 打印 5*5 黃
+    //外部循環
+    for (let i = 1; i <= 5; i++) {
+      // 內部循環
+      for (let j = 1; j <= 5; j++) {
+        document.write(`黃`)
+      }
+      document.write('<br>') //換行顯示
+    }
+
+    // 2.用戶輸入幾行幾列 打印出來
+    // let row = +prompt('輸入行')
+    // let col = +prompt('輸入列')
+    // for (let u = 1; u <= row; u++) {
+    //   for (let r = 1; r <= col; r++) {
+    //     document.write(`林`)
+    //   }
+    //   document.write('<br>') //換行顯示
+    // }
+
+
+    // 練習2
+    // 外層控制行數
+    for (let a = 1; a <= 5; a++) {
+      // 裡層控制列數
+      for (let b = 1; b <= a; b++) {
+        document.write('黃')
+      }
+      document.write('<br>')
+    }
+
+    // 練習3 99乘法表
+    for (let c = 1; c <= 9; c++) {
+      for (let d = 1; d <= c; d++) {
+        document.write(`<span>${d}X${c}=${c * d}</span>`)
+      }
+      document.write('<br>')
+    }
+  </script>
+</body>
+
+</html>

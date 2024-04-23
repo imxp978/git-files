@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let arr = ['aa', 'bb', 'cc']
+    for (let k in arr) {
+      console.log(k)  //數組的下標 索引號 輸出為字符串'0' 不推薦用於數組
+      console.log(arr[k])
+    }
+
+    // 遍歷對象 for in
+    // 遍歷輸出對象裡的元素
+    let obj = {
+      uname: 'andy',
+      age: 18,
+      gemder: '男'
+    }
+    for (let k in obj) {
+      console.log(k)  //輸出為 加上''的字符串 屬性名
+      console.log(obj[k])
+      //打印屬性值需 使用 對象名[k] 輸出 才可輸出 屬性值
+    }
+
+    
+  </script>
+</body>
+
+</html>

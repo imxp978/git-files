@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="node_modules/lodash/lodash.min.js"></script>
+  <script>
+    // 紀錄影片播放位置
+
+    // 事件:
+    // 1.ontimeupdate事件:在視頻/音頻 當前撥放位置發送凱便時觸發
+    // 2.onloadeddata事件:當前幀的數據加載完成且還沒有足夠的數據播放視頻的下一幀時觸發
+    const video = document.querySelector('vodeo')
+    video.ontimeupdata = _.throttle(() => {
+      // 影片當前時間
+      console.log(video.currentTime)
+
+      localStorage.setItem('currentTime', video.currentTime)
+
+    }, 1000)
+
+    video.onloadeddata = () => {
+      video.currentTime = localStorage.getItem('currentTime') || 0
+
+    }
+
+  </script>
+</body>
+
+</html>

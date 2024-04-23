@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 閉包
+    // 概念:一個函數對周圍狀態的引用綑綁在一起，內層函數中訪問到其外層函數的作用域
+    // 簡單理解
+    // 閉包 = 內層函數 + 外層函數的變量
+    // 內層函數 引用 外層函數的變量
+    // function outer() {
+    //   let a = 10
+    //   function fn() {
+    //     console.log(a)
+    //   }
+    //   fn()
+    // }
+    // outer()
+
+    // 閉包基本格式
+    // 閉包作用:封閉數據、提供操作、外部也可以訪問函數內部的變量
+    function outer() {
+      let a = 10
+      function fn() {
+        console.log(a)
+      }
+      return fn
+    }
+    const fun = outer()
+    fun()
+
+    // 閉包應用:實現數據私有
+    // 做統計函數調用次數
+    function count() {
+      let i = 0
+      function fn(){
+        i++
+        console.log(i)
+      }
+      return fn
+    }
+    const func = count()
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

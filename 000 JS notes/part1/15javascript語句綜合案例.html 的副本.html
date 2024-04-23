@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <script>
+
+    // 3.準備金額-寫在循環外面
+    let total = 0
+    // 1.開始循環
+    while (true) {
+      let atm = +prompt(`
+      請選擇操作:
+      1.存錢
+      2.取錢
+      3.查看餘額
+      4.退出
+      `)
+      // 2.如果用戶輸入4退出循環,break
+     
+      if (atm === 4) {
+        break
+      }
+     
+     
+      switch (atm) {
+        case 1:
+          let num1 = +prompt('請輸入金額')
+          total = total + num1
+          break
+
+        case 2:
+          let num2 = +prompt('請輸入金額')
+          total = total - num2
+          break
+
+        case 3:
+          alert(total)
+          break
+      }
+    }
+  </script> -->
+  <script>
+    while (true) {
+      let con = prompt(`
+      請您選擇 + - * /
+      若輸入 q 則退出程序
+      `)
+
+      if (con === 'q') {
+        break
+      }
+      let num1 = +prompt('請輸入第1個數')
+      let num2 = +prompt('請輸入第2個數')
+      switch (con) {
+        case '+':
+          alert(`${num1 + num2}`)
+          break
+        case '-':
+          alert(`${num1 - num2}`)
+          break
+        case '*':
+          alert(`${num1 * num2}`)
+          break
+        case '/`':
+          alert(`${num1 / num2}`)
+          break
+      }
+      // if (con === '+') {
+      //   let num1 = +prompt('請輸入第一個數')
+      //   let num2 = +prompt('請輸入第二個數')
+      //   alert(`總合為${num1 + num2}`)
+      // } else if (con === '-') {
+      //   let num1 = +prompt('請輸入第一個數')
+      //   let num2 = +prompt('請輸入第二個數')
+      //   alert(`總合為${num1 - num2}`)
+      // }
+      // else if (con === '*') {
+      //   let num1 = +prompt('請輸入第一個數')
+      //   let num2 = +prompt('請輸入第二個數')
+      //   alert(`總合為${num1 * num2}`)
+      // }
+      // else if (con === '/') {
+      //   let num1 = +prompt('請輸入第一個數')
+      //   let num2 = +prompt('請輸入第二個數')
+      //   alert(`總合為${num1 / num2}`)
+      // }
+    }
+  </script>
+</body>
+
+</html>

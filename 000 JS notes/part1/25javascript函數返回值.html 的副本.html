@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // 函數返回值
+    // 語法
+    // return數據
+    function fn() {
+      return 20
+    }
+    // 相當於 fn() = 20
+    console.log(fn())
+    let re = fn()
+
+    // 練習-求和
+    function getTotalPrice(x = 0, y = 0) {
+      return x + y
+    }
+    let sum = getTotalPrice(1, 2)
+    document.write(sum)
+
+    // return 後面的代碼不會被執行
+    // return 不能換行
+
+
+    // 練習
+    // 求最大值函數
+    function getMath(x = 0, y = 0) {
+      return x > y ? x : y
+    }
+    let max = getMath()
+
+    //求任意數組最大值和最小
+    function getArrValue(arr = []) {
+      // 1.先準備變量存放數組第一個值
+      let max2 = arr[0]
+      let min = arr[0]  //最小值
+      // 2.遍歷比較
+      for (i = 0; i < arr.length; i++) {
+
+        if (max2 < arr[i]) {
+          max2 = arr[i]
+        }
+
+        if (min > arr[i]) {
+          min = arr[i]
+        }
+
+      }
+      // 3.返回值
+      return [max2,min]   //使用數組 返回數據
+    }
+    let arr = getArrValue([1, 2, 3, 4, 5, 6, 7])
+
+    
+
+  </script>
+</body>
+
+</html>

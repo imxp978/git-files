@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      text-align: center;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    th {
+      width: 100px;
+    }
+
+    thead {
+      background-color: rgb(173, 173, 243);
+    }
+
+    select {
+      width: 100px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>新增學員</h1>
+  <form action="" autocapitalize="off" class="info">
+    姓名: <input type="text" class="uname" name="uname">
+    年齡: <input type="text" class="age" name="age">
+    性別:
+    <select name="gender" class="gender">
+      <option value="男">男</option>
+      <option value="女">女</option>
+    </select>
+    薪資: <input type="text" class="salary" name="salary">
+    就業城市:
+    <select name="city" class="city">
+      <option value="北京">北京</option>
+      <option value="上海">上海</option>
+      <option value="廣州">廣州</option>
+      <option value="深圳">深圳</option>
+      <option value="曹縣">曹縣</option>
+    </select>
+    <button class="add">錄入</button>
+  </form>
+
+  <h1>就業榜</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>學號</th>
+        <th>姓名</th>
+        <th>年齡</th>
+        <th>性別</th>
+        <th>薪資</th>
+        <th>就業城市</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <script>
+    // 聲明空數組，用於新增或刪除
+    const arr = []
+
+    // 1.3獲取表單value值
+    const uname = document.querySelector('.uname')
+    const age = document.querySelector('.age')
+    const gender = document.querySelector('.gender')
+    const salary = document.querySelector('.salary')
+    const city = document.querySelector('.city')
+    const tbody = document.querySelector('tbody')
+
+    // 4.1.獲取帶有所有name屬性的元素
+    const item = document.querySelectorAll('[name]')
+
+    // 1.點擊模塊
+
+    // 1.1表單提交事件
+    const info = document.querySelector('.info')
+    info.addEventListener('submit', function (e) {
+      // 1.2阻止表單送出-默認行為
+      // 事件對象阻止默認行為
+      e.preventDefault()
+      // console.log('提交')
+
+      // 4.表格非空判斷-如果不通過直接中斷，不添加數據
+      // 書寫位置為阻止默認行為後面，新增數據前面
+      for (let i = 0; i < item.length; i++) {
+        if (item[i].value === '') {
+          return alert('不能為空')
+        }
+      }
+
+
+      // 1.4創建新對象，存儲表單獲取的數據
+      const obj = {
+        // ID-以數組長度+1
+        stuid: arr.length + 1,
+        uname: uname.value,
+        age: age.value,
+        gender: gender.value,
+        salary: salary.value,
+        city: city.value
+      }
+      // console.log(obj)
+
+      // 1.5追加給數組
+      arr.push(obj)
+
+      // 1.6清空表單-利用表單重置
+      this.reset()
+
+      // 2.2調用渲染函數
+      render()
+    })
+
+    // 2.渲染函數-因為增加及刪除都需要渲染函數
+    function render() {
+
+      // 2.3先清空tbody
+      tbody.innerHTML = ''
+
+      // 2.1遍歷數組
+      for (i = 0; i < arr.length; i++) {
+        // 生成tr
+        const tr = document.createElement('tr')
+        tr.innerHTML = `
+        <td>${arr[i].stuid}</td>
+        <td>${arr[i].uname}</td>
+        <td>${arr[i].age}</td>
+        <td>${arr[i].gender}</td>
+        <td>${arr[i].salary}</td>
+        <td>${arr[i].city}</td>
+        <td>
+          <a href="javescript:;" data-id = ${i}>刪除</a>
+          </td>
+        `
+        // a標籤添加自定義屬性-刪除找尋
+
+        // 2.1追加元素-父元素.appendChild(子元素)
+        tbody.appendChild(tr)
+      }
+    }
+
+
+    // 3.刪除操作
+    // 3.1事件委託-tbody
+    tbody.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        // console.log('刪除')
+        // console.log(e.target.dataset.id)
+
+        // 3.2刪除數組對應數據
+        arr.splice(e.target.dataset.id, 1)
+
+        // 3.3重新渲染
+        render()
+      }
+    })
+
+
+  </script>
+</body>
+
+</html>

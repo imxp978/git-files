@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.數組解構
+    // 是將數組的單元值快速批量給一系列變量簡潔語法
+
+    // 基本語法
+    // 1.賦值運算符-=左邊[]用於批量聲明變量，右邊數組的單元值將被賦值給左側的變量
+    // 2.變量的順序對應數組單原值的位置依次進行賦值操作
+    const arr = [100, 60, 80]
+    // 數組解構
+    const [max, min, avg] = arr
+
+    // 交換變量
+    let a = 1
+    let b = 2;
+    // 使用數組開頭前，必須加上分號
+    [b, a] = [a, b]
+    console.log(a, b)
+
+    // 練習
+
+    const [hr, lx, mi, fz] = ['海爾', '聯想', '小米', '方正']
+
+    function getValue() {
+      return [100, 60]
+    }
+    const [max2, min2] = getValue()
+
+    // 2.變量多，單元值少的情況
+    const [c, d, e, f] = [1, 2, 3]
+    console.log(c)
+    console.log(d)
+    console.log(e)
+    console.log(f)  //undefind
+
+    // 4.防止undefind傳遞
+    // 添加默認值
+    const [n = 0, m = 0] = []
+    console.log(n) // 0
+    console.log(m) // 0
+
+    // 按需導入，忽略某些值
+    const [t, , y] = [1, 2, 3]
+    console.log(t) // 1
+    console.log(y) // 3
+
+    // 多維數組
+    const arr1 = [1, 2, [3, 4]]
+    console.log(arr1[0]) //1
+    console.log(arr1[1]) //2
+    console.log(arr1[2]) //[3,4]
+    console.log(arr1[2][0]) //3
+
+    // 多維數組-解構
+    const [q, [r, s]] = [1, [3, 4]]
+    console.log(q) //1
+    console.log(r) //3
+    console.log(s) //4
+
+
+
+    // 2.對象解構
+    // 是將對象的屬性與方法快速批量給一系列變量簡潔語法
+
+    // 基本語法:
+    // 1.賦值運算符-=左邊{}用於批量聲明變量，右邊對象的屬性質將被賦值給左側的變量
+    // 2.對象屬性的質將被賦值給予屬性名 相同 的變量
+    // 3.注意解構的變量名不要和外面的變量名衝突否則報錯
+    // 對象中找不到與變量名一致的屬性時，變量值為undefind
+    const obj = {
+      uname: 'red',
+      age: 18
+    }
+    // const {uname,age} = {uname : 'red',age : 18}
+    // 要求屬性名與變量名一致
+    // console.log(uname)
+    // console.log(age)
+
+    // 對象解構的變量名，可以重新改名
+    // 舊變量名:新變量名
+    const { uname: username, age } = { uname: 'red', age: 18 }
+    console.log(username)
+    console.log(age)
+
+    // 2.1數組對象的解構
+    const pig = [
+      {
+        uname: '佩琪',
+        age: 18
+      }
+    ]
+    const [{ uname, age: age1 }] = pig
+    console.log(uname)
+    console.log(age1)
+
+    // 2.2多級對象解構
+    const pig2 = {
+      name: '佩琪',
+      family: {
+        mom: '豬媽媽',
+        dad: '豬爸爸',
+      },
+      age: 6
+    }
+    const { name, family: { mom, dad }, age: age2 } = pig2
+    console.log(name)
+    console.log(mom)
+    console.log(dad)
+    console.log(age2)
+
+    // 練習
+    const msg = {
+      "code": 200,
+      "msg": "獲取新聞成功",
+      "data": [
+        {
+          "id": 1,
+          "title": "5G商用自己，三大運用商收入下降",
+          "count": 58
+        },
+        {
+          "id": 2,
+          "title": "國際媒體頭條速覽",
+          "count": 56
+        },
+        {
+          "id": 3,
+          "title": "烏克蘭和俄羅斯持續衝突",
+          "count": 1669
+        }
+      ]
+    }
+    // 需求一:選出data
+    const { data } = msg
+
+    // 需求二:需要把data選出當作參數傳遞給函數
+    // function render({ data }) {
+    //   // 只需要data數據
+    //   // 內部處理
+    //   console.log(data)
+    // }
+    // render(msg)
+
+    // 需求三:data命名為mydata
+    function render({ data: mydata }) {
+      // 只需要data數據
+      // 內部處理
+      console.log(mydata)
+    }
+    render(msg)
+
+
+    // 3.forEach() 遍歷數組-適合於遍歷數組對象
+    // 主要方法用於調用數組的每一個元素，並將元素傳遞給回調函數
+    // 主要使用場景: 遍歷數組的每一個元素
+    // 不返回值，只遍歷
+
+    // 3.1語法
+    // 被遍歷數組.forEach(function (當前數組元素,當前元素所引號){
+    //   函數體
+    // });
+    const arr2 = ['red','green','blue']
+   const result =  arr2.forEach(function(item,index){
+      console(item)  //數組元素
+      console(index) //索引號
+    })
+    // forEach主要是遍歷數組
+    // 參數當前數組元素是必須要寫的，索引號可選
+
+  </script>
+</body>
+
+</html>

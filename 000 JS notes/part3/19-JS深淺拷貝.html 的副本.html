@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div></div>
+<!-- 先引用 -->
+<script src="./node_modules/lodash/lodash.min.js"></script>
+  <script>
+    const obj = {
+      uname: 'pink',
+      age: 18,
+      family: {
+        baby: 'red'
+      }
+    }
+    // 深淺拷貝
+    // 只針對引用類型
+
+    // 1.淺拷貝
+    // 拷貝的是地址
+
+    // 常見方法:
+    // 1.1拷貝對象 Object.assgin() / 展開運算符{...obj}拷貝對象
+    const o = {}
+    Object.assign(o, obj)
+    o.age = 20
+    o.family.baby = 'green'
+    console.log(o)
+    console.log(obj)
+
+    // 1.2拷貝數組 Arrary.prototypr.concat() 或 [...arr]
+    const oo = { ...obj }
+    oo.age = 20
+    o.family.baby = 'green'
+    console.log(oo)
+    console.log(obj)
+
+    // 注意:
+    // 若遇到複雜數據類型 將會無法完全拷貝，因為只拷貝地址
+    // 適合單層數據類型
+
+
+    // 2.深拷貝
+    // 拷貝的是對象
+
+    // 常見方法:
+    // 2.1 通過遞歸實現深拷貝
+    // 函數遞歸
+    // 如果在一個函數內部再調用自己，則為遞歸函數
+    let i = 1
+    function fn() {
+      console.log(`這是第${i}次`)
+      if (i >= 6) {
+        return
+      }
+      i++
+      fn()
+    }
+    fn()
+    // 遞歸函數的作用和循環效果類似
+    // 由於遞歸很容易發生"棧溢出"錯誤(stack overflow)，所以必須要加入退出條件return
+
+    // 練習
+    // 利用遞歸函數實現setTimeout模擬setInterval效果
+    // 需求:頁面每隔一秒輸出時間
+    function getTime() {
+      // 獲取當前時間
+      document.querySelector('div').innerHTML = new Date().toLocaleString()
+      setTimeout(getTime, 1000)
+    }
+    getTime()
+
+    // 利用遞歸函數深拷貝
+    const obj2 = {
+      uname: 'pink',
+      age: 18,
+      hobby: ['乒乓球', '足球'],
+      family:{
+        baby:'red'
+      }
+    }
+    const ooo = {}
+
+    // 拷貝函數
+    function deepCopy(newObj, oldObj) {
+      for (let k in oldObj) {
+        if (oldObj[k] instanceof Array) {
+          // 處理數組問題
+          // 判斷屬性值屬不屬於 Array
+          // 由於hobby是數組，要把數組裡的值，拷貝到新的數組裡面，所以新聲明一個空數組
+          newObj[k] = []
+
+          // 使用遞歸函數 重新遍歷
+          deepCopy(newObj[k], oldObj[k])
+
+        } else if (oldObj[k] instanceof Object) {
+          newObj[k] = {}
+          // 處理對象問題
+          // 判斷屬性值屬不屬於 Object
+          // 使用遞歸函數 重新遍歷
+          deepCopy(newObj[k], oldObj[k])
+        }
+        else {
+          // k 屬姓名 
+          // oldObj[k] 屬性值
+          // newObj[k] === ooo.uname
+          newObj[k] = oldObj[k]
+        }
+      }
+    }
+    // 遞歸模板
+    // function deepCopy([], ['乒乓球', '足球']) {
+    //   for (let k in oldObj) {
+
+    //    此次遍歷，變成數組遍歷
+    //    k為索引號，oldobj[k]為值
+    //    oldObj[k] = 乒乓球與足球
+    //    不屬於數組，直接執行else
+    //     if (oldObj[k] instanceof Array) {
+    //       newObj[k] = []
+    //       deepCopy(newObj[k],oldObj[k])
+    //     } else {
+
+    //        直接賦值進新數組
+    //        [] = 乒乓球與足球
+    //       newObj[k] = oldObj[k]
+    //     }
+    //   }
+    // }
+    deepCopy(ooo, obj2)  //函數調用 兩個參數 新對象,舊對象
+
+    // 注意:若使用遞歸函數深拷貝
+    // 必須先拷貝 數組 再寫 對象
+    // 因為數組也屬於對象，所以要先過濾數組再拷貝對象
+
+
+
+
+    // 2.2 lodash / cloneDeep
+    // JS庫lodash裡面cloneDeep內部實現了深拷貝
+    const obj3 = {
+      uname: 'pink',
+      age: 18,
+      hobby: ['乒乓球', '足球'],
+      family:{
+        baby:'red'
+      }
+    }
+    const oooo = _.cloneDeep(obj3)
+    console.log(oooo)
+
+
+
+
+    // 2.3 通過JSON.stringify()實現
+    const obj4 = {
+      uname: 'pink',
+      age: 18,
+      hobby: ['乒乓球', '足球'],
+      family:{
+        baby:'red'
+      }
+    }
+    // 將對象轉換為 JSON字符串
+    // JSON.stringify(obj4)
+    
+    // console.log(JSON.stringify(obj4))
+    
+    // 將字符串轉換為對象
+    const ooooo = JSON.parse(JSON.stringify(obj4))
+    console.log(ooooo)
+    
+    // 由於已轉換為字符串，字符串屬於簡單數據
+    // 再將字符串轉換為對象，地址已轉換為新的地址
+    // 不再指回舊對象，故互不影響
+    
+
+
+  </script>
+</body>
+
+</html>

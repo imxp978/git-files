@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    i {
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <button class="delete">刪除</button>
+  <button class="login">登入</button>
+
+  <script>
+    // 1.模態框製作
+    // 需要公共屬性:標題、提示信息內容，可設置默認參數
+    function Modal(title = '', message = '') {
+      // 創建模態框盒子
+      // 1.1創建div標籤
+      this.modalBox = document.createElement('div')
+      // 1.2添加類名modal
+      this.modalBox.className = 'modal'
+      // 1.3modal內部填充兩個div並修改內容
+      this.modalBox.innerHTML = `
+        <div class="header">${title}<i>x</i> </div>
+        <div class="body">${message}</div>
+      `
+    }
+    // new Modal('溫馨提示', '您沒有刪除權限操作')
+    // new Modal('友情提示', '您沒有登入')
+
+
+    // 2.open功能
+
+    // 寫在構造函數的原型對象身上
+    Modal.prototype.open = function () {
+
+      // bug處理
+      // 點擊多次換顯示多個模態框
+      // 解決:準備open顯示時，判斷頁面有沒有模態框，有就刪除，每有舊添加
+      const box = document.querySelector('.modal')
+      // 邏輯與中斷
+      // 當沒有box = false就不執行刪除
+      // 當有box = true就執行刪除
+      box && box.remove()
+
+      // 注意這個方法不要用箭頭函數，因為需要this
+
+      // 把創建的div添加到body當中
+      // open的本質是把創建的標籤添加到頁面當中
+      document.body.append(this.modalBox)
+
+
+      
+      // close功能
+      this.modalBox.querySelector('i').addEventListener('click', () => {
+        // 這個地方需要箭頭函數
+        // 箭頭函數的this會指向上一級
+        // this會指向 這個實例對象
+        this.close()
+      })
+    }
+
+    // 2.close功能
+    // 寫在構造函數的原型對象身上
+    // 把創建的div從body刪除
+    // 需要注意，x按鈕是在模態框裡面
+    // 所以應該是葉面顯示這個模態框就要綁定事件
+    // 頁面顯示框是在open裡面，所以關閉事件也要寫在open裡面
+    Modal.prototype.close = function () {
+      this.modalBox.remove()
+    }
+
+
+
+    // 點擊按鈕，實例化對象，傳入對應參數，並執行open方法
+
+    // 刪除按鈕
+    document.querySelector('.delete').addEventListener('click', () => {
+      // 先調用構造函數(實例化)
+      const del = new Modal('溫馨提示', '您沒有刪除權限操作')
+      // 實例對象調用open方法
+      del.open()
+    })
+
+    // 登入按鈕
+    document.querySelector('.login').addEventListener('click', () => {
+      const login = new Modal('友情提示', '您沒有登入')
+      login.open()
+    })
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

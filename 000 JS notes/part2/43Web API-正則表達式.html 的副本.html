@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    // 正則表達式-適用於匹配 字符串中 字符組合的模式
+    // 正則表達式 也是對象
+    // 通常用來查找，替換那些符合正則表達式的文本
+
+    // 使用場景-例如
+    // 表單驗證-用戶名表單只能輸入英文字母，數字，或者下划線
+    // 頁面過濾-頁面內容中的一些敏感詞(替換)，或者從字符串或許想要的部分(提取)
+
+    // 語法
+    // 1.定義規則
+    // 2.根據規則查找，找到則返回
+
+    // 定義正則表達式語法
+    // const 變量名 = /表達式/
+    // / / 是正則表達式字面量
+
+    // test()方法-用於查看正則表達式是否與指定字符匹配
+    // 如果正則表達式與指定字符匹配 返回true，否則false
+    // 變量名.test(被檢測的字符串)
+
+    // 練習
+    const str = '我們在學習前端，希望高薪畢業'
+    // 1.定義規則
+    const reg = /前端/
+    // 2.是否匹配
+    console.log(reg.test(str))
+    
+    // exec()方法-在一個指定字符串中執行一個搜索匹配
+    // 變量名.exec(被檢測的字符串)
+    // 如果匹配成功，exec()返回一個數組，否則返回null
+    console.log(reg.exec(str))
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

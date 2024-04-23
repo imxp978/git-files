@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 函數
+    // 代碼複用
+    // function - 執行特定代碼的代碼塊
+    // 函數可以把相同或相似的邏輯代碼'包裹'起來
+    // 透過函數調用來執行 
+
+    // 函數使用
+    // 函數一次聲明,可多次調用
+    // 1.聲明語法
+    // function 函數名(){
+    //   函數體
+    // }
+      function sayHi() {
+        console.log('Hi~~~~');
+      } 
+      // 2.函數調用語法   函數不調用 自己不執行
+      // 函數名()   
+      sayHi()
+
+      // 練習1.封裝兩個數和
+        function getSum(){
+          let num1 = +prompt('請輸入一個數')
+          let num2 = +prompt('請輸入一個數')
+          document.write(`${num1 + num2}`)
+        }
+        getSum()
+      // 練習2.封裝1-100的和
+        function getSum100(){
+          let sum = 0
+          for(i = 1;i <=100;i++){
+            sum += i
+          }
+          document.write(`${sum}`) //***
+        }
+      getSum100()
+
+
+
+      // 函數命名規範
+      // 與變量基本一致
+      // 常用動詞約定
+  </script>
+</body>
+</html>

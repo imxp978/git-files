@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">我是標籤內容</div>
+  <div class="box2">我是標籤內容</div>
+
+  <script>
+    // 操縱元素內容
+    // DOM對象是根據標籤生成的，所以操作標籤，本質上就是操作對象-就是操作對象所使用的 點語法
+
+    // 1.對象.innerText屬性
+    // 將文本內容添加/更新到任意標籤位置
+    // 顯示純文本,不解析標籤
+
+    // 獲取元素
+    const box = document.querySelector('.box')
+    // 2.修改文字內容-對象.innerText屬性
+    console.log(box.innerText) //獲取文字內容
+    box.innerText = '我是一個盒子'  //修改文字內容
+
+
+    // 2.對象.innerHTML屬性
+    // 將文本內容添加/更新到任意標籤位置
+    // 會解析標籤，多標籤建議使用模板字符
+    const box2 = document.querySelector('.box2')
+    console.log(box2.innerHTML)
+    box2.innerHTML = '<i>我要更換</i>'
+  </script>
+
+  <hr>
+
+  <div class="wrapper">
+    <strong>年會抽獎</strong>
+    <h1>一等獎:<span id="one">???</span></h1>
+    <h3>二等獎:<span id="two">???</span></h3>
+    <h5>一等獎:<span id="three">???</span></h5>
+  </div>
+
+  <script>
+    // 練習
+    // 將一至三等獎 填入頁面
+
+    // 1.聲明數組
+    const arr = ['周', '劉', '林', '黃', '張', '陳',]
+    // 隨機數
+    const random = Math.floor(Math.random() * arr.length)
+    console.log(arr[random])
+
+    // 2.獲取one元素
+    const one = document.querySelector('#one')
+    one.innerHTML = arr[random]
+    // 3.刪除已選元素
+    arr.splice(random,1)
+    // console.log(arr)
+
+    // 4.重新設計隨機數,獲取及修改
+    // 二等獎
+    const random2 = Math.floor(Math.random() * arr.length)
+    const two = document.querySelector('#two')
+    two.innerHTML = arr[random2]
+    arr.splice(random2,1)
+    // console.log(arr)
+
+    // 三等獎
+    const random3 = Math.floor(Math.random() * arr.length)
+    const three = document.querySelector('#three')
+    three.innerHTML = arr[random3]
+    arr.splice(random3,1)
+    console.log(arr)
+
+
+
+
+  </script>
+
+</body>
+
+</html>

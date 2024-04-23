@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background: pink;
+    }
+
+    body {
+      background: url(./images/1.jpg) no-repeat top center/cover;
+
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <script>
+    // 透過style屬性操作CSS
+    // 語法
+    // 對象.style.樣式屬性 = 值
+    const box = document.querySelector('.box')
+    box.style.width = '50px'
+    box.style.backgroundColor = 'hotpink'
+
+    // 多組單詞採小駝峰命名法
+    box.style.border = '2px solid blue'
+    box.style.borderTop = '5px solid red'
+
+    // 練習-刷新更換背景圖片
+    // 1.隨機函數
+    function getRandom(n, m) {
+      return Math.floor(Math.random() * (m - n + 1)) + n
+    }
+    const random = getRandom(1, 5)
+
+    // 標籤選擇body,因為body是唯一標籤,可以直接寫
+    // document.body.style
+    document.body.style.backgroundImage = `url(./images/${random}.jpg)`
+
+
+
+  </script>
+</body>
+
+</html>

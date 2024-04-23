@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .tab-nav {
+      margin: 10px auto;
+      border: 1px red solid;
+      width: 250px;
+      height: 50px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+    }
+
+    .active {
+      background-color: #333;
+      color: #fff;
+      width: 100px;
+    }
+
+    .link {
+      margin: 10px;
+    }
+
+    .input {
+      margin: 10px;
+    }
+
+    .button {
+      margin-top: 10px;
+    }
+
+    .tab-pane {
+      border: 1px solid #000;
+      width: 300px;
+      height: 168px;
+      margin: 10px auto;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .main {
+      background-color: #000;
+      height: 150px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .xtx_navs {
+      display: inline-block;
+      line-height: 53px;
+    }
+
+    .main a {
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="xtx-login-main">
+
+    <div class="wrapper">
+
+      <form action="" autocomplete="off">
+
+        <div class="box">
+
+          <div class="tab-nav">
+            <a href="javascript:;" class="active" data-id="0">帳戶登入</a>
+            <a href="javascript:;" data-id="1">二維碼登入</a>
+          </div>
+
+          <div class="tab-pane">
+            <div class="link">
+              <a href="javascript:;">手機驗證碼</a>
+            </div>
+
+            <div class="input">
+              <span class="iconfont icon-zhanghao"></span>
+              <input type="text" required placeholder="用戶名/手機號碼" name="username">
+            </div>
+
+            <div class="input">
+              <span class="iconfont icon-suo"></span>
+              <input type="password" required placeholder="密碼" name="password">
+            </div>
+
+            <div class="agree">
+              <label for="my-checkbox">
+                <input type="checkbox" value="1" id="my-checkbox" name="agree" class="rember">
+                <span class="iconfont icon-xuanze"></span>
+              </label>
+              同意 <a href="javascript:;">**條款**</a>和<a href="">**條款**</a>
+            </div>
+
+            <div class="button clearfix">
+              <button type="submit" class="dl">登入</button>
+            </div>
+
+          </div>
+
+          <div class="tab-pane" style="display: none;">
+            <img src="/images/1.jpg" alt="">
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div class="main">
+    <ul class="xtx_navs">
+      <li>登入</li>
+      <li>退出登入</li>
+    </ul>
+  </div>
+
+  <script>
+    // 1.tab欄切換-事件委託
+    const tab_nav = document.querySelector('.tab-nav')
+    const pane = document.querySelectorAll('.tab-pane')
+    tab_nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        // 取消上一個active
+        tab_nav.querySelector('.active').classList.remove('active')
+        // 當前增加
+        e.target.classList.add('active')
+
+        for (let i = 0; i < pane.length; i++) {
+          // 全部關掉
+          pane[i].style.display = 'none'
+        }
+        // 顯示對應盒子
+        pane[e.target.dataset.id].style.display = 'block'
+      }
+    })
+
+    // 2.表單製作模塊
+    const form = document.querySelector('form')
+    const agree = document.querySelector('[name=agree]')
+    const username = document.querySelector('[name=username]')
+    form.addEventListener('submit', function (e) {
+      e.preventDefault()
+      if (!agree.checked) {
+        return alert('請勾選')
+      }
+      // 紀錄用戶名
+      localStorage.setItem('xtx-uname', username.value)
+
+      // 頁面跳轉
+      // location.href = '/index.html'
+      form.reset()
+      render()
+    })
+
+    // 3.登入名稱更改
+    const li1 = document.querySelector('.xtx_navs li:first-child')
+    const li2 = li1.nextElementSibling
+
+    // 3.1製作渲染函數
+    function render() {
+      // 3.2讀取本地用戶名
+      const uname = localStorage.getItem('xtx-uname')
+
+      // 3.3判斷本地存儲
+      if (uname) {
+        li1.innerHTML = `<a href="javascript:;">${uname}</a>`
+        li2.innerHTML = `<a href="javascript:;">退出登入</a>`
+      } else {
+        li1.innerHTML = `<a href="javascript:;">登入</a>`
+        li2.innerHTML = `<a href="javascript:;">免費註冊</a>`
+      }
+    }
+    render()
+
+    // 4.點擊退出登入
+    li2.addEventListener('click', function () {
+      // 刪除本地數據
+      localStorage.removeItem('xtx-uname')
+      // 重新渲染
+      render()
+    })
+
+
+
+
+  </script>
+</body>
+
+</html>

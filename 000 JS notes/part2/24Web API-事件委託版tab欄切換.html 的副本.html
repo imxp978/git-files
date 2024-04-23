@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tab {
+      width: 590px;
+      height: 380px;
+      margin: 20px;
+      border: 1px solid #e4e4e4;
+      overflow: hidden;
+    }
+
+    .tab-nav {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tab-nav h3 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-left: 20px;
+    }
+
+    .tab-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .tab-nav ul li {
+      margin: 0 20px;
+      font-size: 14px;
+    }
+
+    .tab-nav ul li a.active {
+      border-color: #e1251b;
+      color: #e1251b;
+    }
+
+    .tab-content {
+      padding: 0 16px;
+
+    }
+
+    .tab-content .item {
+      display: none;
+    }
+
+    .tab-content .item img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .tab-content .item.active {
+      display: block;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="tab">
+    <div class="tab-nav">
+      <h3>每日特價</h3>
+      <ul>
+        <li><a href="javascript:;" class="active" data-id="0">精選</a></li>
+        <li><a href="javascript:;" data-id="1">美食</a></li>
+        <li><a href="javascript:;" data-id="2">百貨</a></li>
+        <li><a href="javascript:;" data-id="3">個護</a></li>
+        <li><a href="javascript:;" data-id="4">預告</a></li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div class="item active"><img src="/images/1.jpg" alt=""></div>
+      <div class="item"><img src="/images/2.jpg" alt=""></div>
+      <div class="item"><img src="images/3.jpg" alt=""></div>
+      <div class="item"><img src="images/4.jpg" alt=""></div>
+      <div class="item"><img src="images/5.jpg" alt=""></div>
+    </div>
+  </div>
+
+
+  <script>
+    // 使用事件委託的形式
+    // 1.1.獲取ul父元素
+    const ul = document.querySelector('.tab-nav ul')
+
+    const item = document.querySelectorAll('.tab-content .item')
+    // 1.2.添加事件
+    ul.addEventListener('click', function (e) {
+      console.log(e.target)  //e.target 是我們點擊的對象
+
+      // 1.3.只有點擊a才會進行添加類和刪除類操作
+      console.log(e.target.tagName) //e.target.tagName點擊對象的標籤名
+      if (e.target.tagName === 'A') {
+        // 1.4.先移除原來的類，再添加當前對象的類
+        document.querySelector('.tab-nav .active').classList.remove('active')
+        e.target.classList.add('active')
+        // this 指向ul父元素 不能使用this
+
+        // 2.大盒子模塊
+        console.log(e.target.dataset.id)
+        const id = +e.target.dataset.id  //轉換數字型
+        // 2.1.先移除原來的類，再添加當前對象的類
+        document.querySelector('.tab-content .active').classList.remove('active')
+        // 1.
+        // document.querySelector(`.tab-content .item:nth-child(${id + 1})`).classList.add('active')
+
+        // 2.
+        item[id].classList.add('active')
+
+      }
+    })
+  </script>
+</body>
+
+</html>

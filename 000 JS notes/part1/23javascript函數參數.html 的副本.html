@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 函數參數-函數傳參
+    // 1.聲明語法
+    // function 函數名(參數列表) {
+    //   函數體
+    // }
+    function getSum(start, end) //形式上的參數-形參
+    {
+      let sum = 0
+      for (let i = start; i <= end; i++) {
+        sum += i
+      }
+      console.log(sum);
+    }
+    // 2.函數調用
+    // 函數名(參數)
+    getSum(1,50)  //實際參數-實參 
+    getSum(+prompt('輸入數字'), +prompt('輸入數字'))
+    
+    // 練習-函數求和
+    // 形參默認值
+    function getSum(num = 0,num2 = 0){
+
+      document.write(`${num + num2}`)
+
+    }
+    getSum(1,2)
+    getSum()
+
+
+
+  </script>
+</body>
+
+</html>

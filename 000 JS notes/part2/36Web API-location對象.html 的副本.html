@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <a href="http://www.yahoo.com.tw">5秒後自動跳轉</a>
+  <script>
+    // location-對象數據類型
+    console.log(location)
+    // 常用屬性及方法
+    // 1.href-經常利用JS方式跳轉頁面
+    console.log(location.href)
+    // location.href = 'http://www.yahoo.com.tw'
+
+    // 練習-時間到自動跳轉
+    // 1.獲取元素
+    const a = document.querySelector('a')
+    // 2.開啟定時器
+    // 3.聲明到計時變量
+    let num = 5
+    let timeId = setInterval(function () {
+      num--
+      a.innerHTML = `${num}秒後自動跳轉`
+      // 如果=0 則跳轉頁面
+      if (num === 0) {
+        clearInterval(timeId)
+        location.href = 'http://www.yahoo.com.tw'
+      }
+    }, 1000)
+
+
+    // 2.search-獲取地址中攜帶的參數 符號?後面的部分
+
+    // 3.hash-獲取地址中攜帶的hush值 符號#後面的部分
+
+    // 4.reload()-用來刷新頁面，傳入參數值true時表示強制更新
+
+
+
+  </script>
+</body>
+
+</html>

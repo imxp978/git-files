@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // JS內部提供對象，包含各種屬性和方法給開發者調用
+    // 1.document.write()
+    // 2.console.log()
+
+    // 內置對象-Math
+    // Math對象包含方法有
+    // 1.random 生成0-1之間隨機數(包括0,不包含1)
+    // 2.ceil 向上取整(無條件進位)
+    // 3.floor 向下取整(無條件去位)
+    // 4.max 找最大數
+    // 5.min 找最小數
+    // 6.pow 冪算符(求次方)
+    // 7.abs 絕對值
+    // 8.round 四捨五入...等
+
+    // 1.屬性
+
+    // 圓周率
+    console.log(Math.PI)
+
+    // 2.方法
+
+    // 向上取整(無條件進位)
+    console.log(Math.ceil(Math.PI))
+    // floor 向下取整(無條件去位)
+    console.log(Math.floor(Math.PI))
+    // round 四捨五入
+    console.log(Math.round(Math.PI))
+
+    // 取整函數 parseInt()
+    // 可轉換字符串
+
+    // 內置對象-隨機數
+    // Math.random() 生成0-1之間隨機數(包括0,不包含1)
+
+    // 1.練習-生成0-10的隨機數
+    // Math.floor(Math.random() * (10 + 1))
+    console.log(Math.floor(Math.random() * (10 + 1)))
+
+    let arr = ['red', 'green', 'blue']
+    let random = Math.floor(Math.random() * arr.length)
+    console.log(arr[random])
+
+
+    // 2.練習2-隨機點名
+    let arr2 = ['趙雲', '黃忠', '關羽', '張飛', '馬超', '劉備', '曹操']
+    let random2 = Math.floor(Math.random() * arr2.length)
+    console.log(arr2[random2])
+
+    // 2.練習2-隨機點名(不重複)
+    // 1.得到隨機數
+    let arr3 = ['趙雲', '黃忠', '關羽', '張飛', '馬超', '劉備', '曹操']
+    let random3 = Math.floor(Math.random() * arr3.length)
+    // 2.打印輸出
+    document.write(arr3[random3])
+    // 3.刪除元素-splice(起始位置(下標),刪除元素個數)
+    arr3.splice(random3, 1)
+    console.log(arr3)
+
+
+
+
+  </script>
+</body>
+
+</html>

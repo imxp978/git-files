@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    // 1.原型
+    function Star(uname, age) {
+      this.uname = uname
+      this.age = age
+    }
+    // 1.1構造函數通過原型分配的函數是所有對象所共享的
+
+    // 1.2每一個構造函數都有一個prototype屬性，指向另一個對象，也稱之為原型對象
+    console.dir(Star.prototype)  //打印對象
+
+    // 1.3這個對象可以掛載函數，對象實例化不會多次創建原型上的函數，節約內存
+
+    // 1.4可以將不變的方法，直接定義在prototpye對象上，這樣所有對象的實力就可以共享這些方法
+    // Star.prototype.sing = function () { 
+    //   console.log('sing') 
+    // }
+
+    // 1.5構造函數及原型對象中的this都指向實例化的對象
+
+
+
+    // 練習-給數組擴展求最大值和求和方法
+    const arr = [1, 2, 3]
+
+    // 定義數組擴展方法
+
+    // 1.求最大值
+    // 展開運算符-展開數組給 Math.max
+    // this 指向 實例對象arr
+    Array.prototype.max = function () { return Math.max(...this) }
+    console.log(arr.max())
+
+    // 2.求和
+    Array.prototype.sum = function () {
+      return this.reduce((prev, item) => prev + item, 0)
+    }
+    console.log([1, 2, 3].sum())
+
+
+
+
+    // 2.constructor屬性
+    // 每個原型對象都有constructor屬性
+    // 該屬性指向該原型對象的構造函數
+
+    // 若有多個對象的方法，可以給原型對象採取對象形式賦值
+    // 但這樣會覆蓋掉構造函數原型對象原來的內容，修改後原型對象的constructor就不再指向當前的構造函數了
+    // 此時我們可以在修改後的原型對象中，添加一個constructor指向原來的構造函數
+
+    console.log(Star.prototype.constructor === Star)
+
+    Star.prototype = {
+      // 需要重新指回構造函數
+      constructor: Star,
+      sing: function () { console.log('sing') },
+      dance: function () { console.log('dance') },
+    }
+    console.log(Star.prototype)
+
+
+    // 3.對象原型
+    // 對象都會有一個屬性 __proto__ 指向構造函數的prototype原型對象，之所以對象可以使用構造函數prototype原型對象的屬性和方法，就是因為對向有 __proto__ 原型的存在
+    const ldh = new Star()
+
+    // 對象原型 __proto__ 指向該 構造函數的原型對象
+    console.log(ldh.__proto__ === Star.prototype)
+
+    // 注意:
+    // 1.__proto__ 是JS非標準屬性
+    // 2.[[prototype]] 和 __proto__ 意義相同
+    // 3.用來表明當前實例對象指向哪一個原型對象prototype
+    // 4.__proto__ 對象原型裡面也有一個constructor屬性，指向創建該實例對象的構造函數
+    console.log(ldh.__proto__.constructor === Star)
+
+
+
+
+    // 4.原型繼承
+
+    // 公共部分
+    // const Person = {
+    //   eays: 2,
+    //   head: 1
+    // }
+
+    // 構造函數
+    function Women() { }
+    // Women 透過 原型 繼承 Person
+    // Women.prototype = Person
+    // 需指回原來的構造函數
+    Women.prototype.constructor = Women
+
+    const red = new Women()
+    console.log(red)
+
+    function Men() { }
+    // Men.prototype = Person
+    Men.prototype.constructor = Men
+    const pink = new Men()
+    // console.log(red)
+    // console.log(pink)
+
+    Women.prototype.baby = function () {
+      console.log('baby')
+    }
+
+    // 都有baby
+    // console.log(red)
+    // console.log(pink)
+
+    // 注意:
+    // 若同時使用了同一個對象，根據引用類型特點，他們指向同一個對象，修改一個就會影響全部
+    // 可以透過構造函數解決-結構一樣,對象不一樣
+    function Person() {
+      this.eays = 2
+      this.head = 1
+    }
+    Women.prototype = new Person
+    Women.prototype.constructor = Women
+
+    Men.prototype = new Person
+    Men.prototype.constructor = Men
+
+
+
+
+    // 5.原型鏈
+    // 構造函數的原型，裡面也有個 __proto__
+    // 實例對象.__proto__ 指向 構造函數.prototype
+    // 構造函數.prototype.__proto__ 指向 Object.prototype
+    // Object.prototype.__proto__ 則返回 null
+    function Per() { }
+    const newPer = new Per()
+
+    console.log(newPer.__proto__ === Per.prototype)
+    console.log(Per.prototype.__proto__ === Object.prototype)
+    console.log(Object.prototype.__proto__)  //null
+
+    // 基於原型對象的繼承使得不同的構造函數的原型對象關聯至一起，並且這種關聯的關係是一種鏈狀結構
+    // 我們將原型對象的鏈狀結構關係稱之為原型鏈
+
+    // 可以使用instanceof運算符用於檢測構造函數的prototype屬性是否出現在某個實例對象的原型鏈中
+    console.log(newPer instanceof Per) //true
+    console.log(newPer instanceof Object) //true
+    console.log(newPer instanceof Array) //flase
+    console.log([1, 2, 3] instanceof Array) //true
+
+
+
+
+  </script>
+
+</body>
+
+</html>

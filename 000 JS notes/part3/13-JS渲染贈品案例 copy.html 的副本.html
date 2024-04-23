@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div></div>
+
+  <script>
+    const gift = '50g的茶葉,清洗球'
+    // 1.字符串轉換為數組
+    console.log(gift.split(','))
+    // 2.根據數組元素個數 生成對應span
+    const str = gift.split(',').map(item => `<span>【贈品】${item}</span> <br>`).join('')
+    // console.log(str)
+    document.querySelector('div').innerHTML = str
+  </script>
+</body>
+
+</html>
