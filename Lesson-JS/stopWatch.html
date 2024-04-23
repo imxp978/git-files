@@ -17,27 +17,41 @@
     ></script>
     <style>
       h1 {
-        font-size: 20em;
+        font-size: 5em;
         font-weight: bolder;
-        font-family: arial;
+        font-family: monospace, arial;
+        margin-top: 30vh;
+      }
+      button {
+        z-index: 1;
       }
       .card {
+        text-align: center;
         height: 100vh;
         margin: 500px, auto;
         background-color: black;
         color: white;
         width: 100%;
-        transition: 0.1s;
+        transition: background 0.5s;
         transform: (90deg);
+      }
+
+      #wrap {
+        margin: 0 auto;
+      }
+
+      #clock {
+        border-bottom: 3px solid white;
+        margin-bottom: 20px;
       }
     </style>
   </head>
   <body>
-    <div align="center" id="wrap">
+    <div id="wrap">
       <div class="card align-items-center">
         <div class="card-body">
           <h1 class="card-title"><div id="clock">00:57:00</div></h1>
-          <h1 class="card-text">碼表</h1>
+          <h2 class="card-text"></h2>
 
           <button id="set" class="btn btn-primary">啟動</button>
           <button id="reset" class="btn btn-success">重置</button>
@@ -53,22 +67,27 @@
       const card = document.querySelector(".card");
       let ms = 0;
       let s = 57;
-      let m = 9;
-      let timerInterval;
-      let bgInterval;
+      let m = 59;
+      let timerInterval = 0;
+      let bgInterval = 0;
 
       //      set.addEventListener("click", startTimer);
       set.addEventListener("click", function () {
-        if (!timerInterval) {
+        if (timerInterval === 0) {
           timerInterval = setInterval(timer, 10);
+          // console.log("timerInterval: " + timerInterval);
           bgInterval = setInterval(bgChg, 2000);
-          set.innerHTML = "暫停";
+          if (set.innerHTML === "啟動") {
+            set.innerHTML = "暫停";
+          }
         } else {
           clearInterval(timerInterval);
-          clearInterval(bgInterval);
           timerInterval = 0;
+          clearInterval(bgInterval);
           bgInterval = 0;
-          set.innerHTML = "啟動";
+          if (set.innerHTML === "暫停") {
+            set.innerHTML = "啟動";
+          }
         }
       });
 
@@ -80,13 +99,15 @@
         timerInterval = 0;
         clearInterval(bgInterval);
         bgInterval = 0;
+        set.innerHTML = "啟動";
+        card.style.background = "black";
         render();
       });
 
       bg.addEventListener("click", bgChg);
 
       function bgChg() {
-        var color1 =
+        const color1 =
           "rgb(" +
           rand(1, 255) +
           "," +
@@ -94,7 +115,7 @@
           ", " +
           rand(1, 255) +
           ")";
-        var color2 =
+        const color2 =
           "rgb(" +
           rand(1, 255) +
           "," +
@@ -102,12 +123,11 @@
           ", " +
           rand(1, 255) +
           ")";
-        var bgset =
-          "background:linear-gradient(" + color1 + ", " + color2 + ")";
-        card.setAttribute("style", bgset);
-        card.style.fontsize = '500%';
-        card.style('transform', 'rotate(deg90)');
-        card.style.opacity = "0.33";
+        const bgset = `linear-gradient(${color1}, ${color2})`;
+        card.style.background = bgset;
+        // card.style.fontSize = '500%';
+        // card.style.transform = "rotate(deg90)";
+        // card.style.opacity = "0.33";
       }
 
       function timer() {
@@ -119,6 +139,9 @@
         if (s > 59) {
           m++;
           s = 0;
+        }
+        if (m > 59) {
+          m = 0;
         }
         render();
       }
@@ -138,10 +161,10 @@
       }
 
       function render() {
-        ms = addZero(ms);
-        s = addZero(+(s));
-        m = addZero(+(m));
-        clock.textContent = m + ":" + s + ":" + ms;
+        ms = addZero(+ms);
+        s = addZero(+s);
+        m = addZero(+m);
+        clock.textContent = `${m}:${s}:${ms}`;
       }
     </script>
   </body>
