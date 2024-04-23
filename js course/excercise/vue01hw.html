@@ -22,18 +22,16 @@
     <div id="app">
       <div class="container">
         <div class="my-3">
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-          >
+          <button type="button" class="btn btn-outline-primary" @click="status =!status">
             切換大頭貼解析度
           </button>
           現在圖片解析度：
-          <span>清晰</span>
+          <span v-if="status">清晰</span>
+          <span v-else>模糊</span>
         </div>
         <div class="row">
-          <div class="col-md-4 mb-3">
-            <div class="card h-100"  >
+          <div class="col-md-4 mb-3" v-for="item in dataList">
+            <div class="card h-100">
               <div class="position-absolute" style="top: 20px; right: 20px">
                 <button
                   type="button"
@@ -42,37 +40,40 @@
                   <i class="bi bi-heart fs-5"></i>
                 </button>
               </div>
-              <img
-                src="https://randomuser.me/api/portraits/men/24.jpg"
+              <img v-if="status"
+                :src="item.picture.large"
                 class="card-img-top"
               />
+              <img v-else
+              :src="item.picture.thumbnail"
+              class="card-img-top"
+            />
               <div class="card-body">
                 <h5 class="card-title">
-                  Monsieur Jérôme Clement
-                  //{{ item.name.title }}{{ item.name.first }} {{ item.name.last }}
-                  //( <span v-if="item.gender==='male'">👨</span> )
-                  //( <span v-else>b👨b</span> )
+                  
+                  {{ item.name.title }} {{
+                  item.name.first }} {{ item.name.last }}
                 </h5>
                 <p class="card-text">
-                  Email：<a href="mailto:jerome.clement@example.com"
-                    >jerome.clement@example.com</a
+                  Email：<a :href="`mailto:${item.email}`"
+                    >{{ item.email }}</a
                   >
                 </p>
                 <p class="card-text">
-                  Phone: <a href="tel:077 857 10 09">077 857 10 09</a>
+                  Phone: <a :href="`tel:${item.phone}`">{{item.phone}}</a>
                 </p>
                 <p class="card-text">
-                  Cell: <a href="tel:075 491 99 85">075 491 99 85</a>
+                  Cell: <a :href="`tel:${item.cell}`">{{item.cell}}</a>
                 </p>
-                <p class="card-text">City: Châtillon (Ju)</p>
-                <p class="card-text">State: Graubünden</p>
-                <p class="card-text">Country: Switzerland</p>
-                <p class="card-text">Postcode: 6560</p>
+                <p class="card-text">City: {{item.location.city}}</p>
+                <p class="card-text">State: {{item.location.state}}</p>
+                <p class="card-text">Country: {{item.location.country}}</p>
+                <p class="card-text">Postcode: {{item.location.postcode}}</p>
                 <p>
                   Address：<a
-                    href="https://www.google.com.tw/maps/search/Châtillon (Ju)Graubünden"
+                    :href="`https://www.google.com.tw/maps/search/${item.location.city} ${item.location.state} ${item.location.country} ${item.location.postcode}`"
                     target="_blank"
-                    >Châtillon (Ju) Graubünden Switzerland 6560</a
+                    >{{item.location.city}} {{item.location.state}} {{item.location.country}} {{item.location.postcode}}</a
                   >
                 </p>
                 <p class="card-text">
@@ -110,45 +111,28 @@
     ></script>
     <script src="https://unpkg.com/vue@next"></script>
 
-    <script>
 
-    </script>
-    <script>
-      let dataList = [];
-      for (let i = 0; i < 10; i++) {
-        fetch('https://randomuser.me/api/').then(function(response) {
-          return response.json();
-        }).then (function (data) {
-          dataList.push(data.results[0]);
-          //console.log(data);
-          //console.log(data.results);
-        });
-      }
-
-      console.log(dataList)
-    </script>
-
-    <script>
-      Vue.createApp({
-        data() {
-          return dataList
-          //console.log(dataList);
-        },
-        methods: {},
-        mounted() {
-
-          for (let i = 0; i < 10; i++) {
-            fetch('https://randomuser.me/api/').then(function(response) {
-              return response.json();
-            }).then (function (data) {
-              dataList.push(data.results[0]);
-              //console.log(data);
-              //console.log(data.results);
+<script>
+    Vue.createApp({
+      data() {
+        return {
+          dataList: [],
+          status: true,
+        };
+      },
+      methods: {
+        fetchData() {
+          for (let i = 0; i < 9; i++) {
+            fetch('https://randomuser.me/api/').then(response => response.json()).then(data => {
+              this.dataList.push(data.results[0]);
             });
           }
         },
-      }).mount('#app')
-    </script>
-
+      },
+      mounted() {
+        this.fetchData();
+      },
+    }).mount('#app')
+  </script>
   </body>
 </html>
