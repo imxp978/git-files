@@ -20,6 +20,9 @@
       body {
         height: 100%;
       }
+      * {
+        bo/rder: 1px solid black;
+      }
     </style>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
@@ -142,11 +145,11 @@
                 
             },
             addLocalStorage () {
+                // reset localstorage by clear storage if more than 10 records
                 while (this.storage.length > 9) {
                     this.storage.shift();
                 }
                 window.localStorage.clear()
-                
                 
                 const equation = `${this.input1}${this.sign}${this.input2}=${this.result}`
                 this.storage.push(equation)
@@ -155,11 +158,8 @@
 
                 this.storageJson = JSON.parse(window.localStorage.getItem('result'))
 
-                console.log('storage: '+this.storage);
-                console.log('storage JSON: '+this.storageJson);
-
-
-
+                // console.log('storage: '+this.storage);
+                // console.log('storage JSON: '+this.storageJson);
                 window.localStorage.setItem("result", JSON.stringify(this.storage))
             },
 
@@ -167,13 +167,12 @@
                 window.localStorage.clear()
                 this.storageJson = []
                 this.storage = []
-                console.log('this.storageJson: '+this.storageJson)
+                // console.log('this.storageJson: '+this.storageJson)
             },
 
             reset () {
                 this.input1 = 0
                 this.input2 = 0
-
             },
             
         },
