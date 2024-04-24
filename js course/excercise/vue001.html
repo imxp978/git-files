@@ -25,9 +25,23 @@
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="app">
+        <div v-for="item in data">
+            <img :src="item.picture.large"><br>
+            {{item.name.title}} {{item.name.first}} {{item.name.last}} <br>
+            {{item.gender}} <br>
+            {{item.location.city}}, {{item.location.country}} <br>
+            {{item.email}} <br>
+            {{item.cell}} <br>
+            <hr>
+            {{item}}
+
+            <hr>
+        </div>
+
       {{ text }} {{name }} {{num}}
       <input v-model="num" type="number" />
       <hr />
@@ -44,30 +58,9 @@
       </ul>
     </div>
     <button onclick="getData()">取得資料</button>
-    <script>
-      function getData() {
-        fetch("https://randomuser.me/api/")
-          .then(function (response) {
-            console.log(response);
-            return response.json();
-          })
-          .then(function (data) {
-            console.log(data);
-            console.log(data.gender);
-            console.log(typeof data);
-          });
-      }
-    </script>
 
-    <script>
-      $.ajax({
-        url: "https://randomuser.me/api/",
-        dataType: "json",
-        success: function (data) {
-          console.log(data);
-        },
-      });
-    </script>
+
+
     <script>
       Vue.createApp({
         data: function () {
@@ -95,6 +88,7 @@
                 gender: "male",
               },
             ],
+            data: [],
           };
         },
         methods: {
@@ -106,13 +100,20 @@
           },
         },
         mounted: function () {
-          console.log(this.text)
-          console.log(this.name)
-          console.log(this)
-          this.text = '您好呢?'
+            axios.get('https://randomuser.me/api/1.4/?results=2')
+            .then((response) => {
+                console.log(response.data.results);
+                this.data = response.data.results
+            });
+        },
+          
+            //console.log(this.text)
+          //console.log(this.name)
+          //console.log(this)
+          //this.text = '您好呢?'
           // AJAX取得的資料放這邊
         },
-      }).mount("#app");
+      ).mount("#app");
     </script>
   </body>
 </html>
