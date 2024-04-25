@@ -40,21 +40,21 @@
           // 求數組最大及最小
           // 1.最大
           let arr2 = [2,6,1,77,52,25,7]
-          let sum2 = arr2[0] //寫在循環外面，否則數值會被循環賦予 arr2[0] 
+          let max = arr2[0] //寫在循環外面，否則數值會被循環賦予 arr2[0] 
           for(j = 0; j < arr2.length; j++){
-            if (sum2 < arr2[j]) {
-              sum2 = arr2[j]
+            if (max < arr2[j]) {
+              max = arr2[j]
             }
           }
-          document.write(sum2)
+          document.write(max)
           // 2.最小
-          let sum3 = arr2[0] //寫在循環外面，否則數值會被循環賦予 arr2[0] 
+          let min = arr2[0] //寫在循環外面，否則數值會被循環賦予 arr2[0] 
           for(j = 0; j < arr2.length; j++){
-            if (sum3 > arr2[j]) {
-              sum2 = arr2[j]
+            if (min > arr2[j]) {
+              min = arr2[j]
             }
           }
-          document.write(sum3)
+          document.write(min)
   </script>
 </body>
 </html>
