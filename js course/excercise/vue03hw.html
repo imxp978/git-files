@@ -66,8 +66,8 @@
             <span>有 <span id="taskCount"></span>{{todoList.length}} 筆任務</span>
             <div>
               <a href="#" class="me-3">全部</a>
-              <a href="#" class="me-3" @click="filteredList(false)">未完成</a>
-              <a href="#" class="me-3" @click="filteredList(true)">已完成</a>
+              <a href="#" class="me-3" @click="filteredList()">未完成</a>
+              <a href="#" class="me-3" @click="filteredList2()">已完成</a>
               <a href="#" @click="clear" >清除所有任務</a>
             </div>
           </div>
@@ -113,12 +113,13 @@ Vue.createApp({
 
         },
         computed: {
-          filteredList(boolean) {
-            const newList = this.todoList.filter((item) => item.complete===boolean)
-            this.todoList = newList
-            return this.todoList
+          filteredList() {
+            return this.todoList = this.todoList.filter((item) => item.complete===true)
           },
-        },
+          filteredList2() {
+            return this.todoList = this.todoList.filter((item) => item.complete===false)
+          },
+        }
       }).mount('#app');
 
 
