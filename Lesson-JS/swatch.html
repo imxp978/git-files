@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap clock</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style type="text/css">
+        .clockArea {
+            width: 100%;
+            height: 400px;
+            background-image: radial-gradient(#000, #555);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .digital-clock {
+            width: 60%;
+            padding: 20px;
+            color: #ffffff;
+            border: 2px solid #999;
+            border-radius: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 50px;
+            background-image: linear-gradient(180deg, #000, #555);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <div class="card col-sm-8 mx-auto">
+                <div class="clockArea">
+                    <div class="digital-clock">00:00:00</div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">JS測試：馬錶小程式</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <button type="button" class="btn btn-primary">開始</button>
+                    <button type="button" class="btn btn-success">重設</button>
+                    <button type="button" class="btn btn-danger">變更背景顏色</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./comlib.js"></script>
+    <script type="text/javascript">
+        var running = false;
+        var tens = 0;
+        var sec = 57;
+        var min = 0;
+        var interval;
+        //建立12/24時制更換按鈕監聽
+        document.getElementsByClassName("btn-primary")[0].addEventListener("click", watchStart);
+        document.getElementsByClassName("btn-success")[0].addEventListener("click", watchReset);
+        //建立變更背景顏色按鈕監聽
+        document.getElementsByClassName("btn-danger")[0].addEventListener("click", chgBackground);
+        document.getElementsByClassName("digital-clock")[0].setAttribute('style', "color:#fff;text-shadow:0 0 6px #ff0;");
+        document.getElementsByTagName('body')[0].onload = function () {
+            var formatStr = addZero(min) + ':' + addZero(sec) + ':' + addZero(tens);
+            document.getElementsByClassName("digital-clock")[0].innerText = formatStr;
+        }
+        function watchReset() {
+            tens = 0;
+            sec = 0;
+            min = 0;
+            running = false;
+            clearInterval(interval);
+            document.getElementsByClassName("btn-primary")[0].innerText = "啟動";
+            var formatStr = addZero(min) + ':' + addZero(sec) + ':' + addZero(tens);
+            document.getElementsByClassName("digital-clock")[0].innerText = formatStr;
+        }
+        function watchRunning() {
+            tens++;
+            if (tens > 99) {
+                sec++;
+                tens = 0;
+            }
+            if (sec > 59) {
+                min++;
+                sec = 0;
+            }
+            if (min > 59) min = 0;
+            var formatStr = addZero(min) + ':' + addZero(sec) + ':' + addZero(tens);
+            document.getElementsByClassName("digital-clock")[0].innerText = formatStr;
+        }
+
+        function watchStart() {
+            if (running) {
+                running = false;
+                clearInterval(interval);
+                document.getElementsByClassName("btn-primary")[0].innerText = "啟動";
+            } else {
+                running = true;
+                interval = setInterval(watchRunning, 10);
+                document.getElementsByClassName("btn-primary")[0].innerText = "停止";
+            }
+        }
+        // 變更背景顏色功能函數
+        function chgBackground() {
+            var color1 = "rgb(" + rand(1, 255) + "," + rand(1, 255) + "," + rand(1, 255) + ")";
+            var color2 = "rgb(" + rand(1, 255) + "," + rand(1, 255) + "," + rand(1, 255) + ")";
+            var bgset = "background-image:radial-gradient(" + color1 + "," + color2 + ")";
+            document.getElementsByClassName("clockArea")[0].setAttribute('style', bgset);
+        }
+    </script>
+</body>
+
+</html>

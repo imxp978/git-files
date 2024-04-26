@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Clock</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="animate.compat.css">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&family=Rowdies:wght@300;400;700&display=swap');
+
+        .clockArea {
+            width: 100%;
+            height: 400px;
+            background-image: radial-gradient(#000, #555);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .digital-clock {
+            width: 60%;
+            padding: 20px;
+            color: #ffffff;
+            border: 2px solid #999;
+            border-radius: 10px;
+            font-family: 'Rowdies', Arial, Helvetica, sans-serif;
+            font-size: 5vw;
+            background-image: linear-gradient(180deg, #000, #555);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <div class="card col-sm-8 mx-auto">
+                <div class="clockArea">
+                    <h5 name="title">Hello World!</h5>
+                    <div class="digital-clock">00:00:00 AM</div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">JS測試：系統時鐘小程式</h5>
+                    <svg id="bsIcon" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        class="bi bi-alarm animated wobble infinite mx-auto" viewBox="0 0 16 16"
+                        style="width:10%;display:none;">
+                        <path
+                            d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9z" />
+                        <path
+                            d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1zm1.038 3.018a6 6 0 0 1 .924 0 6 6 0 1 1-.924 0M0 3.5c0 .753.333 1.429.86 1.887A8.04 8.04 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5M13.5 1c-.753 0-1.429.333-1.887.86a8.04 8.04 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1" />
+                    </svg>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <button type="button" class="btn btn-primary">24時制更換</button>
+                    <button type="button" class="btn btn-success">停止</button>
+                    <button type="button" class="btn btn-warning">隱藏日期標題</button>
+                    <button type="button" class="btn btn-info">變更民國日期標題</button>
+                    <button type="button" class="btn btn-danger">變更背景顏色</button>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">閙鈴設定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">閙鈴設定</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row text-center mb-2">
+                            <form id="timerForm1" name="timerForm1" action="" style="display: flex;">
+                                <div class="col">
+                                    <input id="remark" name="remark" class="form-control form-control-lg" type="text"
+                                        placeholder="備註" aria-label=".form-control-lg example" required>
+                                </div>
+                                <div class="col">
+                                    <select id="hour" name="hour" class="form-select form-select-lg"
+                                        aria-label=".form-select-lg example">
+                                        <option selected>設定小時</option>
+                                        <option value="0">00</option>
+                                        <option value="1">01</option>
+                                        <option value="2">02</option>
+                                        <option value="3">03</option>
+                                        <option value="4">04</option>
+                                        <option value="5">05</option>
+                                        <option value="6">06</option>
+                                        <option value="7">07</option>
+                                        <option value="8">08</option>
+                                        <option value="9">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <select id="minutes" name="minutes" class="form-select form-select-lg"
+                                        aria-label=".form-select-lg example">
+                                        <option selected>設定分鐘</option>
+                                        <option value="0">00</option>
+                                        <option value="1">01</option>
+                                        <option value="2">02</option>
+                                        <option value="3">03</option>
+                                        <option value="4">04</option>
+                                        <option value="5">05</option>
+                                        <option value="6">06</option>
+                                        <option value="7">07</option>
+                                        <option value="8">08</option>
+                                        <option value="9">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                        <option value="32">32</option>
+                                        <option value="33">33</option>
+                                        <option value="34">34</option>
+                                        <option value="35">35</option>
+                                        <option value="36">36</option>
+                                        <option value="37">37</option>
+                                        <option value="38">38</option>
+                                        <option value="39">39</option>
+                                        <option value="40">40</option>
+                                        <option value="41">41</option>
+                                        <option value="42">42</option>
+                                        <option value="43">43</option>
+                                        <option value="44">44</option>
+                                        <option value="45">45</option>
+                                        <option value="46">46</option>
+                                        <option value="47">47</option>
+                                        <option value="48">48</option>
+                                        <option value="49">49</option>
+                                        <option value="50">50</option>
+                                        <option value="51">51</option>
+                                        <option value="52">52</option>
+                                        <option value="53">53</option>
+                                        <option value="54">54</option>
+                                        <option value="55">55</option>
+                                        <option value="56">56</option>
+                                        <option value="57">57</option>
+                                        <option value="58">58</option>
+                                        <option value="59">59</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <button id="addBtn" name="addBtn" type="button" class="btn btn-primary btn-lg"
+                                        onclick="appendTimer();">新增</button>
+                                    <button type="reset" class="btn btn-info btn-lg text-white">清除</button>
+                                </div>
+                            </form>
+                        </div>
+                        <hr>
+                        <table id="timerList" name="timerList" class="table text-center">
+                            <thead class="table-light">
+                                <tr>
+                                    <td>#</td>
+                                    <td>說明</td>
+                                    <td>時間</td>
+                                    <td>是否啟動</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyId">
+                                <tr class="align-middle">
+                                    <td>1</td>
+                                    <td>吃飯提醒</td>
+                                    <td>11:12</td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch"
+                                                id="flexSwitch[]" name="flexSwitch[]" style="float:none;">
+                                            <label class="form-check-label" for="flexSwitch[]">啟動</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success">修改</button>
+                                        <button type="button" class="btn btn-danger">刪除</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark btn-lg" onclick="clearTimer();">刪除所有閙鈴設定</button>
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./comlib.js"></script>
+    <script type="text/javascript" src="cookie.js"></script>
+    <script type="text/javascript">
+        // 英文日曆對映資料陣列
+        var months = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        var days = [
+            'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+        ];
+        var timeFormat = 12; // 12/24時制判斷變數，預設12小時制
+        var interval;        // 設定time setInterval回傳的編號，可用以停止。
+        var dateHide = true;   // 顯示/隱藏日期標題判斷變數，預設顯示
+        var cdays = [
+            '星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'
+        ];
+        var cdate = false;        // 顯示西元/民國日期標題判斷變數，預設西元日期
+        var timerObject = new Array();     //閙鐘儲存陣列
+        var timerUpdate = false;  //閙鐘資料新增/更新模式切換
+        var updateIndex = 0;      //閙鐘資料陣列更新索引
+        var key = "timerCookie";  //cookie存取設定的KEY值
+
+        document.getElementsByClassName("btn-danger")[0].addEventListener("click", chgBackground); //建立變更背景顏色按鈕監聽
+
+        document.getElementsByClassName("btn-info")[0].addEventListener("click", chgCdate);  //建立顯示西元/民國日期標題按鈕監聽
+
+        document.getElementsByClassName("btn-warning")[0].addEventListener("click", showDate);  //建立顯示/隱藏日期標題按鈕監聽
+
+        document.getElementsByClassName("btn-primary")[0].addEventListener("click", chgFormat); //建立12/24時制更換按鈕監聽
+
+        document.getElementsByClassName("btn-success")[0].addEventListener("click", timeStop); //設定系統時間的啟動/停用
+
+        document.getElementsByTagName('body')[0].onload = function () {
+            document.getElementsByClassName("digital-clock")[0].setAttribute('style', "color:#fff;text-shadow:0 0 6px #ff0;");
+            document.getElementsByName("title")[0].style.color = "#fff";
+            clockUpdate();
+            interval = setInterval(clockUpdate, 1000);
+            timerObject=getCookie(key);
+    }
+
+const myModal = document.getElementById('exampleModal')
+myModal.addEventListener('shown.bs.modal', () => {
+    timerUpdate = false;
+    document.getElementById("addBtn").innerHTML = "新增";
+    updateTimerForm();
+    resetForm();
+
+})
+
+//===以下系統功能函數===============
+//清除表單輸入資料
+function resetForm() {
+    let timerForm1 = document.forms["timerForm1"];
+    timerForm1.reset();
+}
+//顯示閙鐘設定的表格資料
+function updateTimerForm() {
+    let clearTbody = document.getElementById("tbodyId");
+    clearTbody.innerHTML = "";
+    for (i = 0; i < timerObject.length; i++) {
+    lastRow = document.getElementById("tbodyId").rows.length;
+    tableTr = document.getElementById("tbodyId").insertRow(lastRow);
+    tableTr.setAttribute("class", "align-middle");
+    td = tableTr.insertCell(tableTr.cells.length);
+    td.innerHTML = timerObject[i].id;
+    td = tableTr.insertCell(tableTr.cells.length);
+    td.innerHTML = timerObject[i].remark;
+    td = tableTr.insertCell(tableTr.cells.length);
+    td.innerHTML = addZero(timerObject[i].hour) + ":" + addZero(timerObject[i].minutes);
+    td = tableTr.insertCell(tableTr.cells.length);
+    td.innerHTML = '<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch"' + timerObject[i].enable + ' style="float:none;" onchange="chgSwitch(' + i + ')" ><label class="form-check-label">啟動</label></div>';
+    td = tableTr.insertCell(tableTr.cells.length);
+    td.innerHTML = '<button type="button" class="btn btn-success" onclick="editTimer(' + i + ');">修改</button><button type="button" class="btn btn-danger" onclick="delTimer(' + i + ');">刪除</button>';
+    }
+}
+
+//閙鐘資料分新增與更新兩種模式
+function appendTimer() {
+    let timerForm1 = document.forms["timerForm1"];
+    let timerRemark = timerForm1.elements.remark.value;
+    let timerHour = parseInt(timerForm1.elements.hour.value);
+    let timerMinutes = parseInt(timerForm1.elements.minutes.value);
+    if (timerRemark == "" || isNaN(timerHour) || isNaN(timerMinutes)) {
+        alert("需選擇設定備註、時間，或格式有錯誤。");
+        return false;
+    }
+    if (!timerUpdate) {
+        let id = 1;
+        if (timerObject.length != 0) {
+            id = Math.max(...timerObject.map(p => p.id)) + 1;
+            timerObject.push({ id: id, remark: timerRemark, hour: timerHour, minutes: timerMinutes, enable: 'checked' });
+        } else {
+            timerObject = [{ id: id, remark: timerRemark, hour: timerHour, minutes: timerMinutes, enable: 'checked' }];
+        }
+    } else {
+        timerObject[updateIndex] = { id: timerObject[updateIndex].id, remark: timerRemark, hour: timerHour, minutes: timerMinutes, enable: timerObject[updateIndex].enable };
+        timerUpdate = false;
+        document.getElementById("addBtn").innerHTML = "新增";
+    }
+    setCookie(key, timerObject, 30);
+}
+
+
+        // 變更背景顏色功能函數
+        function chgBackground() {
+            var color1 = "rgb(" + rand(1, 255) + "," + rand(1, 255) + "," + rand(1, 255) + ")";
+            var color2 = "rgb(" + rand(1, 255) + "," + rand(1, 255) + "," + rand(1, 255) + ")";
+            var bgset = "background-image:radial-gradient(" + color1 + "," + color2 + ")";
+            document.getElementsByClassName("clockArea")[0].setAttribute('style', bgset);
+        }
+
+        // 顯示西元false/民國true日期標題功能函數
+        function chgCdate() {
+            if (cdate) {
+                cdate = false;
+                document.getElementsByClassName("btn-info")[0].innerText = "變更民國日期標題";
+            } else {
+                cdate = true;
+                document.getElementsByClassName("btn-info")[0].innerText = "變更西元日期標題";
+            }
+        }
+        // 顯示/隱藏日期標題功能函數
+        function showDate() {
+            if (dateHide) {
+                dateHide = false;
+                document.getElementsByClassName("btn-warning")[0].innerText = "顯示日期標題";
+                document.getElementsByName("title")[0].style.display = "none";
+            } else {
+                dateHide = true;
+                document.getElementsByClassName("btn-warning")[0].innerText = "隱藏日期標題";
+                document.getElementsByName("title")[0].style.display = "block";
+            }
+        }
+        // 啟動/停止系統時鐘程式功能
+        function timeStop() {
+            if (interval != 0) {
+                clearInterval(interval); //清除系統計時函數
+                interval = 0;
+                document.getElementsByClassName("btn-success")[0].innerText = "啟動"
+            } else {
+                interval = setInterval(clockUpdate, 1000);
+                document.getElementsByClassName("btn-success")[0].innerText = "停止"
+            }
+        }
+        // 12/24時制更換功能函數
+        function chgFormat() {
+            if (timeFormat == 12) {
+                timeFormat = 24;
+                document.getElementsByClassName("btn-primary")[0].innerText = "12時制更換";
+            } else {
+                timeFormat = 12;
+                document.getElementsByClassName("btn-primary")[0].innerText = "24時制更換";
+            }
+        }
+        // 12時制，HOUR大於12小時需進行轉換
+        function twelveHour(hour) {
+            return ((hour > 12) ? hour - 12 : hour);
+        }
+
+        // 系統時間更新函數
+        function clockUpdate() {
+            var date = new Date();
+            var day = date.getDate();
+            var year = date.getFullYear();
+            var s = addZero(date.getSeconds());
+            var m = addZero(date.getMinutes());
+            var h = addZero(date.getHours());
+            //判斷12/24時制顯示方式
+            if (timeFormat == 12) {
+                var h = addZero(twelveHour(date.getHours()));
+                var formatStr = h + ':' + m + ':' + s + ((date.getHours() >= 12) ? "PM" : "AM");
+            } else {
+                var formatStr = h + ':' + m + ':' + s;
+            }
+            document.getElementsByClassName("digital-clock")[0].innerText = formatStr;
+            //設定對映的星期，月，日，年的英文顯示方式
+            var dayOfWeek = days[date.getDay()]; //取得西元星期幾的陣列索引
+            var month = months[date.getMonth()];
+
+            if (cdate) {    // cdate判斷西元false/民國true日期標題
+                var dateString = '民國' + (year - 1911) + '年' + (date.getMonth() + 1) + '月' + day + '日' + '， ' + cdays[date.getDay()];;
+            } else {
+                var dateString = dayOfWeek + ', ' + month + ' ' + day + ', ' + year;
+            }
+            document.getElementsByName("title")[0].innerText = dateString;
+        }
+
+    </script>
+</body>
+
+</html>
