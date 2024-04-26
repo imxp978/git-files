@@ -21,30 +21,33 @@
       <div id="app" class="container my-3">
         <div class="input-group mb-3">
           <span class="input-group-text">待辦事項</span>
-          <input v-model="newTodo" type="text" class="form-control" placeholder="準備要做的任務"
+          <input v-model="newTodo" type="text" class="form-control" placeholder="準備要做的任務" @keyup.enter="addTodo"
             id="newTodo">
           <button class="btn btn-primary" type="button" id="addTodo" @click="addTodo">新增</button>
         </div>
         <div class="card text-center">
           <ul class="list-group list-group-flush text-left" id="todoList" v-for="item in todoList">
-            <li  class="list-group-item">
+            <li  class="list-group-item" >
               <div class="d-flex">
                 <div class="form-check">
                   <div>
-                    <input id="a" type="checkbox" class="form-check-input">
-                    <label for="a">{{item.todo}}代辦事項</label>
+                    <input :id="item.id" type="checkbox" class="form-check-input" @click="item.complete=!item.complete" :check="item.complete">
+                    <label :for="item.id">{{item.task}}</label>
                   </div>
                 </div>
-                <button type="button" class="btn-close ms-auto remove" @click="remove(item)">
+                <button type="button" class="btn-close ms-auto remove" @click="remove(item.id)">
                 </button>
               </div>
             </li>
+          </ul>
+          <ul>
+
             <li  class="list-group-item">
               <div class="d-flex">
                 <div class="form-check">
                   <div>
                     <input id="b" type="checkbox" class="form-check-input" checked>
-                    <label for="b" class="completed">已完成 代辦事項</label>
+                    <label for="b" class="completed">已完成 待辦事項</label>
                   </div>
                 </div>
                 <button type="button" class="btn-close ms-auto remove">
@@ -60,21 +63,23 @@
             </li>
           </ul>
           <div class="card-footer d-flex justify-content-between">
-            <span>有 <span id="taskCount">1</span> 筆任務</span>
+            <span>有 <span id="taskCount"></span>{{todoList.length}} 筆任務</span>
             <div>
               <a href="#" class="me-3">全部</a>
-              <a href="#" class="me-3">未完成</a>
-              <a href="#" class="me-3">已完成</a>
-              <a href="#" >清除所有任務</a>
+              <a href="#" class="me-3" @click="filteredList(false)">未完成</a>
+              <a href="#" class="me-3" @click="filteredList(true)">已完成</a>
+              <a href="#" @click="clear" >清除所有任務</a>
             </div>
           </div>
+          newTodo: {{newTodo}}
         </div>
       </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
       crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
 
 Vue.createApp({
@@ -86,15 +91,33 @@ Vue.createApp({
         },
         methods: {
             addTodo() {
+              if (this.newTodo) {
+                this.todoList.push({id: Date.now(), task: this.newTodo, complete: false })
+                this.newTodo = ''
+              }
 
             },
             edit() {
 
             },
-            remove() {
-
+            remove(id) {
+              const index = this.todoList.findIndex((item) => item.id===id)
+              this.todoList.splice(index,1);
             },
-          
+
+            clear() {
+              this.todoList= [];
+              console.log(this.todoList.length)
+              console.log(this.todoList)
+            },
+
+        },
+        computed: {
+          filteredList(boolean) {
+            const newList = this.todoList.filter((item) => item.complete===boolean)
+            this.todoList = newList
+            return this.todoList
+          },
         },
       }).mount('#app');
 
