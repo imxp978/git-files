@@ -16,11 +16,15 @@
       crossorigin="anonymous"
     ></script>
     <style>
+      * {
+        bo/rder: 1px solid black;
+      }
+
       h1 {
         font-size: 5em;
         font-weight: bolder;
         font-family: monospace, arial;
-        margin-top: 30vh;
+        margin-top: 20vh;
       }
       button {
         z-index: 1;
@@ -57,6 +61,10 @@
           <button id="reset" class="btn btn-success">重置</button>
           <button id="bg" class="btn btn-danger">換背景色</button>
           <button id="save" class="btn btn-secondary">存入Cookie</button>
+          <hr>
+          <table id="timestamplist" class="table">
+
+          </table>
         </div>
       </div>
     </div>
@@ -168,14 +176,72 @@
         // card.style.transform = "rotate(deg90)";
         // card.style.opacity = "0.33";
       }
-      let value = []
+      let timeStamp = []
+      let timeStampId = 1;
       save.addEventListener('click', saveCookie);
-      function saveCookie() {
-        let key = 'stoptimer'
+      let cookieKey = 'stoptimer'
+      const timestamplist = document.querySelector('#timestamplist')
 
-        value.push(`${m}:${s}:${ms}`);
-        setCookie(key, value, 30);
+      function saveCookie() {
+        if (timeStamp.length < 10) {
+          timeStamp.push({id: timeStampId, time: `${m}:${s}:${ms}`});
+          setCookie(cookieKey, timeStamp, 30);
+          timeStampId++;
+        } else {
+          timeStamp.shift();
+          saveCookie();
+        }
+        renderTimeRecord()
       }
+
+      function clearRecord() {
+        timeStamp = []
+        timeStampId = 1
+        deleteCookie(cookieKey)
+        renderTimeRecord();
+      }
+
+      function editRecord(id) {
+        //console.log(id);
+        timeStamp[id].time = `${m}:${s}:${ms}`;
+        renderTimeRecord();
+      }
+
+      function delRecord(id) {
+        timeStamp.splice(id,1);
+        renderTimeRecord();
+      }
+
+
+      function renderTimeRecord () {
+        timestamplist.innerHTML = '';
+        for (let i=0; i < timeStamp.length; i++){
+          let tr = document.createElement('tr');
+          tr.classList.add('row')
+
+          const td_id = document.createElement('td')
+          td_id.innerHTML = timeStamp[i].id;
+          td_id.classList.add('col')
+          const td_time = document.createElement('td')
+          td_time.innerHTML = timeStamp[i].time;
+          td_time.classList.add('col')
+          const td_btn = document.createElement('td')
+          td_btn.innerHTML = `<button type="button" class="btn btn-primary" onclick=editRecord(${i})>修改</button>`+ `<button type="button" class="btn btn-danger" onclick=delRecord(${i})>刪除</button>`;
+          td_btn.classList.add('col')
+          tr.append(td_id, td_time, td_btn);
+          timestamplist.append(tr);
+        }
+        const btn_clear = document.createElement('button')
+        btn_clear.id='btn_clear'
+        btn_clear.classList.add('btn', 'btn-danger')
+        btn_clear.innerHTML = '刪除所有紀錄';
+        timestamplist.append(btn_clear)
+        btn_clear.addEventListener('click', clearRecord)
+      }
+
+
+
+
 
 
       function timer() {
