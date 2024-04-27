@@ -16,28 +16,57 @@
       crossorigin="anonymous"
     ></script>
     <style>
-      * {
-        bo/rder: 1px solid black;
+
+      body {
+        font-family:  monospace, 'arial';
       }
 
       h1 {
-        font-size: 5em;
+        font-size: 6.5em;
+        font-weight: bolder;
+        margin-top: 35vh;
+        transition: 1s;
+      }
+
+      .active {
+        font-size: 5.5em;
         font-weight: bolder;
         font-family: monospace, arial;
-        margin-top: 20vh;
+        margin-top: 10vh;
+        transition: 0.5s;
       }
+
       button {
-        z-index: 1;
+        margin: 3px;
       }
       .card {
         text-align: center;
         height: 100vh;
+        width: 100%vw
         margin: 500px, auto;
         background-color: black;
         color: white;
-        width: 100%;
-        transition: background 0.5s;
+        transition: 0.3s;
         transform: (90deg);
+      }
+
+      .btns {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .table {
+        margin-top: 20px;
+      }
+
+      tr {
+        line-height: 1.5em;
+        align-items: center;
+        padding: 5px;
+      }
+
+      td li {
+        line-height: 2em;
       }
 
       #wrap {
@@ -45,32 +74,33 @@
       }
 
       #clock {
-        border-bottom: 3px solid white;
-        margin-bottom: 20px;
+        border-bottom: 5px solid white;
+        padding: 10px;
       }
+
     </style>
   </head>
   <body>
     <div id="wrap">
       <div class="card align-items-center">
         <div class="card-body">
-          <h1 class="card-title"><div id="clock">00:57:00</div></h1>
+          <h1 class="card-title">
+            <div id="clock"></div>
+          </h1>
           <h2 class="card-text"></h2>
-
-          <button id="set" class="btn btn-primary">啟動</button>
-          <button id="reset" class="btn btn-success">重置</button>
-          <button id="bg" class="btn btn-danger">換背景色</button>
-          <button id="save" class="btn btn-secondary">存入Cookie</button>
-          <hr>
-          <table id="timestamplist" class="table">
-
-          </table>
+          <div class="btns">
+            <button id="set" class="btn btn-primary">啟動</button>
+            <button id="reset" class="btn btn-secondary">重置</button>
+            <button id="bg" class="btn btn-secondary">換背景色</button>
+            <button id="save" class="btn btn-light">存入Cookie</button>
+          </div>
+          <table id="timestamplist" class="table"></table>
         </div>
       </div>
     </div>
 
     <script>
-      // COOKIE RELATED FN
+      // cookie related
       // 新增或更新 Cookie 中的物件資料
       function setCookie(key, value, expiryDays) {
         const date = new Date();
@@ -104,24 +134,121 @@
       }
     </script>
 
+    <script>
+      // cookie record
+      let timeStamp = [];
+      let timeStampId = 1;
+
+      const save = document.querySelector("#save");
+      save.addEventListener("click", addData);
+
+      let cookieKey = "stopTimer";
+      const timestamplist = document.querySelector("#timestamplist");
+
+      function addData() {
+        if (timeStamp.length < 10) {
+          timeStamp.unshift({ id: timeStampId, time: `${m}:${s}:${ms}` });
+          timeStampId++;
+        } else {
+          timeStamp.pop();
+          addData();
+        }
+        saveCookie();
+      }
+
+      function saveCookie() {
+        setCookie(cookieKey, timeStamp, 30);
+        renderTimeRecord();
+      }
+
+      function clearRecord() {
+        timeStamp = [];
+        timeStampId = 1;
+        deleteCookie(cookieKey);
+        saveCookie();
+      }
+
+      function editRecord(id) {
+        //console.log(id);
+        timeStamp[id].time = `${m}:${s}:${ms}`;
+        saveCookie();
+      }
+
+      function delRecord(id) {
+        timeStamp.splice(id, 1);
+        saveCookie();
+      }
+
+      const h1 = document.querySelector("h1");
+      function renderTimeRecord() {
+        timestamplist.innerHTML = "";
+
+        for (let i = 0; i < timeStamp.length; i++) {
+          let tr = document.createElement("tr");
+          tr.classList.add("row");
+
+          const td_id = document.createElement("td");
+          td_id.innerHTML = `${timeStamp[i].id} :`;
+          td_id.classList.add("col", "col-3");
+
+          const td_time = document.createElement("td");
+          td_time.innerHTML = timeStamp[i].time;
+          td_time.classList.add("col");
+
+          const td_btn = document.createElement("td");
+          td_btn.innerHTML =
+            `<button class="btn btn-sm btn-light mx-1" onclick=editRecord(${i})>修改</button>` +
+            `<button class="btn btn-sm btn-light" onclick=delRecord(${i})>刪除</button>`;
+          td_btn.classList.add("col");
+
+          tr.append(td_id, td_time, td_btn);
+          timestamplist.append(tr);
+          const firstRow = document.querySelector(
+            "#timestamplist tr:first-child"
+          );
+          //console.log(firstRow);
+          firstRow.style.fontSize = "x-large";
+          firstRow.style.fontWeight = "bold";
+        }
+
+        if (timeStamp.length != 0) {
+          h1.classList.add("active");
+          const btn_clear = document.createElement("button");
+          btn_clear.id = "btn_clear";
+          btn_clear.style.marginBottom = "20px";
+          btn_clear.classList.add("btn", "btn-danger");
+          btn_clear.innerHTML = "刪除所有紀錄";
+          timestamplist.append(btn_clear);
+          btn_clear.addEventListener("click", clearRecord);
+        } else {
+          h1.classList.remove("active");
+          timeStampId = 1;
+        }
+      }
+    </script>
 
     <script>
+      // stoptimer
       const clock = document.querySelector("#clock");
       const set = document.querySelector("#set");
       const reset = document.querySelector("#reset");
       const bg = document.querySelector("#bg");
-      const save = document.querySelector('#save')
       const card = document.querySelector(".card");
+
       let ms = 0;
-      let s = 57;
-      let m = 59;
+      let s = 6;
+      let m = 8;
       let timerInterval = 0;
       let bgInterval = 0;
+
+      render();
 
       //      set.addEventListener("click", startTimer);
       set.addEventListener("click", function () {
         if (timerInterval === 0) {
           timerInterval = setInterval(timer, 10);
+          set.classList.remove("btn-primary");
+          set.classList.add("btn-danger");
           // console.log("timerInterval: " + timerInterval);
           bgInterval = setInterval(bgChg, 2000);
           if (set.innerHTML === "啟動") {
@@ -135,6 +262,8 @@
           if (set.innerHTML === "暫停") {
             set.innerHTML = "啟動";
           }
+          set.classList.remove("btn-danger");
+          set.classList.add("btn-primary");
         }
       });
 
@@ -147,102 +276,21 @@
         clearInterval(bgInterval);
         bgInterval = 0;
         set.innerHTML = "啟動";
+        set.classList.remove("btn-danger");
+        set.classList.add("btn-primary");
         card.style.background = "black";
+
         render();
       });
 
       bg.addEventListener("click", bgChg);
 
       function bgChg() {
-        const color1 =
-          "rgb(" +
-          rand(1, 255) +
-          "," +
-          rand(1, 255) +
-          ", " +
-          rand(1, 255) +
-          ")";
-        const color2 =
-          "rgb(" +
-          rand(1, 255) +
-          "," +
-          rand(1, 255) +
-          ", " +
-          rand(1, 255) +
-          ")";
+        const color1 = `rgb(${rand(1, 255)},${rand(1, 255)},${rand(1, 255)})`;
+        const color2 = `rgb(${rand(1, 255)},${rand(1, 255)},${rand(1, 255)})`;
         const bgset = `linear-gradient(${color1}, ${color2})`;
         card.style.background = bgset;
-        // card.style.fontSize = '500%';
-        // card.style.transform = "rotate(deg90)";
-        // card.style.opacity = "0.33";
       }
-      let timeStamp = []
-      let timeStampId = 1;
-      save.addEventListener('click', saveCookie);
-      let cookieKey = 'stoptimer'
-      const timestamplist = document.querySelector('#timestamplist')
-
-      function saveCookie() {
-        if (timeStamp.length < 10) {
-          timeStamp.push({id: timeStampId, time: `${m}:${s}:${ms}`});
-          setCookie(cookieKey, timeStamp, 30);
-          timeStampId++;
-        } else {
-          timeStamp.shift();
-          saveCookie();
-        }
-        renderTimeRecord()
-      }
-
-      function clearRecord() {
-        timeStamp = []
-        timeStampId = 1
-        deleteCookie(cookieKey)
-        renderTimeRecord();
-      }
-
-      function editRecord(id) {
-        //console.log(id);
-        timeStamp[id].time = `${m}:${s}:${ms}`;
-        renderTimeRecord();
-      }
-
-      function delRecord(id) {
-        timeStamp.splice(id,1);
-        renderTimeRecord();
-      }
-
-
-      function renderTimeRecord () {
-        timestamplist.innerHTML = '';
-        for (let i=0; i < timeStamp.length; i++){
-          let tr = document.createElement('tr');
-          tr.classList.add('row')
-
-          const td_id = document.createElement('td')
-          td_id.innerHTML = timeStamp[i].id;
-          td_id.classList.add('col')
-          const td_time = document.createElement('td')
-          td_time.innerHTML = timeStamp[i].time;
-          td_time.classList.add('col')
-          const td_btn = document.createElement('td')
-          td_btn.innerHTML = `<button type="button" class="btn btn-primary" onclick=editRecord(${i})>修改</button>`+ `<button type="button" class="btn btn-danger" onclick=delRecord(${i})>刪除</button>`;
-          td_btn.classList.add('col')
-          tr.append(td_id, td_time, td_btn);
-          timestamplist.append(tr);
-        }
-        const btn_clear = document.createElement('button')
-        btn_clear.id='btn_clear'
-        btn_clear.classList.add('btn', 'btn-danger')
-        btn_clear.innerHTML = '刪除所有紀錄';
-        timestamplist.append(btn_clear)
-        btn_clear.addEventListener('click', clearRecord)
-      }
-
-
-
-
-
 
       function timer() {
         ms++;
@@ -278,7 +326,7 @@
         ms = addZero(+ms);
         s = addZero(+s);
         m = addZero(+m);
-        clock.textContent = `${m}:${s}:${ms}`;
+        clock.innerHTML = `${m}<span id="sparkle">:</span>${s}<span id="sparkle2">:</span>${ms}`;
       }
     </script>
   </body>
