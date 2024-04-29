@@ -16,6 +16,9 @@
       crossorigin="anonymous"
     ></script>
     <style>
+      * {
+        bo/rder: 1px solid black;
+      }
 
       body {
         font-family:  monospace, 'arial';
@@ -24,8 +27,15 @@
       h1 {
         font-size: 6.5em;
         font-weight: bolder;
+        margin: 0 auto;
         margin-top: 35vh;
         transition: 1s;
+        bor/der-bottom: 5px solid white;
+
+      }
+
+      input {
+        min-width: 150px;
       }
 
       .active {
@@ -42,7 +52,7 @@
       .card {
         text-align: center;
         height: 100vh;
-        width: 100%vw
+        width: 100vw;
         margin: 500px, auto;
         background-color: black;
         color: white;
@@ -50,12 +60,18 @@
         transform: (90deg);
       }
 
+      .card-body {
+        width: 45%;
+      }
+
+
       .btns {
         padding-top: 10px;
         padding-bottom: 10px;
+
       }
 
-      .table {
+      table {
         margin-top: 20px;
       }
 
@@ -74,10 +90,20 @@
       }
 
       #clock {
-        border-bottom: 5px solid white;
+        
         padding: 10px;
       }
 
+      .form-control {
+        width: auto !important;
+        display: inline-block !important;
+        line-height: 1 !important;
+      }
+
+      span {
+        color: white !important;
+        background: none !important;
+      }
     </style>
   </head>
   <body>
@@ -138,6 +164,7 @@
       // cookie record
       let timeStamp = [];
       let timeStampId = 1;
+      let editItem = -1;
 
       const save = document.querySelector("#save");
       save.addEventListener("click", addData);
@@ -171,7 +198,35 @@
       function editRecord(id) {
         //console.log(id);
         timeStamp[id].time = `${m}:${s}:${ms}`;
+        
+        // console.log("edit: " + editItem);
         saveCookie();
+      }
+
+      function editRecord2(id) {
+        editItem = id;
+        saveCookie();
+      }
+
+      function doneEdit(id) {
+        const inputM = document.querySelector("#inputM");
+        const inputS = document.querySelector("#inputS");
+        const inputMS = document.querySelector("#inputMS");
+
+        m = inputM.value;
+        s = inputS.value;
+        ms = inputMS.value;
+
+        m = addZero(+m);
+        s = addZero(+s);
+        ms = addZero(+ms);
+
+        let index = timeStamp.findIndex((item) => item.id === id)
+        
+        editItem = -1;
+        timeStamp[index].time = `${m}:${s}:${ms}`;
+        saveCookie();
+        
       }
 
       function delRecord(id) {
@@ -180,29 +235,52 @@
       }
 
       const h1 = document.querySelector("h1");
+
       function renderTimeRecord() {
         timestamplist.innerHTML = "";
+
 
         for (let i = 0; i < timeStamp.length; i++) {
           let tr = document.createElement("tr");
           tr.classList.add("row");
 
           const td_id = document.createElement("td");
+          const td_time = document.createElement("td");
+          const td_btn = document.createElement("td");
+          const id = timeStamp[i].id;
+
           td_id.innerHTML = `${timeStamp[i].id} :`;
           td_id.classList.add("col", "col-3");
-
-          const td_time = document.createElement("td");
-          td_time.innerHTML = timeStamp[i].time;
+          
+          td_time.innerHTML = `<span ondblclick=editRecord2(${i})>${timeStamp[i].time}</span>` ;
           td_time.classList.add("col");
 
-          const td_btn = document.createElement("td");
           td_btn.innerHTML =
-            `<button class="btn btn-sm btn-light mx-1" onclick=editRecord(${i})>修改</button>` +
-            `<button class="btn btn-sm btn-light" onclick=delRecord(${i})>刪除</button>`;
-          td_btn.classList.add("col");
+            `<button class="btn btn-sm btn-light mx-1" onclick=editRecord(${i}) ondblclick=editRecord2(${i})>修改</button>` +
+            `<button class="btn btn-sm btn-light" onclick=delRecord(${i}) >刪除</button>`;
+          td_btn.classList.add("col", "col-4");
+
+
+          if (i == editItem) {
+            const time = timeStamp[i].time
+            const timeArray = time.split(":")
+            // console.log(timeArray);
+            m = timeArray[0];
+            s = timeArray[1];
+            ms = timeArray[2];
+            td_time.innerHTML = `<input min="0" max="99" style="min-width:10%" class="form-control input-sm" type="number" id="inputM" value=${m} >:<input min="0" max="59" class="form-control input-sm" type="number" id="inputS" value=${s} style="min-width:10%"">:<input min="0" max="99" class="form-control input-sm" type="number" id="inputMS" value=${ms} style="min-width:5%"><button class="btn btn-sm btn-primary" type="button" onclick="doneEdit(${id})">完成</button>`;
+            editItem = -1;
+          }
 
           tr.append(td_id, td_time, td_btn);
           timestamplist.append(tr);
+
+          
+
+
+          
+
+
           const firstRow = document.querySelector(
             "#timestamplist tr:first-child"
           );
@@ -213,12 +291,13 @@
 
         if (timeStamp.length != 0) {
           h1.classList.add("active");
+          const hr = document.createElement('hr');
           const btn_clear = document.createElement("button");
           btn_clear.id = "btn_clear";
           btn_clear.style.marginBottom = "20px";
           btn_clear.classList.add("btn", "btn-danger");
           btn_clear.innerHTML = "刪除所有紀錄";
-          timestamplist.append(btn_clear);
+          timestamplist.append(hr, btn_clear);
           btn_clear.addEventListener("click", clearRecord);
         } else {
           h1.classList.remove("active");

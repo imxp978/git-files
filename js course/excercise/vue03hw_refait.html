@@ -10,6 +10,10 @@
       integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <style>
+      * {
+        bord/er: 1px solid black;
+      }
+
       .completed {
         text-decoration: 2px line-through red;
       }
@@ -29,10 +33,11 @@
         <div class="card text-center">
           <ul class="list-group list-group-flush text-left" id="todoList" v-for="item in filteredTodo">
             <li  class="list-group-item">
-              <div class="d-flex">
+              <div class="d-flex flex-row">
                 <div class="form-check">
-                  <div v-if="tempId === item.id">
+                  <div v-if="tempId === item.id" style="display:flex;flex-direction:row;flex:1 1 auto">
                     <input class="form-control" type="text" placeholder="tempTask" v-model="tempTask" @keyup.enter="done" @keyup.esc="cancel"/>
+                    <button type="button" class="btn btn-sm btn-primary" style="min-width:80px" onclick="done(id)">編輯完成</button>
                   </div>
                   <div v-else>
                     <input :id="item.id" type="checkbox" class="form-check-input" @click="item.completed=!item.completed" :checked="item.completed">
@@ -71,7 +76,7 @@
         visible: 'all',
       }
     },
-    
+
     methods:{
       addTodo () {
         if(this.newTask) {
