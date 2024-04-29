@@ -213,18 +213,18 @@
         const inputS = document.querySelector("#inputS");
         const inputMS = document.querySelector("#inputMS");
 
-        m = inputM.value;
-        s = inputS.value;
-        ms = inputMS.value;
+        let m1 = inputM.value;
+        let s1 = inputS.value;
+        let ms1 = inputMS.value;
 
-        m = addZero(+m);
-        s = addZero(+s);
-        ms = addZero(+ms);
+        m1 = addZero(+m1);
+        s1 = addZero(+s1);
+        ms1 = addZero(+ms1);
 
         let index = timeStamp.findIndex((item) => item.id === id)
         
         editItem = -1;
-        timeStamp[index].time = `${m}:${s}:${ms}`;
+        timeStamp[index].time = `${m1}:${s1}:${ms1}`;
         saveCookie();
         
       }
@@ -268,15 +268,12 @@
             m = timeArray[0];
             s = timeArray[1];
             ms = timeArray[2];
-            td_time.innerHTML = `<input min="0" max="99" style="min-width:10%" class="form-control input-sm" type="number" id="inputM" value=${m} >:<input min="0" max="59" class="form-control input-sm" type="number" id="inputS" value=${s} style="min-width:10%"">:<input min="0" max="99" class="form-control input-sm" type="number" id="inputMS" value=${ms} style="min-width:5%"><button class="btn btn-sm btn-primary" type="button" onclick="doneEdit(${id})">完成</button>`;
+            td_time.innerHTML = `<input min="0" max="59" style="min-width:10%" class="form-control input-sm" type="number" id="inputM" value=${m} >:<input min="0" max="59" class="form-control input-sm" type="number" id="inputS" value=${s} style="min-width:10%"">:<input min="0" max="99" class="form-control input-sm" type="number" id="inputMS" value=${ms} style="min-width:5%"><button class="btn btn-sm btn-primary" type="button" onclick="doneEdit(${id})">完成</button>`;
             editItem = -1;
           }
 
           tr.append(td_id, td_time, td_btn);
           timestamplist.append(tr);
-
-          
-
 
           
 
