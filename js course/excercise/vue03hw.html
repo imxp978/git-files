@@ -13,10 +13,17 @@
       .completed {
         text-decoration: line-through
       }
+
+ 
+
+      .edit-section {
+        display: inline;
+      }
     </style>
   </head>
 
-  <body>
+
+  <body @click='tempId !== "" ? cancelEdit : null'>
     <div id="app">
       <div id="app" class="container my-3">
         <div class="input-group mb-3">
@@ -26,13 +33,17 @@
           <button class="btn btn-primary" type="button" id="addTodo" @click="addTodo">新增</button>
         </div>
         <div class="card text-center">
-          <ul class="list-group list-group-flush text-left" id="todoList" v-for="item in todoList">
+          <ul class="list-group list-group-flush text-left" id="todoList" v-for="item in filterTodos">
             <li  class="list-group-item" >
               <div class="d-flex">
                 <div class="form-check">
-                  <div>
-                    <input :id="item.id" type="checkbox" class="form-check-input" @click="item.complete=!item.complete" :check="item.complete">
-                    <label :for="item.id">{{item.task}}</label>
+                  <div class="edit-section" v-if="tempId===item.id">
+                      <input id="edit" v-model="tempTask" class="form-control" type="text" @keyup.enter="done" @keyup.esc="cancelEdit" style="display:inline"> 
+                      <label for="edit" class="edit-section">ESC to exit edit</label>
+                  </div>
+                  <div v-else>
+                    <input :id="item.id" type="checkbox" class="form-check-input" @click="item.completed=!item.completed" :checked="item.completed" :check="item.complete">
+                    <label :for="item.id" @dblclick="edit(item.id, item.task)">{{item.task}} // 時間：{{item.id}}</label>
                   </div>
                 </div>
                 <button type="button" class="btn-close ms-auto remove" @click="remove(item.id)">
@@ -40,38 +51,15 @@
               </div>
             </li>
           </ul>
-          <ul>
-
-            <li  class="list-group-item">
-              <div class="d-flex">
-                <div class="form-check">
-                  <div>
-                    <input id="b" type="checkbox" class="form-check-input" checked>
-                    <label for="b" class="completed">已完成 待辦事項</label>
-                  </div>
-                </div>
-                <button type="button" class="btn-close ms-auto remove">
-                </button>
-              </div>
-            </li>
-            <li  class="list-group-item">
-              <div class="d-flex">
-                <div class="form-check">
-                  <input class="form-control" type="text" placeholder="編輯"/>
-                </div>
-              </div>
-            </li>
-          </ul>
           <div class="card-footer d-flex justify-content-between">
             <span>有 <span id="taskCount"></span>{{todoList.length}} 筆任務</span>
             <div>
-              <a href="#" class="me-3">全部</a>
-              <a href="#" class="me-3" @click="filteredList()">未完成</a>
-              <a href="#" class="me-3" @click="filteredList2()">已完成</a>
+              <a href="#" class="me-3" @click.prevent="visible='all'">全部</a>
+              <a href="#" class="me-3" @click.prevent="visible='undone'">未完成</a>
+              <a href="#" class="me-3" @click.prevent="visible='done'">已完成</a>
               <a href="#" @click="clear" >清除所有任務</a>
             </div>
           </div>
-          newTodo: {{newTodo}}
         </div>
       </div>
     </div>
@@ -87,19 +75,39 @@ Vue.createApp({
           return {
             newTodo: '',
             todoList: [],
+            tempId: '',
+            tempTask: '',
+            visible: 'all',
           }
         },
         methods: {
             addTodo() {
               if (this.newTodo) {
-                this.todoList.push({id: Date.now(), task: this.newTodo, complete: false })
+                this.todoList.unshift({id: Date.now(), task: this.newTodo, completed: false })
                 this.newTodo = ''
               }
 
             },
-            edit() {
-
+            edit(id, task) {
+                this.tempId = id
+                this.tempTask = task
+                // console.log(this.tempId);
             },
+
+            cancelEdit() {
+                this.tempId = '';
+                this.tempTask = '';
+            },
+
+            done(id, task) {
+                if (this.tempTask) {
+                    const index = this.todoList.findIndex((item)=>item.id === this.tempId);
+                    this.todoList[index].task = this.tempTask;
+                    this.tempId = '';
+                    this.tempTask = '';
+                }
+            },
+
             remove(id) {
               const index = this.todoList.findIndex((item) => item.id===id)
               this.todoList.splice(index,1);
@@ -107,20 +115,23 @@ Vue.createApp({
 
             clear() {
               this.todoList= [];
-              console.log(this.todoList.length)
-              console.log(this.todoList)
+              // console.log(this.todoList.length)
+              // console.log(this.todoList)
             },
 
         },
         computed: {
-          filteredList() {
-            return this.todoList = this.todoList.filter((item) => item.complete===true)
-          },
-          filteredList2() {
-            return this.todoList = this.todoList.filter((item) => item.complete===false)
-          },
-        }
-      }).mount('#app');
+            filterTodos () {
+                if (this.visible==='all'){
+                    return this.todoList; 
+                } else if (this.visible ==='undone'){
+                    return this.todoList.filter((item)=>item.completed===false)
+                } else if (this.visible ==='done') {
+                    return this.todoList.filter((item)=>item.completed===true)
+                }
+            }
+            }
+        }).mount('#app');
 
 
     </script>

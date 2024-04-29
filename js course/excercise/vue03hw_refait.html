@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <style>
+      .completed {
+        text-decoration: 2px line-through red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div id="app" class="container my-3">
+        <div class="input-group mb-3">
+          <span class="input-group-text">待辦事項</span>
+          <input type="text" v-model="newTask" class="form-control" placeholder="準備要做的任務"
+            id="newTodo" @keyup.enter="addTodo">
+          <button class="btn btn-primary" type="button" id="addTodo" @click="addTodo">新增</button>
+
+        </div>
+        <div class="card text-center">
+          <ul class="list-group list-group-flush text-left" id="todoList" v-for="item in filteredTodo">
+            <li  class="list-group-item">
+              <div class="d-flex">
+                <div class="form-check">
+                  <div v-if="tempId === item.id">
+                    <input class="form-control" type="text" placeholder="tempTask" v-model="tempTask" @keyup.enter="done" @keyup.esc="cancel"/>
+                  </div>
+                  <div v-else>
+                    <input :id="item.id" type="checkbox" class="form-check-input" @click="item.completed=!item.completed" :checked="item.completed">
+                    <label :for="item.id" :class="item.completed ? 'completed': ''" @dblclick="edit(item.id, item.task)"  class="form-check-label">#{{indexFinder(item.id)}}. {{item.task}} </label>
+                  </div>
+                </div>
+                <button type="button" class="btn-close ms-auto remove" @click="remove">
+                </button>
+              </div>
+            </li>
+          </ul>
+          <div class="card-footer d-flex justify-content-between">
+            <span>有 <span id="taskCount">{{filteredTodo.length}}</span> 筆任務</span>
+            <div>
+              <a href="#" @click="visible='all'" class="me-3">全部</a>
+              <a href="#" @click="visible='undone'" class="me-3">未完成</a>
+              <a href="#" @click="visible='done'" class="me-3">已完成</a>
+              <a href="#" @click="clear">清除所有任務</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  Vue.createApp({
+    data(){
+      return {
+        todoList: [],
+        tempId: '',
+        tempTask: '',
+        newTask:'',
+        visible: 'all',
+      }
+    },
+    
+    methods:{
+      addTodo () {
+        if(this.newTask) {
+          let newjob = {id:Date.now() ,task:this.newTask, completed: false};
+          this.todoList.unshift(newjob);
+          this.newTask = '';
+          // console.log(this.todoList);
+        }
+      },
+
+      remove(id) {
+        let index = this.todoList.findIndex((item)=>item.id===id)
+        this.todoList.splice(index,1);
+      },
+
+      edit(id, task) {
+        this.tempId = id;
+        this.tempTask = task;
+        // console.log("editing")
+      },
+
+      cancel() {
+        this.tempId = '';
+        this.tempTask = '';
+        // console.log('canceled')
+      },
+
+      done(id) {
+        if (this.tempTask) {
+          const index = this.todoList.findIndex((item)=>item.id===this.tempId);
+          this.todoList[index].task = this.tempTask;
+          // console.log('doneEdit')
+        }
+        this.tempId = '';
+        this.tempTask = '';
+      },
+
+      clear() {
+        //console.log(this.todoList.length);
+        if(this.todoList.length != 0 && confirm('刪除全部任務?')) {
+          this.todoList = [];
+          // console.log('cleared')
+        }
+      },
+
+      indexFinder (id) {
+        const index = this.filteredTodo.findIndex((item) => item.id === id);
+        const length = this.filteredTodo.length ;
+        // console.log(index);
+        // console.log(length);
+        return (length-index);
+      },
+    },
+
+    computed:{
+      filteredTodo () {
+        if (this.visible === 'all') {
+          return this.todoList;
+        } else if (this.visible === 'done') {
+          return this.todoList.filter((item)=>item.completed===true)
+        } else if (this.visible === 'undone') {
+          return this.todoList.filter((item)=>item.completed===false)
+        }
+      },
+    },
+    mounted(){
+
+    },
+
+
+  }).mount('#app')
+</script>
+  </body>
+
+</html>
