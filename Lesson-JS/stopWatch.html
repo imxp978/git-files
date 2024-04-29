@@ -21,7 +21,7 @@
       }
 
       body {
-        font-family:  monospace, 'arial';
+        font-family: monospace, "arial";
       }
 
       h1 {
@@ -31,7 +31,6 @@
         margin-top: 35vh;
         transition: 1s;
         bor/der-bottom: 5px solid white;
-
       }
 
       input {
@@ -64,11 +63,9 @@
         width: 45%;
       }
 
-
       .btns {
         padding-top: 10px;
         padding-bottom: 10px;
-
       }
 
       table {
@@ -90,7 +87,6 @@
       }
 
       #clock {
-        
         padding: 10px;
       }
 
@@ -170,6 +166,7 @@
       save.addEventListener("click", addData);
 
       let cookieKey = "stopTimer";
+
       const timestamplist = document.querySelector("#timestamplist");
 
       function addData() {
@@ -180,11 +177,6 @@
           timeStamp.pop();
           addData();
         }
-        saveCookie();
-      }
-
-      function saveCookie() {
-        setCookie(cookieKey, timeStamp, 30);
         renderTimeRecord();
       }
 
@@ -192,20 +184,20 @@
         timeStamp = [];
         timeStampId = 1;
         deleteCookie(cookieKey);
-        saveCookie();
+        // saveCookie();
+        renderTimeRecord();
       }
 
       function editRecord(id) {
         //console.log(id);
         timeStamp[id].time = `${m}:${s}:${ms}`;
-        
         // console.log("edit: " + editItem);
-        saveCookie();
+        renderTimeRecord();
       }
 
       function editRecord2(id) {
         editItem = id;
-        saveCookie();
+        renderTimeRecord();
       }
 
       function doneEdit(id) {
@@ -221,24 +213,22 @@
         s1 = addZero(+s1);
         ms1 = addZero(+ms1);
 
-        let index = timeStamp.findIndex((item) => item.id === id)
-        
+        let index = timeStamp.findIndex((item) => item.id === id);
+
         editItem = -1;
         timeStamp[index].time = `${m1}:${s1}:${ms1}`;
-        saveCookie();
-        
+        renderTimeRecord();
       }
 
       function delRecord(id) {
         timeStamp.splice(id, 1);
-        saveCookie();
+        renderTimeRecord();
       }
 
       const h1 = document.querySelector("h1");
 
       function renderTimeRecord() {
         timestamplist.innerHTML = "";
-
 
         for (let i = 0; i < timeStamp.length; i++) {
           let tr = document.createElement("tr");
@@ -251,8 +241,8 @@
 
           td_id.innerHTML = `${timeStamp[i].id} :`;
           td_id.classList.add("col", "col-3");
-          
-          td_time.innerHTML = `<span ondblclick=editRecord2(${i})>${timeStamp[i].time}</span>` ;
+
+          td_time.innerHTML = `<span ondblclick=editRecord2(${i})>${timeStamp[i].time}</span>`;
           td_time.classList.add("col");
 
           td_btn.innerHTML =
@@ -260,10 +250,9 @@
             `<button class="btn btn-sm btn-light" onclick=delRecord(${i}) >刪除</button>`;
           td_btn.classList.add("col", "col-4");
 
-
           if (i == editItem) {
-            const time = timeStamp[i].time
-            const timeArray = time.split(":")
+            const time = timeStamp[i].time;
+            const timeArray = time.split(":");
             // console.log(timeArray);
             m = timeArray[0];
             s = timeArray[1];
@@ -275,9 +264,6 @@
           tr.append(td_id, td_time, td_btn);
           timestamplist.append(tr);
 
-          
-
-
           const firstRow = document.querySelector(
             "#timestamplist tr:first-child"
           );
@@ -288,7 +274,7 @@
 
         if (timeStamp.length != 0) {
           h1.classList.add("active");
-          const hr = document.createElement('hr');
+          const hr = document.createElement("hr");
           const btn_clear = document.createElement("button");
           btn_clear.id = "btn_clear";
           btn_clear.style.marginBottom = "20px";
@@ -300,7 +286,19 @@
           h1.classList.remove("active");
           timeStampId = 1;
         }
+        setCookie(cookieKey, timeStamp, 30);
       }
+
+      // function saveCookie() {
+      //   console.log(cookieKey);
+      //   console.log('timeStamp: '+timeStamp);
+      //   console.log('saved');
+      //   setCookie(cookieKey, timeStamp, 30);
+      //   setCookie(1, 'time', 1)
+      //   console.log(document.cookie);
+      //   console.log(getCookie(cookieKey));
+      //   // renderTimeRecord();
+      // }
     </script>
 
     <script>
