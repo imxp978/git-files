@@ -10,6 +10,47 @@ h1 h2 h3 h4 h5 {
   font-family: times !important;
 }
 
+div {
+  overflow: hidden;
+}
+
 .navbar {
   margin: 0 auto;
 }
+
+.carousel-item {
+  overflow: hidden;
+}
+
+.card {
+  position: relative;
+}
+
+.card-image {
+  overflow: hidden;
+}
+
+.card-image img {
+  transition: 0.5s;
+}
+
+.card-image img:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1); 
+  transition: 0.5s;
+}
+
+/* .card .card-body {
+  width: 100%;
+  visibility:hidden;
+  transition: 0.5s;
+  position: absolute;
+  z-index: 2;
+}
+
+.card .card-body:hover {
+  visibility: visible;
+  transition: 0.3s;
+  z-index: 2;
+} */
