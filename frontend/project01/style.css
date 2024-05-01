@@ -23,6 +23,12 @@ h1, h2, h3, h4, h5 {
   margin: 20px auto;
 }
 
+.carousel-item {
+  height: 100%;
+  border-radius: 20px;
+  overflow:hidden;
+}
+
 #footer h5 {
   text-decoration: underline;
 }
