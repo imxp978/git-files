@@ -8,25 +8,11 @@
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="../assets/images/carousel00.webp" class="d-block w-100" alt="...">
+          <div class="carousel-item"  v-for="(item, index) in carouselList" :key="index" :class="{ 'active': index === 0 }">
+            <img :src="item.image" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="../assets/images/carousel01.webp" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="../assets/images/carousel02.webp" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p>
+              <h5>{{item.title}}</h5>
+              <p>{{item.content}}</p>
             </div>
           </div>
         </div>
@@ -44,7 +30,7 @@
       <div class="container px-5 text-center" py-5>
         <h3 class="my-5">Category</h3>
         <div class="row gx-5 gy-5 my-5 " >
-          <div class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5" v-for="item in categoryList">
+          <div class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5" v-for="item in categoryList" :key="item.id">
             <div class="card-image">
               <div class="card-modal" style="z-index:1">
                 <p>{{item.title}}</p>
@@ -65,6 +51,12 @@
 
 <script setup>
 import {ref} from "vue";
+
+const carouselList = ref( [
+    {id:1, title:"image 1", content:"content1", image:"/images/carousel00.webp" },
+    {id:2, title:"image 2", content:"content2", image:"/images/carousel01.webp" },
+    {id:3, title:"image 3", content:"content3", image:"/images/carousel02.webp" },
+])
 
 const categoryList = ref( [
         {id:1, title:"plate", image:"/images/product_images/001.webp"},
