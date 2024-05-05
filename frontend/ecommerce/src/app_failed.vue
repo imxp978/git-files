@@ -1,16 +1,13 @@
-<!doctype html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>We Live, We Live, We Grow</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="style.css">
-</head>
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
+</script>
 
-<body id="app">
+
+
+<template>
+<div id="app">
   <section id="navbar">
     <div class="container">
       <nav class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end">
@@ -85,7 +82,7 @@
               <li>
                 <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping fa-4"></i></a>
               </li>
-              </ul>
+            </ul>
             </div>
           </div>
         </div>
@@ -104,21 +101,21 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="images/carousel00.webp" class="d-block w-100" alt="...">
+            <img src="@/assets/images/carousel00.webp" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>First slide label</h5>
               <p>Some representative placeholder content for the first slide.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="images/carousel01.webp" class="d-block w-100" alt="...">
+            <img src="@/assets/images/carousel01.webp" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Second slide label</h5>
               <p>Some representative placeholder content for the second slide.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="images/carousel02.webp" class="d-block w-100" alt="...">
+            <img src="@/assets/images/carousel02.webp" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Third slide label</h5>
               <p>Some representative placeholder content for the third slide.</p>
@@ -146,7 +143,7 @@
               </div>
               <a href="#"><img :src="item.image" class="card-img-top" alt="..."></a>
             </div>
-            <div class="card-body">
+            <div class="card">
               <h5 class="card-title">{{item.title}}</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
@@ -169,7 +166,7 @@
                 </div>
               </div>
               <div class="col-md-8">
-                <div class="card-body text-start">
+                <div class="cartext-start">
                   <h5 class="card-title">{{item.title}}</h5><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                   <p class="card-text">{{item.content}}</p>
                   <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -211,61 +208,124 @@
       </div>
     </div>
   </section>
-  </div>
+</div>
+
+
+</template>
+
+
+<style>
+*{
+  bo/rder: 1px solid black;
+}{
+  font-family: Helvetica ;
+  font-size: 16px;
+  margin-top: 200px;
   
-  <a href="https://canadianloghomes.com/product-category/decor/rustic-dinnerware/">check</a>
-  <a href="https://www.connox.com/broste-copenhagen/broste-copenhagen-nordic-sand-tableware.html">check</a>
-  <a href="https://www.bonappetit.com/story/dinner-party-ceramics">bon appetit</a>
-  <a href="https://www.eastfork.com/">eastfork</a>
-  <a href="https://colorwhistle.com/kitchenware-website-design-inspiration/">for inspiration</a>
-  
-  </div>
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: serif;
+  margin: 20px auto;
+}
+
+.carousel-item {
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#footer h5 {
+  text-decoration: underline;
+}
+
+.navbar {
+  he/ight: 120px;
+}
+
+.navbar-brand:hover {
+  scale: 1.05;
+  transition: 0.2s;
+  text-decoration: none;
+}
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<!-- <script src="script/vue.js"></script> -->
-<script>
-Vue.createApp({
-  data () {
-    return {
-      categoryList: [
-        {id:1, title:"plate", image:"images/product_images/001.webp"},
-        {id:2, title:"bowl", image:"images/product_images/002.jpg"},
-        {id:3, title:"cooker", image:"images/product_images/003.jpg"},
-        {id:4, title:"pot", image:"images/product_images/001.webp"},
-        {id:5, title:"good one too", image:"images/product_images/004.jpg"},
-        {id:6, title:"good one 333", image:"images/product_images/002.jpg"},
-        {id:7, title:"good one 333", image:"images/product_images/003.jpg"},
-        {id:8, title:"good one 111", image:"images/product_images/001.webp"},
-        {id:9, title:"good one too", image:"images/product_images/002.jpg"},
-      ],
+.card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-      reviewList: [
-        {id:1, title:"user1", content:"this is good 1", image:"images/user_images/person_1.jpg",},
-        {id:2, title:"user2", content:"this is good 2", image:"images/user_images/person_2.jpg",},
-        {id:3, title:"user3", content:"this is good 3", image:"images/user_images/person_3.jpg",},
-        {id:4, title:"user4", content:"this is good 4", image:"images/user_images/person_4.jpg",},
-      ],
+.card-modal {
+  position: absolute;
+}
 
-      productList: [
-        {id:1, title:"", content:"", price:"", image:"",}
-      ],
+.card-image {
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    }
-  },
-  methods: {
+.card-image img:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: 0.5s;
 
+}
 
-  },
-  mounted () {
+.card-modal p {
+  width:100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  display: none;
+  transition: 0.5s;
+  color:white;
+  border:1px solid white;
 
-  }
+}
 
-}).mount('#app')
+.card-image:hover .card-modal p {
+  transition: 0.5s;
+  scale: 1;
+  display: block;
+}
 
-</script>
+.review-image {
+  border-radius: 5px !important;
+  overflow: hidden;
+}
 
-</body>
+.review-image:hover img {
+  scale: 1.05;
+  transition: 0.3s;
+}
 
-</html>
+/* .card .car{
+  width: 100%;
+  visibility:hidden;
+  transition: 0.5s;
+  position: absolute;
+  z-index: 2;
+}
+
+.card .carhover {
+  visibility: visible;
+  transition: 0.3s;
+  z-index: 2;
+} */
+
+</style>
