@@ -2,8 +2,8 @@
   <section id="navbar">
     <div class="container">
       <nav class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end">
-        <div class="container">
-          <a class="navbar-brand" href="#"><h3>We Live, <br>We Eat, <br>We Grow</h3></a>
+        <div class="container mx-auto d-flex justify-content-center">
+          <a class="navbar-brand mx-auto" href="#"><h3>We Live, <br>We Eat, <br>We Grow</h3></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -127,6 +127,15 @@ h1, h2, h3, h4, h5 {
 
 .navbar {
   he/ight: 120px;
+}
+
+.navbar .navbar-brand h3 {
+  background-color: whitegray;
+  co/lor: white;
+  padding: 1.3vw;
+  border-radius: 50% !important;
+  border: 3px solid black !important;
+  text-decoration: underline;
 }
 
 .navbar-brand:hover {
