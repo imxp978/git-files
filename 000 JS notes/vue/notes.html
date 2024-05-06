@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Vue.createApp({}).mounted
+
+        // data, mounted都是function
+        // methods, computed都是Object
+        
+        Vue.createApp({
+            data() {  //function return
+                return {
+                    a: 1,
+                    b: [],
+                    c: {},
+                }
+            },
+
+            methods: { //object
+                fn1 () {
+
+                },
+
+                fn2 (item) {
+                    item ++
+                    return item;
+                } ,
+            },
+
+            computed: { //object
+                fn1 () {
+
+                },
+
+                fn2 () {
+
+                },
+            }
+
+
+            mounted() { //function
+
+            }
+        }).mounted
+    </script>
+</body>
+</html>
