@@ -57,7 +57,7 @@
         <h3 class="my-5 movable slideIn">Category</h3>
         <div class="row gx-5 gy-5 my-5">
           <div
-            class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5  movable slideIn"
+            class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5 movable slideIn"
             v-for="item in categoryList"
             :key="item.id"
           >
@@ -108,6 +108,24 @@ const carouselList = ref([
     title: "image 4",
     content: "content4",
     image: "/images/carousel01.webp",
+  },
+  {
+    id: 3,
+    title: "image 3",
+    content: "content3",
+    image: "/images/carousel02.webp",
+  },
+  {
+    id: 3,
+    title: "image 3",
+    content: "content3",
+    image: "/images/carousel02.webp",
+  },
+  {
+    id: 3,
+    title: "image 3",
+    content: "content3",
+    image: "/images/carousel02.webp",
   },
 ]);
 
@@ -166,122 +184,27 @@ const categoryList = ref([
     content: "content 9 is very tasty, definitely yum!",
     image: "/images/product_images/002.jpg",
   },
+  {
+    id: 5,
+    title: "Pot",
+    content: "content 5 is very tasty, definitely yum!",
+    image: "/images/product_images/004.jpg",
+  },
+  {
+    id: 5,
+    title: "Pot",
+    content: "content 5 is very tasty, definitely yum!",
+    image: "/images/product_images/004.jpg",
+  },
+  {
+    id: 5,
+    title: "Pot",
+    content: "content 5 is very tasty, definitely yum!",
+    image: "/images/product_images/004.jpg",
+  },
 ]);
 </script>
 
 <style>
-* {
-  bo/rder: 1px solid black;
-}
 
-body {
-  font-family: Helvetica;
-  font-size: 16px;
-  margin-top: 200px;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: serif;
-  margin: 20px auto;
-}
-
-.carousel-item {
-  height: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-#footer h5 {
-  text-decoration: underline;
-}
-
-.navbar {
-  he/ight: 120px;
-}
-
-.navbar-brand:hover {
-  scale: 1.05;
-  transition: 0.2s;
-  text-decoration: none;
-}
-
-.card {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-modal {
-  position: absolute;
-}
-
-.card-image {
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-image img:hover {
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
-  transition: 0.5s;
-}
-
-.card-modal p {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  display: none;
-  transition: 0.5s;
-  color: white;
-  border: 1px solid white;
-}
-
-.card-image:hover .card-modal p {
-  transition: 0.5s;
-  scale: 1;
-  display: block;
-}
-
-.review-image {
-  border-radius: 5px !important;
-  overflow: hidden;
-}
-
-.review-image:hover img {
-  scale: 1.05;
-  transition: 0.3s;
-}
-
-/* .card .card-body {
-  width: 100%;
-  visibility:hidden;
-  transition: 0.5s;
-  position: absolute;
-  z-index: 2;
-}
-
-.card .card-body:hover {
-  visibility: visible;
-  transition: 0.3s;
-  z-index: 2;
-} */
 </style>
