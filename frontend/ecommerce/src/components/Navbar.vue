@@ -91,14 +91,14 @@ export default {
 
 <style>
 *{
-  bo/rder: 1px solid black;
+  bor/der: 1px solid black;
 }
 
 body {
   font-family: Helvetica ;
   font-size: 16px;
-  margin-top: 200px;
-  
+  margin-top: 220px;
+
 }
 
 a {
@@ -115,10 +115,22 @@ h1, h2, h3, h4, h5 {
   margin: 20px auto;
 }
 
+.navbar .navbar-brand h3 {
+  background-color: black;
+  padding: 1.3vw;
+  border-radius: 50% !important;
+  border: 5px solid black !important;
+  color: white;
+}
+
 .carousel-item {
-  height: 100%;
+  height: 50vh;
   border-radius: 20px;
-  overflow: hidden;
+  object-fit: cover;
+}
+
+.carousel-item img {
+  m/ax-height: 100%;
 }
 
 #footer h5 {
@@ -127,15 +139,6 @@ h1, h2, h3, h4, h5 {
 
 .navbar {
   he/ight: 120px;
-}
-
-.navbar .navbar-brand h3 {
-  background-color: whitegray;
-  co/lor: white;
-  padding: 1.3vw;
-  border-radius: 50% !important;
-  border: 3px solid black !important;
-  text-decoration: underline;
 }
 
 .navbar-brand:hover {
@@ -177,7 +180,8 @@ h1, h2, h3, h4, h5 {
   height: 100%;
   margin: 0 auto;
   padding: 20px;
-  display: none;
+  margin-top: 5vh;
+  opacity: 0;
   transition: 0.5s;
   color:white;
   border:1px solid white;
@@ -185,10 +189,19 @@ h1, h2, h3, h4, h5 {
 }
 
 .card-image:hover .card-modal p {
-  transition: 0.5s;
+  margin-top: 0;
   scale: 1;
-  display: block;
+  opacity: 1;
+  transition: 0.3s;
 }
+
+.ca/rd-image:hover .card-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
 
 .review-image {
   border-radius: 5px !important;
@@ -198,6 +211,29 @@ h1, h2, h3, h4, h5 {
 .review-image:hover img {
   scale: 1.05;
   transition: 0.3s;
+}
+
+.slideIn {
+  opacity: 0;
+  transform: translateY(20vh);
+  transition: 0.5s;
+}
+.slideIn.ed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.5s;
+}
+
+.slideInLeft {
+  transform: translateX(2vw);
+  opacity: 1;
+  transition: 0.5s;
+
+}
+.slideInLeft.ed {
+  transform: translateX(0);
+  opacity: 1;
+  transition: 0.5s;
 }
 
 /* .card .card-body {
@@ -213,5 +249,6 @@ h1, h2, h3, h4, h5 {
   transition: 0.3s;
   z-index: 2;
 } */
+
 
 </style>

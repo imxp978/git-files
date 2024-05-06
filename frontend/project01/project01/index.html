@@ -15,7 +15,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end">
         <div class="container">
-          <a class="navbar-brand" href="#"><h3>We Live, <br>We Eat, <br>We Grow</h3></a>
+          <a class="navbar-brand movable" href="#"><h3>We Live, <br>We Eat, <br>We Grow</h3></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -37,7 +37,7 @@
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  
+
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
@@ -51,7 +51,7 @@
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  
+
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
@@ -65,7 +65,7 @@
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  
+
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
@@ -92,7 +92,7 @@
       </nav>
       <hr>
     </div>
-   </section>
+  </section>
 
    <section id="content">
       <div class="container">
@@ -101,9 +101,10 @@
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          <div class="carousel-item active ">
             <img src="images/carousel00.webp" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>First slide label</h5>
@@ -111,7 +112,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img src="images/carousel01.webp" class="d-block w-100" alt="...">
+            <img src="images/Broste-Copenhagen-Nordic-Sea-Geschirr-Banner-3840x1440.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Second slide label</h5>
               <p>Some representative placeholder content for the second slide.</p>
@@ -119,6 +120,13 @@
           </div>
           <div class="carousel-item">
             <img src="images/carousel02.webp" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Third slide label</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/Blog_Banner_1_long-min.webp" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Third slide label</h5>
               <p>Some representative placeholder content for the third slide.</p>
@@ -137,9 +145,9 @@
       </div>
 
       <div class="container px-5 text-center" py-5>
-        <h3 class="my-5">Category</h3>
+        <h3 class="my-5 movable slideIn">Category</h3>
         <div class="row gx-5 gy-5 my-5 " >
-          <div class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5" v-for="item in categoryList">
+          <div class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5 movable slideIn" v-for="item in categoryList" v-keky="item.id">
             <div class="card-image">
               <div class="card-modal" style="z-index:1">
                 <p>{{item.title}}</p>
@@ -159,9 +167,9 @@
 
   <section id="scontent">
     <div class="container text-center mx-auto px-5 py-5 ">
-      <h3 class="mx-auto">Review</h3>
+      <h3 class="my-5 movable slideIn">Review</h3>
         <div class="row gy-10 gx-5">
-          <div class="card col-6 border-0 border-end border-bottom border-3" v-for="item in reviewList">
+          <div class="card col-6 border-0 border-end border-bottom border-3 movable slideInLeft" v-for="item in reviewList" v-key="item.id">
             <div class="row g-5" >
               <div class="review col-md-4">
                 <div class="review-image">
@@ -212,18 +220,43 @@
     </div>
   </section>
   </div>
-  
+
   <a href="https://canadianloghomes.com/product-category/decor/rustic-dinnerware/">check</a>
   <a href="https://www.connox.com/broste-copenhagen/broste-copenhagen-nordic-sand-tableware.html">check</a>
   <a href="https://www.bonappetit.com/story/dinner-party-ceramics">bon appetit</a>
   <a href="https://www.eastfork.com/">eastfork</a>
   <a href="https://colorwhistle.com/kitchenware-website-design-inspiration/">for inspiration</a>
-  
+
+<br>
+<a href="https://www.bilibili.com/video/BV1MU4y1M7Rz/">bilibili</a>
+
   </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+<script>
+  const movable = document.querySelector('.movable')
+
+function isElementInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return rect.bottom < 0 || rect.top > window.innerHeight;
+}
+
+function addClassToVisibleElements() {
+  const movable = document.querySelectorAll(".movable");
+  movable.forEach(function (movable) {
+    if (!isElementInViewport(movable)) movable.classList.add("ed");
+    else movable.classList.remove("ed");
+  });
+}
+
+document.addEventListener("scroll", addClassToVisibleElements);
+addClassToVisibleElements();
+</script>
+
 <!-- <script src="script/vue.js"></script> -->
 <script>
 Vue.createApp({
@@ -234,7 +267,7 @@ Vue.createApp({
         {id:2, title:"bowl", image:"images/product_images/002.jpg"},
         {id:3, title:"cooker", image:"images/product_images/003.jpg"},
         {id:4, title:"pot", image:"images/product_images/001.webp"},
-        {id:5, title:"good one too", image:"images/product_images/004.jpg"},
+        {id:5, title:"good one too", image:"images/product_images/005.webp"},
         {id:6, title:"good one 333", image:"images/product_images/002.jpg"},
         {id:7, title:"good one 333", image:"images/product_images/003.jpg"},
         {id:8, title:"good one 111", image:"images/product_images/001.webp"},
