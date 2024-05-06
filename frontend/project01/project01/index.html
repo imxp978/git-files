@@ -181,6 +181,7 @@
               <div class="col-2"><p>quantity</p></div>
             </div>
             <hr>
+            <div v-show="checkCartList()" class="text-end">Cart is empty</div>
             <ul>
               <li class="mb-1" v-for="(item,index) in cartList" :key="index" >
                 <div class="row d-flex align-item-baseline justify-content-between">
@@ -410,6 +411,10 @@ Vue.createApp({
     searchShow () {
       this.search = !this.search;
 
+    },
+
+    checkCartList () {
+      return this.cartList.length === 0;
     },
 
     checkQuantity(item) {
