@@ -54,10 +54,10 @@
       </div>
 
       <div class="container px-5 text-center" py-5>
-        <h3 class="my-5">Category</h3>
+        <h3 class="my-5 movable slideIn">Category</h3>
         <div class="row gx-5 gy-5 my-5">
           <div
-            class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5"
+            class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5  movable slideIn"
             v-for="item in categoryList"
             :key="item.id"
           >
