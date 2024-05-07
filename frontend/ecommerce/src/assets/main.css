@@ -1,5 +1,5 @@
 *{
-  bor/der: 1px solid black;
+  bo/rder: 1px solid black;
 }
 
 body {
@@ -24,10 +24,10 @@ h1, h2, h3, h4, h5 {
 }
 
 .navbar .navbar-brand h3 {
-  background-color: gray;
+  background-color: black;
   padding: 1.3vw;
   border-radius: 50% !important;
-  bord/er: 5px solid black !important;
+  border: 5px solid black !important;
   color: white;
 }
 
@@ -144,16 +144,16 @@ h1, h2, h3, h4, h5 {
   transition: 0.5s;
 }
 
-/* .card .card-body {
-  width: 100%;
-  visibility:hidden;
-  transition: 0.5s;
-  position: absolute;
-  z-index: 2;
+li {
+  list-style: none;
 }
 
-.card .card-body:hover {
-  visibility: visible;
-  transition: 0.3s;
-  z-index: 2;
-} */
+#search {
+  width: 0;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+#search.active {
+  width:100%;
+  opacity: 1;
