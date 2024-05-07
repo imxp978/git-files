@@ -790,8 +790,8 @@
             let delIndex = this.cartList.findIndex(
               (cartItem) => cartItem.id === item.id
             );
-            if (delIndex !== -1) {
-              if (confirm("Delete this item?")) {
+            if (delIndex !== -1) { // findIndex return -1 if no item matched
+              if (confirm("Remove this item?")) {
                 this.cartList.splice(delIndex, 1);
               }
             }
