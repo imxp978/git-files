@@ -114,25 +114,26 @@
           </div>
           <div class="modal-body">
             <div class="row d-flex justify-content-end">
-              <div class="col-2"></div>
-              <div class="col-6">item</div>
-              <div class="col-2">price</div>
-              <div class="col-2"><p>quantity</p></div>
+              <!-- <div class="col-2"></div> -->
+              <div class="col-6 text-center">item</div>
+              <div class="col-2 text-center">price</div>
+              <div class="col-2 text-center">quantity</div>
+              <div class="col-2 text-center">subtotal</div>
             </div>
             <hr />
             <div v-show="checkCartList()" class="text-end">Cart is empty</div>
             <ul>
               <li class="mb-1" v-for="(item, index) in cartList" :key="index">
                 <div
-                  class="row d-flex align-item-baseline justify-content-between"
+                  class="row d-flex justify-content-between"
                 >
-                  <div class="col-2">
+                  <!-- <div class="col-1">
+                  </div> -->
+                  <div class="col-6 d-flex justify-content-start">
                     <img :src="item.image" width="50px" />
-                  </div>
-                  <div class="col-6">
                     <p>{{ item.title }}</p>
                   </div>
-                  <div class="col-2 d-flex justify-content-end">
+                  <div class="col-2 d-flex justify-content-end ml-2">
                     <p>$:</p>
                     <p>{{ item.price }}</p>
                   </div>
@@ -145,6 +146,10 @@
                       @change="checkQuantity(item)"
                       min="0"
                     />
+                  </div>
+                  <div class="col-2 d-flex justify-content-end">
+                    <p>$:</p>
+                    <p>{{ (item.price * item.quantity).toFixed(2) }}</p>
                   </div>
                 </div>
               </li>

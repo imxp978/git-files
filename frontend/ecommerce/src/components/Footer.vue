@@ -2,6 +2,11 @@
     <section id="footer">
       <div class="container mx-auto pb-3" style="width: 100%">
         <div class="row">
+          <div class="col-12">
+            <i class="fa-brands fa-cc-visa fa-2x fa-fw"></i>
+            <i class="fa-brands fa-cc-mastercard fa-2x fa-fw"></i>
+            <i class="fa-brands fa-cc-paypal fa-2x fa-fw"></i>
+          </div>
           <div class="col col-sm-6 col-12 text-end text-sm-start">
             <h5>About Us</h5>
             Company <br />
