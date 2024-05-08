@@ -5,9 +5,7 @@
           class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end"
         >
           <div class="container">
-            <a class="navbar-brand" href="#"
-              ><h3>We Live, <br />We Eat, <br />We Grow</h3></a
-            >
+          <RouterLink class="navbar-brand" to="/"><h3>We Live, <br />We Eat, <br />We Grow</h3></RouterLink>
             <button
               class="navbar-toggler"
               type="button"
