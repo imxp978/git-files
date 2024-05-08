@@ -109,4 +109,13 @@ const categoryList2 = ref([
 ]);
 </script>
 
-<style></style>
+<style>
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: gray;
+  text-decoration: none;
+}
+</style>
