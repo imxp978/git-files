@@ -37,7 +37,7 @@
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
             >
-              Sign In
+              Sign Up
             </button>
             <button type="button" class="btn btn-dark">Log In</button>
           </div>
@@ -54,7 +54,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalToggleLabel2">Sign In</h5>
+            <h5 class="modal-title" id="exampleModalToggleLabel2">Sign Up</h5>
             <button
               type="button"
               class="btn-close"

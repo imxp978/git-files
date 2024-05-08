@@ -10,15 +10,15 @@
         >
           <div class="card-image">
             <div class="card-modal" style="z-index: 1">
-              <p><RouterLink to="/products">{{ item.title }}</RouterLink></p>
+              <p><RouterLink :to="`products/${item.id}`">{{ item.title }}</RouterLink></p>
             </div>
             <a href="#"
-              ><img :src="item.image" class="card-img-top" alt="..."
+              ><img :src="`/images/product_images/${item.image}`" class="card-img-top" alt="..."
             /></a>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ item.title }}</h5>
-            <p class="card-text">{{ item.content }}</p>
+            <p class="card-text">{{ item.description }}</p>
           </div>
         </div>
       </div>
@@ -30,7 +30,10 @@
 <script setup>
 import { ref } from "vue";
 
-const categoryList = ref([
+import sourceData from "@/data.json"
+
+const categoryList = ref(sourceData.product)
+const categoryList2 = ref([
   {
     id: 1,
     title: "Plate",
