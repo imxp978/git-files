@@ -1,9 +1,13 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import Carousel from "../components/Carousel.vue";
+import Category from "../components/Category.vue";
+import Review from "../components/Review.vue";
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+
+    <Carousel />
+    <Category />
+    <Review />
+
 </template>

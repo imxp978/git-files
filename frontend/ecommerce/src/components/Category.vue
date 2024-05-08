@@ -10,7 +10,7 @@
         >
           <div class="card-image">
             <div class="card-modal" style="z-index: 1">
-              <p>{{ item.title }}</p>
+              <p><RouterLink to="/products">{{ item.title }}</RouterLink></p>
             </div>
             <a href="#"
               ><img :src="item.image" class="card-img-top" alt="..."
