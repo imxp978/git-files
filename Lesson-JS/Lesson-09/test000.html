@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .a {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        z-index: 1;
+        transition: 0.5s;
+        background-color: orange;
+      }
+
+      .coin {
+        position: absolute;
+        top: -200px;
+        height: 200px;
+        anim/ation: 1s linear infinite normal drop;
+      }
+
+      .active {
+        z-index: 3;
+        top: 350px;
+        left: 350px;
+      }
+
+      .b {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        top: 100px;
+        left: 100px;
+        z-index: 2;
+        transition: 1s;
+        background-color: red;
+      }
+
+      @keyframes drop {
+        from {
+          top: -300px;
+        }
+        to {
+          rotate: 720deg;
+          top: 1100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn" type="button">TEST</button>
+    <hr />
+    <!-- <div class="a">a</div>
+    <div class="b">b</div> -->
+    <img
+      class="coin"
+      src="https://media.bradfordexchange.ca/image/upload/b_auto,c_pad,dpr_2.0,f_auto,h_375,q_auto,w_375/e_sharpen:200/c_pad,h_375,w_375/v1/subplan-and-parent/923410_alt2?pgw=1"
+    />
+
+    <hr />
+    <script>
+      const btn = document.querySelector("#btn");
+      const coin = document.querySelector(".coin");
+
+      btn.addEventListener("click", function () {
+        coin.style.animation = "1s linear infinite normal drop";
+      });
+    </script>
+  </body>
+</html>

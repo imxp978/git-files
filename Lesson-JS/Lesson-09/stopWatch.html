@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        bo/rder: 1px solid black;
+      }
+
+      body {
+        font-family: monospace, "arial";
+      }
+
+      h1 {
+        font-size: 6.5em;
+        font-weight: bolder;
+        margin: 0 auto;
+        margin-top: 30vh;
+        transition: 1s;
+        bor/der-bottom: 5px solid white;
+      }
+
+      input {
+        min-width: 150px;
+      }
+
+      .active {
+        font-size: 5.5em;
+        font-weight: bolder;
+        font-family: monospace, arial;
+        margin-top: 1vh;
+        transition: 0.5s;
+      }
+
+      button {
+        margin: 3px;
+      }
+      .card {
+        text-align: center;
+        height: 100vh;
+        width: 100vw;
+        margin: 500px, auto;
+        background-color: black;
+        color: white;
+        transition: 0.3s;
+        transform: (90deg);
+      }
+
+      .card-body {
+        width: 45%;
+      }
+
+      .btns {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      table {
+        margin-top: 20px;
+      }
+
+      tr {
+        line-height: 1.5em;
+        align-items: center;
+        padding: 5px;
+      }
+
+      td li {
+        line-height: 2em;
+      }
+
+      #wrap {
+        margin: 0 auto;
+      }
+
+      #clock {
+        padding: 10px;
+      }
+
+      .form-control {
+        width: auto !important;
+        display: inline-block !important;
+        line-height: 1 !important;
+      }
+
+      span {
+        color: white !important;
+        background: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="card align-items-center">
+        <div class="card-body">
+          <h1 class="card-title">
+            <div id="clock"></div>
+          </h1>
+          <h2 class="card-text"></h2>
+          <div class="btns">
+            <button id="set" class="btn btn-primary">啟動</button>
+            <button id="reset" class="btn btn-secondary">重置</button>
+            <button id="bg" class="btn btn-secondary">換背景色</button>
+            <button id="save" class="btn btn-light">存入Cookie</button>
+          </div>
+          <table id="timestamplist" class="table"></table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // cookie related
+      // 新增或更新 Cookie 中的物件資料
+      function setCookie(key, value, expiryDays) {
+        const date = new Date();
+        date.setTime(date.getTime() + expiryDays * 24 * 60 * 60 * 1000);
+        const expires = "expires=" + date.toUTCString();
+        document.cookie =
+          key + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
+      }
+
+      // 從 Cookie 中取得物件資料
+      function getCookie(key) {
+        const name = key + "=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(";");
+        for (let i = 0; i < cookieArray.length; i++) {
+          let cookie = cookieArray[i];
+          while (cookie.charAt(0) === " ") {
+            cookie = cookie.substring(1);
+          }
+          if (cookie.indexOf(name) === 0) {
+            return JSON.parse(cookie.substring(name.length, cookie.length));
+          }
+        }
+        return new Array();
+      }
+
+      // 從 Cookie 中刪除物件資料
+      function deleteCookie(key) {
+        document.cookie =
+          key + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      }
+    </script>
+
+    <script>
+      // cookie record
+      let timeStamp = [];
+      let timeStampId = 1;
+      let editItem = -1;
+
+      const save = document.querySelector("#save");
+      save.addEventListener("click", addData);
+
+      let cookieKey = "stopTimer";
+
+      const timestamplist = document.querySelector("#timestamplist");
+
+      function addData() {
+        if (timeStamp.length < 10) {
+          timeStamp.unshift({ id: timeStampId, time: `${m}:${s}:${ms}` });
+          timeStampId++;
+        } else {
+          timeStamp.pop();
+          addData();
+        }
+        renderTimeRecord();
+      }
+
+      function clearRecord() {
+        timeStamp = [];
+        timeStampId = 1;
+        deleteCookie(cookieKey);
+        // saveCookie();
+        renderTimeRecord();
+      }
+
+      function editRecord(id) {
+        //console.log(id);
+        timeStamp[id].time = `${m}:${s}:${ms}`;
+        // console.log("edit: " + editItem);
+        renderTimeRecord();
+      }
+
+      function editRecord2(id) {
+        editItem = id;
+        renderTimeRecord();
+      }
+
+      function doneEdit(id) {
+        const inputM = document.querySelector("#inputM");
+        const inputS = document.querySelector("#inputS");
+        const inputMS = document.querySelector("#inputMS");
+
+        let m1 = inputM.value;
+        let s1 = inputS.value;
+        let ms1 = inputMS.value;
+
+        m1 = addZero(+m1);
+        s1 = addZero(+s1);
+        ms1 = addZero(+ms1);
+
+        let index = timeStamp.findIndex((item) => item.id === id);
+
+        editItem = -1;
+        timeStamp[index].time = `${m1}:${s1}:${ms1}`;
+        renderTimeRecord();
+      }
+
+      function delRecord(id) {
+        timeStamp.splice(id, 1);
+        renderTimeRecord();
+      }
+
+      const h1 = document.querySelector("h1");
+
+      function renderTimeRecord() {
+        timestamplist.innerHTML = "";
+
+        for (let i = 0; i < timeStamp.length; i++) {
+          let tr = document.createElement("tr");
+          tr.classList.add("row");
+
+          const td_id = document.createElement("td");
+          const td_time = document.createElement("td");
+          const td_btn = document.createElement("td");
+          const id = timeStamp[i].id;
+
+          td_id.innerHTML = `${timeStamp[i].id} :`;
+          td_id.classList.add("col", "col-3");
+
+          td_time.innerHTML = `<span ondblclick=editRecord2(${i})>${timeStamp[i].time}</span>`;
+          td_time.classList.add("col");
+
+          td_btn.innerHTML =
+            `<button class="btn btn-sm btn-light mx-1" onclick=editRecord(${i}) ondblclick=editRecord2(${i})>修改</button>` +
+            `<button class="btn btn-sm btn-light" onclick=delRecord(${i}) >刪除</button>`;
+          td_btn.classList.add("col", "col-4");
+
+          if (i == editItem) {
+            const time = timeStamp[i].time;
+            const timeArray = time.split(":");
+            // console.log(timeArray);
+            m = timeArray[0];
+            s = timeArray[1];
+            ms = timeArray[2];
+            td_time.innerHTML = `<input min="0" max="59" style="min-width:10%" class="form-control input-sm" type="number" id="inputM" value=${m} >:<input min="0" max="59" class="form-control input-sm" type="number" id="inputS" value=${s} style="min-width:10%"">:<input min="0" max="99" class="form-control input-sm" type="number" id="inputMS" value=${ms} style="min-width:5%"><button class="btn btn-sm btn-primary" type="button" onclick="doneEdit(${id})">完成</button>`;
+            editItem = -1;
+          }
+
+          tr.append(td_id, td_time, td_btn);
+          timestamplist.append(tr);
+
+          const firstRow = document.querySelector(
+            "#timestamplist tr:first-child"
+          );
+          //console.log(firstRow);
+          firstRow.style.fontSize = "x-large";
+          firstRow.style.fontWeight = "bold";
+        }
+
+        if (timeStamp.length != 0) {
+          h1.classList.add("active");
+          const hr = document.createElement("hr");
+          const btn_clear = document.createElement("button");
+          btn_clear.id = "btn_clear";
+          btn_clear.style.marginBottom = "20px";
+          btn_clear.classList.add("btn", "btn-danger");
+          btn_clear.innerHTML = "刪除所有紀錄";
+          timestamplist.append(hr, btn_clear);
+          btn_clear.addEventListener("click", clearRecord);
+        } else {
+          h1.classList.remove("active");
+          timeStampId = 1;
+        }
+        setCookie(cookieKey, timeStamp, 30);
+      }
+
+      // function saveCookie() {
+      //   console.log(cookieKey);
+      //   console.log('timeStamp: '+timeStamp);
+      //   console.log('saved');
+      //   setCookie(cookieKey, timeStamp, 30);
+      //   setCookie(1, 'time', 1)
+      //   console.log(document.cookie);
+      //   console.log(getCookie(cookieKey));
+      //   // renderTimeRecord();
+      // }
+    </script>
+
+    <script>
+      // stoptimer
+      const clock = document.querySelector("#clock");
+      const set = document.querySelector("#set");
+      const reset = document.querySelector("#reset");
+      const bg = document.querySelector("#bg");
+      const card = document.querySelector(".card");
+
+      let ms = 0;
+      let s = 6;
+      let m = 8;
+      let timerInterval = 0;
+      let bgInterval = 0;
+
+      render();
+
+      //      set.addEventListener("click", startTimer);
+      set.addEventListener("click", function () {
+        if (timerInterval === 0) {
+          timerInterval = setInterval(timer, 10);
+          set.classList.remove("btn-primary");
+          set.classList.add("btn-danger");
+          // console.log("timerInterval: " + timerInterval);
+          bgInterval = setInterval(bgChg, 2000);
+          if (set.innerHTML === "啟動") {
+            set.innerHTML = "暫停";
+          }
+        } else {
+          clearInterval(timerInterval);
+          timerInterval = 0;
+          clearInterval(bgInterval);
+          bgInterval = 0;
+          if (set.innerHTML === "暫停") {
+            set.innerHTML = "啟動";
+          }
+          set.classList.remove("btn-danger");
+          set.classList.add("btn-primary");
+        }
+      });
+
+      reset.addEventListener("click", function () {
+        clearInterval(timerInterval);
+        ms = 0;
+        s = 0;
+        m = 0;
+        timerInterval = 0;
+        clearInterval(bgInterval);
+        bgInterval = 0;
+        set.innerHTML = "啟動";
+        set.classList.remove("btn-danger");
+        set.classList.add("btn-primary");
+        card.style.background = "black";
+
+        render();
+      });
+
+      bg.addEventListener("click", bgChg);
+
+      function bgChg() {
+        const color1 = `rgb(${rand(1, 255)},${rand(1, 255)},${rand(1, 255)})`;
+        const color2 = `rgb(${rand(1, 255)},${rand(1, 255)},${rand(1, 255)})`;
+        const bgset = `linear-gradient(${color1}, ${color2})`;
+        card.style.background = bgset;
+      }
+
+      function timer() {
+        ms++;
+        if (ms > 99) {
+          s++;
+          ms = 0;
+        }
+        if (s > 59) {
+          m++;
+          s = 0;
+        }
+        if (m > 59) {
+          m = 0;
+        }
+        render();
+      }
+
+      function addZero(num) {
+        if (num < 10) {
+          return (num = "0" + num);
+        } else {
+          return num;
+        }
+      }
+
+      function rand(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+      function render() {
+        ms = addZero(+ms);
+        s = addZero(+s);
+        m = addZero(+m);
+        clock.innerHTML = `${m}:${s}:${ms}`;
+      }
+    </script>
+  </body>
+</html>

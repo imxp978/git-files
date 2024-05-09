@@ -31,7 +31,7 @@ const product = computed(() => {
       <div class="row">
         <div class="col-12 col-lg-6">
           <img
-            :src="`../../public/images/product_images/${product.image}`"
+            :src="`../../public/images/category_images/${product.image}`"
             width="100%"
             alt=""
           />

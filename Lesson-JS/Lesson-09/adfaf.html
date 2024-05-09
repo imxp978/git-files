@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanilla JS Two-Way Binding</title>
+</head>
+<body>
+  <input type="text" id="textInput">
+  <p>Input value: <span id="output"></span></p>
+
+  <script>
+    // 將 input 元素和 output 元素存儲為變量
+    const textInput = document.getElementById('textInput');
+    const output = document.getElementById('output');
+
+    // 初始化數據模型
+    let inputValue = '';
+
+    // 定義 input 事件監聽器
+    textInput.addEventListener('input', function(event) {
+      // 更新數據模型
+      inputValue = event.target.value;
+      // 更新

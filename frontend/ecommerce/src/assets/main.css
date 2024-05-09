@@ -64,10 +64,20 @@ h1, h2, h3, h4, h5 {
 }
 
 .card-modal {
+  wid/th: 100%;
+  he/ight: 100%;
   position: absolute;
 }
 
+.card-modal p {
+  pos/ition: absolute;
+  
+}
+
 .card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(50,50,10,0.1);
   border-radius: 10px;
   overflow: hidden;
   display: flex;

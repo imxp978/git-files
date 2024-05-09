@@ -13,7 +13,7 @@
               <p><RouterLink :to="`products/${item.id}`">{{ item.title }}</RouterLink></p>
             </div>
             <a href="#"
-              ><img :src="`/images/product_images/${item.image}`" class="card-img-top" alt="..."
+              ><img :src="`/images/category_images/${item.image}`" class="card-img-top" alt="..."
             /></a>
           </div>
           <div class="card-body">

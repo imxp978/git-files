@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="comlib.js"></script>
+</head>
+
+<body>
+
+  <h1 id="time">yo</h1>
+
+<script>
+  let hour = 11;
+  let min = 56;
+  let sec = 20;
+
+  document.write(hour +":"+min + ":" + sec)
+  
+  function runTimer() {
+    if (sec === 59) {
+      sec = 0;
+      if (min === 59) {
+        min = 0;
+        hour ++;
+        if (hour === 24) {
+          hour = 0;
+        let str1 = str();
+        if (hour > 12) {
+          hour -= 12;
+        }
+        }
+      } else {
+        min ++;
+      }
+    } else {
+      sec++;
+    }
+    time.innerHTML = "Current Time is: " + addZero(hour) + ":" + addZero(min) + ":" + addZero(sec) +" "+ str();
+    window.setTimeout('runTimer()', 1);
+  }
+
+  function str() {
+    if (hour > 11) {
+      return "PM";
+    } else {
+      return "AM";
+    }
+  }
+
+  // let str = "AM";
+  // (hour > 11) ? str = "PM" : str = "AM";
+  // hour > 12 ? hour = hour - 12 : hour;
+
+  function addZero(num) {
+    if (num < 10) {
+      return num = "0"+num;
+    }
+    else {
+      return num;
+    }     
+  }
+
+  const time = document.getElementById('time');
+  runTimer();
+
+</script>
+
+<h3>
+
+  <script>
+    let hour = rand(1,24);
+    document.write(hour+"<br>");
+    let str = (hour >= 12)?"PM":"AM";
+    hour = (hour==24)?hour-24:hour; 
+    hour = (hour>12)?hour-12:hour;
+    document.write("current time: "+hour+" "+str)
+    </script>
+</h3>
+  <hr>
+
+  <p id="lottery" name="lottery" style="font-size:100px;">1</p>
+  <button type="button" id="btn01" name="btn01" onclick="getPrize();">抽獎</button>
+
+
+  <script>
+    let count = 0;
+    function getPrize() {
+      if (count < 99) {
+        let lottery = document.getElementById('lottery');
+        lottery.innerText = rand(1, 4);
+        window.setTimeout('getPrize()', 1);
+        count++;
+      } else {
+        count = 0;
+        switch (lottery.innerText) {
+          case "1":
+            window.alert("抽中1獎 10000");
+            break;
+          case "2":
+            window.alert("抽中2獎 1000");
+            break;
+          case "3":
+            window.alert("抽中3獎 500");
+            break;
+          default:
+            window.alert("抽中普獎 100");
+            break;
+
+        }
+      }
+    }
+
+  </script>
+<hr>
+
+  <h3>
+    <script>
+
+    </script>
+
+    <script>
+      let a = rand(1, 10);
+      let b = rand(1, 10);
+      let c = rand(1, 10);
+
+        if (a > b) {
+          if (a > c) {
+            if (b > c) {
+              document.write("a > b > c");
+            } else if (b < c) {
+              document.write("a > c > b");
+            };
+          } else if (a < c) {
+              document.write("c > a > b");
+            }
+        } else if (a < b) {
+          if (a > c) {
+              document.write("b > a > c");
+            }
+          } else if (a < c) {
+            if (b > c) {
+              document.write("b > c > a");
+            } else if (b < c) {
+              document.write("c > b > a");
+            }
+        }
+    </script>
+    <br>
+
+  <script>
+      if (a > b) {
+        if (a > c) {
+          document.write("a=" + a + ", b=" + b + ", c=" + c + " , a為最大值");
+
+        } else {
+          document.write("a=" + a + ", b=" + b + ", c=" + c + " , c為最大值");
+        }
+
+      } else if (b > c) {
+        document.write("a=" + a + ", b=" + b + ", c=" + c + " , b為最大值");
+      }
+    </script>
+
+    <script>
+      var grade = rand(1, 99);
+      document.write("<h1>測試成績" + grade + "</h1>");
+      if (grade >= 80) {
+        document.write("測試成績判斷為A:取得4.0積分");
+      } else if (grade >= 70) {
+        document.write("測試成績判斷為B:取得3.0積分")
+      } else {
+        document.write("測試成績判斷為C:取得2.0積分")
+      }
+
+
+    </script>
+  </h3>
+  <script>
+    var score = rand(1, 99);
+    document.write("<h1>測試成績:", score, "</h1>");
+    if (score < 60) {
+      document.write("<h3>測試成績判斷為不及格</h3>");
+    }
+
+    if (score >= 60) {
+      document.write("<h3>測試成績判斷為及格</h3>");
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <b><p style="font-size: 20px">
+    <script>
+        let sum = 0;
+        for (let i = 6; i < 16; i++) {
+            let sum1 = sum;
+            let j = i;
+            sum += i; 
+            if (j % 2 == 1) {
+                j = "<span style=\"color:blue; \">" + "*" + j + "</span>"
+            } 
+            document.write(" | " + sum1 +" + " + j +" = " + sum);
+        }
+        document.write(" |" + "<br> sum 6 to 15 = " + sum);
+    </script>
+    </p></b>
+</body>
+</html>

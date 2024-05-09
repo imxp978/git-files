@@ -45,5 +45,7 @@ export default {
 </script>
 
 <style>
-
+.col.col-12.col-sm-2 a {
+  color: black;
+}
 </style>
