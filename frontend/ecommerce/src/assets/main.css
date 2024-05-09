@@ -29,6 +29,14 @@ h1, h2, h3, h4, h5 {
   border-radius: 50% !important;
   border: 5px solid black !important;
   color: white;
+  transform: rotate(-1deg);
+}
+
+.navbar-brand:hover {
+  transform: rotate(1deg);
+  scale: 1.05;
+  transition: 0.2s;
+  text-decoration: none;
 }
 
 .carousel-item {
@@ -57,10 +65,8 @@ h1, h2, h3, h4, h5 {
   he/ight: 120px;
 }
 
-.navbar-brand:hover {
-  scale: 1.05;
-  transition: 0.2s;
-  text-decoration: none;
+.category-image {
+  backdrop-filter: sepia(10%);
 }
 
 
@@ -75,6 +81,7 @@ h1, h2, h3, h4, h5 {
   wid/th: 100%;
   he/ight: 100%;
   position: absolute;
+  
   
   opa/city: 0
 }
@@ -103,9 +110,9 @@ h1, h2, h3, h4, h5 {
 }
 
 .card-modal p {
-t/op:50%;
-le/ft: 50%;
-  margin: 5vh auto;
+
+  margin: 0 auto;
+  margin-top: 20px;
   padding: 20px;
   opacity: 0;
   transition: 0.5s;

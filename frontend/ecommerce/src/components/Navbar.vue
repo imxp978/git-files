@@ -126,7 +126,7 @@
                       />
                       <button class="btn btn-dark" type="submit">Search</button>
                     </form>
-                    <a class="nav-link" href="#" @click="searchShow"
+                    <a class="nav-link" href="#" @click.prevent="searchShow"
                       ><i class="fa-solid fa-magnifying-glass fa-4"></i
                     ></a>
                   </li>

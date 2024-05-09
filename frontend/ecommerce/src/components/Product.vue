@@ -43,7 +43,7 @@ const product = computed(() => {
             <h4 class="my-5">{{ product.title }}</h4>
             <p class="fs-4 text-end">$: {{ product.price }}</p>
             <p v-if="product.quantity > 0" class="text-end">In Stock</p>
-            <p v-else class="text-end">Not Available</p>
+            <p v-else class="text-end" style="color:red">Out of Stock</p>
             <p>
               {{ product.description }}
             </p>
@@ -68,7 +68,7 @@ const product = computed(() => {
               ADD TO CART
             </button>
             <button v-else class="btn btn-danger m-3">
-              NOTIFY ME WHEN AVAILABLE
+              NOTIFY WHEN IN STOCK
             </button>
           </div>
           <hr />

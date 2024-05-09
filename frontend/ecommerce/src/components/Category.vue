@@ -2,7 +2,7 @@
   <section id="content">
     <div class="container px-5 text-center" py-5>
       <h3 class="my-5 movable slideIn">Category</h3>
-      <div class="row gx-5 gy-5 my-5">
+      <div class="row my-3">
         <div
           class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5 movable slideIn"
           v-for="item in categoryList"
@@ -12,9 +12,10 @@
             <div class="card-modal" style="z-index: 1">
               <p><RouterLink :to="`products/${item.id}`">{{ item.title }}</RouterLink></p>
             </div>
-            <a href="#"
-              ><img :src="`/images/category_images/${item.image}`" class="card-img-top" alt="..."
-            /></a>
+            <div class="category-image">
+              <RouterLink :to="`products/${item.id}`"><img :src="`/images/category_images/${item.image}`" class="card-img-top" alt="..."
+            /></RouterLink>
+            </div>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ item.title }}</h5>
