@@ -32,13 +32,21 @@ h1, h2, h3, h4, h5 {
 }
 
 .carousel-item {
-  height: 50vh;
+  aspect-ratio: 16 / 6;
   border-radius: 20px;
-  object-fit: cover;
+  overflow: hidden;
+  position: relative;
 }
 
 .carousel-item img {
-  m/ax-height: 100%;
+  position: absolute;
+  top: 50%; /* 將圖片的上邊緣移動到父元素的50%位置 */
+  left: 50%; /* 將圖片的左邊緣移動到父元素的50%位置 */
+  transform: translate(-50%, -50%); /* 將圖片居中 */
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  object-fit: cover;
 }
 
 #footer h5 {
@@ -67,11 +75,8 @@ h1, h2, h3, h4, h5 {
   wid/th: 100%;
   he/ight: 100%;
   position: absolute;
-}
-
-.card-modal p {
-  pos/ition: absolute;
   
+  opa/city: 0
 }
 
 .card-image {
@@ -83,6 +88,10 @@ h1, h2, h3, h4, h5 {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  transition: 0.3s;
 }
 
 .card-image img:hover {
@@ -94,11 +103,10 @@ h1, h2, h3, h4, h5 {
 }
 
 .card-modal p {
-  width:100%;
-  height: 100%;
-  margin: 0 auto;
+t/op:50%;
+le/ft: 50%;
+  margin: 5vh auto;
   padding: 20px;
-  margin-top: 5vh;
   opacity: 0;
   transition: 0.5s;
   color:white;
@@ -111,6 +119,8 @@ h1, h2, h3, h4, h5 {
   scale: 1;
   opacity: 1;
   transition: 0.3s;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .ca/rd-image:hover .card-modal {
@@ -167,3 +177,21 @@ li {
 #search.active {
   width:100%;
   opacity: 1;
+}
+
+.product_image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: relative; /* 設置為相對定位 */
+  overflow: hidden; /* 隱藏溢出部分 */
+}
+
+.product_image img {
+  position: absolute; /* 設置為絕對定位 */
+  top: 50%; /* 將圖片的上邊緣移動到父元素的50%位置 */
+  left: 50%; /* 將圖片的左邊緣移動到父元素的50%位置 */
+  transform: translate(-50%, -50%); /* 將圖片居中 */
+  max-width: 100%; /* 自動調整圖片寬度 */
+  he/ight: auto; /* 自動調整圖片高度 */
+  object-fit: cover; /* 保持圖片比例並填滿容器 */
+}

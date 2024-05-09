@@ -30,15 +30,17 @@ const product = computed(() => {
     <div class="container">
       <div class="row">
         <div class="col-12 col-lg-6">
+          <div class="product_image">
           <img
             :src="`../../public/images/category_images/${product.image}`"
-            width="100%"
+            
             alt=""
           />
+          </div>
         </div>
         <div class="col-12 col-lg-6">
           <div class="container d-flex flex-column">
-            <h5>{{ product.title }}</h5>
+            <h4 class="my-5">{{ product.title }}</h4>
             <p class="fs-4 text-end">$: {{ product.price }}</p>
             <p v-if="product.quantity > 0" class="text-end">In Stock</p>
             <p v-else class="text-end">Not Available</p>

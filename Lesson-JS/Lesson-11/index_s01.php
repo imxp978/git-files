@@ -49,7 +49,8 @@
 
                                         <ul class="dropdown-menu">
                                             <?php while ($pyclass02_Rows = $pyclass02->fetch()) { ?>
-                                                <li><a class="dropdown-item" href="#"><em class="fas <?php echo $pyclass02_Rows['fonticon']; ?> fa-fw"></em><?php echo $pyclass02_Rows['cname']; ?></a></li>
+                                                <li><a class="dropdown-item" href="#"><em class="fas <?php echo $pyclass02_Rows['fonticon']; ?> fa-fw"></em>
+                                                <?php echo $pyclass02_Rows['cname']; ?></a></li>
                                             <?php } ?>
                                             <!-- <li><a href="#" class="dropdown-item">Item-2</a></li>
                                             <li><a href="#" class="dropdown-item">Item-3</a></li> -->

@@ -18,7 +18,6 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ item.title }}</h5>
-            <p class="card-text">{{ item.description }}</p>
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@
             :key="index"
             :class="{ active: index === 0 }"
           >
-            <img :src="item.image" class="d-block w-100" alt="..." />
+            <img :src="`images/carousel_images/${item.image}`" class="d-block w-100" alt="..." />
             <div class="carousel-caption d-none d-md-block">
               <h5>{{ item.title }}</h5>
               <p>{{ item.content }}</p>
@@ -64,43 +64,31 @@ const carouselList = ref([
     id: 1,
     title: "image 1",
     content: "content1",
-    image: "/images/carousel00.webp",
+    image: "carousel00.jpg",
   },
   {
     id: 2,
     title: "image 2",
     content: "content2",
-    image: "/images/carousel01.webp",
+    image: "carousel01.webp",
   },
   {
     id: 3,
     title: "image 3",
     content: "content3",
-    image: "/images/carousel02.webp",
+    image: "carousel02.jpg",
   },
   {
     id: 4,
     title: "image 4",
     content: "content4",
-    image: "/images/carousel01.webp",
+    image: "carousel03.webp",
   },
   {
-    id: 3,
-    title: "image 3",
-    content: "content3",
-    image: "/images/carousel02.webp",
-  },
-  {
-    id: 3,
-    title: "image 3",
-    content: "content3",
-    image: "/images/carousel02.webp",
-  },
-  {
-    id: 3,
-    title: "image 3",
-    content: "content3",
-    image: "/images/carousel02.webp",
+    id: 5,
+    title: "image 5",
+    content: "content5",
+    image: "carousel04.webp",
   },
 ]);
 </script>
