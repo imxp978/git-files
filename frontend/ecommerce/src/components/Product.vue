@@ -9,7 +9,12 @@ const route = useRoute()
 const product = computed(() => {
     let productId = parseInt(route.params.id)
     return sourceData.product.find(product => product.id === productId)
-})
+});
+
+function addToCart () {
+
+  
+} 
 
 // "Option API"
 // export default {
@@ -64,7 +69,7 @@ const product = computed(() => {
                 <div class="col-3 text-center">QUANTITY</div>
                 <button class="col-1 btn btn-sm btn-outline-dark">+</button> -->
             </div>
-            <button v-if="product.quantity > 0" class="btn btn-dark m-3">
+            <button v-if="product.quantity > 0" @click="addToCart" class="btn btn-dark m-3">
               ADD TO CART
             </button>
             <button v-else class="btn btn-danger m-3">
