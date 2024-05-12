@@ -50,7 +50,7 @@
     },
     {
       "id": 7,
-      "title": "Tools",
+      "title": "PRODUCT Tools",
       "price": 8.99,
       "quantity": 0,
       "image": "CooksToolSet-5_960x.webp",
@@ -58,7 +58,7 @@
     },
     {
       "id": 8,
-      "title": "Storage",
+      "title": "PRODUCT Storage",
       "price": 23.99,
       "quantity": 10,
       "image": "Base-Walnut_960x.webp",

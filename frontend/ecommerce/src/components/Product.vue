@@ -26,8 +26,10 @@ function addToCart() {
   console.log(store.cart)
   console.log(product.value)
   if (product.value.quantity > 0) {
+
   cart.push(product.value)
   console.log(store.cart)
+    
   }
 }
 

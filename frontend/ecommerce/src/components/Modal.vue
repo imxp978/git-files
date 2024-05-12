@@ -125,8 +125,11 @@
               <div v-show="checkCartList()" class="text-end">Cart is empty</div>
             </Transition>
             <ul>
-              <li v-for="item in cart">
-              {{ item.title }} {{ item.price }}
+              <li v-for="item in cart" class="row d-flex justify-content-end">
+                <div class="col-6"></div>
+                <div class="col-2 text-center">{{ item.title }}</div>
+                <div class="col-2"></div>
+                <div class="col-2 text-center">{{ item.price }}</div>
             </li>
               <li class="mb-1" v-for="(item, index) in cartList" :key="index">
                 <div
