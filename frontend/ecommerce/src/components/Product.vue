@@ -1,18 +1,20 @@
 <script setup>
 // import sourceData from "@/data.json";
-import {ref, onMounted} from 'vue';
-import {useStore} from "@/stores/store.js";
+import { ref, onMounted } from "vue";
+import { useStore } from "@/stores/store.js";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 const store = useStore();
+const products = store.products;
 
 const productId = ref(parseInt(route.params.id));
 
-let product = ref(store.getProductById(productId.value))
+let product = ref(store.getProductById(productId.value));
 
+// mount時才賦值
 // let product = ref(null);
-// onMounted(()=>{  
+// onMounted(()=>{
 //   product.value = store.getProductById(productId.value);
 // });
 
@@ -22,7 +24,6 @@ let product = ref(store.getProductById(productId.value))
 // });
 
 function addToCart() {}
-
 </script>
 
 <template>
@@ -38,7 +39,9 @@ function addToCart() {}
         <div class="col-12 col-lg-6">
           <div class="container d-flex flex-column">
             <h4 class="my-5">{{ product.title }}</h4>
-            <p class="fs-4 text-end"><i class="fa-solid fa-dollar-sign"></i> {{ product.price }}</p>
+            <p class="fs-4 text-end">
+              <i class="fa-solid fa-dollar-sign"></i> {{ product.price }}
+            </p>
             <p v-if="product.quantity > 0" class="text-end">In Stock</p>
             <p v-else class="text-end" style="color: red">Out of Stock</p>
             <p>
@@ -63,7 +66,7 @@ function addToCart() {}
               @click="addToCart"
               class="btn btn-dark m-3"
             >
-            ADD TO CART<i class="fa-solid fa-cart-shopping"></i>
+              ADD TO CART<i class="fa-solid fa-cart-shopping"></i>
             </button>
             <button v-else class="btn btn-danger m-3">
               NOTIFY ME <i class="fa-solid fa-bell"></i>
