@@ -12,6 +12,10 @@ const productId = ref(parseInt(route.params.id));
 
 let product = ref(store.getProductById(productId.value));
 
+function increase() { product.value.quantity ++ };
+function decrease() { product.value.quantity -- };
+
+
 // mount時才賦值
 // let product = ref(null);
 // onMounted(()=>{
@@ -47,6 +51,13 @@ function addToCart() {}
             <p>
               {{ product.description }}
             </p>
+            <div class="d-flex justify-content-end">
+              <div class="testing only col-3 d-flex justify-content-between align-items-baseline border">
+                <button class="btn btn-sm btn-light" @click ="decrease">-</button>
+                <p>{{ product.quantity }}</p>
+                <button class="btn btn-sm btn-light" @click ="increase">+</button>
+              </div>
+            </div>
             <div class="row d-flex justify-content-center m-3">
               <select
                 v-if="product.quantity > 0"

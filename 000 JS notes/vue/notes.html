@@ -18,35 +18,47 @@
                     a: 1,
                     b: [],
                     c: {},
+                    d: false,
                 }
             },
 
             methods: { //object
-                fn1 () {
-
-                },
-
-                fn2 (item) {
+                fn1 (item) {
                     item ++
                     return item;
                 } ,
+                fn2 () {
+                    this.d = !this.d
+                }
             },
-
             computed: { //object
                 fn1 () {
-
-                },
-
-                fn2 () {
-
+                    return this.a * 2
                 },
             },
-
-
             mounted() { //function
-
             }
         }).mount('#app')
+    </script>
+
+    <script>
+        // composition API
+        // method = function
+        function a() {}
+        // data = const
+        const a = ref()
+        const c = ref(true)
+        // computed = const
+        const b = computed((a)=>{
+            return a.value * 2
+        })
+        //響應式要用.value
+        function c() {
+            c.value = !c.value
+        }
+
+        // https://ithelp.ithome.com.tw/m/articles/10294194
+        
     </script>
 </body>
 </html>
