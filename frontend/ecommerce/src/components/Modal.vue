@@ -125,6 +125,9 @@
               <div v-show="checkCartList()" class="text-end">Cart is empty</div>
             </Transition>
             <ul>
+              <li v-for="item in cart">
+              {{ item.title }} {{ item.price }}
+            </li>
               <li class="mb-1" v-for="(item, index) in cartList" :key="index">
                 <div
                   class="row d-flex justify-content-between"
@@ -176,6 +179,7 @@
 
 <script setup>
 import {ref, computed} from 'vue'
+import {useStore} from '@/stores/store.js'
 const cartList = ref([{
                 id: 1,
                 title: "Rustic Iron Pot",
@@ -224,6 +228,11 @@ const sum = computed(() => {
     });
     return parseFloat(total).toFixed(2);
 });
+
+const store = useStore()
+const cart = store.cart
+console.log(cart)
+
 
 </script>
 

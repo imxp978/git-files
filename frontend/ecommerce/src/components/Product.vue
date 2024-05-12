@@ -10,24 +10,33 @@ const products = store.products;
 
 const productId = ref(parseInt(route.params.id));
 
-let product = ref(store.getProductById(productId.value));
+// let product = ref(store.getProductById(productId.value));
+
+// mount時才賦值
+let product = ref(null);
+onMounted(()=>{
+  product.value = store.getProductById(productId.value);
+});
 
 function increase() { product.value.quantity ++ };
 function decrease() { product.value.quantity -- };
 
+let cart = store.cart;
+function addToCart() {
+  console.log(store.cart)
+  console.log(product.value)
+  if (product.value.quantity > 0) {
+  cart.push(product.value)
+  console.log(store.cart)
+  }
+}
 
-// mount時才賦值
-// let product = ref(null);
-// onMounted(()=>{
-//   product.value = store.getProductById(productId.value);
-// });
 
 // 從data.json取product
 // const product = computed(() => {
 //   return sourceData.product.find((product) => product.id === productId.value);
 // });
 
-function addToCart() {}
 </script>
 
 <template>
