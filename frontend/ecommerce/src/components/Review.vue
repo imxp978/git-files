@@ -1,7 +1,7 @@
 <template>
-    <section id="scontent" style="width:100%">
+    <section id="review" style="width:100%">
     <div class="container text-center mx-auto px-5 py-5  ">
-      <h3 class="my-5 movable slideIn">Review</h3>
+      <h3 class="my-5 movable slideIn">REVIEWS</h3>
         <div class="row gy-10 gx-5">
           <div class="card col-6 border-0 border-end border-bottom border-3" v-for="item in reviewList" :key="item.id">
             <div class="row g-5" >

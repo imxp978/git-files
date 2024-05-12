@@ -121,7 +121,9 @@
               <div class="col-2 text-center">subtotal</div>
             </div>
             <hr />
-            <div v-show="checkCartList()" class="text-end">Cart is empty</div>
+            <Transition>
+              <div v-show="checkCartList()" class="text-end">Cart is empty</div>
+            </Transition>
             <ul>
               <li class="mb-1" v-for="(item, index) in cartList" :key="index">
                 <div

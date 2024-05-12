@@ -228,8 +228,10 @@
       const h1 = document.querySelector("h1");
 
       function renderTimeRecord() {
+        // 清空紀錄區塊html元素
         timestamplist.innerHTML = "";
 
+        // 組織記錄表格
         for (let i = 0; i < timeStamp.length; i++) {
           let tr = document.createElement("tr");
           tr.classList.add("row");
@@ -250,6 +252,7 @@
             `<button class="btn btn-sm btn-light" onclick=delRecord(${i}) >刪除</button>`;
           td_btn.classList.add("col", "col-4");
 
+          // 在選定的編輯紀錄 由紀錄文字改為顯示input編輯區域
           if (i == editItem) {
             const time = timeStamp[i].time;
             const timeArray = time.split(":");
@@ -264,6 +267,7 @@
           tr.append(td_id, td_time, td_btn);
           timestamplist.append(tr);
 
+          // 將最新的紀錄字體放大
           const firstRow = document.querySelector(
             "#timestamplist tr:first-child"
           );
@@ -272,7 +276,7 @@
           firstRow.style.fontWeight = "bold";
         }
 
-        if (timeStamp.length != 0) {
+        if (timeStamp.length != 0) { // 有紀錄時 增加刪除所有紀錄的按鈕
           h1.classList.add("active");
           const hr = document.createElement("hr");
           const btn_clear = document.createElement("button");
@@ -282,10 +286,11 @@
           btn_clear.innerHTML = "刪除所有紀錄";
           timestamplist.append(hr, btn_clear);
           btn_clear.addEventListener("click", clearRecord);
-        } else {
+        } else { //沒有紀錄時 重置編號
           h1.classList.remove("active");
           timeStampId = 1;
         }
+        // 存入cookie
         setCookie(cookieKey, timeStamp, 30);
       }
 

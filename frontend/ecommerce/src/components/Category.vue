@@ -1,11 +1,12 @@
 <template>
-  <section id="content">
+  <section id="category">
     <div class="container px-5 text-center" py-5>
-      <h3 class="my-5 movable slideIn">Category</h3>
+      
+      <h3 class="my-5 movable slideIn">CATEGORIES</h3>
       <div class="row my-3">
         <div
           class="card col-sm-12 col-md-6 col-lg-4 border-0 gx-5 gy-5 movable slideIn"
-          v-for="item in categoryList"
+          v-for="item in categories"
           :key="item.id"
         >
           <div class="card-image">
@@ -28,85 +29,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
+import {useStore} from "@/stores/store.js";
+// import sourceData from "@/data.json"
+// const categoryList = ref(sourceData.product)
 
-import sourceData from "@/data.json"
-
-const categoryList = ref(sourceData.product)
-const categoryList2 = ref([
-  {
-    id: 1,
-    title: "Plate",
-    content: "content 1 is very tasty, definitely yum!",
-    image: "/images/product_images/001.webp",
-  },
-  {
-    id: 2,
-    title: "Bowl",
-    content: "content 2 is very tasty, definitely yum!",
-    image: "/images/product_images/002.jpg",
-  },
-  {
-    id: 3,
-    title: "Tableware",
-    content: "content 3 is very tasty, definitely yum!",
-    image: "/images/product_images/003.jpg",
-  },
-  {
-    id: 4,
-    title: "Cooker",
-    content: "content 4 is very tasty, definitely yum!",
-    image: "/images/product_images/001.webp",
-  },
-  {
-    id: 5,
-    title: "Pot",
-    content: "content 5 is very tasty, definitely yum!",
-    image: "/images/product_images/004.jpg",
-  },
-  {
-    id: 6,
-    title: "Appliance",
-    content: "content 6 is very tasty, definitely yum!",
-    image: "/images/product_images/002.jpg",
-  },
-  {
-    id: 7,
-    title: "Good Stuff",
-    content: "content 7 is very tasty, definitely yum!",
-    image: "/images/product_images/003.jpg",
-  },
-  {
-    id: 8,
-    title: "good one 111",
-    content: "content 8 is very tasty, definitely yum!",
-    image: "/images/product_images/001.webp",
-  },
-  {
-    id: 9,
-    title: "good one too",
-    content: "content 9 is very tasty, definitely yum!",
-    image: "/images/product_images/002.jpg",
-  },
-  {
-    id: 5,
-    title: "Pot",
-    content: "content 5 is very tasty, definitely yum!",
-    image: "/images/product_images/004.jpg",
-  },
-  {
-    id: 5,
-    title: "Pot",
-    content: "content 5 is very tasty, definitely yum!",
-    image: "/images/product_images/004.jpg",
-  },
-  {
-    id: 5,
-    title: "Pot",
-    content: "content 5 is very tasty, definitely yum!",
-    image: "/images/product_images/004.jpg",
-  },
-]);
+import {toRaw} from 'vue'
+const store = useStore();
+const categories = store.categories;
+// console.log(toRaw(categories))
 </script>
 
 <style>
@@ -115,7 +46,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: gray;
+  color: lightgray;
   text-decoration: none;
 }
 </style>
