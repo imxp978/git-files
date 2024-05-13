@@ -45,7 +45,7 @@
       </div>
     </div>
     <div
-      class="modal fade "
+      class="modal fade"
       id="exampleModalToggle2"
       aria-hidden="true"
       aria-labelledby="exampleModalToggleLabel2"
@@ -87,7 +87,7 @@
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
             >
-              Sign In
+              Sign Up
             </button>
           </div>
         </div>
@@ -122,11 +122,19 @@
             </div>
             <hr />
             <Transition>
-              <div v-show="checkCartList()" class="text-end">Cart is empty</div>
+              <div v-show="checkCart()" class="text-end">Cart is empty</div>
             </Transition>
             <ul>
-              <li v-for="item in cart" class="row d-flex justify-content-end align-items-baseline">
-                <div class="col-6 text-start"><img :src="`../images/product_images/${item.image}`" width="50px" />{{ item.title }}</div>
+              <li
+                v-for="item in cart"
+                class="row d-flex justify-content-end align-items-baseline"
+              >
+                <div class="col-6 text-start">
+                  <img
+                    :src="`../images/product_images/${item.image}`"
+                    width="50px"
+                  />{{ item.title }}
+                </div>
                 <div class="col-2 text-end">$: {{ item.price }}</div>
                 <div class="col-2 text-end">
                   <input
@@ -134,17 +142,27 @@
                     class="form-control"
                     min="0"
                     v-model="item.quantity"
+                    @change="checkQuantity(item)"
                   />
                 </div>
                 <div class="col-2 text-end">
                   $: {{ (item.price * item.quantity).toFixed(2) }}
                 </div>
               </li>
-              <hr>
-              <li class="col-12 text-end d-flex justify-content-end"><div>$: {{ sum2 }}</div></li>
-              <hr>
-              <li class="mb-1" v-for="(item, index) in cartList" :key="index">
+            </ul>
+            <hr />
+            <li class="col-12 text-end d-flex justify-content-end">
+              <div>$: {{ sum }}</div>
+            </li>
+            <!-- <hr>
+              ==FAKE CART BELOW==
+              <hr> 
+              <Transition>
+              <div v-show="checkCartList()" class="text-end">Cart is empty</div>
+            </Transition> -->
+            <!-- <li class="mb-1" v-for="(item, index) in cartList" :key="index">
                 <div class="row d-flex justify-content-between">
+                  
                   <div class="col-6 d-flex justify-content-start">
                     <img :src="item.image" width="50px" />
                     <p>{{ item.title }}</p>
@@ -159,7 +177,7 @@
                       class="form-control"
                       value="1"
                       v-model="item.quantity"
-                      @change="checkQuantity(item)"
+                      @change="checkQuantity2(item)"
                       min="0"
                     />
                   </div>
@@ -168,13 +186,11 @@
                     <p>{{ (item.price * item.quantity).toFixed(2) }}</p>
                   </div>
                 </div>
-              </li>
-            </ul>
-            <hr />
+              </li>            
             <div id="total" class="col-12 d-flex justify-content-end">
               <p>$:</p>
-              <p>{{ sum }}</p>
-            </div>
+              <p>{{ sum2 }}</p>
+            </div> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">
@@ -191,32 +207,73 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "@/stores/store.js";
-const cartList = ref([
-  {
-    id: 1,
-    title: "Rustic Iron Pot",
-    price: 19.99,
-    quantity: 1,
-    image: "images/product_images/002.jpg",
-  },
-  {
-    id: 2,
-    title: "Ceramic Plate",
-    price: 8.99,
-    quantity: 2,
-    image: "images/product_images/003.jpg",
-  },
-  {
-    id: 3,
-    title: "Modern Moka Coffee Maker",
-    price: 39.99,
-    quantity: 3,
-    image: "images/product_images/004.jpg",
-  },
-]);
+// const cartList = ref([
+//   {
+//     id: 1,
+//     title: "Rustic Iron Pot",
+//     price: 19.99,
+//     quantity: 1,
+//     image: "images/product_images/002.jpg",
+//   },
+//   {
+//     id: 2,
+//     title: "Ceramic Plate",
+//     price: 8.99,
+//     quantity: 2,
+//     image: "images/product_images/003.jpg",
+//   },
+//   {
+//     id: 3,
+//     title: "Modern Moka Coffee Maker",
+//     price: 39.99,
+//     quantity: 3,
+//     image: "images/product_images/004.jpg",
+//   },
+// ]);
 
-function checkCartList() {
-  return cartList.value.length === 0;
+// function checkCartList() {
+//   return cartList.value.length === 0;
+// }
+
+// function checkQuantity2(item) {
+//   if (item.quantity === 0) {
+//     delItem2(item);
+//   }
+// }
+
+// function delItem2(item) {
+//   let delIndex = cartList.value.findIndex(
+//     (cartItem) => cartItem.id === item.id
+//   );
+//   if (delIndex !== -1) {
+//     if (confirm("Remove this item?")) {
+//       cartList.value.splice(delIndex, 1);
+//     }
+//   }
+// }
+
+// const sum2 = computed(() => {
+//   let total = 0;
+//   cartList.value.forEach((item) => {
+//     total += item.price * item.quantity;
+//   });
+//   return parseFloat(total).toFixed(2);
+// });
+
+const store = useStore();
+const cart = store.cart;
+// console.log(cart);
+
+const sum = computed(() => {
+  let total = 0;
+  cart.map((item) => {
+    total += item.price * item.quantity;
+  });
+  return parseFloat(total).toFixed(2);
+});
+
+function checkCart() {
+  return cart.length === 0;
 }
 
 function checkQuantity(item) {
@@ -226,37 +283,13 @@ function checkQuantity(item) {
 }
 
 function delItem(item) {
-  let delIndex = cartList.value.findIndex(
-    (cartItem) => cartItem.id === item.id
-  );
+  let delIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
   if (delIndex !== -1) {
     if (confirm("Remove this item?")) {
-      cartList.value.splice(delIndex, 1);
+      cart.splice(delIndex, 1);
     }
   }
 }
-
-const store = useStore();
-const cart = store.cart;
-// console.log(cart);
-
-const sum = computed(() => {
-  let total = 0;
-  cartList.value.forEach((item) => {
-    total += item.price * item.quantity;
-  });
-  return parseFloat(total).toFixed(2);
-});
-
-const sum2 = computed(() => {
-  let total = 0;
-  cart.map((item) => {
-    total += item.price * item.quantity
-  });
-  return parseFloat(total).toFixed(2);
-});
-
-
 </script>
 
 <style></style>

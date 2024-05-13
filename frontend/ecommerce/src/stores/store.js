@@ -6,6 +6,8 @@ export const useStore = defineStore("store", {
     return {
       categories: data.category,
       products: data.product,
+      carousels: data.carousel,
+      reviews: data.review,
       cart: [],
     };
   },

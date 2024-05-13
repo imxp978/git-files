@@ -10,7 +10,7 @@
           <div class="col col-sm-6 col-12 text-end text-sm-start">
             <h5>About Us</h5>
             Company <br />
-            email: thisisanemail.email.com <br />
+            email: thisisanemail@email.com <br />
             tel: +886 987654321 <br />
           </div>
           <div class="col col-12 col-sm-2 text-end">
@@ -22,7 +22,7 @@
             ><br />
           </div>
           <div class="col col-12 col-sm-2 text-end">
-            <h5>Term & Condition</h5>
+            <h5>Terms & Conditions</h5>
             <a href="#">Return & Policy</a> <br />
             <a href="#">Privacy</a><br />
             <a href="#">FAQ</a><br />

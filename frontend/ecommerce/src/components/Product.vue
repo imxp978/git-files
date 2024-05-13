@@ -24,13 +24,13 @@ function decrease() { product.value.quantity -- };
 
 let cart = store.cart;
 function addToCart() {
-  console.log(store.cart)
-  console.log(product.value)
+  console.log('store.cart: '+store.cart)
+  console.log('product.value: '+product.value)
   if (product.value.quantity > 0) {
     let cartIndex = cart.findIndex((item)=>item.id === product.value.id)
     if (cartIndex === -1) {
       cart.push({id: product.value.id, title: product.value.title, price: product.value.price, image: product.value.image, quantity: quantity.value})
-      console.log(store.cart)
+      console.log('store.cart: '+store.cart)
     } else {
       cart[cartIndex].quantity = parseInt(cart[cartIndex].quantity)
       cart[cartIndex].quantity += parseInt(quantity.value);

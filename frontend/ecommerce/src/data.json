@@ -6,7 +6,7 @@
       "price": 8.99,
       "quantity": 0,
       "image": "1_cd3a98fc-2f96-4c63-9f35-188f0510ae54_960x.webp",
-      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+      "description": "This is a good bowl for the home-made soup! Keep your heart and the soup warm and tasty!"
     },
     {
       "id": 2,
@@ -30,7 +30,7 @@
       "price": 8.99,
       "quantity": 0,
       "image": "copperset_960x.webp",
-      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+      "description": "This is a good bowl for the home-made soup! Keep your heart and the soup warm and tasty!"
     },
     {
       "id": 5,
@@ -54,7 +54,7 @@
       "price": 8.99,
       "quantity": 0,
       "image": "CooksToolSet-5_960x.webp",
-      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+      "description": "This is a good bowl for the home-made soup! Keep your heart and the soup warm and tasty!"
     },
     {
       "id": 8,
@@ -73,6 +73,7 @@
       "description": "This is a fine crafted fork designed by a designer"
     }
   ],
+
   "category": [
     {
       "id": 1,
@@ -80,7 +81,7 @@
       "price": 8.99,
       "quantity": 0,
       "image": "1_cd3a98fc-2f96-4c63-9f35-188f0510ae54_960x.webp",
-      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+      "description": "This is a good bowl for the home-made soup! Keep your heart and the soup warm and tasty!"
     },
     {
       "id": 2,
@@ -104,7 +105,7 @@
       "price": 8.99,
       "quantity": 0,
       "image": "copperset_960x.webp",
-      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+      "description": "This is a good bowl for the home-made soup! Keep your heart and the soup warm and tasty!"
     },
     {
       "id": 5,
@@ -128,7 +129,7 @@
       "price": 8.99,
       "quantity": 0,
       "image": "CooksToolSet-5_960x.webp",
-      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+      "description": "This is a good bowl for the home-made soup! Keep your heart and the soup warm and tasty!"
     },
     {
       "id": 8,
@@ -145,6 +146,70 @@
       "quantity": 5,
       "image": "saltspherewalnutsite_960x.webp",
       "description": "This is a fine crafted fork designed by a designer"
+    }
+  ],
+
+  "carousel": [
+    {
+      "id": 1,
+      "title": "CAROUSEL image 1",
+      "content": "content1",
+      "image": "carousel00.jpg"
+    },
+    {
+      "id": 2,
+      "title": "CAROUSEL image 2",
+      "content": "content2",
+      "image": "carousel01.webp"
+    },
+    {
+      "id": 3,
+      "title": "CAROUSEL image 3",
+      "content": "content3",
+      "image": "carousel02.jpg"
+    },
+    {
+      "id": 4,
+      "title": "CAROUSEL image 4",
+      "content": "content4",
+      "image": "carousel03.webp"
+    },
+    {
+      "id": 5,
+      "title": "CAROUSEL image 5",
+      "content": "content5",
+      "image": "carousel04.webp"
+    }
+  ],
+
+  "review": [
+    {
+      "id": 1,
+      "title": "user1",
+      "rate": 5,
+      "content": "this is good 1",
+      "image": "person_1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "user2",
+      "rate": 3,
+      "content": "this is good 2",
+      "image": "person_2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "user3",
+      "rate": 5,
+      "content": "this is good 3",
+      "image": "person_3.jpg"
+    },
+    {
+      "id": 4,
+      "title": "user4",
+      "rate": 4,
+      "content": "this is good 4",
+      "image": "person_4.jpg"
     }
   ]
 }

@@ -8,7 +8,7 @@
       >
         <div class="carousel-indicators">
           <button
-            v-for="(item, index) in carouselList"
+            v-for="(item, index) in carousels"
             :key="index"
             type="button"
             data-bs-target="#carouselExampleCaptions"
@@ -21,7 +21,7 @@
         <div class="carousel-inner">
           <div
             class="carousel-item"
-            v-for="(item, index) in carouselList"
+            v-for="(item, index) in carousels"
             :key="index"
             :class="{ active: index === 0 }"
           >
@@ -58,39 +58,43 @@
 
 <script setup>
 import { ref } from "vue";
+import { useStore} from "@/stores/store.js"
 
-const carouselList = ref([
-  {
-    id: 1,
-    title: "image 1",
-    content: "content1",
-    image: "carousel00.jpg",
-  },
-  {
-    id: 2,
-    title: "image 2",
-    content: "content2",
-    image: "carousel01.webp",
-  },
-  {
-    id: 3,
-    title: "image 3",
-    content: "content3",
-    image: "carousel02.jpg",
-  },
-  {
-    id: 4,
-    title: "image 4",
-    content: "content4",
-    image: "carousel03.webp",
-  },
-  {
-    id: 5,
-    title: "image 5",
-    content: "content5",
-    image: "carousel04.webp",
-  },
-]);
+const store = useStore();
+const carousels = store.carousels;
+ 
+// const carouselList = ref([
+//   {
+//     id: 1,
+//     title: "image 1",
+//     content: "content1",
+//     image: "carousel00.jpg",
+//   },
+//   {
+//     id: 2,
+//     title: "image 2",
+//     content: "content2",
+//     image: "carousel01.webp",
+//   },
+//   {
+//     id: 3,
+//     title: "image 3",
+//     content: "content3",
+//     image: "carousel02.jpg",
+//   },
+//   {
+//     id: 4,
+//     title: "image 4",
+//     content: "content4",
+//     image: "carousel03.webp",
+//   },
+//   {
+//     id: 5,
+//     title: "image 5",
+//     content: "content5",
+//     image: "carousel04.webp",
+//   },
+// ]);
 </script>
 
 <style>

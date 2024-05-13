@@ -28,7 +28,7 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
+                  <a class="nav-link" href="#">Products</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a
@@ -41,16 +41,25 @@
                     Categories
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li v-for="item in categories"><a class="dropdown-item" href="#">{{ item.title }}</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    About Us
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Company</a></li>
                     <li>
-                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Contact Us</a>
                     </li>
                     <li>
-                      <hr class="dropdown-divider" />
-                    </li>
-
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
                     </li>
                   </ul>
                 </li>
@@ -62,43 +71,12 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Categories 2
+                    Links
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Terms and Conditions</a></li>
                     <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider" />
-                    </li>
-
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Categories 3
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider" />
-                    </li>
-
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <a class="dropdown-item" href="#">Privacy</a>
                     </li>
                   </ul>
                 </li>
@@ -160,6 +138,10 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useStore} from '@/stores/store.js';
+
+const store = useStore();
+const categories = store.categories;
 
 const search = ref(false)
 
