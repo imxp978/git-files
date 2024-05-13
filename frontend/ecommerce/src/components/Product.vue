@@ -4,6 +4,7 @@ import { ref, onMounted } from "vue";
 import { useStore } from "@/stores/store.js";
 import { useRoute } from "vue-router";
 
+const quantity = ref(1);
 const route = useRoute();
 const store = useStore();
 const products = store.products;
@@ -26,10 +27,14 @@ function addToCart() {
   console.log(store.cart)
   console.log(product.value)
   if (product.value.quantity > 0) {
-
-  cart.push(product.value)
-  console.log(store.cart)
-    
+    let cartIndex = cart.findIndex((item)=>item.id === product.value.id)
+    if (cartIndex === -1) {
+      cart.push({id: product.value.id, title: product.value.title, price: product.value.price, image: product.value.image, quantity: quantity.value})
+      console.log(store.cart)
+    } else {
+      cart[cartIndex].quantity = parseInt(cart[cartIndex].quantity)
+      cart[cartIndex].quantity += parseInt(quantity.value);
+    }
   }
 }
 
@@ -72,11 +77,12 @@ function addToCart() {
             <div class="row d-flex justify-content-center m-3">
               <select
                 v-if="product.quantity > 0"
+                v-model="quantity" 
                 name="quantity"
                 id="quantify"
                 class="form-select m-3"
               >
-                <option value="1">1</option>
+                <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>

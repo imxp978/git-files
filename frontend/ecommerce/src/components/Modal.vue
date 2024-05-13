@@ -45,7 +45,7 @@
       </div>
     </div>
     <div
-      class="modal fade"
+      class="modal fade "
       id="exampleModalToggle2"
       aria-hidden="true"
       aria-labelledby="exampleModalToggleLabel2"
@@ -95,7 +95,7 @@
     </div>
 
     <div
-      class="modal fade mt-5"
+      class="modal fade modal-lg mt-5"
       id="cart"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
@@ -116,27 +116,35 @@
             <div class="row d-flex justify-content-end">
               <!-- <div class="col-2"></div> -->
               <div class="col-6 text-center">item</div>
-              <div class="col-2 text-center">price</div>
-              <div class="col-2 text-center">quantity</div>
-              <div class="col-2 text-center">subtotal</div>
+              <div class="col-2 text-end">price</div>
+              <div class="col-2 text-end">quantity</div>
+              <div class="col-2 text-end">subtotal</div>
             </div>
             <hr />
             <Transition>
               <div v-show="checkCartList()" class="text-end">Cart is empty</div>
             </Transition>
             <ul>
-              <li v-for="item in cart" class="row d-flex justify-content-end">
-                <div class="col-6"></div>
-                <div class="col-2 text-center">{{ item.title }}</div>
-                <div class="col-2"></div>
-                <div class="col-2 text-center">{{ item.price }}</div>
-            </li>
+              <li v-for="item in cart" class="row d-flex justify-content-end align-items-baseline">
+                <div class="col-6 text-start"><img :src="`../images/product_images/${item.image}`" width="50px" />{{ item.title }}</div>
+                <div class="col-2 text-end">$: {{ item.price }}</div>
+                <div class="col-2 text-end">
+                  <input
+                    type="number"
+                    class="form-control"
+                    min="0"
+                    v-model="item.quantity"
+                  />
+                </div>
+                <div class="col-2 text-end">
+                  $: {{ (item.price * item.quantity).toFixed(2) }}
+                </div>
+              </li>
+              <hr>
+              <li class="col-12 text-end d-flex justify-content-end"><div>$: {{ sum2 }}</div></li>
+              <hr>
               <li class="mb-1" v-for="(item, index) in cartList" :key="index">
-                <div
-                  class="row d-flex justify-content-between"
-                >
-                  <!-- <div class="col-1">
-                  </div> -->
+                <div class="row d-flex justify-content-between">
                   <div class="col-6 d-flex justify-content-start">
                     <img :src="item.image" width="50px" />
                     <p>{{ item.title }}</p>
@@ -181,60 +189,72 @@
 </template>
 
 <script setup>
-import {ref, computed} from 'vue'
-import {useStore} from '@/stores/store.js'
-const cartList = ref([{
-                id: 1,
-                title: "Rustic Iron Pot",
-                price: 19.99,
-                quantity: 1,
-                image: "images/product_images/002.jpg",
-              },
-              {
-                id: 2,
-                title: "Ceramic Plate",
-                price: 8.99,
-                quantity: 2,
-                image: "images/product_images/003.jpg",
-              },
-              {
-                id: 3,
-                title: "Modern Moka Coffee Maker",
-                price: 39.99,
-                quantity: 3,
-                image: "images/product_images/004.jpg",
-              },]);
+import { ref, computed } from "vue";
+import { useStore } from "@/stores/store.js";
+const cartList = ref([
+  {
+    id: 1,
+    title: "Rustic Iron Pot",
+    price: 19.99,
+    quantity: 1,
+    image: "images/product_images/002.jpg",
+  },
+  {
+    id: 2,
+    title: "Ceramic Plate",
+    price: 8.99,
+    quantity: 2,
+    image: "images/product_images/003.jpg",
+  },
+  {
+    id: 3,
+    title: "Modern Moka Coffee Maker",
+    price: 39.99,
+    quantity: 3,
+    image: "images/product_images/004.jpg",
+  },
+]);
 
 function checkCartList() {
-    return cartList.value.length === 0;
-};
+  return cartList.value.length === 0;
+}
 
 function checkQuantity(item) {
-    if (item.quantity === 0) {
-        delItem(item);
-    };
-};
+  if (item.quantity === 0) {
+    delItem(item);
+  }
+}
 
 function delItem(item) {
-    let delIndex = cartList.value.findIndex( (cartItem) => cartItem.id === item.id);
-    if (delIndex !== -1){
-        if (confirm('Remove this item?')) {
-            cartList.value.splice(delIndex, 1);
-        }
+  let delIndex = cartList.value.findIndex(
+    (cartItem) => cartItem.id === item.id
+  );
+  if (delIndex !== -1) {
+    if (confirm("Remove this item?")) {
+      cartList.value.splice(delIndex, 1);
     }
-};
+  }
+}
+
+const store = useStore();
+const cart = store.cart;
+// console.log(cart);
 
 const sum = computed(() => {
-    let total = 0;
-    cartList.value.forEach((item) => {
-        total += item.price * item.quantity;
-    });
-    return parseFloat(total).toFixed(2);
+  let total = 0;
+  cartList.value.forEach((item) => {
+    total += item.price * item.quantity;
+  });
+  return parseFloat(total).toFixed(2);
 });
 
-const store = useStore()
-const cart = store.cart
-console.log(cart)
+const sum2 = computed(() => {
+  let total = 0;
+  cart.map((item) => {
+    total += item.price * item.quantity
+  });
+  return parseFloat(total).toFixed(2);
+});
 
 
 </script>
