@@ -75,9 +75,8 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Terms and Conditions</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Privacy</a>
-                    </li>
+                    <li><a class="dropdown-item" href="#">Privacy</a></li>
+                    <li><a class="dropdown-item" href="#">FAQ</a></li>
                   </ul>
                 </li>
               </ul>
