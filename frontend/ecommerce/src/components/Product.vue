@@ -34,8 +34,23 @@ function addToCart() {
     } else {
       cart[cartIndex].quantity = parseInt(cart[cartIndex].quantity)
       cart[cartIndex].quantity += parseInt(quantity.value);
-    }
-  }
+    } added()
+    console.log('added')
+  } 
+}
+
+let notice = ref(false)
+function added() {
+  setTimeout(showNotice, 500)
+  setTimeout(showNotice, 1500)
+}
+
+function showNotice() {
+  notice.value = !notice.value;
+}
+
+function notifyMe() {
+
 }
 
 
@@ -51,6 +66,14 @@ function addToCart() {
   <section id="product" v-if="product">
     <div class="container">
       <div class="row">
+          <div class="d-flex justify-content-center">
+            <Transition>
+            <div class="notice col-12 position-fixed d-flex justify-content-center" v-if="notice">
+                <p class="mx-auto my-auto">Added to cart <i class="fa-regular fa-circle-check"></i></p>
+              </div>
+            </Transition>
+          </div>
+
         <div class="col-12 col-lg-6">
           <div class="product_image">
             <img :src="`../images/category_images/${product.image}`" alt="" />
@@ -94,9 +117,11 @@ function addToCart() {
               @click="addToCart"
               class="btn btn-dark m-3"
             >
-              ADD TO CART<i class="fa-solid fa-cart-shopping"></i>
+              ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
             </button>
-            <button v-else class="btn btn-danger m-3">
+            <button v-else 
+              @click="notifyMe" 
+              class="btn btn-danger m-3">
               NOTIFY ME <i class="fa-solid fa-bell"></i>
             </button>
           </div>
@@ -124,4 +149,18 @@ function addToCart() {
   </section>
 </template>
 
-<style></style>
+<style>
+.notice {
+  background: rgba(0, 0, 0, 0.33);
+  border-radius: 5px;
+  width: 10vw;
+  min-width: 150px;
+  height: 10vh;
+  z-index: 1;
+  top: 50%;
+}
+
+.notice p {
+  color: white;
+}
+</style>

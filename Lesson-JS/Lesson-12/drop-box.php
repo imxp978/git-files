@@ -1,3 +1,35 @@
+<?php
+$level3Open="";
+if (isset($_GET['p_id'])&& $_GET['p_id']!="") {
+    
+    // 第一層
+    // 使用p_id取出資料
+
+    $SQLstring = sprintf("SELECT * FROM product, pyclass, 
+    (SELECT classid as upclassid, level as uplevel, cname as upcname FROM pyclass WHERE level=1) as uplevel 
+    WHERE product.classid= pyclass.classid AND pyclass.uplink=uplevel.upclassid AND product.p_id=%d", $_GET['p_id']);
+
+    $classid_rs = $link->query($SQLstring);
+    $data = $classid_rs->fetch();
+    $level1Cname = $data['upcname'];
+    $level1Upclassid = $data['upclassid'];
+    $level1 = $data['uplevel1'];
+    $level1Open = '<li class="breadcrumb-item"><a href="drugstore.php?classid='.$level1Upclassid.'&level='.$level1.'">'.$level1Cname.'</a></li>';
+
+    //第二層
+    $level2Cname = $data['cname'];
+    $level2Classid = $data['classid'];
+    $level2Open = '<li class="breadcrumb-item"><a href="drugstore.php?classid='.$level2Classid.'">'.$level2Cname.'</a></li>';
+
+    //第三層
+    $level3Open = '<li class="breadcrumb-item active" aria-current="page">'.$data['p_name'].'</li>';
+
+} elseif (isset($_GET['search_name'])) {
+
+}
+
+?>
+
 <div class="drop-box">
     <meta itemprop="description" content="Biore淨嫩沐浴乳 浪漫櫻花香 水采保濕型 1000g，除了Biore 蜜妮等推薦品牌，屈臣氏提供多種熱銷沐浴乳商品選擇，全面符合您的需求。">
     <p></p>
