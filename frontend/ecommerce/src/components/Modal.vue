@@ -151,7 +151,7 @@
             </ul>
             <hr />
             <li class="col-12 text-end d-flex justify-content-end">
-              <div>$: {{ cartStore.sum() }}</div>
+              <div>Total $: {{ cartStore.sum() }}</div>
             </li>
           </div>
           <div class="modal-footer">

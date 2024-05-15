@@ -43,12 +43,6 @@ import { useReviewStore } from "@/stores/ReviewStore.js";
 
 const reviews = useReviewStore().reviews;
 
-// const reviewList = ref( [
-//         {id:1, title:"user1", content:"this is good 1", image:"/images/user_images/person_1.jpg",},
-//         {id:2, title:"user2", content:"this is good 2", image:"/images/user_images/person_2.jpg",},
-//         {id:3, title:"user3", content:"this is good 3", image:"/images/user_images/person_3.jpg",},
-//         {id:4, title:"user4", content:"this is good 4", image:"/images/user_images/person_4.jpg",},
-//       ]);
 </script>
 
 <style></style>

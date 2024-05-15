@@ -21,7 +21,9 @@ export const useCartStore = defineStore("cart", {
 
   actions: {
     addToCart(product, quantity) {
-      if (product.quantity > 0) {
+      //console.log(this.cart)
+      //console.log(this.cart[cartIndex])
+      if (product.quantity >= quantity ) {
         let cartIndex = this.cart.findIndex((item) => item.id === product.id);
         if (cartIndex === -1) {
           this.cart.push({
@@ -39,6 +41,11 @@ export const useCartStore = defineStore("cart", {
         }
         this.itemAddedToCart();
       }
+      // } else if (product.quantity > quantity + this.cart[cartIndex].quantity) {
+      //   alert('case 2')
+      // } else {
+      //   alert('Not Enough Stock')
+      // }
     },
 
     itemAddedToCart() {
