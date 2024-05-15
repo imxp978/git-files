@@ -2,7 +2,7 @@ const movable = document.querySelector(".movable");
 
 function isElementInViewport(el) {
   const rect = el.getBoundingClientRect();
-  return rect.bottom < 0 || rect.top > window.innerHeight;
+  return rect.bottom < 0 || rect.top + 200 >= window.innerHeight;
 }
 
 function addClassToVisibleElements() {
