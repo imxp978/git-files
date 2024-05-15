@@ -5,7 +5,7 @@
         class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end"
       >
         <div class="container">
-          <RouterLink class="navbar-brand" to="/"
+          <RouterLink class="navbar-brand" :to="{name: 'home'}"
             ><h3>We Live, <br />We Eat, <br />We Grow</h3></RouterLink
           >
           <button
@@ -25,10 +25,10 @@
           >
             <ul class="navbar-nav mb-2 mb-lg-0 mx-auto">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <RouterLink class="nav-link active" aria-current="page" :to="{name: 'home'}">Home</RouterLink>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
+                <RouterLink class="nav-link" :to="{ name: 'products' }">Products</RouterLink>
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -42,7 +42,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li v-for="item in categories">
-                    <a class="dropdown-item" href="#">{{ item.title }}</a>
+                    <RouterLink class="dropdown-item" :to="{ name: 'category', params: { id: item.id }}">{{ item.title }}</RouterLink>
                   </li>
                 </ul>
               </li>
