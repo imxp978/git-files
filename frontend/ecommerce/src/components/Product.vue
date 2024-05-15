@@ -1,7 +1,6 @@
 <script setup>
 // import sourceData from "@/data.json";
 import { ref, onMounted } from "vue";
-import { useStore } from "@/stores/store.js";
 import { useRoute } from "vue-router";
 import { useProductStore } from "@/stores/ProductStore.js"
 import { useCartStore } from "@/stores/CartStore.js" 
@@ -10,21 +9,20 @@ import { storeToRefs } from "pinia";
 const quantity = ref(1);
 const route = useRoute();
 const productstore = useProductStore()
+const cartstore = useCartStore()
 
 const productId = ref(parseInt(route.params.id));
-
 // let product = ref(store.getProductById(productId.value));
-
-// mount時才賦值
 let product = ref(null);
+// mount時才賦值
 onMounted(()=>{
   product.value = productstore.getProductById(productId.value);
 });
 
-function increase() { product.value.quantity ++ };
-function decrease() { product.value.quantity -- };
+const cart = cartstore.cart;
 
-let cart = useCartStore().cart;
+// productstore.addToCart(product);
+
 function addToCart() {
   // console.log('cart: '+cart)
 
@@ -40,13 +38,14 @@ function addToCart() {
     //console.log('added')
   } 
 }
+
 let notice = ref(false)
 let itemAdded = ref(false)
 let noticeAdded = ref(false)
 
 function itemAddedToCart() {
   setTimeout(addedToCart, 200)
-  setTimeout(addedToCart, 1500)
+  setTimeout(addedToCart, 1000)
 }
 
 function addedToCart() {
@@ -106,9 +105,9 @@ function addedNotice() {
             </p>
             <div class="d-flex justify-content-end">
               <div class="testing only col-3 d-flex justify-content-between align-items-baseline border">
-                <button class="btn btn-sm btn-light" @click ="decrease">-</button>
+                <button class="btn btn-sm btn-light" @click ="productstore.decrease(product.id)">-</button>
                 <p>{{ product.quantity }}</p>
-                <button class="btn btn-sm btn-light" @click ="increase">+</button>
+                <button class="btn btn-sm btn-light" @click ="productstore.increase(product.id)">+</button>
               </div>
             </div>
             <div class="row d-flex justify-content-center m-3">

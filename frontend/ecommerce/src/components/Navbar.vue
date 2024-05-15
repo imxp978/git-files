@@ -127,12 +127,15 @@
                     data-bs-target="#cart"
                     ><span
                       ><i class="fa-solid fa-cart-shopping fa-4"></i
-                      ><span
-                        class="position-absolute translate-middle badge rounded-pill bg-danger"
-                        v-if="cart.reduce((acc, item) => acc += parseInt(item.quantity), 0)  > 0"
-                      >{{ cart.reduce((acc, item) => acc += parseInt(item.quantity), 0) }}
-                       </span
                       >
+                      <Transition>
+                        <span
+                          class="position-absolute translate-middle badge rounded-pill bg-danger"
+                          v-if="cart.reduce((acc, item) => acc += parseInt(item.quantity), 0)  > 0"
+                        >
+                        {{ cart.reduce((acc, item) => acc += parseInt(item.quantity), 0) }}
+                        </span>
+                      </Transition>
                     </span></a
                   >
                 </li>

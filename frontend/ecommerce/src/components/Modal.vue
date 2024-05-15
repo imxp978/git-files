@@ -79,8 +79,6 @@
             </form>
           </div>
           <div class="modal-footer">
-            <!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
-            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button> -->
             <button
               class="btn btn-dark"
               data-bs-target="#exampleModalToggle"
@@ -114,7 +112,6 @@
           </div>
           <div class="modal-body">
             <div class="row d-flex justify-content-end">
-              <!-- <div class="col-2"></div> -->
               <div class="col-6 text-center">item</div>
               <div class="col-2 text-end">price</div>
               <div class="col-2 text-end">quantity</div>
@@ -152,45 +149,9 @@
             </ul>
             <hr />
             <li class="col-12 text-end d-flex justify-content-end">
-              <div>$: {{ sum }}</div>
+              <div>$: {{sum}}</div>
             </li>
-            <!-- <hr>
-              ==FAKE CART BELOW==
-              <hr> 
-              <Transition>
-              <div v-show="checkCartList()" class="text-end">Cart is empty</div>
-            </Transition> -->
-            <!-- <li class="mb-1" v-for="(item, index) in cartList" :key="index">
-                <div class="row d-flex justify-content-between">
-                  
-                  <div class="col-6 d-flex justify-content-start">
-                    <img :src="item.image" width="50px" />
-                    <p>{{ item.title }}</p>
-                  </div>
-                  <div class="col-2 d-flex justify-content-end ml-2">
-                    <p>$:</p>
-                    <p>{{ item.price }}</p>
-                  </div>
-                  <div class="col-2">
-                    <input
-                      type="number"
-                      class="form-control"
-                      value="1"
-                      v-model="item.quantity"
-                      @change="checkQuantity2(item)"
-                      min="0"
-                    />
-                  </div>
-                  <div class="col-2 d-flex justify-content-end">
-                    <p>$:</p>
-                    <p>{{ (item.price * item.quantity).toFixed(2) }}</p>
-                  </div>
-                </div>
-              </li>            
-            <div id="total" class="col-12 d-flex justify-content-end">
-              <p>$:</p>
-              <p>{{ sum2 }}</p>
-            </div> -->
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">
@@ -208,8 +169,9 @@
 import { ref, computed } from "vue";
 import { useCartStore } from "@/stores/CartStore.js";
 
+const cartstore = useCartStore();
 const cart = useCartStore().cart;
-// console.log(cart);
+// console.log(cartstore.sum);
 
 const sum = computed(() => {
   let total = 0;
@@ -238,59 +200,6 @@ function delItem(item) {
   }
 }
 
-
-// const cartList = ref([
-//   {
-//     id: 1,
-//     title: "Rustic Iron Pot",
-//     price: 19.99,
-//     quantity: 1,
-//     image: "images/product_images/002.jpg",
-//   },
-//   {
-//     id: 2,
-//     title: "Ceramic Plate",
-//     price: 8.99,
-//     quantity: 2,
-//     image: "images/product_images/003.jpg",
-//   },
-//   {
-//     id: 3,
-//     title: "Modern Moka Coffee Maker",
-//     price: 39.99,
-//     quantity: 3,
-//     image: "images/product_images/004.jpg",
-//   },
-// ]);
-
-// function checkCartList() {
-//   return cartList.value.length === 0;
-// }
-
-// function checkQuantity2(item) {
-//   if (item.quantity === 0) {
-//     delItem2(item);
-//   }
-// }
-
-// function delItem2(item) {
-//   let delIndex = cartList.value.findIndex(
-//     (cartItem) => cartItem.id === item.id
-//   );
-//   if (delIndex !== -1) {
-//     if (confirm("Remove this item?")) {
-//       cartList.value.splice(delIndex, 1);
-//     }
-//   }
-// }
-
-// const sum2 = computed(() => {
-//   let total = 0;
-//   cartList.value.forEach((item) => {
-//     total += item.price * item.quantity;
-//   });
-//   return parseFloat(total).toFixed(2);
-// });
 </script>
 
 <style></style>
