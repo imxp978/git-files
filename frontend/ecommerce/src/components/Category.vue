@@ -29,15 +29,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import {useStore} from "@/stores/store.js";
-// import sourceData from "@/data.json"
-// const categoryList = ref(sourceData.product)
 
-import {toRaw} from 'vue'
-const store = useStore();
-const categories = store.categories;
-// console.log(toRaw(categories))
+import {useCategoryStore} from "@/stores/CategoryStore.js"
+
+const categories = useCategoryStore().categories
+
 </script>
 
 <style>

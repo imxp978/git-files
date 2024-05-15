@@ -3,11 +3,13 @@
 import { ref, onMounted } from "vue";
 import { useStore } from "@/stores/store.js";
 import { useRoute } from "vue-router";
+import { useProductStore } from "@/stores/ProductStore.js"
+import { useCartStore } from "@/stores/CartStore.js" 
+import { storeToRefs } from "pinia";
 
 const quantity = ref(1);
 const route = useRoute();
-const store = useStore();
-const products = store.products;
+const productstore = useProductStore()
 
 const productId = ref(parseInt(route.params.id));
 
@@ -16,46 +18,53 @@ const productId = ref(parseInt(route.params.id));
 // mount時才賦值
 let product = ref(null);
 onMounted(()=>{
-  product.value = store.getProductById(productId.value);
+  product.value = productstore.getProductById(productId.value);
 });
 
 function increase() { product.value.quantity ++ };
 function decrease() { product.value.quantity -- };
 
-let cart = store.cart;
+let cart = useCartStore().cart;
 function addToCart() {
-  console.log('store.cart: '+store.cart)
-  console.log('product.value: '+product.value)
+  // console.log('cart: '+cart)
+
   if (product.value.quantity > 0) {
     let cartIndex = cart.findIndex((item)=>item.id === product.value.id)
     if (cartIndex === -1) {
-      cart.push({id: product.value.id, title: product.value.title, price: product.value.price, image: product.value.image, quantity: quantity.value})
-      console.log('store.cart: '+store.cart)
+      cart.push({id: product.value.id, title: product.value.title, price: product.value.price, image: product.value.image, quantity: +(quantity.value) })
+      // console.log('cart: '+cart)
     } else {
       cart[cartIndex].quantity = parseInt(cart[cartIndex].quantity)
       cart[cartIndex].quantity += parseInt(quantity.value);
-    } added()
-    console.log('added')
+    } itemAddedToCart()
+    //console.log('added')
   } 
 }
-
 let notice = ref(false)
-function added() {
-  setTimeout(showNotice, 500)
-  setTimeout(showNotice, 1500)
+let itemAdded = ref(false)
+let noticeAdded = ref(false)
+
+function itemAddedToCart() {
+  setTimeout(addedToCart, 200)
+  setTimeout(addedToCart, 1500)
 }
 
-function showNotice() {
-  notice.value = !notice.value;
+function addedToCart() {
+  notice.value = !notice.value
+  itemAdded.value = !itemAdded.value;
 }
 
 function notifyMe() {
-
-
-
-function added() {
-  
+  setTimeout(addedNotice, 200)
+  setTimeout(addedNotice, 1000)
 }
+
+function addedNotice() {
+  notice.value = !notice.value
+  noticeAdded.value = !noticeAdded.value
+}
+
+
 
 
 // 從data.json取product
@@ -73,7 +82,8 @@ function added() {
           <div class="d-flex justify-content-center">
             <Transition>
             <div class="notice col-12 position-fixed d-flex justify-content-center" v-if="notice">
-                <p class="mx-auto my-auto">Added to cart <i class="fa-regular fa-circle-check"></i></p>
+                <p class="mx-auto my-auto" v-if="itemAdded">Added to cart <i class="fa-regular fa-circle-check"></i></p>
+                <p class="mx-auto my-auto" v-if="noticeAdded">Success <i class="fa-regular fa-circle-check"></i></p>
               </div>
             </Transition>
           </div>

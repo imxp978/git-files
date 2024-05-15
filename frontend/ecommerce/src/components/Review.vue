@@ -31,10 +31,9 @@
 <script setup>
 
 import {ref} from "vue";
-import {useStore} from "@/stores/store.js";
+import { useReviewStore } from "@/stores/ReviewStore.js";
 
-const store = useStore();
-const reviews = store.reviews;
+const reviews = useReviewStore().reviews;
 
 // const reviewList = ref( [
 //         {id:1, title:"user1", content:"this is good 1", image:"/images/user_images/person_1.jpg",},

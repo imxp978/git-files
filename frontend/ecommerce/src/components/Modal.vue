@@ -206,7 +206,39 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { useStore } from "@/stores/store.js";
+import { useCartStore } from "@/stores/CartStore.js";
+
+const cart = useCartStore().cart;
+// console.log(cart);
+
+const sum = computed(() => {
+  let total = 0;
+  cart.map((item) => {
+    total += item.price * item.quantity;
+  });
+  return parseFloat(total).toFixed(2);
+});
+
+function checkCart() {
+  return cart.length === 0;
+}
+
+function checkQuantity(item) {
+  if (item.quantity === 0) {
+    delItem(item);
+  }
+}
+
+function delItem(item) {
+  let delIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
+  if (delIndex !== -1) {
+    if (confirm("Remove this item?")) {
+      cart.splice(delIndex, 1);
+    }
+  }
+}
+
+
 // const cartList = ref([
 //   {
 //     id: 1,
@@ -259,37 +291,6 @@ import { useStore } from "@/stores/store.js";
 //   });
 //   return parseFloat(total).toFixed(2);
 // });
-
-const store = useStore();
-const cart = store.cart;
-// console.log(cart);
-
-const sum = computed(() => {
-  let total = 0;
-  cart.map((item) => {
-    total += item.price * item.quantity;
-  });
-  return parseFloat(total).toFixed(2);
-});
-
-function checkCart() {
-  return cart.length === 0;
-}
-
-function checkQuantity(item) {
-  if (item.quantity === 0) {
-    delItem(item);
-  }
-}
-
-function delItem(item) {
-  let delIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
-  if (delIndex !== -1) {
-    if (confirm("Remove this item?")) {
-      cart.splice(delIndex, 1);
-    }
-  }
-}
 </script>
 
 <style></style>

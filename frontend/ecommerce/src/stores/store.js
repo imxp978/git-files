@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
+import { ref, computed } from 'vue';
 import data from "@/data.json";
 
+// option store
 export const useStore = defineStore("store", {
   state: () => {
     return {
@@ -17,3 +19,18 @@ export const useStore = defineStore("store", {
     },
   },
 });
+
+// setup store
+// export const useStore = defineStore('store', ()=>{
+//   const categories = ref(data.category)
+//   const products = ref(data.product)
+//   const carousels = ref(data.carousel)
+//   const reviews = ref(data.review)
+//   const cart = ref([])
+
+//   const getProductById = computed((itemID) => {
+//     products.value.find((product) => product.id === itemID)
+//   })
+
+//   return {categories, products, carousels, reviews, cart, getProductById, }
+// })
