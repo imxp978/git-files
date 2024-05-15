@@ -25,7 +25,8 @@
             <p class="fs-4 text-end">
               <i class="fa-solid fa-dollar-sign"></i> {{ product.price }}
             </p>
-            <p v-if="product.quantity > 0" class="text-end">In Stock</p>
+            <p v-if="product.quantity >= 5" class="text-end">In Stock</p>
+            <p v-else-if="product.quantity > 0" class="text-end" style="color: orange">Low Stock</p>
             <p v-else class="text-end" style="color: red">Out of Stock</p>
             <p>
               {{ product.description }}
