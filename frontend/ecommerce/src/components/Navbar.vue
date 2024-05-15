@@ -131,9 +131,9 @@
                       <Transition>
                         <span
                           class="position-absolute translate-middle badge rounded-pill bg-danger"
-                          v-if="cart.reduce((acc, item) => acc += parseInt(item.quantity), 0)  > 0"
+                          v-if="cartStore.countItem()>0"
                         >
-                        {{ cart.reduce((acc, item) => acc += parseInt(item.quantity), 0) }}
+                        {{ cartStore.countItem() }}
                         </span>
                       </Transition>
                     </span></a
@@ -155,9 +155,9 @@ import { useCategoryStore } from "@/stores/CategoryStore.js"
 import { useCartStore } from "@/stores/CartStore.js"; 
 import { storeToRefs} from "pinia";
 
+const cartStore = useCartStore();
 const categories = useCategoryStore().categories;
 const cart = useCartStore().cart;
-
 
 const search = ref(false);
 

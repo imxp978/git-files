@@ -1,7 +1,7 @@
 <template>
-    <section id="carousel">
+  <section id="carousel">
     <div class="container">
-  <div
+      <div
         id="carouselExampleCaptions"
         class="carousel slide"
         data-bs-ride="carousel"
@@ -25,7 +25,11 @@
             :key="item.id"
             :class="{ active: index === 0 }"
           >
-            <img :src="`images/carousel_images/${item.image}`" class="d-block w-100" alt="..." />
+            <img
+              :src="`images/carousel_images/${item.image}`"
+              class="d-block w-100"
+              alt="..."
+            />
             <div class="carousel-caption d-none d-md-block">
               <h5>{{ item.title }}</h5>
               <p>{{ item.content }}</p>
@@ -53,22 +57,13 @@
         <hr />
       </div>
     </div>
-      </section>
+  </section>
 </template>
 
 <script setup>
-import { ref } from "vue";
-// import { useStore } from "@/stores/store.js"
-import { useCarouselStore } from "@/stores/CarouselStore.js"
-import { storeToRefs } from "pinia"
+import { useCarouselStore } from "@/stores/CarouselStore.js";
 
-// const store = useStore();
-// const carousels = store.carousels;
-
-const carousels = useCarouselStore().carousels
-
+const carousels = useCarouselStore().carousels;
 </script>
 
-<style>
-
-</style>
+<style></style>

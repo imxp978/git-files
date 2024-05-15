@@ -1,7 +1,6 @@
 <template>
   <section id="category">
     <div class="container px-5 text-center" py-5>
-      
       <h3 class="my-5 movable slideIn">CATEGORIES</h3>
       <div class="row my-3">
         <div
@@ -11,11 +10,19 @@
         >
           <div class="card-image">
             <div class="card-modal" style="z-index: 1">
-              <p><RouterLink :to="`products/${item.id}`">{{ item.title }}</RouterLink></p>
+              <p>
+                <RouterLink :to="`products/${item.id}`">{{
+                  item.title
+                }}</RouterLink>
+              </p>
             </div>
             <div class="category-image">
-              <RouterLink :to="`products/${item.id}`"><img :src="`/images/category_images/${item.image}`" class="card-img-top" alt="..."
-            /></RouterLink>
+              <RouterLink :to="`products/${item.id}`"
+                ><img
+                  :src="`/images/category_images/${item.image}`"
+                  class="card-img-top"
+                  alt="..."
+              /></RouterLink>
             </div>
           </div>
           <div class="card-body">
@@ -29,11 +36,9 @@
 </template>
 
 <script setup>
+import { useCategoryStore } from "@/stores/CategoryStore.js";
 
-import {useCategoryStore} from "@/stores/CategoryStore.js"
-
-const categories = useCategoryStore().categories
-
+const categories = useCategoryStore().categories;
 </script>
 
 <style>

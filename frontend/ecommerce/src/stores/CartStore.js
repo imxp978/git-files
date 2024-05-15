@@ -2,7 +2,11 @@ import { defineStore } from "pinia";
 
 export const useCartStore = defineStore("cart", {
   state: () => {
-    return { cart: [] };
+    return {
+      cart: [],
+      notice: false,
+      itemAdded: false,
+    };
   },
 
   getters: {
@@ -11,30 +15,49 @@ export const useCartStore = defineStore("cart", {
       state.cart.map((item) => {
         total += item.price * item.quantity;
       });
-      return total;
-    }
+      return parseFloat(total).toFixed(2);
+    },
   },
 
   actions: {
-    addToCart(product) {
+    addToCart(product, quantity) {
       if (product.quantity > 0) {
-        let cartIndex = this.cart.findIndex((item)=>item.id === product.id)
+        let cartIndex = this.cart.findIndex((item) => item.id === product.id);
         if (cartIndex === -1) {
-          this.cart.push({id: product.id, title: product.title, price: product.price, image: product.image, quantity: +(quantity.value) })
+          this.cart.push({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            quantity: +quantity,
+          });
         } else {
-          this.cart[cartIndex].quantity = parseInt(this.cart[cartIndex].quantity)
-          this.cart[cartIndex].quantity += parseInt(quantity.value);
-        } itemAddedToCart()
-      } 
+          this.cart[cartIndex].quantity = parseInt(
+            this.cart[cartIndex].quantity
+          );
+          this.cart[cartIndex].quantity += parseInt(quantity);
+        }
+        this.itemAddedToCart();
+      }
     },
-    
+
+    itemAddedToCart() {
+      setTimeout(this.addedToCart, 200);
+      setTimeout(this.addedToCart, 1000);
+    },
+
+    addedToCart() {
+      this.notice = !this.notice;
+      this.itemAdded = !this.itemAdded;
+    },
+
     checkCart() {
       return this.cart.length === 0;
     },
-    
+
     checkQuantity(item) {
       if (item.quantity === 0) {
-        delItem(item);
+        this.delItem(item);
       }
     },
 
@@ -46,6 +69,12 @@ export const useCartStore = defineStore("cart", {
         }
       }
     },
-    
+
+    countItem() {
+      return this.cart.reduce(
+        (acc, item) => (acc += parseInt(item.quantity)),
+        0
+      );
+    },
   },
 });

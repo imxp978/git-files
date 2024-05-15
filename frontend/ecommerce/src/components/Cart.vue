@@ -21,7 +21,6 @@
           </div>
           <div class="modal-body">
             <div class="row d-flex justify-content-end">
-              <!-- <div class="col-2"></div> -->
               <div class="col-6 text-center">item</div>
               <div class="col-2 text-center">price</div>
               <div class="col-2 text-center">quantity</div>
@@ -32,8 +31,6 @@
             <ul>
               <li class="mb-1" v-for="(item, index) in cartList" :key="index">
                 <div class="row d-flex justify-content-between">
-                  <!-- <div class="col-1">
-                  </div> -->
                   <div class="col-6 d-flex justify-content-start">
                     <img :src="item.image" width="50px" />
                     <p>{{ item.title }}</p>

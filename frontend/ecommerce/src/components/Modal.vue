@@ -119,7 +119,9 @@
             </div>
             <hr />
             <Transition>
-              <div v-show="checkCart()" class="text-end">Cart is empty</div>
+              <div v-show="cartStore.checkCart()" class="text-end">
+                Cart is empty
+              </div>
             </Transition>
             <ul>
               <li
@@ -139,7 +141,7 @@
                     class="form-control"
                     min="0"
                     v-model="item.quantity"
-                    @change="checkQuantity(item)"
+                    @change="cartStore.checkQuantity(item)"
                   />
                 </div>
                 <div class="col-2 text-end">
@@ -149,9 +151,8 @@
             </ul>
             <hr />
             <li class="col-12 text-end d-flex justify-content-end">
-              <div>$: {{sum}}</div>
+              <div>$: {{ cartStore.sum() }}</div>
             </li>
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">
@@ -166,40 +167,37 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
 import { useCartStore } from "@/stores/CartStore.js";
 
-const cartstore = useCartStore();
+const cartStore = useCartStore();
 const cart = useCartStore().cart;
-// console.log(cartstore.sum);
 
-const sum = computed(() => {
-  let total = 0;
-  cart.map((item) => {
-    total += item.price * item.quantity;
-  });
-  return parseFloat(total).toFixed(2);
-});
+// const sum = computed(() => {
+//   let total = 0;
+//   cart.map((item) => {
+//     total += item.price * item.quantity;
+//   });
+//   return parseFloat(total).toFixed(2);
+// });
 
-function checkCart() {
-  return cart.length === 0;
-}
+// function checkCart() {
+//   return cart.length === 0;
+// }
 
-function checkQuantity(item) {
-  if (item.quantity === 0) {
-    delItem(item);
-  }
-}
+// function checkQuantity(item) {
+//   if (item.quantity === 0) {
+//     delItem(item);
+//   }
+// }
 
-function delItem(item) {
-  let delIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
-  if (delIndex !== -1) {
-    if (confirm("Remove this item?")) {
-      cart.splice(delIndex, 1);
-    }
-  }
-}
-
+// function delItem(item) {
+//   let delIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
+//   if (delIndex !== -1) {
+//     if (confirm("Remove this item?")) {
+//       cart.splice(delIndex, 1);
+//     }
+//   }
+// }
 </script>
 
 <style></style>

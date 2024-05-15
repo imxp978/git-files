@@ -1,8 +1,8 @@
-import {defineStore} from "pinia";
-import data from '@/data.json'
+import { defineStore } from "pinia";
+import data from "@/data.json";
 
 export const useCarouselStore = defineStore("CarouselStore", {
-    state: () => {
-        return {carousels: data.carousel}
-    }
-})
+  state: () => {
+    return { carousels: data.carousel };
+  },
+});
