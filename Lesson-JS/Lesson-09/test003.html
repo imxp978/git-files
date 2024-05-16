@@ -1,194 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <script src="comlib.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap offline</title>
+    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
 </head>
-
 <body>
+    <h1>Carousell Bootstrap offline</h1>
 
-  <h1 id="time">yo</h1>
-
-<script>
-  let hour = 11;
-  let min = 56;
-  let sec = 20;
-
-  document.write(hour +":"+min + ":" + sec)
-  
-  function runTimer() {
-    if (sec === 59) {
-      sec = 0;
-      if (min === 59) {
-        min = 0;
-        hour ++;
-        if (hour === 24) {
-          hour = 0;
-        let str1 = str();
-        if (hour > 12) {
-          hour -= 12;
-        }
-        }
-      } else {
-        min ++;
-      }
-    } else {
-      sec++;
-    }
-    time.innerHTML = "Current Time is: " + addZero(hour) + ":" + addZero(min) + ":" + addZero(sec) +" "+ str();
-    window.setTimeout('runTimer()', 1);
-  }
-
-  function str() {
-    if (hour > 11) {
-      return "PM";
-    } else {
-      return "AM";
-    }
-  }
-
-  // let str = "AM";
-  // (hour > 11) ? str = "PM" : str = "AM";
-  // hour > 12 ? hour = hour - 12 : hour;
-
-  function addZero(num) {
-    if (num < 10) {
-      return num = "0"+num;
-    }
-    else {
-      return num;
-    }     
-  }
-
-  const time = document.getElementById('time');
-  runTimer();
-
-</script>
-
-<h3>
-
-  <script>
-    let hour = rand(1,24);
-    document.write(hour+"<br>");
-    let str = (hour >= 12)?"PM":"AM";
-    hour = (hour==24)?hour-24:hour; 
-    hour = (hour>12)?hour-12:hour;
-    document.write("current time: "+hour+" "+str)
-    </script>
-</h3>
-  <hr>
-
-  <p id="lottery" name="lottery" style="font-size:100px;">1</p>
-  <button type="button" id="btn01" name="btn01" onclick="getPrize();">抽獎</button>
-
-
-  <script>
-    let count = 0;
-    function getPrize() {
-      if (count < 99) {
-        let lottery = document.getElementById('lottery');
-        lottery.innerText = rand(1, 4);
-        window.setTimeout('getPrize()', 1);
-        count++;
-      } else {
-        count = 0;
-        switch (lottery.innerText) {
-          case "1":
-            window.alert("抽中1獎 10000");
-            break;
-          case "2":
-            window.alert("抽中2獎 1000");
-            break;
-          case "3":
-            window.alert("抽中3獎 500");
-            break;
-          default:
-            window.alert("抽中普獎 100");
-            break;
-
-        }
-      }
-    }
-
-  </script>
-<hr>
-
-  <h3>
-    <script>
-
-    </script>
-
-    <script>
-      let a = rand(1, 10);
-      let b = rand(1, 10);
-      let c = rand(1, 10);
-
-        if (a > b) {
-          if (a > c) {
-            if (b > c) {
-              document.write("a > b > c");
-            } else if (b < c) {
-              document.write("a > c > b");
-            };
-          } else if (a < c) {
-              document.write("c > a > b");
-            }
-        } else if (a < b) {
-          if (a > c) {
-              document.write("b > a > c");
-            }
-          } else if (a < c) {
-            if (b > c) {
-              document.write("b > c > a");
-            } else if (b < c) {
-              document.write("c > b > a");
-            }
-        }
-    </script>
-    <br>
-
-  <script>
-      if (a > b) {
-        if (a > c) {
-          document.write("a=" + a + ", b=" + b + ", c=" + c + " , a為最大值");
-
-        } else {
-          document.write("a=" + a + ", b=" + b + ", c=" + c + " , c為最大值");
-        }
-
-      } else if (b > c) {
-        document.write("a=" + a + ", b=" + b + ", c=" + c + " , b為最大值");
-      }
-    </script>
-
-    <script>
-      var grade = rand(1, 99);
-      document.write("<h1>測試成績" + grade + "</h1>");
-      if (grade >= 80) {
-        document.write("測試成績判斷為A:取得4.0積分");
-      } else if (grade >= 70) {
-        document.write("測試成績判斷為B:取得3.0積分")
-      } else {
-        document.write("測試成績判斷為C:取得2.0積分")
-      }
+    <div class="container-fluid">
+        <div class="row">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0.1" >
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                <div class="carousel-item active" >
+                    <a href="https:///www.yahoo.com.tw"><img src="images/1920-500-01.jpg" class="d-block w-100" alt="廣告輪播圖01"></a>
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5>廣告輪播測試01</h5>
+                    <p>廣告輪播子標題測試文字01</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="images/1920-500-02.jpg" class="d-block w-100" alt="廣告輪播圖02">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5>廣告輪播測試02</h5>
+                    <p>廣告輪播子標題測試文字02</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <a href="https://www.pchome.com.tw"><img src="images/1920-500-03.jpg" class="d-block w-100" alt="廣告輪播圖03"></a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5></h5>
+                        <p></p>
+                    </div>
+                </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="card col-md-4" >
+            <img src="/images/400x200.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">資訊縮圖測試文字01</h5>
+              <p class="card-text">次標題測試文字01，內容文字說明</p>
+              <a href="#" class="btn btn-primary">更多資訊</a>
+              <a href="#" class="btn btn-primary">放購物車</a>
+            </div>
+        </div>
+        <div class="card col-md-4">
+            <img src="/images/400x200.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">資訊縮圖測試文字02</h5>
+              <p class="card-text">次標題測試文字02，內容文字說明</p>
+              <a href="#" class="btn btn-primary">更多資訊</a>
+              
+            </div>
+        </div>
+        <div class="card col-md-4">
+            <img src="/images/400x200.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">資訊縮圖測試文字03</h5>
+              <p class="card-text">次標題測試文字03，內容文字說明</p>
+              
+              <a href="#" class="btn btn-primary">放購物車</a>
+            </div>
+        </div>
+    </div>
 
 
-    </script>
-  </h3>
-  <script>
-    var score = rand(1, 99);
-    document.write("<h1>測試成績:", score, "</h1>");
-    if (score < 60) {
-      document.write("<h3>測試成績判斷為不及格</h3>");
-    }
-
-    if (score >= 60) {
-      document.write("<h3>測試成績判斷為及格</h3>");
-    }
-  </script>
+    <script src="bootstrap-5.2.3-dist/js/bootstrap.bundle.js"></script>
 </body>
-
 </html>

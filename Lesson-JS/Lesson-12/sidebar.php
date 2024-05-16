@@ -25,8 +25,18 @@ $i = 1; //控制編號順序
                 </button>
             </h2>
             <?php
+
             //使用第一層類別查詢
-            if (isset($_GET['level']) && $_GET['level']==1) {
+            if (isset($_GET['p_id'])) {
+                $SQLstring = sprintf("SELECT uplink 
+                FROM pyclass, product 
+                WHERE pyclass.classid=product.classid 
+                AND p_id=%d", $_GET['p_id']);
+                $classid_rs = $link->query($SQLstring);
+                $data = $classid_rs->fetch();
+                $ladder = $data['uplink'];
+
+             } elseif (isset($_GET['level']) && $_GET['level']==1) {
                 $ladder = $_GET['classid'];
              } elseif (isset($_GET['classid'])) { //若使用類別查詢 需取得上一層類別
                 $SQLstring = "SELECT uplink FROM pyclass WHERE level=2 AND classid=" . $_GET['classid'];

@@ -43,14 +43,19 @@ $i = 1; // 控制每列row產生
 
 <?php while ($pList01_Rows = $pList01->fetch()) { ?>
     <?php if ($i % 4 == 1) { ?><div class="row text-center"><?php } ?>
-        <div class="card col-md-3">
-            <img src="product_img/<?php echo $pList01_Rows['img_file']; ?>" class="card-img-top" alt="<?php echo $pList01_Rows['p_name']; ?>" title="<?php echo $pList01_Rows['p_name']; ?>">
+        <div class="card col-md-3"><a href="goods.php?p_id=<?php echo $pList01_Rows['p_id']; ?>">
+            <img src="product_img/<?php echo $pList01_Rows['img_file']; ?>" 
+                class="card-img-top" 
+                alt="<?php echo $pList01_Rows['p_name']; ?>" 
+                title="<?php echo $pList01_Rows['p_name']; ?>"></a>
             <div class="card-body">
                 <h5 class="card-title"><?php echo $pList01_Rows['p_name']; ?></h5>
                 <p class="card-text"><?php echo mb_substr($pList01_Rows['p_intro'], 0, 30, "utf-8"); ?></p>
                 <p>NT<?php echo $pList01_Rows['p_price']; ?></p>
-                <a href="#" class="btn btn-primary">更多資訊</a>
-                <a href="#" class="btn btn-success">放購物車</a>
+                <a href="goods.php?p_id=<?php echo $pList01_Rows['p_id']; ?>" class="btn btn-primary">更多資訊</a>
+                <!-- <a href="#" class="btn btn-success">放購物車</a> -->
+                <button type="button" id="button01[]" name="button01[]" class="btn btn-success" 
+                onclick="addcart(<?php echo $pList01_Rows['p_id']; ?>)">加入購物車</button>
             </div>
         </div>
         <?php if ($i % 4 == 0 || $i == $pList01->rowCount()) { ?>

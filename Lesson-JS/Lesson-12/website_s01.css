@@ -129,3 +129,8 @@ td>em{
     background-color: #28a745;
     border-color: #28a745;
 }
+
+.badge.text-bg-info{
+    font-size: 40% !important;
+    color: white !important;
+}

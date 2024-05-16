@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      #carousell {
+        width: 100%;
+        overflow-x: hidden;
+        position: relative;
+    }
+    
+    #image {
+      display:flex;
+      width: 100%;
+      transition: 0.3s;
+    }
+    
+    .photo {
+      width: 100%;
+    }
+    
+    #c/ontrol {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    #control span{
+        text-decoration: none;
+        opacity: 0.3;
+        transition: 0.3s;
+    }
+    
+    #control span:hover {
+        opacity: 0.9;
+        transition: 0.3s;
+    }
+    
+    #pre, #next {
+      position: absolute;
+      cursor: pointer;
+      width: 20px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 10px;
+      top: 50%;
+    }
+    
+    #pre {
+      left: 0;
+      position: absolute;
+      z-index: 2;
+      
+    }
+    
+    #next {
+      right: 0;
+      position: absolute;
+      z-index: 2;
+      text-align:right;      
+    }
+
+    #link {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      bottom: 10%;
+    }
+    .des {
+      po/sition: absolute;
+      z-index:2;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 3px;
+      color: white;
+      bor/der: white;
+      b/ackground-color: gray;
+      bottom: 10%;
+      transform: translateY(-100%);
+    }
+
+    .des:hover {
+      color: gray;
+    }
+    </style>
+</head>
+<div class="container">
+  <div id="carousell">
+    <div id="control">
+      <span id="pre"><</span>
+      <span id="next">></span>
+    </div>
+    <div id="index"></div>
+    <div id="image"></div>
+    <div id="link"></div>
+  </div>
+</div>
+
+<script>
+  var images = [
+  "https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1707343848723-bd87dea7b118?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1707141709645-3b15148daca8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1708792083117-52286bee89f8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1708913156945-df01fdf89809?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1707343848723-bd87dea7b118?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1707141709645-3b15148daca8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1708792083117-52286bee89f8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1708913156945-df01fdf89809?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  ]
+  
+  var links = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  ]
+
+  var image = document.querySelector('#image');
+  var link = document.querySelector('#link');
+  images.forEach(function(element) {
+    var img = document.createElement('img');
+    img.src = element;
+    img.classList.add('photo');
+    image.appendChild(img);
+    var span = document.createElement('span');
+    span.classList.add('des');
+    span.innerHTML="O";
+    link.appendChild(span);
+
+  })
+  
+  var pre = document.querySelector('#pre');
+  var next = document.querySelector('#next');
+  var number = document.querySelectorAll('.photo').length;
+  var counter = 0;
+  
+  function preclick () {
+      if (counter <= 0) {
+          counter = number - 1;
+      } else {
+          counter--;
+      }
+      image.style.transform = `translateX(${-counter * 100}%)`;
+  }
+  
+  function nextclick() {
+      if (counter >= number - 1) {
+          counter = 0;       
+      } else {
+          counter++;
+      }
+      image.style.transform = `translateX(${-counter * 100}%)`;
+  };
+
+  //索引點點
+  var dots = document.querySelectorAll('.des');
+  for (let i = 0; i < dots.length; i++) {
+  dots[i].innerHTML = '●';
+  dots[i].addEventListener('click', function () {
+    image.style.transform = `translateX(${-i * 100}%)`;
+  });
+ }
+    
+  //滑鼠點擊控制
+  pre.addEventListener('click', preclick);
+  next.addEventListener('click', nextclick);
+
+  //方向鍵控制
+  document.addEventListener('keydown', function(key) {
+    if (key.key === "ArrowLeft") {
+      preclick();
+    } else if (key.key === "ArrowRight"){
+      nextclick();
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    body {
+        color:red;
+        font-style: 20px;
+        font-weight: bolder;
+    }
+
+    div{
+        width: 300px;
+        height: 100px;
+        border: solid 2px blue;
+    }
+
+    @media screen and (min-width: 0px) and (max-width:575px) {
+        .text-color {
+            color: green;
+            width: 200px;
+            height: 100px;
+        }
+    }
+
+    @media screen and (min-width: 576px) and (max-width: 767px) {
+        .text-color {
+            color: blueviolet;
+            width: 400px;
+            height: 150px;
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 991px)  {
+        .text-color {
+            color: black;
+            float: left;
+            margin-left: 50px;
+            width: 150px;
+            height: 150px;
+        }
+    }
+
+    @media (min-width:992px) {
+        .text-color {
+            color: brown;
+            content: "min-width:992"
+        }
+    }
+
+    @media screen and (min-width: 1400px) {
+        .text-color {
+            height: 200px;
+            width: 600px;
+        }
+        .text-color p {
+            background-color: yellow;
+        }
+
+    }
+</style>
+
+</head>
+<body>
+    <div>
+        <p>預設文字顏色，不同解析度不會改變</p>
+    </div>
+    <hr>
+    <div class="text-color">
+        <p>設定文字顏色，依使用者device解析度改變內容</p>
+    </div>
+</body>
+</html>

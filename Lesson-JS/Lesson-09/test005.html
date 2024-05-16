@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bootstrap offline</title>
+    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="style01.css">
 </head>
 <body>
-    <b><p style="font-size: 20px">
-    <script>
-        let sum = 0;
-        for (let i = 6; i < 16; i++) {
-            let sum1 = sum;
-            let j = i;
-            sum += i; 
-            if (j % 2 == 1) {
-                j = "<span style=\"color:blue; \">" + "*" + j + "</span>"
-            } 
-            document.write(" | " + sum1 +" + " + j +" = " + sum);
-        }
-        document.write(" |" + "<br> sum 6 to 15 = " + sum);
-    </script>
-    </p></b>
+    <div class="header">
+        <p>
+            <a href="#">LOGO</a>
+        </p>
+    </div>
+    <div class="content">
+        <ul>
+            <li><a href="#">test1</a></li>
+            <li><a href="#">test2</a></li>
+            <li><a href="#">test3</a></li>
+            <li><a href="#">test4</a></li>
+            <li><a href="#">test5</a></li>
+        </ul>
+    </div>
+    <div class="footer">
+        <a href="#">footer1</a>
+        <a href="#">footer2</a>
+        <a href="#">footer3</a>
+    </div>
+
+
+    <script src="bootstrap-5.2.3-dist/js/bootstrap.bundle.js"></script>
 </body>
 </html>

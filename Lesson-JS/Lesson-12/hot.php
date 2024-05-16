@@ -12,6 +12,10 @@ $hot = $link->query($SQLstring);
                         <img src="product_img/-SPF50-50ml-196690.webp" class="card-img-top" alt="...">
                         <img src="product_img/-Acnes-BB-30g-533727.webp" class="card-img-top" alt="..."> -->
     <?php while ($data = $hot->fetch()) { ?>
-        <img src="product_img/<?php echo $data['img_file']; ?>" class="card-img-top" alt="HOT<?php echo $data['h_sort']; ?>" title="<?php echo $data['p_name']; ?>">
+        <a href="goods.php?p_id-<?php echo $data['p_id']; ?>"></a>
+        <img src="product_img/<?php echo $data['img_file']; ?>" 
+        class="card-img-top" 
+        alt="HOT<?php echo $data['h_sort']; ?>" 
+        title="<?php echo $data['p_name']; ?>"></a>
     <?php } ?>
 </div>

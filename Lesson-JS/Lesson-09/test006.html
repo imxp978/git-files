@@ -3,105 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="comlib.js"></script>
+    <title>Bootstrap offline</title>
+    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="test01.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <link rel="stylesheet" href="style01.scss">
+    
+    <link rel="stylesheet" href="style01.css">
+    <style>
+      <!-- .card {
+        margin-left: 5px;
+        width: 33%;
+      } -->
+
+      
+      .navbar .nav-brand img {
+        margin-top: -15px;
+        margin-right: 10px;
+    }
+
+    .dropdown:hover>.dropdown-menu,
+    .dropend:hover>.dropdown-menu {
+        display: block;
+    }
+
+
+
+    .dropdown .dropdown-menu {
+        display: none;
+    }
+
+    .dropend .dropdown-menu {
+      margin-left: 100px;
+    }
+
+    .navbar {
+      z-index: 2;
+      font-weight: bolder;
+    }
+
+
+    </style>
 </head>
 <body>
-    <table border="1">
-        <tr><td>*</td>
-            <script>
-                for(let i = 1; i <= 9; i++) {
-                    document.write("<td>"+ i + "</td>")
-                }
-            </script>
-        </tr>
-        <script>
-            for(let i = 1; i <= 9; i ++) {
-                document.write("<tr>")
-                    document.write("<td>"+i+"</td>")
-                for (let j = 1; j <= 9; j ++) {
-                    let k = i*j;
-                    
-                    document.write("<td>");
-                    document.write(i+" * "+j+" = "+k+"<br>");
-                    document.write("</td>");
-                }
-                document.write("</tr>");
-            }
-        </script>
+  <nav class="navbar navbar-expand-lg fixed-top bg-good">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/Lesson-09/images/logo_test.png" width="50px">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="test006.html">美麗旅行社</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#content">精選行程</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">下拉式選單 </a>
+            <ul class="dropdown-menu ">
+              <li><a class="dropdown-item" href="#">選項一</a></li>
+              <li class="nav-item dropend">
+                <a class="dropdown-item dropdown-toggle" href="#">選項二</a>
+                  <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">item1</a></li>
+                      <li><a class="dropdown-item" href="#">item2</a></li>
+                      <li><a class="dropdown-item" href="#">item3</a></li>
+                  </ul>
+              </li>                    
+              <li><a class="dropdown-item" href="#">選項三</a></li>
+              <li><a class="dropdown-item" href="#">選項四</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#content">關於我們</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#footer">聯絡</a>
+          </li>
+          <li class="nav-item">
 
-    </table>
-    
-    <script>
-        let j = 1;
-        let total2 = 0;
-        let limit = 30;
-        do {
-            if ((j%2) == 0) {
-                j ++;
-                continue;
-            }
-            document.write("|"+j);
-            total2 += j;
-            j += 2;
-            if (j > limit) {
-                break;
-            }
-        }while(true);
-        document.write("|<br>計算1加到"+limit+"的奇數總和="+total2);
-
-    </script>
-    <hr>
-    <script>
-        let i = 1;
-        let total = 0;
-        do {
-            document.write("|"+i);
-            total += i;
-            i++;
-            if (i > 15) {
-                break;
-            }
-        }while(true);
-        document.write("|<br>計算1加到15的總和="+total);
-
-    </script>
-
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="搜尋" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+<section id="header">
+    <div class="container-fluid">
+      
+        <div class="row">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="images/pic21new.jpg" class="d-block w-100" alt="英國倫敦大橋，熱門旅遊景點">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>英國倫敦大橋，熱門旅遊景點</h5>
+                      <p>英國團行程，首創倫敦、愛丁堡－各２晚５星連泊，一共４晚５星尊榮體驗！倫敦五星飯店選用緊鄰皇家海德公園的InterContinental洲際酒店</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/pic22new.jpg" class="d-block w-100" alt="安納西，法國定製旅遊決不可錯過的田園小鎮">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>安納西，法國定製旅遊決不可錯過的田園小鎮</h5>
+                      <p>北靠峻峭的阿爾卑斯山，南臨清冽明透的安納西湖，絕佳的位置造就她獨特而動人的姿色。</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/pic23new.jpg" class="d-block w-100" alt="日本關東 伊豆‧東京春之櫻">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>日本關東 伊豆‧東京春之櫻</h5>
+                      <p>櫻花由含苞至全開大約十天，而日本人最愛在三分開至八分開的期間舉行花見大會、櫻花祭、花見船、泡湯賞櫻。</p>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+    </div>
+</section>
 <hr>
-
-    <script>
-        let level = 1;
-        let n = 1;
-        countLevel=rand(5,15);
-        while(level <= countLevel) {
-            n = n * (n - 1);
-            document.write(level+"!="+n+"<br>");
-            level++
-        }
-    </script>
+<section id="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="row col-3 offset-1">
+                <div class="row">
+                    <div class="col-2"><img src="images/40x40.jpg" alt="HOT" class="rounded-circle img-fluid"></div>
+                    <div class="col-10 mt-2">推薦日本自由遊行的套裝行程</div>
+                </div>
+            </div>
+            <div class="row col-3 offset-1">
+                <div class="row">
+                    <div class="col-2"><img src="images/40x40.jpg" alt="HOT" class="rounded-circle img-fluid"></div>
+                    <div class="col-10 mt-2">精選美國西岸10大必去行程</div>
+                </div>
+            </div>
+            <div class="row col-3 offset-1">
+                <div class="row">
+                    <div class="col-2"><img src="images/40x40.jpg" alt="HOT" class="rounded-circle img-fluid"></div>
+                    <div class="col-10 mt-2">最熱門鈕西蘭與澳洲新人蜜月行程</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <hr>
-    <script>
-        let i = 1
-        let numero = rand(5,15);
-        for(i = 1; i <= numero; i++) {
-            i *= (i+1);
-            document.write("i: "+i+"<br>");
-        }
-        document.write("numero: "+numero+", numero!=" + i ); 
-    </script>
-    <hr>
-    <script>
-        c = 100;
-        document.write("攝氏 ==> 華氏<br>");
+<div class="row text-center">
+    <div class="card col-sm-4 animate__animated animate__fadeInLeft ani/mate__infinite"><img class="card-img-top" src="images/pic31.jpg" alt="萬象泰國～五星帝寶‧希爾頓海景‧漫步雲端精選５天(含稅)">
+        <div class="card-body">
+            <h5 class="card-title">萬象泰國～五星帝寶‧希爾頓海景‧漫步雲端精選５天(含稅)</h5>
+            <p>全球最高的《空中餐廳》，甫開幕的《BREEZE》餐廳提供獨特的雲端體驗，這個全球最高的空中餐廳與酒吧高居海拔238英尺。</p>
+            <a href="#"class="btn">更多資訊</a>
+            <a href="#"class="btn">線上預訂</a>
+        </div>
+    </div>
+    <div class="card col-sm-4 animate__animated animate__animated animate__fadeInRight ani/mate__infinite"><img class="card-img-top" src="images/pic32.jpg" alt="唯美華欣～夢幻小希臘５天(無購物含小費及稅).６人成行">
+        <div class="card-body">
+            <h5 class="card-title">唯美華欣～夢幻小希臘５天(無購物含小費及稅).６人成行</h5>
+            <p>《昭帕耶公主號》享用自助晚餐。船上準備美味可口的多樣式歐式自助餐＋飲料。搭乘遊船欣賞曼谷東方威尼斯河畔浪漫夜景。</p>
+            <a href="#"class="btn">更多資訊</a>
+            <a href="#"class="btn">線上預訂</a>
+        </div>
+    </div>
+    <div class="card col-sm-4 animate__animated animate__fadeInLeft animate__animated an/imate__infinite"><img class="card-img-top" src="images/pic33.jpg" alt="九州花賞５天～和牛燒烤．豪斯登堡鬱金香季．櫻花雙溫泉">
+        <div class="card-body">
+            <h5 class="card-title">九州花賞５天～和牛燒烤．豪斯登堡鬱金香季．櫻花雙溫泉</h5>
+            <p>湯布院地區最具代表性的觀光景點之一，當陽光照耀在清澈的湖面時，更是如同夢幻仙境一樣迷人，是湯布院最著名的湖泊。</p>
+            <a href="#"class="btn">更多資訊</a>
+            <a href="#"class="btn">線上預訂</a>
+        </div>
+    </div>
+</div>
+<div class="row text-center mt-2 ">
+    <div class="card col-sm-4 animated fadeOut faster"><img class="card-img-top" src="images/pic34.jpg" alt="東京花賞雙溫泉5天～足利紫藤園．秩父芝櫻．海濱粉蝶戀">
+        <div class="card-body">
+            <h5 class="card-title">東京花賞雙溫泉5天～足利紫藤園．秩父芝櫻．海濱粉蝶戀</h5>
+            <p>樂園是水戶籓第9代籓主德川齊昭親自設計規劃的池泉迴遊自然風景式的金澤市的兼六園、偕樂園和旁邊的千波公園合併為「偕樂園公園」。</p>
+            <a href="#"class="btn">更多資訊</a>
+            <a href="#"class="btn">線上預訂</a>
+        </div>
+    </div>
+    <div class="card col-sm-4 animated fadeOut faster"><img class="card-img-top" src="images/pic35.jpg" alt="藍寶石公主號～沖繩、石垣島、宮古島自主遊５天">
+        <div class="card-body">
+            <h5 class="card-title">藍寶石公主號～沖繩、石垣島、宮古島自主遊５天</h5>
+            <p>建造於14世紀末，為琉球歷代國王居住城都，同時也是琉球王國的政治中心，讓人彷彿走進時光的隧道，感受昔日琉球文化與優美景色。</p>
+            <a href="#"class="btn">更多資訊</a>
+            <a href="#"class="btn">線上預訂</a>
+        </div>
+    </div>
+    <div class="card col-sm-4 wow animated zoomIn faster infinite"><img class="card-img-top" src="images/pic36.jpg" alt="美加東八大名城十二大風味餐精選１２天">
+        <div class="card-body">
+            <h5 class="card-title">美加東八大名城十二大風味餐精選１２天</h5>
+            <p>紐約！人們嚮往的天堂之地！被暱稱為「大蘋果」，源自20世紀20年代。《紐約晨遞報》賽馬專欄作者的一個暱稱，人人都願追逐之。</p>
+            <a href="#"class="btn">更多資訊</a>
+            <a href="#"class="btn">線上預訂</a>
+        </div>
+    </div>
+</div>
+<div class="row pt-2">
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+</div>
+    <script src="bootstrap-5.2.3-dist/js/bootstrap.bundle.js"></script>
 
-        do {
-            f = (9.0 * c) / 5.0 + 32.0;
-            document.write(c + "====>" + f + "<br>");
-            c = rand(10,100);
-            <!-- document.write("c: "+ c +"<br>") -->
-        } while (c < 100);
-    </script>
-
-    
 </body>
+<hr>
+  <section id="footer">
+    <div class="container-fluid">
+      <div class="row text-center">
+        <div class="col-lg-12">
+          <h6>美麗旅行社 地址:40767台中市西屯區工業區一路100號 電話0800-123456</h6>
+          <h6>COPYRIGHT &copy; BEAUTIFUL TRAVEL AGENT, ALL RIGHTS RESERVED</h6>
+        </div>
+      </div>
+    </div>
+  </section>
 </html>

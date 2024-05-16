@@ -5,6 +5,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <?php
+        //讀取後台購物車內產品數量
+        $SQLstring = "SELECT * FROM cart 
+                    WHERE orderid is NULL 
+                    AND ip = '".$_SERVER['REMOTE_ADDR']."'";
+                    $cart_rs = $link->query($SQLstring); 
+
         //列出產品類別第一層
         $SQLstring = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
         $pyclass01 = $link->query($SQLstring);
@@ -57,7 +63,7 @@
                     <a class="nav-link" href="#">折價券</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">購物車</a>
+                    <a class="nav-link" href="#">購物車<span class="badge text-bg-info"><?php echo($cart_rs) ? $cart_rs->rowCount(): ''; ?></span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

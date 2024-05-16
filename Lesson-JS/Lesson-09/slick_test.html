@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;   
+        }
+
+        .slider {
+            margin-top: 50px;
+            width: 70%;
+        }
+
+        .slick-prev,.slick-next {
+            z-index: 1001;
+        }
+
+
+        .slick-next {
+            margin-right: 10%;
+        }
+
+        .slick-prev {
+            margin-left: 10%;
+        }
+
+        .image {
+            border-radius: 0.6em;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+        integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
+        integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+        integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body>
+    <div class="slider">
+
+    </div>
+
+    <script>
+        var photos = [
+            "https://picsum.photos/600/300?random=1",
+            "https://picsum.photos/600/300?random=2",
+            "https://picsum.photos/600/300?random=3",
+            "https://picsum.photos/600/300?random=4",
+            "https://picsum.photos/600/300?random=5",
+            "https://picsum.photos/600/300?random=6",
+        ]
+
+        const slider = document.querySelector('.slider')
+
+        for (let i = 0; i < photos.length; i++) {
+            var div = document.createElement('div');
+            var img = document.createElement('img');
+            div.classList.add('image');
+            img.src = photos[i];
+            slider.appendChild(div);
+            div.appendChild(img);
+        }
+
+        $('.slider').slick({
+            dots: true,
+            autoplay: true,
+            infinite: true,
+            autoplaySpeed: 1000,
+            speed: 100,
+            swipeToSlide: true,
+        });
+    </script>
+
+</body>
+
+
+</html>

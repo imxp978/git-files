@@ -41,28 +41,15 @@
                                         <a href="#" class="dropdown-item dropdown-toggle">
                                             <i class="fas <?php echo $pyclass01_Rows['fonticon']; ?> fa-fw"></i><?php echo $pyclass01_Rows['cname']; ?>
                                         </a>
+                                        <?php
+                                        //列出產品類別對映的第二層資料
+                                        $SQLstring = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $pyclass01_Rows['classid']);
+                                        $pyclass02 = $link->query($SQLstring);
+                                        ?>
                                         <ul class="dropdown-menu">
-                                        <?php while ($pyclass01_Rows = $pyclass01->fetch()) { ?>
-                  <li class="nav-item dropend">
-                    <a class="dropdown-item dropdown-toggle" href="#"><i class="fas <?php echo $pyclass01_Rows['fonticon']; ?> fa-fw"></i><?php echo $pyclass01_Rows['cname']; ?></a>
-
-                    <?php
-                    //SECOND LEVEL 第二層產品資料
-                    $SQLstring = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink = %d ORDER BY sort", $pyclass01_Rows['classid']);
-                    $pyclass02 = $link->query($SQLstring);
-                    ?>
-
-                    <ul class="dropdown-menu">
-                      <?php while ($pyclass02_Rows = $pyclass02->fetch()) { ?>
-                        <li><a class="dropdown-item" href="#"><em class="fas <?php echo $pyclass02_Rows['fonticon']; ?> fa-fw"></em><?php echo $pyclass02_Rows['cname']; ?></a></li>
-                      <?php } ?>
-                      <!-- <li><a class="dropdown-item" href="#">item2</a></li>
-                      <li><a class="dropdown-item" href="#">item3</a></li> -->
-                    </ul>
-                  </li>
-                <?php } ?>
-                                            <li><a href="#" class="dropdown-item">Item-2</a></li>
-                                            <li><a href="#" class="dropdown-item">Item-3</a></li>
+                                            <?php while ($pyclass02_Rows = $pyclass02->fetch()) { ?>
+                                                <li><a href="#" class="dropdown-item"><em class="fas <?php echo $pyclass02_Rows['fonticon']; ?> fa-fw"></em><?php echo $pyclass02_Rows['cname']; ?></a></li>
+                                            <?php } ?>
                                         </ul>
                                     </li>
                                 <?php  } ?>
@@ -101,10 +88,39 @@
                                 <li><a class="dropdown-item" href="#">投資人專區</a></li>
                             </ul>
                         </li>
+                        <!-- 使用PHP函數方式，外加類別功能 -->
+                        <?php // multiList01(); 
+                        ?>
                     </ul>
                 </div>
             </div>
         </nav>
+        <?php
+        function multiList01()
+        {
+            global $link;
+            //列出產品類別第一層
+            $SQLstring = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
+            $pyclass01 = $link->query($SQLstring);
+        ?>
+            <?php while ($pyclass01_Rows = $pyclass01->fetch()) { ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php echo $pyclass01_Rows['cname']; ?>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <?php
+                        //列出產品類別對映的第二層資料
+                        $SQLstring = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $pyclass01_Rows['classid']);
+                        $pyclass02 = $link->query($SQLstring);
+                        ?>
+                        <?php while ($pyclass02_Rows = $pyclass02->fetch()) { ?>
+                            <li><a class="dropdown-item" href="#"><em class="fas <?php echo $pyclass02_Rows['fonticon']; ?> fa-fw"></em><?php echo $pyclass02_Rows['cname']; ?></a></li>
+                        <?php } ?>
+                    </ul>
+                </li>
+            <?php  } ?>
+        <?php } ?>
     </section>
     <section id="content">
         <div class="container-fluid">
@@ -156,47 +172,68 @@
                         <?php $i++;
                         } ?>
                     </div>
+                    <?php
+                    //建立熱銷商品
+                    $SQLstring = "SELECT * FROM hot,product,product_img WHERE hot.p_id=product_img.p_id AND hot.p_id=product.p_id AND product_img.sort=1 ORDER BY h_sort";
+                    $hot = $link->query($SQLstring);
+                    ?>
+                    <div class="card text-center mt-3" style="border:none;">
+                        <div class="card-body">
+                            <h5 class="card-title">站長推薦，熱銷商品</h5>
+                        </div>
+                        <?php while ($data = $hot->fetch()) { ?>
+                            <img src="product_img/<?php echo $data['img_file']; ?>" class="card-img-top" alt="HOT<?php echo $data['h_sort']; ?>" title="<?php echo $data['p_name']; ?>">
+                        <?php } ?>
+                    </div>
                 </div>
                 <div class="col-md-10">
-                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="./product_img/pic1.jpg" class="d-block w-100" alt="雙11！天天最高送1111">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>雙11！天天最高送1111</h5>
-                                    <p>購物金活動採單日累計消費滿額即可參加登記送活動，活動期間僅需登記一次，部分商品不適用，詳見說明。</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="./product_img/pic2.jpg" class="d-block w-100" alt="建康養生的好幫手">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>建康養生的好幫手</h5>
-                                    <p>黑金鑽土雞18小時純粹滴煉，去油濾渣無膽固醇，殺菌包裝常溫保存，含BACC、雙肌肽、牛磺酸、小分子蛋白質等，可單飲或當高湯華陀扶元堂養生飲品系列3折優惠，歡迎選購
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="./product_img/pic3.jpg" class="d-block w-100" alt="頂級保濕面膜，臉部滋養的好幫手">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>頂級保濕面膜，臉部滋養的好幫手</h5>
-                                    <p>保養界的藝術品！內到外優雅自成一格，堅持保養始於自然，升級膚質0負擔，讓肌膚與生活更美好。源自台灣的國際保養品牌！</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
+<?php 
+//建立廣告輪播carousel資料查詢
+$SQLstring="SELECT * FROM carousel WHERE caro_online=1 ORDER BY caro_sort";
+$carousel=$link->query($SQLstring);
+$i=0; //控制acrive起動
+?>
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+    <?php for($i=0; $i<$carousel->rowCount();$i++){ ?>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?php echo $i; ?>" class="<?php echo activeShow($i,0); ?>" aria-current="true" aria-label="Slide <?php echo $i; ?>"></button>
+    <?php } ?>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="./product_img/pic1.jpg" class="d-block w-100" alt="雙11! 天天最高送1111">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>雙11! 天天最高送1111</h5>
+                <p>購物金活動採單日累計消費滿額即可參加登記送活動，活動期間僅需登記一次，部分商品不適用，詳見說明。</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="./product_img/pic2.jpg" class="d-block w-100" alt="建康養生的好幫手">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>建康養生的好幫手</h5>
+                <p>黑金鑽土雞18小時純粹滴煉，去油濾渣無膽固醇，殺菌包裝常溫保存，含BACC、雙肌肽、牛磺酸、小分子蛋白質等，可單飲或當高湯華陀扶元堂養生飲品系列3折優惠，歡迎選購
+                </p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="./product_img/pic3.jpg" class="d-block w-100" alt="頂級保濕面膜，臉部滋養的好幫手">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>頂級保濕面膜，臉部滋養的好幫手</h5>
+                <p>保養界的藝術品! 內到外優雅自成一格，堅持保養始於自然，升級膚質0負擔，讓肌膚與生活更美好。源自台灣的國際保養品牌! </p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
                     <hr>
                     <div class="row text-center">
                         <div class="card col-md-3">
@@ -213,7 +250,7 @@
                             <img src="product_img/pic0102.jpg" class="card-img-top" alt="黃金燕窩生物纖維面膜">
                             <div class="card-body">
                                 <h5 class="card-title">黃金燕窩生物纖維面膜</h5>
-                                <p class="card-text">手術後保養，約會前急救聖品，媲美專櫃等級！網友推薦最新使用，肌膚很水嫩，感覺很透亮。</p>
+                                <p class="card-text">手術後保養，約會前急救聖品，媲美專櫃等級! 網友推薦最新使用，肌膚很水嫩，感覺很透亮。</p>
                                 <p class="card-text">NT1200</p>
                                 <a href="#" class="btn btn-primary">更多資訊</a>
                                 <a href="#" class="btn btn-success">放購物車</a>
@@ -223,7 +260,7 @@
                             <img src="product_img/pic0103.jpg" class="card-img-top" alt="MIZON 蝸牛全效活膚霜">
                             <div class="card-body">
                                 <h5 class="card-title">MIZON 蝸牛全效活膚霜</h5>
-                                <p class="card-text">無論混合肌、油性肌、痘痘肌、乾性肌、過敏肌等《任何膚質適用》，是修護型保養品！！</p>
+                                <p class="card-text">無論混合肌、油性肌、痘痘肌、乾性肌、過敏肌等《任何膚質適用》，是修護型保養品! ! </p>
                                 <p class="card-text">NT690</p>
                                 <a href="#" class="btn btn-primary">更多資訊</a>
                                 <a href="#" class="btn btn-success">放購物車</a>
@@ -233,7 +270,7 @@
                             <img src="product_img/pic0104.jpg" class="card-img-top" alt="星期四農莊迷迭香精油">
                             <div class="card-body">
                                 <h5 class="card-title">星期四農莊迷迭香精油</h5>
-                                <p class="card-text">迷迭香精油+薰衣草精油(大自然植物舒眠系列)！！</p>
+                                <p class="card-text">迷迭香精油+薰衣草精油(大自然植物舒眠系列)! ! </p>
                                 <p class="card-text">NT1269</p>
                                 <a href="#" class="btn btn-primary">更多資訊</a>
                                 <a href="#" class="btn btn-success">放購物車</a>

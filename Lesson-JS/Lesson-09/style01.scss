@@ -1,0 +1,11 @@
+@import "variable01";
+@import "base01";
+@import "_variables";
+
+.bg-dark {
+    background-color: #000000;
+}
+
+.bg-good {
+    background-color: $orange;
+}

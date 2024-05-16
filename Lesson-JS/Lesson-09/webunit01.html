@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            border: solid 2px blue;
+            width: 600px;
+            height: 300px;
+            display: block;
+            padding: 5px;
+        }
+        * {
+            font-style: 14px;
+        }
+    
+    </style>
+</head>
+<body>
+    <p>px:絕對單位:為螢幕中每個網點(pixel)</p>
+    <p>em:相對單位:為設定元件經由乘以parent元件的px值</p>
+    <p>rem:相對單位:為設定元件經由乘以body元件的px值</p>
+    <p>vw(view width):相對單位:為設定元件經由乘以browser可視寬度的px值</p>
+    <p>vh(view height):相對單位:為設定元件經由乘以browser可是高度的px值</p>
+    <span>
+        px:14px;
+        <span style="font-size:18px, width=80%, height=80%">
+            px:18px;
+        </span>
+    </span>
+    <hr color="orange">
+    <span style="font-size">
+        em:14px;
+        <span style="font-size:1.5em;width:80%;height:80%">
+            em:1.5em, 14*1.5=21px;
+            <span style="font-size:1.5em;width:80%;height:80%;">
+                em:1.5em,21*1.5=31.5px;
+            </span>
+        </span>
+    </span>
+
+    <hr color="yellow">
+    <span>
+        rem:14px;
+        <span style="font-size:1.5rem;width:80%;height:80%">
+            rem:1.5em, 14*1.5=21px;
+            <span style="font-size:1.5rem;width:80%;height:80%;">
+                rem:1.5em, 14*1.5=21px;
+            </span>
+        </span>
+    </span>
+
+</body>
+</html>
