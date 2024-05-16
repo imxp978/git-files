@@ -24,23 +24,18 @@
                     <!-- 引入熱銷商品module -->
                     <?php require_once('hot.php'); ?>
                 </div>
-
                 <div class="col-md-10">
                     <!-- 引入輪播模組 -->
                     <?php require_once('carousel.php'); ?>
                     <hr>
                     <!-- 引入商品列表模組 -->
                     <?php require_once('product_list.php') ?>
-
                 </div>
-
                 <!-- <div class="row text-center"> -->
-
             </div>
         </div>
         </div>
         </div>
-
         </div>
     </section>
     <section id="scontent">
@@ -49,14 +44,14 @@
     <section id="footer">
         <?php require_once('footer.php'); ?>
     </section>
-<?php require_once('jsfile.php');?>
+    <?php require_once('jsfile.php'); ?>
 </body>
 
 </html>
 
 <?php
-function activeShow($num, $chkPoint)
-{
-    return (($num == $chkPoint) ? 'active' : '');
-}
+    function activeShow($num, $chkPoint)
+    {
+        return (($num == $chkPoint) ? 'active' : '');
+    }
 ?>
