@@ -30,7 +30,7 @@
                         ?>
                             <li class="row d-flex justify-content-end align-items-baseline">
                                 <div class="col-6 text-start">
-                                    <button class="btn btn-sm btn-light" type="button" id="btn[]" name="btn[]" onclick="btn_confirmLink('確定刪除本資料?','shopcart_del.php?mode=1&cartid=<?php echo $cart_data['cartid']; ?>');">x</button>
+                                    <button class="btn btn-sm btn-light" type="button" id="btn[]" name="btn[]" onclick="btn_confirmLink('Remove This Item?','shopcart_del.php?mode=1&cartid=<?php echo $cart_data['cartid']; ?>');">x</button>
                                     <img src="./images/product_images/<?php echo $cart_data['img_file']; ?>" alt="<?php echo $cart_data['p_name']; ?>" width="50px">
                                     <?php echo $cart_data['p_name']; ?>
                                 </div>
