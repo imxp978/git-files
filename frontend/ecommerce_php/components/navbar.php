@@ -20,44 +20,6 @@
             </li>
 
             <?php
-            $SQLstring = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
-            $pyclass01 = $link->query($SQLstring);
-            ?>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Categories
-              </a>
-              <ul class="dropdown-menu">
-                <?php while ($pyclass01_Rows = $pyclass01->fetch()) { ?>
-                  <li class="nav-item dropend">
-                    <a href="#" class="dropdown-item dropdown-toggle">
-                      <i
-                        class="fas <?php echo $pyclass01_Rows['fonticon']; ?> fa-fw"></i><?php echo $pyclass01_Rows['cname']; ?>
-                    </a>
-                    <?php
-                    //SECOND LEVEL 第二層產品資料
-                    $SQLstring = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink = %d ORDER BY sort", $pyclass01_Rows['classid']);
-                    $pyclass02 = $link->query($SQLstring);
-                    ?>
-
-                    <ul class="dropdown-menu">
-                      <?php while ($pyclass02_Rows = $pyclass02->fetch()) { ?>
-                        <li><a class="dropdown-item"
-                            href="drugstore.php?classid=<?php echo $pyclass02_Rows['classid']; ?>"><em
-                              class="fas <?php echo $pyclass02_Rows['fonticon']; ?> fa-fw"></em><?php echo $pyclass02_Rows['cname']; ?></a>
-                        </li>
-                      <?php } ?>
-                      <!-- <li><a href="#" class="dropdown-item">Item-2</a></li>
-                                            <li><a href="#" class="dropdown-item">Item-3</a></li> -->
-                    </ul>
-                  </li>
-                <?php } ?>
-              </ul>
-            </li>
-
-
-            <?php
             //讀取後台購物車內產品數量
             $SQLstring = "SELECT * FROM cart 
                     WHERE orderid is NULL 
@@ -119,13 +81,15 @@
           <div class="d-flex justify-content-lg-end justify-content-end text-end">
             <ul class="navbar-nav mb-2">
               <li class="d-flex justify-content-end">
-                <form id="search" name="search-form" method="get" action="./products.php"
-                  class="d-flex justify-content-end text-end" role="search">
-                  <input value="<?php echo (isset($_GET['search'])) ? $_GET['search'] : ''; ?>" name="search"
-                    class="form-control me-2" type="search" required placeholder="Search products" aria-label="Search"
-                    style="min-width:100px" />
-                  <button class="btn btn-sm btn-dark" type="submit">Search</button>
-                </form>
+                <div id="search">
+                  <form name="search-form" method="get" action="./products.php"
+                    class="d-flex justify-content-end text-end" role="search">
+                    <input value="<?php echo (isset($_GET['search'])) ? $_GET['search'] : ''; ?>" name="search"
+                      class="form-control me-2" type="search" required placeholder="Search products" aria-label="Search"
+                      style="min-width:100px" />
+                    <button class="btn btn-sm btn-dark" type="submit">Search</button>
+                  </form>
+                  </div>
                 <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-4"
                     onclick="searchShow()"></i></a>
               </li>

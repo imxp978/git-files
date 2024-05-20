@@ -25,9 +25,7 @@
                                     <p><?php echo $data['caro_content']; ?></p>
                                 </div>
                             </div>
-                        <?php $i++;
-                        }
-                        ?>
+                        <?php $i++;  } ?>
                         <!-- <div class="carousel-item active">
                             <img src="./product_img/pic1.jpg" class="d-block w-100" alt="雙11！天天最高送1111">
                             <div class="carousel-caption d-none d-md-block">
