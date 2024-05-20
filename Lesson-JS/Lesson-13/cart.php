@@ -35,8 +35,6 @@
                     <?php require_once('cart_content.php');
                     ?>
 
-
-                        
                     <!-- 引入商品列表模組 -->
                     <?php // require_once('product_list.php') 
                     ?>

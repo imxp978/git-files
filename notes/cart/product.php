@@ -67,8 +67,7 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
           <td><?php echo $row_Recordset1['P_Introduce']; ?></td></tr>
         <tr>
           <td>特價:</td>
-          <td><?php echo $row_Recordset1['P_Price']; ?>
-          <input name="P_Introduce" type="hidden" id="P_Introduce" value="<?php echo $row_Recordset1['P_Introduce']; ?>" /></td>
+          <td><?php echo $row_Recordset1['P_Price']; ?><input name="P_Price" type="hidden" id="P_Price" value="<?php echo $row_Recordset1['P_Price']; ?>" /></td>
      </tr>
         <tr>
          <td>狀態:</td><td><?php echo $row_Recordset1['P_State']; ?></td></tr>

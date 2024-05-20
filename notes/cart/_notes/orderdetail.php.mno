@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_orderDetail" value="name:D_ID;datatype:int,name:D_OID;datatype:string,name:D_PName;datatype:string,name:D_PPrice;datatype:int,name:D_PQuantity;datatype:int,name:D_ItemTotal;datatype:int" />
+	<infoitem key="UD_order" value="name:O_ID;datatype:int,name:O_OID;datatype:string,name:O_CName;datatype:string,name:O_CAddr;datatype:string,name:O_CPhone;datatype:string,name:O_CEmail;datatype:string,name:O_Date;datatype:datetime,name:O_Total;datatype:int,name:O_State;datatype:string" />
+	<infoitem key="UD_order_detail" value="name:D_ID;datatype:int,name:D_OID;datatype:string,name:D_PName;datatype:string,name:D_PPrice;datatype:int,name:D_PQuantity;datatype:int,name:D_ItemTotal;datatype:int" />
+	<infoitem key="UD_od" value="name:D_ID;datatype:int,name:D_OID;datatype:string,name:D_PName;datatype:string,name:D_PPrice;datatype:int,name:D_PQuantity;datatype:int,name:D_ItemTotal;datatype:int" />
+	<infoitem key="UD_odetail" value="name:D_ID;datatype:int,name:D_OID;datatype:string,name:D_PName;datatype:string,name:D_PPrice;datatype:int,name:D_PQuantity;datatype:int,name:D_ItemTotal;datatype:int" />
+	<infoitem key="UD_o" value="name:O_ID;datatype:int,name:O_OID;datatype:string,name:O_CName;datatype:string,name:O_CAddr;datatype:string,name:O_CPhone;datatype:string,name:O_CEmail;datatype:string,name:O_Date;datatype:datetime,name:O_Total;datatype:int,name:O_State;datatype:string" />
+	<infoitem key="UD_detail" value="name:D_ID;datatype:int,name:D_OID;datatype:string,name:D_PName;datatype:string,name:D_PPrice;datatype:int,name:D_PQuantity;datatype:int,name:D_ItemTotal;datatype:int" />
+</info>

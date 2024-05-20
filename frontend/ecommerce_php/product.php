@@ -11,14 +11,14 @@
 
             <div id="cartnotice"
               class="notice col-12 position-fixed d-flex justify-content-center">
-              <p class="mx-auto my-auto" style="color:white">
+              <p class="mx-auto my-auto cartnotice">
                 Added to cart <i class="fa-regular fa-circle-check"></i>
               </p>
             </div>
 
             <div id="notifynotice"
               class="notice col-12 position-fixed d-flex justify-content-center">
-              <p class="mx-auto my-auto" style="color:white"">
+              <p class="mx-auto my-auto" v-if="noticeAdded">
                 Success <i class="fa-regular fa-circle-check"></i>
               </p>
             </div>
@@ -49,16 +49,18 @@
             <p class="fs-4 text-end">
               <i class="fa-solid fa-dollar-sign"></i><?php echo $data['p_price']?>
             </p>
-            <?php if ($data['p_qty']>4) { ?>
-            <p class="text-end">In Stock</p>
-            <?php } else if ($data['p_qty']>0) { ?>
-            <p class="text-end" style="color: orange">Low Stock</p>
-            <?php } else {?>
-            <p class="text-end" style="color: red">Out of Stock</p>
+            <p v-if="product.quantity >= 5" class="text-end">In Stock</p>
+            <p
+              v-else-if="product.quantity > 0"
+              class="text-end"
+              style="color: orange"
+            >
+              Low Stock
+            </p>
+            <p v-else class="text-end" style="color: red">Out of Stock</p>
             <p>
               <?php echo $data['p_intro']?>
             </p>
-            <?php } ?>
             <div class="row d-flex justify-content-center m-3">
               <select
                 v-if="product.quantity > 0"
@@ -74,14 +76,12 @@
                 <option value="5" >5</option>
               </select>
             </div>
-            <?php if($data['p_qty'] > 0) { ?><button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark m-3">
+            <button onclick="a" class="btn btn-dark m-3">
               ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
             </button>
-            <?php } else { ?>
             <button onclick="notifyMe()" class="btn btn-danger m-3">
               NOTIFY ME <i class="fa-solid fa-bell"></i>
             </button>
-            <?php } ?>
           </div>
           <hr />
         </div>
@@ -108,75 +108,21 @@
 
 <?php require_once("./components/footer.php"); ?>
 <script>
-  function added() {
-  const notice = document.querySelector("#cartnotice");
-  setTimeout(()=>addClass(notice), 200);
-  setTimeout(()=>removeClass(notice), 1000);
-}
+    function a() {
+        let notice = document.querySelector('#cartnotice');
+        notice.classList.add('active');
+        // setTimeout(notice.classList.add('active'), 200);
+        // setTimeout(notice.classList.remove('active'), 1000);
+    };
 
-function notifyMe() {
-  const notice = document.querySelector("#notifynotice");
-  setTimeout(()=>addClass(notice), 200);
-  setTimeout(()=>removeClass(notice), 1000);
-}
+    function notifyMe() {
+        let notice = document.querySelector('#notifynotice');
+        setTimeout(notice.classList.add('active'), 200);
+        setTimeout(notice.classList.remove('active'), 1000);
+    };
 
-
-function addClass(item) {
-  item.classList.add('active');
-}
-
-function removeClass(item) {
-  item.classList.remove('active');
-}
-
-
-function btn_confirmLink(message, url) {
-  if (message == "" || url == "") {
-      return false;
-  }
-  if (confirm(message)) {
-      window.location = url;
-  }
-  return false;
-}
-
-function addcart(p_id) {
-  let qty = $("#quantity").val();
-  if (qty <= 0) {
-    alert("數量不能為零或負數 懂嗎?");
-    return false;
-  }
-  if (qty == undefined) {
-    qty = 1;
-  } else if (qty >= 50) {
-    alert("數量限制50內");
-    return false;
-  }
-  
-    // 利用jquery $.ajax函數呼叫後台的addcart.php
-    $.ajax({
-    url: "addcart.php",
-    type: "get",
-    dataType: "json",
-    data: { p_id: p_id, qty: qty },
-    success: function (data) {
-      if (data.c == true) {
-        alert(data.m);
-      }
-    },
-    error: function (data) {
-      alert("後臺壞了");
-    },
-  });
-
-  // prompt
-  added();
-}
+    function
 </script>
-<script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-  crossorigin="anonymous"></script>
 </body>
 
 </html>

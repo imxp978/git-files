@@ -32,7 +32,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 mysql_select_db($database_cart_conn, $cart_conn);
-$query_Recordset1 = "SELECT * FROM products ORDER BY P_ID DESC";
+$query_Recordset1 = "SELECT * FROM orders ORDER BY O_OID DESC";
 $Recordset1 = mysql_query($query_Recordset1, $cart_conn) or die(mysql_error());
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysql_num_rows($Recordset1);
@@ -45,21 +45,19 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 </head>
 
 <body>
-
-<h1>購物車</h1>
-<table >
-<tr><td>瀏覽商品| <a href="showcart.php">檢視購物車</a>| <a href="cls.php">清空購物車</a> <a href="reg.php">註冊</a> <a href="login.php">登入</a></td></tr>
+<table>
+<tr><td>柳覽商品</td><td>檢視購物車</td><td>清空購物車</td></tr>
 </table>
 
 <table border="1">
 <tr>
-<td>商品名稱</td>
-<td>特價</td>
+<td>訂單編號</td><td>訂購者</td><td>日期</td><td>金額</td><td>狀態</td>
 </tr>
 <?php do { ?>
   <tr>
-    <td><a href="product.php?P_ID=<?php echo $row_Recordset1['P_ID'] ?>"><?php echo $row_Recordset1['P_Name']; ?></a></td>
-    <td><?php echo $row_Recordset1['P_Price']; ?></td>
+    <td><a href="orderdetail.php?OID=<?php echo $row_Recordset1['O_OID']; ?>"><?php echo $row_Recordset1['O_OID']; ?></a></td>
+    <td><?php echo $row_Recordset1['O_CName']; ?></td>
+    <td><?php echo $row_Recordset1['O_Date']; ?></td><td><?php echo $row_Recordset1['O_Total']; ?></td><td><?php echo $row_Recordset1['O_State']; ?></td>
   </tr>
   <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
 </table>
