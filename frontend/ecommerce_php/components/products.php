@@ -20,7 +20,9 @@
       $i = 0;
   ?>
     <div class="container px-5 text-center py-5">
-      <h3 class="my-5 movable slideIn"><?php echo $title; ?></h3>
+      <h3 class="my-5 movable slideIn">
+      <?= $title? $title: "PRODUCTS" ?>
+       </h3>
       <div class="row my-3">
         <?php while ($data = $product->fetch()) { ?>
           <div class="card col-sm-12 col-md-6 col-lg-3 border-0 gx-5 gy-5 movable slideIn">
