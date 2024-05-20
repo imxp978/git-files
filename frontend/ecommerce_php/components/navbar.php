@@ -1,5 +1,5 @@
 <section id="navbar">
-  <div class="container">
+<div class="container">
     <nav
       class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end">
       <div class="container">
@@ -62,13 +62,14 @@
             $SQLstring = "SELECT * FROM cart 
                     WHERE orderid is NULL 
                     AND ip = '" . $_SERVER['REMOTE_ADDR'] . "'";
-            $cart_rs = $link->query($SQLstring);
+                $cart_rs = $link->query($SQLstring);
 
-            //列出產品類別第一層
-            $SQLstring = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
-            $pyclass01 = $link->query($SQLstring);
-            ?>
-            <?php while ($pyclass01_Rows = $pyclass01->fetch()) { ?>
+      //列出產品類別第一層
+      $SQLstring = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
+      $pyclass01 = $link->query($SQLstring);
+      ?>
+      <?php while ($pyclass01_Rows = $pyclass01->fetch()) { ?>
+        <li class="nav-item dropdown">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle dropdown-item" href="#" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
