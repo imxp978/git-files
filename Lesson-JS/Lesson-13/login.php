@@ -18,78 +18,76 @@ if (isset($_SESSION['login'])) {
     header(sprintf('location: %s', $sPath));
 }
 ?>
-
 <!doctype html>
 <html lang="zh-TW">
 
 <head>
     <?php require_once('headfile.php'); ?>
+    <style>
+        .col-md-10 {
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+        }
+
+        .mycard.mycard-container {
+            max-width: 400px;
+            height: 450px;
+        }
+
+        .mycard {
+            background-color: #f7f7f7;
+            padding: 20px 25px 30px;
+            margin: 0 auto 25px;
+            margin-top: 50px;
+            border-radius: 10px;
+        }
+
+        .profile-img-card {
+            margin: 0 auto 10px auto;
+            display: block;
+            width: 100px;
+        }
+
+        profile-name-card {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .form-signin input[type="email"],
+        .form-signin input[type="password"],
+        .form-signin button {
+            width: 100%;
+            height: 44px;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .btn.btn-signin {
+            font-weight: 700;
+            background-color: rgb(104, 145, 162);
+            color: white;
+            height: 38px;
+            transition: background-color 1s;
+        }
+
+        .btn.btn-signin:hover,
+        .btn.btn-signin:active,
+        .btn.btn-signin:focus {
+            background-color: rgb(12, 97, 33);
+        }
+
+        .other a {
+            color: rgb(104, 145, 162)
+        }
+
+        .other a:hover,
+        .other a:active,
+        .other a:focus {
+            color: rgb(12, 97, 33);
+        }
+    </style>
 </head>
-
-<style>
-    .col-md-10 {
-        background-repeat: no-repeat;
-        background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
-    }
-
-    .mycard.mycard-container {
-        max-width: 400px;
-        height: 450px;
-    }
-
-    .mycard {
-        background-color: #f7f7f7;
-        padding: 20px 25px 30px;
-        margin: 0 auto 25px;
-        margin-top: 50px;
-        border-radius: 10px;
-    }
-
-    .profile-img-card {
-        margin: 0 auto 10px auto;
-        display: block;
-        width: 100px;
-    }
-
-    profile-name-card {
-        font-size: 20px;
-        text-align: center;
-    }
-
-    .form-signin input[type="email"],
-    .form-signin input[type="password"],
-    .form-signin button {
-        width: 100%;
-        height: 44px;
-        font-size: 16px;
-        display: block;
-        margin-bottom: 20px;
-    }
-
-    .btn.btn-signin {
-        font-weight: 700;
-        background-color: rgb(104, 145, 162);
-        color: white;
-        height: 38px;
-        transition: background-color 1s;
-    }
-
-    .btn.btn-signin:hover,
-    .btn.btn-signin:active,
-    .btn.btn-signin:focus {
-        background-color: rgb(12, 97, 33);
-    }
-
-    .other a {
-        color: rgb(104, 145, 162)
-    }
-
-    .other a:hover,
-    .other a:active,
-    .other a:focus {
-        color: rgb(12, 97, 33);
-    }
-</style>
 
 <body>
     <section id="header">
@@ -109,10 +107,10 @@ if (isset($_SESSION['login'])) {
                     <!-- 會員登入HTML模組 -->
                     <div class="mycard mycard-container">
                         <img id="profile-img" src="images/logo03.svg" alt="logo" class="profile-img-card">
-                        <p id="profile-name" class="profile-name-card">電傷藥妝 登入頁面</p>
+                        <p id="profile-name" class="profile-name-card">電商藥妝 登入頁面</p>
                         <form action="" method="post" id="form1" name="form1" class="form-signin">
                             <input type="email" id="inputAccount" name="inputAccount" class="form-control" placeholder="Account" required autofocus>
-                            <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required autofocus>
+                            <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
                             <button type="submit" class="btn btn-signin mt-4">SIGN IN</button>
                         </form>
                         <div class="other mt-5 text-center">
@@ -120,16 +118,12 @@ if (isset($_SESSION['login'])) {
                             <a href="#">Forget password?</a>
                         </div>
                     </div>
-
                 </div>
-
                 <!-- <div class="row text-center"> -->
-
             </div>
         </div>
         </div>
         </div>
-
         </div>
     </section>
     <section id="scontent">
@@ -140,11 +134,41 @@ if (isset($_SESSION['login'])) {
     </section>
     <?php require_once('jsfile.php'); ?>
 
-    <div id="#loading" name="loading" style="display:none; position:fixed; width:100%;height:100%;top:0;left:0;background-color:rgba(255,255,255,0.5);z-index:9999;">
-        <i class="fas fa-spinner fa-spin fa-5x fa-fw" style="position:absolute; top:50%; left:50%;"></i>
+    <script>
+        $(function() {
+            $("#form1").submit(function() {
+                const inputAccount = $('#inputAccount').val();
+                const inputPassword = $('#inputPassword').val();
+                $('#loading').show();
+                // $ajax call auth_user.php
+                $.ajax({
+                    url: 'auth_user.php',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        inputAccount: inputAccount,
+                        inputPassword: inputPassword,
+                    },
+                    success: function(data) {
+                        if (data.c == true) {
+                            alert(data.m);
+                            //window.location.reload();
+                            window.location.href = "<?php echo $sPath; ?>"
+                        } else {
+                            alert(data.m);
+                        }
+                    },
+                    error: function(data) {
+                        alert('cant access, db is down');
+                    }
+                });
+            });
+        });
+    </script>
+    <div id="loading" name="loading" style="display:none;position:fixed;width:100%;height:100%;top:0;left:0;background-color:rgba(255,255,255,0.5);z-index:9999;">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw" style="position:absolute;top:50%;left:50%;"></i>
     </div>
 
-    </div>
 </body>
 
 </html>
