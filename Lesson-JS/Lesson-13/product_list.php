@@ -31,7 +31,7 @@ if (isset($_GET['search_name'])){
     //列出產品product查詢
     $queryFirst = sprintf("SELECT * FROM product,product_img 
     WHERE p_open=1 AND product_img.sort=1 AND product.p_id=product_img.p_id 
-    ORDER BY product.p_id DESC", $maxRows_rs);
+    ORDER BY product.p_id DESC");
 
 }
 $query = sprintf("%s LIMIT %d,%d", $queryFirst, $startRow_rs, $maxRows_rs);

@@ -281,3 +281,19 @@ li {
   opacity: 1;
   transition: 0.3s;
 }
+
+page-item {
+  color: black !important;
+}
+
+span.page-link {
+  background-color: black !important;
+}
+
+a.page-link {
+  color: black !important;
+}
+
+.active .page-link {
+  border-color: white !important;
+}
