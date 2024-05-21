@@ -3,7 +3,7 @@
 <?php
   $maxRows_rs = 4; //分頁數量
   $pageNum_rs = 0; //起始頁面 = 0
-
+  
   if (isset($_GET['classid'])) {
     $SQLstring = sprintf("SELECT * FROM product,product_img, pyclass 
       WHERE p_open=1 AND product_img.sort=1 AND product.p_id=product_img.p_id AND product.classid='%d' AND product.classid=pyclass.classid 
@@ -30,13 +30,11 @@
   if (isset($_GET['pageNum_rs'])) {
     $pageNum_rs = $_GET['pageNum_rs'];
   }
-  $startRow_rs = $pageNum_rs * $maxRows_rs;
 
+  $startRow_rs = $pageNum_rs * $maxRows_rs;
   $query = sprintf("%s LIMIT %d,%d", $SQLstring, $startRow_rs, $maxRows_rs);
   $product = $link->query($query);
-  $i = 0; // 控制每列row產生
-  
-  // $product = $link->query($SQLstring);
+
   if ($product->rowCount() > 0) {
     ?>
     <div class="container px-5 text-center py-5">
@@ -63,9 +61,10 @@
               <h5 class="card-title"><?php echo $data['p_name']; ?></h5>
             </div>
           </div>
-        <?php $i++; } ?>
+          <?php $i++;
+        } ?>
       </div>
-      <div class="row mt-2">
+      <div class="row my-2">
         <?php //取得目前頁數
           if (isset($_GET['totalRows_rs'])) {
             $totalRows_rs = $_GET['totalRows_rs'];
