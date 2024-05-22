@@ -51,13 +51,14 @@
               <?php echo $data['p_intro'] ?>
             </p>
             <div class="row d-flex justify-content-center m-3">
-              <select v-if="product.quantity > 0" v-model="quantity" name="quantity" id="quantify" class="form-select m-3">
+              <select v-if="product.quantity > 0" v-model="quantity" name="quantity" id="quantity" class="form-select m-3">
                 <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
+              <!-- <span id="quantity2"> ??? </span> -->
             </div>
             <?php if ($data['p_qty'] > 0) { ?>
               <button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark m-3">
@@ -71,7 +72,7 @@
           </div>
           <hr />
         </div>
-        <div class="col-12 col-lg-6 my-5">
+        <div class="col-12 col-lg-6 mb-5">
           <div class="container">
             <h5>SPEC</h5>
             <p>
@@ -79,7 +80,7 @@
             </p>
           </div>
         </div>
-        <div class="col-12 col-lg-6 my-5">
+        <div class="col-12 col-lg-6 mb-5">
           <div class="container">
             <h5>DESCRIPTION</h5>
             <p>
@@ -106,5 +107,4 @@
 </section>
 
 <script>
-
 </script>

@@ -53,43 +53,46 @@ function btn_confirmLink(message, url) {
 }
 
 function addcart(p_id) {
-  let qty = $("#quantity").val();
+  let qty = document.querySelector('#quantity').value;
+  // let qty = parseInt(document.querySelector('#quantity2').textContent);
+  
+  console.log('qty is: '+qty)
+
   if (qty <= 0) {
     alert("數量不能為零或負數 懂嗎?");
     return false;
-  }
-  if (qty == undefined) {
+  } else if (qty === undefined || qty === "") {
     qty = 1;
   } else if (qty >= 50) {
     alert("數量限制50內");
     return false;
-  }
+  } 
 
-  // 利用jquery $.ajax函數呼叫後台的addcart.php
-  $.ajax({
-    url: "addcart.php",
-    type: "get",
-    dataType: "json",
-    data: {
-      p_id: p_id,
-      qty: qty
-    },
-    success: function(data) {
-      if (data.c == true) {
-        added();
-        // alert(data.m);
-      }
-    },
-    error: function(data) {
-      alert("後臺壞了");
-    },
+  // 利用 fetch 函數呼叫後台的 addcart.php
+  fetch(`addcart.php?p_id=${p_id}&qty=${qty}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Fetch success response:", data);  
+    if (data.c == true) {
+      added();
+      // alert(data.m);
+    }
+  })
+  .catch(error => {
+    console.log("Fetch error response:", error);  
+    alert("Failed to Add Product, Contact Customer Support!");
   });
 
   // prompt
   added();
-};
+}
 
-var productSwiper = new Swiper(".productSwiper", {
+let productSwiper = new Swiper(".productSwiper", {
   lazy: true,
   loop: true,
   pagination: {
@@ -102,10 +105,10 @@ var productSwiper = new Swiper(".productSwiper", {
   },
 });
 
-var reviewSwiper = new Swiper(".reviewSwiper", {
+let reviewSwiper = new Swiper(".reviewSwiper", {
   lazy: true, 
-  slidesPerView: 3,
-  spaceBetween: 100,
+  slidesPerView: 5,
+  spaceBetween: 50,
   loop: true,
   autoplay: {
     delay: 2500,

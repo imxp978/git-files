@@ -4,6 +4,7 @@ header('Access-Control-Allow-Origin:*');
 header('Content-Type: application/json;charset=utf-8'); // return json string
 
 require_once ('connections/conn_db.php');
+
 if(isset($_GET['p_id'])&& isset($_GET['qty'])) {
     $p_id=$_GET['p_id'];
     $qty = $_GET['qty'];
@@ -15,6 +16,7 @@ if(isset($_GET['p_id'])&& isset($_GET['qty'])) {
             AND ip='" .$_SERVER['REMOTE_ADDR']."' AND orderid IS NULL";
 
     $result = $link->query($query);
+
     if($result) {
         if($result->rowCount()==0) {
             $query= "INSERT INTO cart (p_id, qty, ip)
@@ -29,7 +31,7 @@ if(isset($_GET['p_id'])&& isset($_GET['qty'])) {
             $query="UPDATE cart SET qty = '".$qty."' WHERE cart.cartid=".$cart_data['cartid']; 
         }
         $result = $link->query($query);
-        $retcode = array("c"=>"0", "m"=>'');
+        $retcode = array("c"=>"1", "m"=>'');
     } else {
         $retcode = array("c"=>"0", "m"=>'Unable to Add, Contact Customer Support');
     } 
