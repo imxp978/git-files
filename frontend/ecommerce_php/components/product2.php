@@ -24,7 +24,7 @@
         // $imgList = $img_rs->fetch();
         // $count = $img_rs->rowCount();
         //echo $count;
-      
+
         $SQLstringData = sprintf("SELECT * FROM product 
                 WHERE p_open=1 AND p_id=%s", $_GET['productid']);
         $product_data = $link->query($SQLstringData);
@@ -32,9 +32,25 @@
       }
       ?>
     </div>
+
+
     <div class="row">
       <div class="col-12 col-lg-6">
-      <img class="card-img-top" src="./images/product_images/002.jpg" alt="">
+        
+        <div style="--swiper-navigation-color: black; --swiper-pagination-color: black" class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <?php while ($imgList = $img_rs->fetch()) { ?>
+              <div class="swiper-slide">
+                <img src="./images/product_images/<?php echo $imgList['img_file']; ?>" class="" alt="..." />     
+                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>      
+              </div>
+            <?php } ?>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+
       </div>
       <div class="col-12 col-lg-6">
         <div class="container d-flex flex-column">
@@ -45,16 +61,15 @@
           <?php if ($data['p_qty'] > 4) { ?>
             <p class="text-end">In Stock</p>
           <?php } else if ($data['p_qty'] > 0) { ?>
-              <p class="text-end" style="color: orange">Low Stock</p>
+            <p class="text-end" style="color: orange">Low Stock</p>
           <?php } else { ?>
-              <p class="text-end" style="color: red">Out of Stock</p>
-              <p>
-              <?php echo $data['p_intro'] ?>
-              </p>
+            <p class="text-end" style="color: red">Out of Stock</p>
           <?php } ?>
+            <p>
+              <?php echo $data['p_intro'] ?>
+            </p>
           <div class="row d-flex justify-content-center m-3">
-            <select v-if="product.quantity > 0" v-model="quantity" name="quantity" id="quantify"
-              class="form-select m-3">
+            <select v-if="product.quantity > 0" v-model="quantity" name="quantity" id="quantify" class="form-select m-3">
               <option value="1" selected>1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -62,17 +77,17 @@
               <option value="5">5</option>
             </select>
           </div>
-          <?php if ($data['p_qty'] > 0) { ?><button onclick="addcart(<?php echo $data['p_id']; ?>)"
-              class="btn btn-dark m-3">
+          <?php if ($data['p_qty'] > 0) { ?>
+            <button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark m-3">
               ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
             </button>
           <?php } else { ?>
             <button onclick="notifyMe()" class="btn btn-danger m-3">
               NOTIFY ME <i class="fa-solid fa-bell"></i>
             </button>
-          </div>
-        <?php } ?>
-        <hr />
+            <?php } ?>
+        </div>
+      <hr />
       </div>
       <div class="col-12 col-lg-6">
         <div class="container">
@@ -95,9 +110,6 @@
   <hr />
 </section>
 
+<script>
 
-<?php while ($imgList = $img_rs->fetch()) { ?>
-          <div class="product_image">
-            <img src="./images/product_images/<?php echo $imgList['img_file']; ?>" class="" alt="..." />
-          </div>
-        <?php } ?>
+</script>
