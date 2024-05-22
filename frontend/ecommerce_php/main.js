@@ -79,8 +79,14 @@ function addcart(p_id) {
   .then(data => {
     console.log("Fetch success response:", data);  
     if (data.c == true) {
-      added();
+      // added();
       // alert(data.m);
+      // prompt
+      added();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      
     }
   })
   .catch(error => {
@@ -88,13 +94,6 @@ function addcart(p_id) {
     alert("Failed to Add Product, Contact Customer Support!");
   });
 
-  // prompt
-  window.location.reload();
-  // alert('Added');
-  setTimeout(added(), 2000);
-  // added();
-  
-  
 }
 
 let productSwiper = new Swiper(".productSwiper", {
