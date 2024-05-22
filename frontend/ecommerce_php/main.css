@@ -1,5 +1,5 @@
 * {
-  bor/der: 1px solid black;
+  bo/rder: 1px solid black;
 }
 
 body {
@@ -250,11 +250,12 @@ li {
 
 #cartnotice {
   background: rgba(0, 0, 0, 0.33);
+  position: fixed;
   border-radius: 5px;
   width: 10vw;
   min-width: 150px;
   height: 10vh;
-  z-index: 1;
+  z-index: 2;
   top: 50%;
   opacity: 0;
   transition: 0.3s;
@@ -271,7 +272,7 @@ li {
   width: 10vw;
   min-width: 150px;
   height: 10vh;
-  z-index: 1;
+  z-index: 2;
   top: 50%;
   opacity: 0;
   transition: 0.3s;
@@ -294,32 +295,31 @@ a.page-link {
   color: black !important;
 }
 
-.active .page-link {
+.productSwiper .active .page-link {
   border-color: white !important;
 }
 
-.swiper {
+.productSwiper .swiper {
+  aspect-ratio: 1/1;
   width: 100%;
- 
 }
 
-.swiper-slide {
+.productSwiper .swiper-slide {
+  width: 100% !important;
   text-align: center;
-  font-size: 18px;
+  font-size: 1.2em;
   background: white;
-  aspect-ratio: 1 / 1;
 }
 
-.swiper-slide img {
-  object-fit: cover;
+.productSwiper .swiper-slide img {
   width: 100%;
+  height: auto;
   max-width: 100%;
   max-height: 100%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  position: absolute;
-  left: 50%;
-  top: 50%;
+  object-fit: cover !important;
 }
+
+.reviewSwiper .swiper {
+  width: 100%;
+}
+

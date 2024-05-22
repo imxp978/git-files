@@ -23,7 +23,8 @@ function searchShow() {
 
 function added() {
   const notice = document.querySelector("#cartnotice");
-  setTimeout(() => addClass(notice), 200);
+  // setTimeout(() => addClass(notice), 200);
+  addClass(notice);
   setTimeout(() => removeClass(notice), 1000);
 }
 
@@ -75,7 +76,8 @@ function addcart(p_id) {
     },
     success: function(data) {
       if (data.c == true) {
-        alert(data.m);
+        added();
+        // alert(data.m);
       }
     },
     error: function(data) {
@@ -87,8 +89,9 @@ function addcart(p_id) {
   added();
 };
 
-var swiper = new Swiper(".mySwiper", {
+var productSwiper = new Swiper(".productSwiper", {
   lazy: true,
+  loop: true,
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
@@ -99,4 +102,21 @@ var swiper = new Swiper(".mySwiper", {
   },
 });
 
-
+var reviewSwiper = new Swiper(".reviewSwiper", {
+  lazy: true, 
+  slidesPerView: 3,
+  spaceBetween: 100,
+  loop: true,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+})

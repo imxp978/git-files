@@ -29,7 +29,7 @@ if(isset($_GET['p_id'])&& isset($_GET['qty'])) {
             $query="UPDATE cart SET qty = '".$qty."' WHERE cart.cartid=".$cart_data['cartid']; 
         }
         $result = $link->query($query);
-        $retcode = array("c"=>"1", "m"=>'Added to Cart');
+        $retcode = array("c"=>"0", "m"=>'');
     } else {
         $retcode = array("c"=>"0", "m"=>'Unable to Add, Contact Customer Support');
     } 

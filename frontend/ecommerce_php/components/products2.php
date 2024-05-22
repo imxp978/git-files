@@ -1,7 +1,6 @@
 <section id="products">
-  <?php include_once ("./php_lib.php"); ?>
 
-  <?php
+<?php
   $maxRows_rs = 4; //分頁數量
   $pageNum_rs = 0; //起始頁面 = 0
 
