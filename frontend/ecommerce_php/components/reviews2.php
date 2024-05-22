@@ -35,43 +35,13 @@
             </div>
             <?php $i++;
           } ?>
-
-          <div class="swiper-slide">Slide 2 MIC CHECK</div>
-          <div class="swiper-slide">Slide 3 MIC CHECK</div>
+          <div class="swiper-slide">PLACEHOLDER #1</div>
+          <div class="swiper-slide">PLACEHOLDER #2</div>
         </div>
-        <div class="my-3">
-          TEST
-          <div class="swiper-pagination"></div>
-        </div>
+        <!-- <div class="mt-5 swiper-pagination"></div> -->
       </div>
     </div>
-    <div class="row gy-10 gx-5">
-      <?php $i = 0;
-      while ($data = $review->fetch()) { ?>
-        <div class="card col-6 border-0 border-end border-bottom border-3">
-          <div class="row g-5">
-            <div class="review col-md-4 movable slideIn slideInLeft">
-              <div class="review-image">
-                <img src="./images/user_images/<?php echo $data['image']; ?>" class="img-fluid rounded-start" alt="..." />
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body text-start">
-                <h5 class="card-title"><?php echo $data['user'] ?></h5>
-                <?php for ($j = 0; $j < $data['rate']; $j++) { ?>
-                  <i class="fa-solid fa-star"></i>
-                <?php } ?>
-                <p class="card-text"><?php echo $data['content']; ?></p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <?php $i++;
-      } ?>
-    </div>
+
   </div>
   <hr />
   </div>

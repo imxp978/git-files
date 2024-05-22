@@ -1,5 +1,5 @@
 * {
-  bo/rder: 1px solid black;
+  b/order: 1px solid black;
 }
 
 body {
@@ -334,3 +334,6 @@ a.page-link {
   width: 100%;
 }
 
+.swiper-pagination-bullet-active {
+  color: black !important;
+} 
