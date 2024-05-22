@@ -69,7 +69,7 @@
               <?php echo $data['p_intro'] ?>
             </p>
           <div class="row d-flex justify-content-center m-3">
-            <select v-if="product.quantity > 0" v-model="quantity" name="quantity" id="quantify" class="form-select m-3">
+            <select name="quantity" id="quantify" class="form-select m-3">
               <option value="1" selected>1</option>
               <option value="2">2</option>
               <option value="3">3</option>
