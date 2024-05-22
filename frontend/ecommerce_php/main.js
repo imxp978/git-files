@@ -89,7 +89,12 @@ function addcart(p_id) {
   });
 
   // prompt
-  added();
+  window.location.reload();
+  // alert('Added');
+  setTimeout(added(), 2000);
+  // added();
+  
+  
 }
 
 let productSwiper = new Swiper(".productSwiper", {
@@ -123,3 +128,38 @@ let reviewSwiper = new Swiper(".reviewSwiper", {
     prevEl: ".swiper-button-prev",
   },
 })
+
+document.querySelectorAll("input").forEach(input => {
+  input.addEventListener("change", function() {
+      var qty = this.value;
+      const cartid = this.getAttribute("cartid");
+      if (qty <= 0 || qty >= 50) {
+          alert('數量需大於0 且小於50');
+          return false;
+      }
+
+      fetch('change_qty.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: new URLSearchParams({
+              'cartid': cartid,
+              'qty': qty
+          })
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.c == true) {
+              // alert(data.m)
+              window.location.reload();
+          } else {
+              alert(data.m);
+          }
+      })
+      .catch(error => {
+          alert("DB is down!");
+      });
+  });
+});
+

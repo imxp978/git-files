@@ -98,14 +98,27 @@
                     class="fa-solid fa-user fa-4"></i></a>
               </li>
               <li class="d-flex justify-content-end">
+                <?php
+                $SQLstring = sprintf("SELECT * FROM cart WHERE orderid IS NULL AND ip = '%s'", $_SERVER['REMOTE_ADDR']);
+                $cart_rs = $link->query($SQLstring); 
+                $i = 0;
+                $totalItem = 0;
+                while ($data = $cart_rs->fetch() ) {
+                   $totalItem += $data['qty'];
+                $i++; }
+                
+                ?>
                 <!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cart"><span><i
                       class="fa-solid fa-cart-shopping fa-4"></i> -->
-                      <a class="nav-link" href="./cart.php" ><span><i
-                      class="fa-solid fa-cart-shopping fa-4"></i>
-                      <span class="position-absolute translate-middle badge rounded-pill bg-danger">
-                        5
-                      </span>
-                  </span></a>
+                <a class="nav-link" href="./cart.php" >
+                  <span>
+                    <i class="fa-solid fa-cart-shopping fa-4"></i>
+                    <span class="position-absolute translate-middle badge rounded-pill bg-danger">
+                    <?php echo $totalItem ?>
+                    <!-- <?php echo($cart_rs) ? $cart_rs->rowCount(): ''; ?> -->
+                    </span>
+                  </span>
+                </a>
               </li>
             </ul>
           </div>

@@ -31,12 +31,13 @@ if(isset($_GET['p_id'])&& isset($_GET['qty'])) {
             $query="UPDATE cart SET qty = '".$qty."' WHERE cart.cartid=".$cart_data['cartid']; 
         }
         $result = $link->query($query);
-        $retcode = array("c"=>"1", "m"=>'');
+        $retcode = array("c"=>"1", "m"=>'oh');
     } else {
         $retcode = array("c"=>"0", "m"=>'Unable to Add, Contact Customer Support');
     } 
     echo json_encode($retcode, JSON_UNESCAPED_UNICODE);
 }
+
 return; 
 
 ?>

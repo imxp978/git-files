@@ -10,8 +10,8 @@
     $ptotal = 0; //設定累加的變數 初始=0;
     ?>
     <div class="container text-center">
-        <h3 class="mt-5 movable slideIn">CART</h3>
-        <div class="mb-5 row movable slideIn" id="cart">
+        <h3 class="mt-5">CART</h3>
+        <div class="mb-5 row" id="cart">
             <div class="mx-auto my-5 col-lg-8">
                 <div class="cart-body">
                     <div class="row d-flex justify-content-end">
@@ -46,10 +46,14 @@
                                 </li>
                             <?php }
                         } else { ?>
-                            <li class="text-end">Cart is empty</li>
+                            <li class="text-end">
+                                <p>Cart is empty</p>
+                                <a href="./products.php" class="btn btn-dark"> Go Shop </a>
+
+                            </li>
                         <?php } ?>
                     </ul>
-
+                    <?php if ($cart_rs->rowCount() != 0) {?>
                     <hr />
                     <li class="col-12 text-end d-flex justify-content-end">
                         <div>Total $: <?php echo $ptotal; ?></div>
@@ -58,6 +62,7 @@
                 <div class="cart-footer d-flex justify-content-end">
                     <button type="button" class="btn btn-dark mt-3">Checkout</button>
                 </div>
+                <?php } ?>
             </div>
             <hr>
         </div>
