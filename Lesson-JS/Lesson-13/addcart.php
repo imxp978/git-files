@@ -14,11 +14,6 @@ if(isset($_GET['p_id'])&& isset($_GET['qty'])) {
             WHERE p_id=".$p_id." 
             AND ip='" .$_SERVER['REMOTE_ADDR']."' AND orderid IS NULL";
 
-
-    $query = sprintf("SELECT * FROM cart WHERE p_id = %d AND ip = '%s' AND orderid IS NULL", $p_id, $_SERVER['REMOTE_ADDR']);
-
-    // echo $query;
-
     $result = $link->query($query);
     if($result) {
         if($result->rowCount()==0) {

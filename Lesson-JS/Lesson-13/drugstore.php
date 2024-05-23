@@ -4,6 +4,7 @@
 <?php (!isset($_SESSION)) ? session_start() : ""; ?>
 <!-- 載入PHP函數庫 -->
 <?php require_once("php_lib.php"); ?>
+<?php require_once('jsfile.php');?>
 <!doctype html>
 <html lang="zh-TW">
 

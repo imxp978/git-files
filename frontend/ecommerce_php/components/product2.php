@@ -58,8 +58,15 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              <!-- <span id="quantity2"> ??? </span> -->
+              <!-- <span id="quantity2"> 19 </span> -->
             </div>
+
+            <div>
+              <button class="btn btn-sm btn-dark" onclick="minus()">-</button>
+              <input type="number" value="1" id="quantity2" min="1" readonly></input>
+              <button class="btn btn-sm btn-dark" onclick="plus()">+</button>
+            </div>
+
             <?php if ($data['p_qty'] > 0) { ?>
               <button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark m-3">
                 ADD TO CART <i class="fa-solid fa-cart-shopping"></i>

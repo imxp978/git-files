@@ -53,10 +53,10 @@ function btn_confirmLink(message, url) {
 }
 
 function addcart(p_id) {
-  let qty = document.querySelector('#quantity').value;
+  // let qty = document.querySelector('#quantity').value;
+  let qty = document.querySelector('#quantity2').value;
   // let qty = parseInt(document.querySelector('#quantity2').textContent);
-  
-  console.log('qty is: '+qty)
+  // console.log('qty is: '+qty)
 
   if (qty <= 0) {
     alert("數量不能為零或負數 懂嗎?");
@@ -86,7 +86,6 @@ function addcart(p_id) {
       setTimeout(() => {
         window.location.reload();
       }, 1000);
-      
     }
   })
   .catch(error => {
@@ -111,7 +110,7 @@ let productSwiper = new Swiper(".productSwiper", {
 
 let reviewSwiper = new Swiper(".reviewSwiper", {
   lazy: true, 
-  slidesPerView: 5,
+  slidesPerView: 2,
   spaceBetween: 50,
   loop: true,
   autoplay: {
@@ -126,6 +125,16 @@ let reviewSwiper = new Swiper(".reviewSwiper", {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
+  breakpoints: {
+    576: {
+      slidesPerView: 2,
+      spaceBetween: 50,
+    },
+    768: {
+      slidesPerView: 5,
+      spaceBetween: 50,
+    },
+  }, 
 })
 
 document.querySelectorAll("input").forEach(input => {
@@ -162,3 +171,19 @@ document.querySelectorAll("input").forEach(input => {
   });
 });
 
+
+let qty2 = document.querySelector('#quantity2');
+
+function minus() {
+  console.log(qty2.value) ;
+  if (qty2.value > 1) {
+    qty2.value--; 
+  } else {
+    qty2.value = 1;
+    console.log(qty2.value);
+  }};
+
+function plus() {
+  // console.log(qty2);
+  qty2.value++;
+}

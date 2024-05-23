@@ -113,10 +113,12 @@
                 <a class="nav-link" href="./cart.php" >
                   <span>
                     <i class="fa-solid fa-cart-shopping fa-4"></i>
+                    <?php if ($totalItem > 0) { ?>
                     <span class="position-absolute translate-middle badge rounded-pill bg-danger">
-                    <?php echo $totalItem ?>
+                    <?php echo $totalItem; ?>
                     <!-- <?php echo($cart_rs) ? $cart_rs->rowCount(): ''; ?> -->
                     </span>
+                    <?php } ?>
                   </span>
                 </a>
               </li>

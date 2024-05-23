@@ -10,8 +10,8 @@
         </div>
 
         <div id="notifynotice" class="notice col-12 position-fixed d-flex justify-content-center">
-          <p class="mx-auto my-auto" style="color:white"">
-                Success <i class=" fa-regular fa-circle-check"></i>
+          <p class="mx-auto my-auto" style="color:white">
+            Success <i class=" fa-regular fa-circle-check"></i>
           </p>
         </div>
 
@@ -55,8 +55,7 @@
             <?php echo $data['p_intro'] ?>
           </p>
           <div class="row d-flex justify-content-center m-3">
-            <select v-if="product.quantity > 0" v-model="quantity" name="quantity" id="quantify"
-              class="form-select m-3">
+            <select name="quantity" id="quantify" class="form-select m-3">
               <option value="1" selected>1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -64,8 +63,8 @@
               <option value="5">5</option>
             </select>
           </div>
-          <?php if ($data['p_qty'] > 0) { ?><button onclick="addcart(<?php echo $data['p_id']; ?>)"
-              class="btn btn-dark m-3">
+          <?php if ($data['p_qty'] > 0) { ?>
+            <button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark m-3">
               ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
             </button>
           <?php } else { ?>

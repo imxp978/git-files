@@ -4,6 +4,7 @@
 <?php (!isset($_SESSION)) ? session_start() : ""; ?>
 <!-- 載入PHP函數庫 -->
 <?php require_once("php_lib.php"); ?>
+<?php require_once('jsfile.php');?>
 <!doctype html>
 <html lang="zh-TW">
 
@@ -63,3 +64,16 @@ function activeShow($num, $chkPoint)
 
 <?php require_once ('jsfile.php'); ?>
 <script type="text/javascript" src="fancybox-2.1.7/source/jquery.fancybox.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //定義在滑鼠滑過圖片檔明田入主圖src中
+        $(".card .row.mt-2 .col-md-4 a").mouseover(function(){
+            var imgsrc=$(this).children("img").attr("src");
+            $("#showGoods").attr({"src":imgsrc});
+        }); 
+        $(".fancybox").fancybox();
+    });
+</script>
+<script>
+
+</script>
