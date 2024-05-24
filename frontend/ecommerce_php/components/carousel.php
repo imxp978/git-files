@@ -14,7 +14,7 @@
 
       <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">
-          <?php for ($i = 1; $i <= $carousel->rowCount(); $i++) { ?>
+          <?php for ($i = 0; $i <= $carousel->rowCount(); $i++) { ?>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?php echo $i; ?>"
               class="active" aria-current="true" aria-label="Slide <?php echo $i; ?>"></button>
           <?php } ?>
