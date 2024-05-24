@@ -7,19 +7,19 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <div>
               Account:
-              <input class="form-control m-1" type="text" value="test@example.com" />
+              <input class="form-control m-1" type="text" value="" id="inputAccount"/>
               Password:
-              <input class="form-control m-1" type="password" value="123456" />
-            </form>
+              <input class="form-control m-1" type="password" value="" id="inputPassword"/>
+            </div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-light" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
               data-bs-dismiss="modal">
               Sign Up
             </button>
-            <button type="button" class="btn btn-dark">Log In</button>
+            <button type="button" class="btn btn-dark" id="login_btn" >Log In</button>
           </div>
         </div>
       </div>

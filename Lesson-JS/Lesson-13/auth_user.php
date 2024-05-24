@@ -1,8 +1,9 @@
 <?php
 header('Access-Control-Allow-Origin:*');
 header('Content-Type:application/json;charset=utf-8');
+
+require_once('connections/conn_db.php');
 (!isset($_SESSION)) ? session_start() : "";
-require_once('Connections/conn_db.php');
 if (isset($_POST['inputAccount']) && isset($_POST['inputPassword'])) {
     $inputAccount = $_POST['inputAccount'];
     $inputPassword = $_POST['inputPassword'];
@@ -29,5 +30,3 @@ if (isset($_POST['inputAccount']) && isset($_POST['inputPassword'])) {
     echo json_encode($retcode, JSON_UNESCAPED_UNICODE);
 }
 return;
-?>
-

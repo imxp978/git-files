@@ -9,6 +9,41 @@ function btn_confirmLink(message, url) {
     return false;
 };
 
+// JS vanilla
+// function addcart(p_id) {
+//     let qty = document.getElementById('qty').value;
+//     if (qty <= 0) {
+//         alert("數量不能為零或負數 懂嗎?");
+//         return false;
+//     }
+//     if (qty == undefined) {
+//         qty = 1;
+//     } else if (qty >= 50) {
+//         alert("數量限制50內");
+//         return false;
+//     }
+
+//     // 使用 Fetch API 发送 AJAX 请求
+//        fetch(`addcart.php?p_id=${p_id}&qty=${qty}`)
+//     fetch('addcart.php?p_id=' + p_id + '&qty=' + qty)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error('後臺壞了');
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             if (data.c) {
+//                 alert(data.m);
+//             }
+//         })
+//         .catch(error => {
+//             alert(error.message);
+//         });
+// }
+
+
+
 function addcart(p_id) {
     let qty = $("#qty").val();
     if(qty<=0) {

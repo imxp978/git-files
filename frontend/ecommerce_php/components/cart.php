@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="col-2 text-end">$: <?php echo $cart_data['p_price']; ?></div>
                                     <div class="col-2 text-end">
-                                        <input type="number" class="form-control" id="qty[]" name="qty[]"
+                                        <input type="number" class="form-control quantity" id="quantity2" name="qty[]"
                                             value="<?php echo $cart_data['qty']; ?>" min="1" max="49"
                                             cartid="<?php echo $cart_data['cartid']; ?>" style="min-width:60px" required>
                                     </div>

@@ -54,7 +54,7 @@ function btn_confirmLink(message, url) {
 
 function addcart(p_id) {
   // let qty = document.querySelector('#quantity').value;
-  let qty = document.querySelector('#quantity2').value;
+  let qty = document.querySelector('.quantity').value;
   // let qty = parseInt(document.querySelector('#quantity2').textContent);
   // console.log('qty is: '+qty)
 
@@ -137,7 +137,7 @@ let reviewSwiper = new Swiper(".reviewSwiper", {
   }, 
 })
 
-document.querySelectorAll("input").forEach(input => {
+document.querySelectorAll(".quantity").forEach(input => {
   input.addEventListener("change", function() {
       var qty = this.value;
       const cartid = this.getAttribute("cartid");
@@ -172,18 +172,61 @@ document.querySelectorAll("input").forEach(input => {
 });
 
 
-let qty2 = document.querySelector('#quantity2');
+let qty = document.querySelector('.quantity');
 
 function minus() {
-  console.log(qty2.value) ;
-  if (qty2.value > 1) {
-    qty2.value--; 
+  
+  if (qty.value > 1) {
+    qty.value--; 
+    throw new error('hi, this is a error');
   } else {
-    qty2.value = 1;
-    console.log(qty2.value);
+    qty.value = 1;
+    
   }};
 
 function plus() {
-  // console.log(qty2);
-  qty2.value++;
+  // console.log(qty);
+  qty.value++;
 }
+
+// login 
+// document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('#login_btn').addEventListener('click', function(event) {
+      // event.preventDefault(); // 防止表单默认提交
+
+      const inputAccount = document.querySelector('#inputAccount').value;
+      const inputPassword = document.querySelector('#inputPassword').value;
+      // const loading = document.getElementById('loading');
+      // loading.style.display = 'block';
+
+      fetch('auth_user.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: new URLSearchParams({
+                  inputAccount: inputAccount,
+                  inputPassword: inputPassword
+              })
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.c === true) {
+                  alert(data.m);
+                  window.location.href = "<?php echo $sPath; ?>";
+              } else {
+                  alert(data.m);
+                  if (data.c == 1) {
+                    window.location.reload();
+                  }
+              }
+          })
+          .catch(error => {
+            // console.log(error);
+              alert('cant access, db is down');
+          })
+          // .finally(() => {
+          //     loading.style.display = 'none';
+          // });
+  });
+// });

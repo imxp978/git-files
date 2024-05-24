@@ -165,6 +165,49 @@ if (isset($_SESSION['login'])) {
             });
         });
     </script>
+
+    <!-- <script>
+        // JS vanilla
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('form1').addEventListener('submit', function(event) {
+                event.preventDefault(); // 防止表单默认提交
+
+                const inputAccount = document.getElementById('inputAccount').value;
+                const inputPassword = document.getElementById('inputPassword').value;
+                const loading = document.getElementById('loading');
+                loading.style.display = 'block';
+
+                fetch('auth_user.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            inputAccount: inputAccount,
+                            inputPassword: inputPassword
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.c === true) {
+                            alert(data.m);
+                            window.location.href = "<?php echo $sPath; ?>";
+                        } else {
+                            alert(data.m);
+                        }
+                    })
+                    .catch(error => {
+                        alert('cant access, db is down');
+                    })
+                    .finally(() => {
+                        loading.style.display = 'none';
+                    });
+            });
+        });
+    </script> -->
+
+
+
     <div id="loading" name="loading" style="display:none;position:fixed;width:100%;height:100%;top:0;left:0;background-color:rgba(255,255,255,0.5);z-index:9999;">
         <i class="fas fa-spinner fa-spin fa-5x fa-fw" style="position:absolute;top:50%;left:50%;"></i>
     </div>

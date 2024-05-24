@@ -28,8 +28,8 @@
                 WHERE p_open=1 AND p_id=%s", $_GET['productid']);
         $product_data = $link->query($SQLstringData);
         $data = $product_data->fetch();
-      }
-      ?>
+      } ?>
+      
       <div class="col-12 col-lg-6">
         <?php while ($imgList = $img_rs->fetch()) { ?>
           <div class="product_image">

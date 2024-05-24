@@ -50,7 +50,7 @@
             <p>
               <?php echo $data['p_intro'] ?>
             </p>
-            <div class="row d-flex justify-content-center m-3">
+            <!-- <div class="row d-flex justify-content-center m-3">
               <select v-if="product.quantity > 0" v-model="quantity" name="quantity" id="quantity" class="form-select m-3">
                 <option value="1" selected>1</option>
                 <option value="2">2</option>
@@ -58,21 +58,24 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              <!-- <span id="quantity2"> 19 </span> -->
-            </div>
-
-            <div>
-              <button class="btn btn-sm btn-dark" onclick="minus()">-</button>
-              <input type="number" value="1" id="quantity2" min="1" readonly></input>
-              <button class="btn btn-sm btn-dark" onclick="plus()">+</button>
-            </div>
+            </div> -->
 
             <?php if ($data['p_qty'] > 0) { ?>
-              <button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark m-3">
+              <div class="row d-flex justify-content-center my-5">
+                <button class="col-1 btn btn-sm btn-light" onclick="minus2()">-</button>
+                <div class="col-10">
+                <input class="col-10 form-control quantity" type="number" value="1" id="quantity" min="1" readonly></input>
+                </div>
+                <button class="col-1 btn btn-sm btn-light" onclick="plus()">+</button>
+              </div>
+            <?php } ?>
+
+            <?php if ($data['p_qty'] > 0) { ?>
+              <button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark my-3">
                 ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
               </button>
             <?php } else { ?>
-              <button onclick="notifyMe()" class="btn btn-danger m-3">
+              <button onclick="notifyMe()" class="btn btn-danger my-3">
                 NOTIFY ME <i class="fa-solid fa-bell"></i>
               </button>
             <?php } ?>
