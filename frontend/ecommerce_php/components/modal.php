@@ -1,26 +1,71 @@
 <section id="modal">
+<?php (!isset($_SESSION) ? session_start() : ""); 
+  if (isset($_POST['formct1']) && $_POST['formct1'] == 'reg') {
+    $email = $_POST['email'];
+    $pw1 = md5($_POST['pw1']);
+    $cname = $_POST['cname'];
+    $tssn = $_POST['tssn'];
+    $birthday = $_POST['birthday'];
+    $mobile = $_POST['mobile'];
+    $myZip = $_POST['myZip'] == '' ? NULL : $_POST['myZip'];
+    $address = $_POST['address'] == '' ? NULL : $_POST['address'];
+    $imgname = $_POST['uploadname'] == '' ? NULL : $_POST['uploadname'];
+    $insertsql = "INSERT INTO member (email,pw1,cname,tssn,birthday,imgname) VALUES('" . $email . "','" . $pw1 . "', '" . $cname . "','" . $tssn . "','" . $birthday . "','" . $imgname . "')";
+    $Result = $link->query($insertsql);
+    $emailid = $link->lastInsertId();
+    if ($Result) {
+      $insertsql = "INSERT INTO addbook (emailid,setdefault,cname,mobile,myzip,address) VALUES ('" . $emailid . "', '1','" . $cname . "','" . $mobile . "','" . $myZip . "','" . $address . "')";
+      $Result = $link->query($insertsql);
+      $_SESSION['login'] = true;
+      $_SESSION['emailid'] = $emailid;
+      $_SESSION['email'] = $email;
+      $_SESSION['cname'] = $cname;
+      echo "<script>alert('謝謝您!會員資瞭已完成註冊');location.href='index.php';</script>";
+    }
+  }
+  ?>
+
+<div id="loading" name="loading" style="display:none;position:fixed;width:100%;height:100%;top:0;left:0;background-color:rgba(255,255,255,0.5);z-index:9999;">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw" style="position:absolute;top:50%;left:50%;"></i>
+    </div>
     <div class="modal fade" id="login" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalToggleLabel">Log In</h5>
+            <h5 class="modal-title" id="exampleModalToggleLabel">
+              <?php if ($_SESSION['login']!=true) { ?>Log In 
+              <?php } else { ?> Hi,  <?php echo $_SESSION['cname'];?>
+              <?php } ?>
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <div>
-              Account:
-              <input class="form-control m-1" type="text" value="" id="inputAccount"/>
-              Password:
-              <input class="form-control m-1" type="password" value="" id="inputPassword"/>
+          <?php if($_SESSION['login']!=true) { ?>
+            
+            <div class="modal-body">
+              <div>
+                Account:
+                <input class="form-control m-1" type="text" value="" id="inputAccount"/>
+                Password:
+                <input class="form-control m-1" type="password" value="" id="inputPassword"/>
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-light" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+            <div class="modal-footer">
+              <button class="btn btn-light" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
               data-bs-dismiss="modal">
               Sign Up
-            </button>
-            <button type="button" class="btn btn-dark" id="login_btn" >Log In</button>
-          </div>
+              </button>
+              <button type="button" class="btn btn-dark" id="login_btn" >Log In</button>
+            </div>
+           <?php } else { ?>
+            <div class="modal-body">
+             
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-dark" id="logout_btn">Log Out</button>
+            <a href="logout.php"><button type="button" class="btn btn-dark" >Log Out</button></a>
+            </div>
+           <?php } ?> 
+
         </div>
       </div>
     </div>
@@ -33,15 +78,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
-              Username:
-              <input class="form-control m-1" type="text" value="user01" />
+            <form method="post">
               Email:
-              <input class="form-control m-1" type="email" value="test@example.com" />
+              <input class="form-control m-1" type="email" id="email" />
               Password:
-              <input class="form-control m-1" type="password" value="123456" />
+              <input class="form-control m-1" type="password" id="pw1" />
               Re-enter Password:
-              <input class="form-control m-1" type="password" value="123456" />
+              <input class="form-control m-1" type="password" id="pw2" />
+              <input type="hidden" name="form_control" id="form_control" value="reg">
             </form>
           </div>
           <div class="modal-footer">
@@ -54,7 +98,7 @@
       </div>
     </div>
 
-    <div class="modal fade modal-lg mt-5" id="cart" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <!-- <div class="modal fade modal-lg mt-5" id="cart" tabindex="-1" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -104,7 +148,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Button trigger modal -->
 
 

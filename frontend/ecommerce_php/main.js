@@ -1,3 +1,5 @@
+console.log('main.js is loaded');
+
 const movable = document.querySelector(".movable");
 
 function isElementInViewport(el) {
@@ -35,11 +37,11 @@ function notifyMe() {
 }
 
 function addClass(item) {
-  item.classList.add('active');
+  item.classList.add("active");
 }
 
 function removeClass(item) {
-  item.classList.remove('active');
+  item.classList.remove("active");
 }
 
 function btn_confirmLink(message, url) {
@@ -52,9 +54,10 @@ function btn_confirmLink(message, url) {
   return false;
 }
 
+
 function addcart(p_id) {
   // let qty = document.querySelector('#quantity').value;
-  let qty = document.querySelector('.quantity').value;
+  let qty = document.querySelector(".quantity").value;
   // let qty = parseInt(document.querySelector('#quantity2').textContent);
   // console.log('qty is: '+qty)
 
@@ -66,33 +69,32 @@ function addcart(p_id) {
   } else if (qty >= 50) {
     alert("數量限制50內");
     return false;
-  } 
+  }
 
   // 利用 fetch 函數呼叫後台的 addcart.php
   fetch(`addcart.php?p_id=${p_id}&qty=${qty}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Fetch success response:", data);  
-    if (data.c == true) {
-      // added();
-      // alert(data.m);
-      // prompt
-      added();
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    }
-  })
-  .catch(error => {
-    console.log("Fetch error response:", error);  
-    alert("Failed to Add Product, Contact Customer Support!");
-  });
-
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Fetch success response:", data);
+      if (data.c == true) {
+        // added();
+        // alert(data.m);
+        // prompt
+        added();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })
+    .catch((error) => {
+      console.log("Fetch error response:", error);
+      alert("Failed to Add Product, Contact Customer Support!");
+    });
 }
 
 let productSwiper = new Swiper(".productSwiper", {
@@ -109,7 +111,7 @@ let productSwiper = new Swiper(".productSwiper", {
 });
 
 let reviewSwiper = new Swiper(".reviewSwiper", {
-  lazy: true, 
+  lazy: true,
   slidesPerView: 2,
   spaceBetween: 50,
   loop: true,
@@ -134,99 +136,132 @@ let reviewSwiper = new Swiper(".reviewSwiper", {
       slidesPerView: 5,
       spaceBetween: 50,
     },
-  }, 
-})
+  },
+});
 
-document.querySelectorAll(".quantity").forEach(input => {
-  input.addEventListener("change", function() {
-      var qty = this.value;
-      const cartid = this.getAttribute("cartid");
-      if (qty <= 0 || qty >= 50) {
-          alert('數量需大於0 且小於50');
-          return false;
-      }
 
-      fetch('change_qty.php', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams({
-              'cartid': cartid,
-              'qty': qty
-          })
+document.querySelectorAll(".quantity").forEach((input) => {
+  input.addEventListener("change", function () {
+    var qty = this.value;
+    const cartid = this.getAttribute("cartid");
+    if (qty <= 0 || qty >= 50) {
+      alert("數量需大於0 且小於50");
+      return false;
+    }
+
+    fetch("change_qty.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        cartid: cartid,
+        qty: qty,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.c == true) {
+          // alert(data.m)
+          window.location.reload();
+        } else {
+          alert(data.m);
+        }
       })
-      .then(response => response.json())
-      .then(data => {
-          if (data.c == true) {
-              // alert(data.m)
-              window.location.reload();
-          } else {
-              alert(data.m);
-          }
-      })
-      .catch(error => {
-          alert("DB is down!");
+      .catch((error) => {
+        alert("DB is down!");
       });
   });
 });
 
-
-let qty = document.querySelector('.quantity');
+let qty = document.querySelector(".quantity");
 
 function minus() {
-  
-  if (qty.value > 1) {
-    qty.value--; 
-    throw new error('hi, this is a error');
-  } else {
-    qty.value = 1;
-    
-  }};
+  const minus_btn = document.querySelector("#minus_btn");
+  minus_btn.addEventListener("click", function () {
+    if (qty.value > 1) {
+      qty.value--;
+    } else {
+      qty.value = 1;
+    }
+  });
+}
 
 function plus() {
   // console.log(qty);
-  qty.value++;
+  const plus_btn = document.querySelector("#plus_btn");
+  plus_btn.addEventListener("click", function () {
+    qty.value++;
+  });
 }
 
-// login 
-// document.addEventListener('DOMContentLoaded', function() {
-  document.querySelector('#login_btn').addEventListener('click', function(event) {
-      // event.preventDefault(); // 防止表单默认提交
 
-      const inputAccount = document.querySelector('#inputAccount').value;
-      const inputPassword = document.querySelector('#inputPassword').value;
-      // const loading = document.getElementById('loading');
-      // loading.style.display = 'block';
+function login() {
+  // document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector("#login_btn").addEventListener("click", function () {
+    // event.preventDefault(); // 防止表单默认提交
 
-      fetch('auth_user.php', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: new URLSearchParams({
-                  inputAccount: inputAccount,
-                  inputPassword: inputPassword
-              })
-          })
-          .then(response => response.json())
-          .then(data => {
-              if (data.c === true) {
-                  alert(data.m);
-                  window.location.href = "<?php echo $sPath; ?>";
-              } else {
-                  alert(data.m);
-                  if (data.c == 1) {
-                    window.location.reload();
-                  }
-              }
-          })
-          .catch(error => {
-            // console.log(error);
-              alert('cant access, db is down');
-          })
-          // .finally(() => {
-          //     loading.style.display = 'none';
-          // });
+    const inputAccount = document.querySelector("#inputAccount").value;
+    const inputPassword = document.querySelector("#inputPassword").value;
+    const loading = document.querySelector("#loading");
+    loading.style.display = "block";
+
+    fetch("auth_user.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        inputAccount: inputAccount,
+        inputPassword: inputPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.c === true) {
+          // alert(data.m);
+          window.location.href = "<?php echo $sPath; ?>";
+        } else {
+          // alert(data.m);
+          if (data.c == 1) {
+            window.location.reload();
+          }
+        }
+      })
+      .catch((error) => {
+        // console.log(error);
+        alert("cant access, db is down");
+      })
+      .finally(() => {
+        loading.style.display = "none";
+      });
   });
-// });
+  // });
+}
+
+function logout() {
+  document.querySelector("#logout_btn").addEventListener("click", function () {
+    console.log("this");
+    window.location.href = "logout.php";
+  });
+}
+
+ function checkpw2(){
+  const pw1=document.querySelector('#pw1');
+  const pw2=document.querySelector('#pw2');
+  if (pw2.value != pw1.value) {
+    alert('Passwords dont match');
+    return false;
+  }
+ };
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOMContentLoaded event fired");
+  login();
+  plus();
+  minus();
+  checkpw2();
+});
+
+console.log('main.js running');
