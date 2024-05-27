@@ -18,6 +18,7 @@ function addClassToVisibleElements() {
 document.addEventListener("scroll", addClassToVisibleElements);
 addClassToVisibleElements();
 
+
 const navbar = document.querySelector(".navbar");
 const navContainer = document.querySelector('#nav-container')
 window.addEventListener("scroll", () => {
@@ -29,6 +30,7 @@ window.addEventListener("scroll", () => {
     navContainer.classList.remove('mini');
   }
 });
+
 
 function searchShow() {
   let searchbar = document.querySelector("#search");

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+        * {
+            border: 1px solid black;
+        }
+
+        img {
+            width: 100%;
+            /* 縮放至容器(父元素)的大小 cover:保持寬高比例 */
+            object-fit: cover; 
+            /* 顯示１：１多餘的會裁掉 */
+            aspect-ratio: 1/1; 
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <a href="https://bootstrap5.hexschool.com/docs/5.1/layout/columns/">bootstrap 網格 欄 列</a><br>
+        <a href="https://bootstrap5.hexschool.com/docs/5.1/utilities/flex/#enable-flex-behaviors">bootstrap flex</a>
+    </div>
+    <div class="container">
+        container 有這個類別左右會有一點margin
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 text-center">
+                col-12
+                <h1>ITEM TITLE</h1>
+            </div>
+            <div class="col-5">
+                <div>
+                    <p class="text-left">col-5</p>
+                    <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d46d9f4f-f0d5-4c07-af57-e08e5b9feeb7/air-force-1-lx-united-womens-shoes-58VkQV.png">
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-2">
+                        col-2<br>
+                        父元素有d-flex jusify-content-center 所以這三個col-2會置中
+                    </div>
+                    <div class="col-2">
+                        col-2
+                        <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d46d9f4f-f0d5-4c07-af57-e08e5b9feeb7/air-force-1-lx-united-womens-shoes-58VkQV.png">
+                    </div>
+                    <div class="col-2">
+                        col-2
+                        <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d46d9f4f-f0d5-4c07-af57-e08e5b9feeb7/air-force-1-lx-united-womens-shoes-58VkQV.png">
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="row d-flex justify-content-end">
+                    col-7
+                    <div class="col-12">
+                        col-12<br>
+                        col-7內部的12 所以會佔滿整個col-7
+                    </div>
+                    <div class="col-8">
+                        col-8<br>
+                        col-7內的col-8,<br> 
+                        父元素有d-flex justify-content-end 所以會靠右
+                        <h3>Description</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam ea earum libero labore quas ab, cupiditate necessitatibus soluta, in non dolore odio et perferendis praesentium culpa facere dolores maiores quaerat? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos alias saepe eligendi, vel, consequatur blanditiis quas quod quibusdam in iste dolore repudiandae molestiae tempore nemo quasi voluptatem, quisquam doloremque est.</p>
+                        <div class="text-end">
+                            <button class="btn btn-dark">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
