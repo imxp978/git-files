@@ -18,6 +18,15 @@ function addClassToVisibleElements() {
 document.addEventListener("scroll", addClassToVisibleElements);
 addClassToVisibleElements();
 
+const navbar = document.querySelector(".navbar");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50 || document.documentElement.scrollTop > 50) {
+    navbar.classList.add("mini");
+  } else {
+    navbar.classList.remove("mini");
+  }
+});
+
 function searchShow() {
   let searchbar = document.querySelector("#search");
   searchbar.classList.toggle("active");

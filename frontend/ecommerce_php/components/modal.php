@@ -61,7 +61,6 @@
              
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-dark" id="logout_btn">Log Out</button>
             <a href="logout.php"><button type="button" class="btn btn-dark" >Log Out</button></a>
             </div>
            <?php } ?> 

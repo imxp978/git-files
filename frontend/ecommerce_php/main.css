@@ -35,6 +35,27 @@ h5 {
   transform: rotate(-1deg);
 }
 
+.navbar {
+  height: 200px;
+  transition: 0.2s;
+}
+
+.navbar.mini {
+  height: 50px;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.navbar .navbar-brand {
+  scale: 1;
+  transition: 0.2s;
+}
+
+.navbar.mini .navbar-brand {
+  scale: 0.33;
+  transition: 0.3s;
+}
+
 .navbar-brand:hover {
   transform: rotate(1deg);
   scale: 1.05;
@@ -62,10 +83,6 @@ h5 {
 
 #footer h5 {
   text-decoration: underline;
-}
-
-.navbar {
-  he/ight: 120px;
 }
 
 .category-image {
