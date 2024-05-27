@@ -45,9 +45,10 @@ h5 {
 }
 
 .navbar.mini {
-  height: 50px;
+  height: 80px;
   width: 100%;
   transition: 0.3s;
+  background-color: blue;
 }
 
 .na/vbar.mini .container {
@@ -60,8 +61,9 @@ h5 {
 }
 
 .navbar.mini .navbar-brand {
-  scale: 0.33;
+  scale: 0.41;
   transition: 0.3s;
+  ma/rgin-top: 30px;
 }
 
 .navbar-brand:hover {
