@@ -1,5 +1,5 @@
 * {
-  b/order: 1px solid black;
+  bo/rder: 1px solid black;
 }
 
 body {
@@ -35,6 +35,10 @@ h5 {
   transform: rotate(-1deg);
 }
 
+.navbar .container {
+  pos/ition: fixed;
+}
+
 .navbar {
   height: 200px;
   transition: 0.2s;
@@ -44,6 +48,10 @@ h5 {
   height: 50px;
   width: 100%;
   transition: 0.3s;
+}
+
+.navbar.mini .container {
+  top: 0;
 }
 
 .navbar .navbar-brand {

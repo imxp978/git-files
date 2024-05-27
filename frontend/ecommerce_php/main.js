@@ -20,7 +20,7 @@ addClassToVisibleElements();
 
 const navbar = document.querySelector(".navbar");
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 50 || document.documentElement.scrollTop > 50) {
+  if (window.scrollY > 80 || document.documentElement.scrollTop > 80) {
     navbar.classList.add("mini");
   } else {
     navbar.classList.remove("mini");
