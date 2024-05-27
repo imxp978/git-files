@@ -1,8 +1,8 @@
 <section id="navbar">
-  <div class="container">
+  <div class="container" >
     <nav
-      class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end">
-      <div class="container">
+      class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-center">
+      <div class="container d-flex justify-content-between" id="nav-container">
         <a class="navbar-brand" href="./index.php">
           <h3>We Live, <br />We Eat, <br />We Grow</h3>
         </a>

@@ -35,8 +35,8 @@ h5 {
   transform: rotate(-1deg);
 }
 
-.navbar .container {
-  pos/ition: fixed;
+.navbar .container.mini {
+  position: fixed;
 }
 
 .navbar {

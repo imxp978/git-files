@@ -19,11 +19,14 @@ document.addEventListener("scroll", addClassToVisibleElements);
 addClassToVisibleElements();
 
 const navbar = document.querySelector(".navbar");
+const navContainer = document.querySelector('#nav-container')
 window.addEventListener("scroll", () => {
   if (window.scrollY > 80 || document.documentElement.scrollTop > 80) {
     navbar.classList.add("mini");
+    navContainer.classList.add('mini');
   } else {
     navbar.classList.remove("mini");
+    navContainer.classList.remove('mini');
   }
 });
 
