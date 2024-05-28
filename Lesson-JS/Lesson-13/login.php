@@ -133,12 +133,12 @@ if (isset($_SESSION['login'])) {
         <?php require_once('footer.php'); ?>
     </section>
     <?php require_once('jsfile.php'); ?>
-
+    <script src="commlib.js"></script>
     <script>
         $(function() {
             $("#form1").submit(function() {
                 const inputAccount = $('#inputAccount').val();
-                const inputPassword = $('#inputPassword').val();
+                const inputPassword = MD5($('#inputPassword').val());
                 $('#loading').show();
                 // $ajax call auth_user.php
                 $.ajax({
@@ -211,7 +211,7 @@ if (isset($_SESSION['login'])) {
     <div id="loading" name="loading" style="display:none;position:fixed;width:100%;height:100%;top:0;left:0;background-color:rgba(255,255,255,0.5);z-index:9999;">
         <i class="fas fa-spinner fa-spin fa-5x fa-fw" style="position:absolute;top:50%;left:50%;"></i>
     </div>
-
+       
 </body>
 
 </html>

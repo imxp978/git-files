@@ -97,7 +97,7 @@
                                     <input type="text" name="tssn" id="tssn" class="form-control" placeholder="請輸入身分證字號">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="birthday" id="birthday" class="form-control" placeholder="請選擇生日">
+                                    <input type="text" name="birthday" id="birthday" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="請選擇生日">
                                 </div>
                                 <div class="input-group mb-3">
                                     <input type="text" name="mobile" id="mobile" class="form-control" placeholder="請輸入手機號碼">
