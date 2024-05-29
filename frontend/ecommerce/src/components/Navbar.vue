@@ -3,7 +3,8 @@
     <div class="container">
       <nav
         class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end"
-      >
+        :class="{mini:mini}"
+        >
         <div class="container">
           <RouterLink class="navbar-brand" :to="{name: 'home'}"
             ><h3>We Live, <br />We Eat, <br />We Grow</h3></RouterLink
@@ -16,11 +17,12 @@
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            :class="mini"
           >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div
-            class="collapse navbar-collapse bg-light"
+            class="collapse navbar-collapse"
             id="navbarSupportedContent"
           >
             <ul class="navbar-nav mb-2 mb-lg-0 mx-auto">
@@ -150,7 +152,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useCategoryStore } from "@/stores/CategoryStore.js"
 import { useCartStore } from "@/stores/CartStore.js"; 
 import { storeToRefs} from "pinia";
@@ -160,13 +162,30 @@ const categories = useCategoryStore().categories;
 const cart = useCartStore().cart;
 
 const search = ref(false);
+const mini = ref(false);
 
 function searchShow() {
   search.value = !search.value;
-  console.log('cart.value: '+cart.value)
-  console.log('cart: '+cart)
-  console.log('storeToRefs: '+storeToRefs.cart)
+  // console.log('cart.value: '+cart.value)
+  // console.log('cart: '+cart)
+  // console.log('storeToRefs: '+storeToRefs.cart)
 }
+
+function handleScroll() {
+  if (window.scrollY > 80 || document.documentElement.scrollTop > 80) {
+    mini.value = true;
+  } else {
+    mini.value = false;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 
 // let itemNumber = ref(null);
 // onMounted(()=>{
