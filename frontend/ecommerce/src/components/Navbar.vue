@@ -27,7 +27,7 @@
           >
             <ul class="navbar-nav mb-2 mb-lg-0 mx-auto">
               <li class="nav-item">
-                <RouterLink class="nav-link active" aria-current="page" :to="{name: 'home'}">Home</RouterLink>
+                <RouterLink class="nav-link" aria-current="page" :to="{name: 'home'}">Home</RouterLink>
               </li>
               <li class="nav-item">
                 <RouterLink class="nav-link" :to="{ name: 'products' }">Products</RouterLink>

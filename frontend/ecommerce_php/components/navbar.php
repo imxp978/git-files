@@ -1,7 +1,7 @@
 <section id="navbar">
   <div class="container" >
     <nav
-      class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-center">
+      class="navbar navbar-expand-lg fixed-top mx-auto d-flex justify-content-start justify-content-sm-center">
       <div class="container d-flex justify-content-between" id="nav-container">
         <a class="navbar-brand" href="./index.php">
           <h3>We Live, <br />We Eat, <br />We Grow</h3>
@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mb-2 mb-lg-0 mx-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./">Home</a>
+              <a class="nav-link" aria-current="page" href="./">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./products.php">Products</a>

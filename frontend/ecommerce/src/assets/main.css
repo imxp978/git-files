@@ -49,11 +49,19 @@ h5 {
 }
 
 .navbar.mini {
-  height: 80px;
+  height: 50px;
   width: 100%;
-  background-color: rgb(222, 222, 222) !important;
+  background-color: rgba(121, 121, 121, 0.33) !important;
   transition: 0.3s;
 
+}
+
+.navbar.mini a {
+  color: white;
+}
+
+.navbar.mini a:hover {
+  color: lightgray;
 }
 
 .navbar .navbar-brand {
@@ -62,7 +70,7 @@ h5 {
 }
 
 .navbar.mini .navbar-brand {
-  scale: 0.41;
+  scale: 0.3;
   transition: 0.3s;
 }
 
