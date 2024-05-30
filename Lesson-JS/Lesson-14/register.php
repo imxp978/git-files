@@ -38,30 +38,30 @@
         <?php require_once('navbar.php'); ?>
     </section>
     <?php
-  if (isset($_POST['formct1']) && $_POST['formct1'] == 'reg') {
-    $email = $_POST['email'];
-    $pw1 = md5($_POST['pw1']);
-    $cname = $_POST['cname'];
-    $tssn = $_POST['tssn'];
-    $birthday = $_POST['birthday'];
-    $mobile = $_POST['mobile'];
-    $myZip = $_POST['myZip'] == '' ? NULL : $_POST['myZip'];
-    $address = $_POST['address'] == '' ? NULL : $_POST['address'];
-    $imgname = $_POST['uploadname'] == '' ? NULL : $_POST['uploadname'];
-    $insertsql = "INSERT INTO member (email,pw1,cname,tssn,birthday,imgname) VALUES('" . $email . "','" . $pw1 . "', '" . $cname . "','" . $tssn . "','" . $birthday . "','" . $imgname . "')";
-    $Result = $link->query($insertsql);
-    $emailid = $link->lastInsertId();
-    if ($Result) {
-      $insertsql = "INSERT INTO addbook (emailid,setdefault,cname,mobile,myzip,address) VALUES ('" . $emailid . "', '1','" . $cname . "','" . $mobile . "','" . $myZip . "','" . $address . "')";
-      $Result = $link->query($insertsql);
-      $_SESSION['login'] = true;
-      $_SESSION['emailid'] = $emailid;
-      $_SESSION['email'] = $email;
-      $_SESSION['cname'] = $cname;
-      echo "<script>alert('謝謝您!會員資瞭已完成註冊');location.href='index.php';</script>";
+    if (isset($_POST['formct1']) && $_POST['formct1'] == 'reg') {
+        $email = $_POST['email'];
+        $pw1 = md5($_POST['pw1']);
+        $cname = $_POST['cname'];
+        $tssn = $_POST['tssn'];
+        $birthday = $_POST['birthday'];
+        $mobile = $_POST['mobile'];
+        $myZip = $_POST['myZip'] == '' ? NULL : $_POST['myZip'];
+        $address = $_POST['address'] == '' ? NULL : $_POST['address'];
+        $imgname = $_POST['uploadname'] == '' ? NULL : $_POST['uploadname'];
+        $insertsql = "INSERT INTO member (email,pw1,cname,tssn,birthday,imgname) VALUES('" . $email . "','" . $pw1 . "', '" . $cname . "','" . $tssn . "','" . $birthday . "','" . $imgname . "')";
+        $Result = $link->query($insertsql);
+        $emailid = $link->lastInsertId();
+        if ($Result) {
+        $insertsql = "INSERT INTO addbook (emailid,setdefault,cname,mobile,myzip,address) VALUES ('" . $emailid . "', '1','" . $cname . "','" . $mobile . "','" . $myZip . "','" . $address . "')";
+        $Result = $link->query($insertsql);
+        $_SESSION['login'] = true;
+        $_SESSION['emailid'] = $emailid;
+        $_SESSION['email'] = $email;
+        $_SESSION['cname'] = $cname;
+        echo "<script>alert('謝謝您!會員資瞭已完成註冊');location.href='index.php';</script>";
+        }
     }
-  }
-  ?>
+    ?>
 
     <section id="content">
         <div class="container-fluid">
@@ -103,7 +103,7 @@
                                     <input type="text" name="mobile" id="mobile" class="form-control" placeholder="請輸入手機號碼">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <select name="mycity" id="mycity" class="form-control">
+                                    <select name="myCity" id="myCity" class="form-control">
                                         <option value="">請選擇市區</option>
                                         <?php
                                         $city = "SELECT * FROM city WHERE State = 0";
@@ -274,8 +274,8 @@
 
     <script>
         // 城市選擇
-        $("#mycity").change(function() {
-            let CNo = $("#mycity").val()
+        $("#myCity").change(function() {
+            let CNo = $("#myCity").val()
             if (CNo == "") {
                 return false
             }
@@ -397,11 +397,5 @@
             getCaptcha();
         })
     </script>
-
-
-
-
-
 </body>
-
 </html>

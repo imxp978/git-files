@@ -1,13 +1,11 @@
 <section id="navbar">
-  <div class="container" >
-    <nav
-      class="navbar navbar-expand-lg fixed-top mx-auto d-flex justify-content-start justify-content-sm-center">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top mx-auto d-flex justify-content-start justify-content-sm-center">
       <div class="container d-flex justify-content-between" id="nav-container">
         <a class="navbar-brand" href="./index.php">
           <h3>We Live, <br />We Eat, <br />We Grow</h3>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -24,17 +22,16 @@
             $SQLstring = "SELECT * FROM cart 
                     WHERE orderid is NULL 
                     AND ip = '" . $_SERVER['REMOTE_ADDR'] . "'";
-                $cart_rs = $link->query($SQLstring);
+            $cart_rs = $link->query($SQLstring);
 
-      //列出產品類別第一層
-      $SQLstring = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
-      $pyclass01 = $link->query($SQLstring);
-      ?>
-      <?php while ($pyclass01_Rows = $pyclass01->fetch()) { ?>
-        <li class="nav-item dropdown">
+            //列出產品類別第一層
+            $SQLstring = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
+            $pyclass01 = $link->query($SQLstring);
+            ?>
+            <?php while ($pyclass01_Rows = $pyclass01->fetch()) { ?>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle dropdown-item" href="#" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <?php echo $pyclass01_Rows['cname']; ?>
                 </a>
                 <?php
@@ -52,8 +49,7 @@
               </li>
             <?php } ?>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 About Us
               </a>
               <ul class="dropdown-menu">
@@ -65,8 +61,7 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Links
               </a>
               <ul class="dropdown-menu">
@@ -82,42 +77,38 @@
             <ul class="navbar-nav mb-2">
               <li class="d-flex justify-content-end">
                 <div id="search">
-                  <form name="search-form" method="get" action="./products.php"
-                    class="d-flex justify-content-end text-end" role="search">
-                    <input value="<?php echo (isset($_GET['search'])) ? $_GET['search'] : ''; ?>" name="search"
-                      class="form-control me-2" type="search" required placeholder="Search products" aria-label="Search"
-                      style="min-width:100px" />
+                  <form name="search-form" method="get" action="./products.php" class="d-flex justify-content-end text-end" role="search">
+                    <input value="<?php echo (isset($_GET['search'])) ? $_GET['search'] : ''; ?>" name="search" class="form-control me-2" type="search" required placeholder="Search products" aria-label="Search" style="min-width:100px" />
                     <button class="btn btn-sm btn-dark" type="submit">Search</button>
                   </form>
-                  </div>
-                <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-4"
-                    onclick="searchShow()"></i></a>
+                </div>
+                <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-4" onclick="searchShow()"></i></a>
               </li>
               <li class="d-flex justify-content-end">
-                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login"><i
-                    class="fa-solid fa-user fa-4"></i></a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login"><i class="fa-solid fa-user fa-4"></i></a>
               </li>
               <li class="d-flex justify-content-end">
                 <?php
                 $SQLstring = sprintf("SELECT * FROM cart WHERE orderid IS NULL AND ip = '%s'", $_SERVER['REMOTE_ADDR']);
-                $cart_rs = $link->query($SQLstring); 
+                $cart_rs = $link->query($SQLstring);
                 $i = 0;
                 $totalItem = 0;
-                while ($data = $cart_rs->fetch() ) {
-                   $totalItem += $data['qty'];
-                $i++; }
-                
+                while ($data = $cart_rs->fetch()) {
+                  $totalItem += $data['qty'];
+                  $i++;
+                }
+
                 ?>
                 <!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cart"><span><i
                       class="fa-solid fa-cart-shopping fa-4"></i> -->
-                <a class="nav-link" href="./cart.php" >
+                <a class="nav-link" href="./cart.php">
                   <span>
                     <i class="fa-solid fa-cart-shopping fa-4"></i>
                     <?php if ($totalItem > 0) { ?>
-                    <span class="position-absolute translate-middle badge rounded-pill bg-danger">
-                    <?php echo $totalItem; ?>
-                    <!-- <?php echo($cart_rs) ? $cart_rs->rowCount(): ''; ?> -->
-                    </span>
+                      <span class="position-absolute translate-middle badge rounded-pill bg-danger">
+                        <?php echo $totalItem; ?>
+                        <!-- <?php echo ($cart_rs) ? $cart_rs->rowCount() : ''; ?> -->
+                      </span>
                     <?php } ?>
                   </span>
                 </a>
