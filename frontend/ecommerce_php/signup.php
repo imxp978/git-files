@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'message' => 'This Email Has Already Been Registered'
             );
         } else {
-            $SQLstring = sprintf("INSERT INTO member (email, pw1, active) VALUES ('%s', '%s', 1)", $email, $password);
+            $SQLstring = sprintf("INSERT INTO member (email, pw1) VALUES ('%s', '%s')", $email, $password);
             $signup = $link->query($SQLstring);
             if ($signup) {
                 $data = array(
