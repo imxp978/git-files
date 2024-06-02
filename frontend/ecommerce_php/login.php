@@ -12,7 +12,7 @@ if (session_status() == PHP_SESSION_NONE) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $email = $input['email'];
-    $password = ($input['password']);
+    $password = md5($input['password']);
 
     if (!($email && $password)) {
         $data = array(
