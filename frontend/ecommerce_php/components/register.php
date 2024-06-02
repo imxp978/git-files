@@ -1,7 +1,7 @@
 <div class="container text-center">
     <h3 class="mt-5">Sign Up</h3>
     <div class="row d-flex justify-content-center" name="reg">
-            <div class="col-md-6 col-10">
+            <div class="col-md-4 col-10">
             Email:
             <input class="form-control m-1" type="email" name="email" id="email" />
             Password:
@@ -11,8 +11,10 @@
             <span id="msg"></span><br>
             <div class="my-3"></div>
             <button class="btn btn-sm btn-dark" id="signup_btn">Sign Up</button>
+            
         </div>
     </div>
+    <hr>
 </div>
 
 <script>
@@ -26,6 +28,7 @@
             if (pw2.value !== pw1.value) {
                 msg.textContent = 'Passwords dont Match'
                 msg.style.color = 'red';
+                return;
             }
             fetch('./signup.php', {
                 method: 'post',
