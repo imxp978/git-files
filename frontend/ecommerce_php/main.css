@@ -39,10 +39,6 @@ h5 {
   position: fixed;
 }
 
-.navbar-collapse {
-
-}
-
 .navbar {
   height: 200px;
   transition: 0.2s;
@@ -51,17 +47,8 @@ h5 {
 .navbar.mini {
   height: 50px;
   width: 100%;
-  background-color: rgba(121, 121, 121, 1) !important;
+  background-color: gainsboro !important;
   transition: 0.3s;
-
-}
-
-.navbar.mini a {
-  color: white;
-}
-
-.navbar.mini a:hover {
-  color: lightgray;
 }
 
 .navbar .navbar-brand {
@@ -120,11 +107,7 @@ h5 {
 }
 
 .card-modal {
-  wid/th: 100%;
-  he/ight: 100%;
   position: absolute;
-
-  opa/city: 0;
 }
 
 .card-image {
@@ -166,13 +149,6 @@ h5 {
   transition: 0.3s;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-.ca/rd-image:hover .card-modal {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
 }
 
 .review-image {
@@ -230,13 +206,12 @@ li {
 }
 
 .product_image img {
-  position: absolute; /* 設置為絕對定位 */
-  top: 50%; /* 將圖片的上邊緣移動到父元素的50%位置 */
-  left: 50%; /* 將圖片的左邊緣移動到父元素的50%位置 */
-  transform: translate(-50%, -50%); /* 將圖片居中 */
-  max-width: 100%; /* 自動調整圖片寬度 */
-  he/ight: auto; /* 自動調整圖片高度 */
-  object-fit: cover; /* 保持圖片比例並填滿容器 */
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  max-width: 100%; 
+  object-fit: cover; 
 }
 
 .v-enter-active,

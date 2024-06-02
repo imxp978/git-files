@@ -78,14 +78,15 @@
               <li class="d-flex justify-content-end">
                 <div id="search">
                   <form name="search-form" method="get" action="./products.php" class="d-flex justify-content-end text-end" role="search">
-                    <input value="<?php echo (isset($_GET['search'])) ? $_GET['search'] : ''; ?>" name="search" class="form-control me-2" type="search" required placeholder="Search products" aria-label="Search" style="min-width:100px" />
+                    <input value="<?php echo (isset($_GET['search'])) ? $_GET['search'] : ''; ?>" name="search" class="form-control me-2 input-sm" type="search" required placeholder="Search products" aria-label="Search" style="min-width:100px" />
                     <button class="btn btn-sm btn-dark" type="submit">Search</button>
                   </form>
                 </div>
                 <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-4" onclick="searchShow()"></i></a>
               </li>
               <li class="d-flex justify-content-end">
-                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login"><i class="fa-solid fa-user fa-4"></i></a>
+                <!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login"><i class="fa-solid fa-user fa-4"></i></a> -->
+                <a class="nav-link" href="./member.php"><i class="fa-solid fa-user fa-4"></i></a>
               </li>
               <li class="d-flex justify-content-end">
                 <?php

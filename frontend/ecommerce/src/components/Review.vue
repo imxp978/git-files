@@ -9,11 +9,8 @@
           :modules="modules"
           :slides-per-view="5"
           :space-between="50"
-          navigation
           loop
           autoplay
-          :pagination="{ clickable: true }"
-          :scrollbar="{ draggable: true }"
           @swiper="onSwiper"
           @slideChange="onSlideChange"
         >
@@ -22,8 +19,7 @@
             v-for="item in reviews"
             :key="item.id">
             <div class="swiper-slide">
-              <div class="card col-12 border-0 border-end border-bottom border-3"
->
+              <div class="card col-12 border-0 border-end border-bottom border-3">
                 <div class="row g-5">
                   <div class="review col-md-12">
                     <div class="review-image" >
@@ -46,15 +42,12 @@
                 </div>
               </div>
             </div>
-
-
           </swiper-slide>
           <swiper-slide>Placeholder1</swiper-slide>
           <swiper-slide>Placeholder2</swiper-slide>
-
         </swiper>
       </div>
-      <hr />
+      <hr/>
     </div>
   </section>
 </template>
@@ -65,7 +58,7 @@ import { useReviewStore } from "@/stores/ReviewStore.js";
 const reviews = useReviewStore().reviews;
 
   // import Swiper core and required modules
-  import { Navigation, Pagination, Autoplay, A11y } from 'swiper/modules';
+  import { Autoplay, A11y } from 'swiper/modules';
 
   // Import Swiper Vue.js components
   import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -75,7 +68,7 @@ const reviews = useReviewStore().reviews;
   import 'swiper/css/navigation';
   import 'swiper/css/pagination';
 
-  const modules= [Navigation, Pagination, Autoplay, A11y];
+  const modules= [Autoplay, A11y];
   const onSwiper = (swiper) => {
     // console.log(swiper);
   };

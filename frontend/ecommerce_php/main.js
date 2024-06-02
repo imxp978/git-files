@@ -192,66 +192,70 @@ let qty = document.querySelector(".quantity");
 
 function minus() {
   const minus_btn = document.querySelector("#minus_btn");
-  minus_btn.addEventListener("click", function () {
-    if (qty.value > 1) {
-      qty.value--;
-    } else {
-      qty.value = 1;
-    }
-  });
+  if (minus_btn) {
+    minus_btn.addEventListener("click", function () {
+      if (qty.value > 1) {
+        qty.value--;
+      } else {
+        qty.value = 1;
+      }
+    });
+  }
 }
 
 function plus() {
   // console.log(qty);
   const plus_btn = document.querySelector("#plus_btn");
-  plus_btn.addEventListener("click", function () {
-    qty.value++;
-  });
+  if (plus_btn) {
+    plus_btn.addEventListener("click", function () {
+      qty.value++;
+    });
+  }
 }
 
 
-function login() {
-  // document.addEventListener('DOMContentLoaded', function() {
-  document.querySelector("#login_btn").addEventListener("click", function () {
-    // event.preventDefault(); // 防止表单默认提交
+// function login() {
+//   // document.addEventListener('DOMContentLoaded', function() {
+//   document.querySelector("#login_btn").addEventListener("click", function () {
+//     // event.preventDefault(); // 防止表单默认提交
 
-    const inputAccount = document.querySelector("#inputAccount").value;
-    const inputPassword = document.querySelector("#inputPassword").value;
-    const loading = document.querySelector("#loading");
-    loading.style.display = "block";
+//     const inputAccount = document.querySelector("#inputAccount").value;
+//     const inputPassword = document.querySelector("#inputPassword").value;
+//     const loading = document.querySelector("#loading");
+//     loading.style.display = "block";
 
-    fetch("auth_user.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        inputAccount: inputAccount,
-        inputPassword: inputPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.c === true) {
-          // alert(data.m);
-          window.location.href = "<?php echo $sPath; ?>";
-        } else {
-          // alert(data.m);
-          if (data.c == 1) {
-            window.location.reload();
-          }
-        }
-      })
-      .catch((error) => {
-        // console.log(error);
-        alert("cant access, db is down");
-      })
-      .finally(() => {
-        loading.style.display = "none";
-      });
-  });
+//     fetch("auth_user.php", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded",
+//       },
+//       body: new URLSearchParams({
+//         inputAccount: inputAccount,
+//         inputPassword: inputPassword,
+//       }),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         if (data.c === true) {
+//           // alert(data.m);
+//           window.location.href = "<?php echo $sPath; ?>";
+//         } else {
+//           // alert(data.m);
+//           if (data.c == 1) {
+//             window.location.reload();
+//           }
+//         }
+//       })
+//       .catch((error) => {
+//         // console.log(error);
+//         alert("cant access, db is down");
+//       })
+//       .finally(() => {
+//         loading.style.display = "none";
+//       });
+//   });
   // });
-}
+// }
 
 function logout() {
   document.querySelector("#logout_btn").addEventListener("click", function () {
@@ -272,10 +276,10 @@ function logout() {
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOMContentLoaded event fired");
-  login();
+  // login();
+  // checkpw2();
   plus();
   minus();
-  checkpw2();
 });
 
 console.log('main.js running');

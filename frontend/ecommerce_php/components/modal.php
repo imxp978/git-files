@@ -3,24 +3,15 @@
   if (isset($_POST['formct1']) && $_POST['formct1'] == 'reg') {
     $email = $_POST['email'];
     $pw1 = md5($_POST['pw1']);
-    $cname = $_POST['cname'];
-    $tssn = $_POST['tssn'];
-    $birthday = $_POST['birthday'];
-    $mobile = $_POST['mobile'];
-    $myZip = $_POST['myZip'] == '' ? NULL : $_POST['myZip'];
-    $address = $_POST['address'] == '' ? NULL : $_POST['address'];
-    $imgname = $_POST['uploadname'] == '' ? NULL : $_POST['uploadname'];
-    $insertsql = "INSERT INTO member (email,pw1,cname,tssn,birthday,imgname) VALUES('" . $email . "','" . $pw1 . "', '" . $cname . "','" . $tssn . "','" . $birthday . "','" . $imgname . "')";
-    $Result = $link->query($insertsql);
-    $emailid = $link->lastInsertId();
+    // $insertsql = "INSERT INTO member (email,pw1,cname,tssn,birthday,imgname) VALUES('" . $email . "','" . $pw1 . "', '" . $cname . "','" . $tssn . "','" . $birthday . "','" . $imgname . "')";
+    $SQLstring = sprintf("INSERT INTO member (email, pw1) VALUES ('%s', '%s')", $email, $pw1);
+    $Result = $link->query($SQLstring);
+    $id = $link->lastInsertId();
     if ($Result) {
-      $insertsql = "INSERT INTO addbook (emailid,setdefault,cname,mobile,myzip,address) VALUES ('" . $emailid . "', '1','" . $cname . "','" . $mobile . "','" . $myZip . "','" . $address . "')";
-      $Result = $link->query($insertsql);
       $_SESSION['login'] = true;
-      $_SESSION['emailid'] = $emailid;
+      $_SESSION['id'] = $id;
       $_SESSION['email'] = $email;
-      $_SESSION['cname'] = $cname;
-      echo "<script>alert('謝謝您!會員資瞭已完成註冊');location.href='index.php';</script>";
+      echo "<script>alert('Thank You for Register!');location.href='index.php';</script>";
     }
   }
   ?>
@@ -77,19 +68,19 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="post">
+            <form name="reg" action="modal.php" method="post">
               Email:
-              <input class="form-control m-1" type="email" id="email" />
+              <input class="form-control m-1" type="email" name="email" id="email" />
               Password:
-              <input class="form-control m-1" type="password" id="pw1" />
+              <input class="form-control m-1" type="password" name="pw1" id="pw1" />
               Re-enter Password:
-              <input class="form-control m-1" type="password" id="pw2" />
+              <input class="form-control m-1" type="password" name="pw2" id="pw2" />
               <input type="hidden" name="form_control" id="form_control" value="reg">
             </form>
           </div>
           <div class="modal-footer">
             <button class="btn btn-dark" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
-              data-bs-dismiss="modal">
+              data-bs-dismiss="modal" onclick="checkpw()">
               Sign Up
             </button>
           </div>
@@ -169,4 +160,12 @@
         </div>
       </div>
     </div>
+    <script>
+      function checkpw() {
+        const pw1 = document.querySelector('#pw1');
+        const pw2 = document.querySelector('#pw2');
+        pw2.value !== pw1.value ? alert("Password Doesn't Match") : '';
+      }
+      
+    </script>
   </section>
