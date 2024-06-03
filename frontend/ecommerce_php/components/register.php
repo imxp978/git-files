@@ -27,8 +27,9 @@
     signup_btn.addEventListener('click', () => {
         if (email.value && pw1.value && pw2.value) {
             if (pw2.value !== pw1.value) {
-                msg.textContent = 'Passwords dont Match'
+                msg.textContent = 'Passwords Dont Match'
                 msg.style.color = 'red';
+                notice(msg.textContent);
                 return;
             }
             fetch('./signup.php', {
@@ -43,9 +44,11 @@
             })
             .then(response=>response.json())
             .then(data=>{
+                notice(data.message)
                 if(data.success) {
                     msg.textContent = data.message;
                     msg.style.color = 'green';
+                    
                     setTimeout(()=>{
                         window.location.href='index.php';
                     }, 1000)
@@ -57,6 +60,7 @@
         }else {
             msg.textContent = 'Please Insert Email and Password';
             msg.style.color = 'red';
+            notice(msg.textContent);
         }
     })
 </script>

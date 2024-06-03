@@ -93,18 +93,7 @@
           </div>
         </div>
       </div>
-      <div class="row d-flex justify-content-center">
-        <div id="cartnotice" class="notice d-flex justify-content-center position-fixed">
-          <p id="cartnotice-p" class="mx-auto my-auto text-center" style="color:white">
-            Added to cart <i class="fa-regular fa-circle-check"></i>
-          </p>
-        </div>
-        <div id="notifynotice" class="notice d-flex justify-content-center position-fixed">
-          <p class="mx-auto my-auto" style="color:white">
-            Success <i class=" fa-regular fa-circle-check"></i>
-          </p>
-        </div>
-      </div>
+      
     </div>
   </div>
   <hr />

@@ -6,8 +6,8 @@
     <div class="container text-center">
         <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
             <h3 class="mt-5">Hi, <?php echo $_SESSION['email']; ?></h3>
-            <hr>
             <a href="logout.php"><button type="submit" class="btn btn-sm btn-dark">Logout</button></a>
+            <hr>
 
         <?php } else { ?>
 
@@ -56,14 +56,16 @@
                         .then(data => {
                             // console.log(data);
                             // console.log('json converted');
+                            notice(data.message);
                             if (data.success) {
                                 // console.log('login successful');
                                 msg.textContent = data.message;
                                 msg.style.color = 'green';
-                                setTimeout(window.location.href = 'index.php', 10000);
+                                // setTimeout(window.location.href = 'index.php', 1000);
                             } else {
                                 msg.textContent = data.message;
                                 msg.style.color = 'red';
+                                
                             }
                         })
                         .catch((error) => {

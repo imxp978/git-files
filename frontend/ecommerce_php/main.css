@@ -265,10 +265,11 @@ li {
   width: 10vw;
   min-width: 150px;
   height: 10vh;
-  z-index: 0;
+  z-index: -1;
   top: 50%;
   opacity: 0;
   transition: 0.3s;
+
 }
 
 #cartnotice.active {
@@ -288,6 +289,7 @@ li {
   top: 50%;
   opacity: 0;
   transition: 0.3s;
+  display: none !important;
 }
 
 #notifynotice.active {
