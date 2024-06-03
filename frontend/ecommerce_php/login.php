@@ -4,7 +4,6 @@ header('Content-Type: application/json;charset=utf-8');
 
 require_once('connections/conn_db.php');
 
-// if (!$_SESSION) { session_start(); };
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -43,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'success' => false,
                 'message' => 'Invalid Email or Password'
             );
-        }
+        };
     }
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }

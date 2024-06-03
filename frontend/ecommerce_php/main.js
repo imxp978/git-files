@@ -37,11 +37,13 @@ function searchShow() {
   searchbar.classList.toggle("active");
 }
 
-function added() {
+function notice(message) {
   const notice = document.querySelector("#cartnotice");
+  const notice_p = document.querySelector('#cartnotice-p')
   // setTimeout(() => addClass(notice), 200);
-  addClass(notice);
-  setTimeout(() => removeClass(notice), 1000);
+  notice_p.textContent=message;
+  notice.classList.add('active');
+  setTimeout(() => notice.classList.remove('active'), 1000);
 }
 
 function notifyMe() {

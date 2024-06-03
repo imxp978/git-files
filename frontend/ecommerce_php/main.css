@@ -272,6 +272,7 @@ li {
 }
 
 #cartnotice.active {
+  color: white;
   opacity: 1;
   z-index: 3;
   transition: 0.3s;

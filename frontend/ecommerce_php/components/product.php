@@ -50,15 +50,6 @@
             <p>
               <?php echo $data['p_intro'] ?>
             </p>
-            <!-- <div class="row d-flex justify-content-center m-3">
-              <select v-if="product.quantity > 0" v-model="quantity" name="quantity" id="quantity" class="form-select m-3">
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div> -->
 
             <?php if ($data['p_qty'] > 0) { ?>
               <div class="row d-flex justify-content-center my-5">
@@ -71,11 +62,14 @@
             <?php } ?>
 
             <?php if ($data['p_qty'] > 0) { ?>
-              <button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark my-3">
+              <button class="btn btn-dark my-3" id="add_btn">
                 ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
               </button>
+              <!-- <button onclick="addcart(<?php echo $data['p_id']; ?>)" class="btn btn-dark my-3" id="add_btn">
+                ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
+              </button> -->
             <?php } else { ?>
-              <button onclick="notifyMe()" class="btn btn-danger my-3">
+              <button onclick="notice('Success')" class="btn btn-danger my-3">
                 NOTIFY ME <i class="fa-solid fa-bell"></i>
               </button>
             <?php } ?>
@@ -101,7 +95,7 @@
       </div>
       <div class="row d-flex justify-content-center">
         <div id="cartnotice" class="notice d-flex justify-content-center position-fixed">
-          <p id="cartnotice-p" class="mx-auto my-auto" style="color:white">
+          <p id="cartnotice-p" class="mx-auto my-auto text-center" style="color:white">
             Added to cart <i class="fa-regular fa-circle-check"></i>
           </p>
         </div>
@@ -117,4 +111,29 @@
 </section>
 
 <script>
+  const url = new URL(window.location);
+  const p_id = url.searchParams.get('productid');
+  const quantity = document.querySelector('#quantity');
+  const add_btn = document.querySelector('#add_btn');
+  add_btn.addEventListener('click', ()=>{
+      fetch('./addtocart.php', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          p_id: p_id,
+          quantity: quantity.value
+        })
+      })
+      .then(response=>response.json())
+      .then(data=>{
+        notice(data.message);
+        if (data.success) {
+          setTimeout( ()=> {
+            window.location.reload()
+          }, 1000);
+        }
+      })
+  });
 </script>
