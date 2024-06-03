@@ -8,7 +8,7 @@ unset($_SESSION['login']);
 unset($_SESSION['emailid']);
 unset($_SESSION['cname']);
 unset($_SESSION['email']);
-$sPath="index.php";
+$sPath="member.php";
 header(sprintf("Location:%s", $sPath));
 
 ?>

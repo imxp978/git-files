@@ -61,11 +61,11 @@
                                 // console.log('login successful');
                                 msg.textContent = data.message;
                                 msg.style.color = 'green';
-                                // setTimeout(window.location.href = 'index.php', 1000);
+                                setTimeout(window.location.href = 'index.php', 1000);
                             } else {
                                 msg.textContent = data.message;
                                 msg.style.color = 'red';
-                                
+
                             }
                         })
                         .catch((error) => {
