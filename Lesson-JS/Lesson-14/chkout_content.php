@@ -33,8 +33,6 @@ if ($addbook_rs && $addbook_rs->rowCount() != 0) {
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">選擇其他收件人</button>
         </div>
     </div>
-
-
     <div class="card col ms-3">
         <div class="card-header" style="color:#000">
             <i class="fas fa-truck fa-credit-card me-1"></i>
@@ -204,12 +202,6 @@ if ($addbook_rs && $addbook_rs->rowCount() != 0) {
             </tfoot>
         </table>
     </div>
-
-</div>
-</div>
-</div>
-</div>
-
 </div>
 
 <?php
@@ -250,7 +242,7 @@ $addbook_rs = $link->query($SQLstring);
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-auto">
                             <input type="hidden" id="myzip" name="myzip" value="">
                             <label for="address" id="add_label" name="add_label"></label>
                             <input type="text" class="form-control" id="address" name="address" placeholder="地址">
