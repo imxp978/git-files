@@ -142,7 +142,7 @@ if ($addbook_rs && $addbook_rs->rowCount() != 0) {
     $cart_rs = $link->query($SQLstring);
     $pTotal = 0; //設定累加變數
     ?>
-    <div class="table-responsive-md">
+    <div class="table-responsive-md" style="width:90%">
         <table class="table table-hover mt-3">
             <thead>
                 <tr class="text-bg-primary">

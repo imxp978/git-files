@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <style>
+        .test {
+            font-size: 18px;
+            font-family: sans-serif;
+            text-decoration: underline;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div id="myapp" class="d-flex justify-content-center">
+      <div class="card" style="width: 30vw">
+        <img :src="img" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{title}}</h5>
+          <p class="card-text" style="font-weight:bolder">
+            {{p1}}
+          </p>
+          <p class="card-text" style="color:darkgray">
+            {{p2}}
+          </p>
+          <p class="card-text" :class="class3"> 
+            {{p3}}
+          </p>
+          <p class="card-text" :style="">
+            {{p4}}
+          </p>
+          <a :href="source" class="btn btn-primary">新聞來源</a>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" ></script>
+    <script>
+
+        const vue = Vue.createApp({
+            data() {
+                return {
+                    title:'就是不愛輸！蘇姿丰VS.黃仁勳戰到台灣　她展示了哪些AI軍火？',
+                    content: "輝達執行長黃仁勳，在6月2日晚間轟動全台、宛如大型演場會般的專題演說，幾乎讓兩天後才正式開幕的台北國際電腦展Computex，儼然變成輝達供應商大會。12小時後之後，面對強大對手先聲奪人，本屆Computex真正主角、負責開幕演說的超微（AMD）執行長蘇姿丰，身穿突破傳統的粉紅色系外套、粉色眼影，精神抖擻地在南港展覽館二館演講廳走上舞台。端坐第一排的貴賓，幾乎就是前一晚傾聽黃仁勳演講的原班人馬，包括廣達電腦副董事長梁次震、緯創董事長林憲銘和執行長林建勳、緯穎董事長洪麗甯，以及台塑集團總裁王文淵等。54歲的蘇姿丰，擔任超微執行長今年就要滿10年，她翻轉奄奄一息的超微，特別渴望乘著這股全球生成式AI的大浪，贏得下一個勝利山頭。",
+                    img: 'https://cw-image-resizer.cwg.tw/resize/uri/https%3A%2F%2Fcdn-www.cw.com.tw%2Farticle%2F202406%2Farticle-665d9dcfb91298.50129484.JPG/?w=1600&format=webp',
+                    p1: "輝達執行長黃仁勳，在6月2日晚間轟動全台、宛如大型演場會般的專題演說，幾乎讓兩天後才正式開幕的台北國際電腦展Computex，儼然變成輝達供應商大會。",
+                    p2: "12小時後之後，面對強大對手先聲奪人，本屆Computex真正主角、負責開幕演說的超微（AMD）執行長蘇姿丰，身穿突破傳統的粉紅色系外套、粉色眼影，精神抖擻地在南港展覽館二館演講廳走上舞台。",
+                    p3: "端坐第一排的貴賓，幾乎就是前一晚傾聽黃仁勳演講的原班人馬，包括廣達電腦副董事長梁次震、緯創董事長林憲銘和執行長林建勳、緯穎董事長洪麗甯，以及台塑集團總裁王文淵等。",
+                    p4: "54歲的蘇姿丰，擔任超微執行長今年就要滿10年，她翻轉奄奄一息的超微，特別渴望乘著這股全球生成式AI的大浪，贏得下一個勝利山頭。",
+                    class3: 'test',
+                    source: 'https://www.cw.com.tw/article/5130626',
+                }
+            },
+        }).mount('#myapp')
+    </script>
+  </body>
+</html>

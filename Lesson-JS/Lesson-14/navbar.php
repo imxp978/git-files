@@ -63,7 +63,7 @@
                     <a class="nav-link" href="#">最新活動</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">查訂單</a>
+                    <a class="nav-link" href="orderlist.php">查訂單</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">折價券</a>
@@ -80,12 +80,26 @@
                         <li><a class="dropdown-item" href="#">全台門市資訊</a></li>
                         <li><a class="dropdown-item" href="#">供應商報價服務</a></li>
                         <li><a class="dropdown-item" href="#">加盟專區</a></li>
-                        <li><a class="dropdown-item" href="#">投資人專區</a></li>
+                        <li><a class="dropdown-item" href="#">投資人專區!!</a></li>
                     </ul>
                 </li>
                 <!-- 使用PHP函數外加類別功能 -->
-                <?php multiList01(); ?>
+                <?php //multiList01(); ?>
             </ul>
+            <?php if(isset($_SESSION['login'])) { ?>
+            <ul class="navbar ms-auto me-4">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-hashpopup="true" aria-expanded="false">
+                        <img src="uploads/<?php echo ($_SESSION['imgname']!='')? $_SESSION['imgname']: 'avatar.svg'; ?>" width="40" height="40" alt="" class="rounded-circle">
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="orderlist.php" class="dropdown-item">Order List</a>
+                        <a href="profile.php" class="dropdown-item">Edit Profile</a>
+                        <a href="#" onclick="btn_confirmLink('是否要登出?', 'logout.php')" class="dropdown-item">Log Out</a>
+                    </div>
+                </li>
+            </ul>
+            <?php } ?>
         </div>
 
 </nav>

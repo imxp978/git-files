@@ -31,9 +31,6 @@
                     <!-- 引入商品列表模組 -->
                     <?php require_once('product_list.php') ?>
                 </div>
-
-                <!-- <div class="row text-center"> -->
-
             </div>
         </div>
         </div>
@@ -47,7 +44,7 @@
     <section id="footer">
         <?php require_once('footer.php'); ?>
     </section>
-<?php require_once('jsfile.php');?>
+    <?php require_once('jsfile.php'); ?>
 </body>
 
 </html>
