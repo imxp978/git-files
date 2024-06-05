@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $members->fetch();
             if ($result['active']) {
                 $_SESSION['login'] = true;
+                $_SESSION['id'] = $result['id'];
                 $_SESSION['email'] = $result['email'];
                 $data = array(
                     'success' => true,

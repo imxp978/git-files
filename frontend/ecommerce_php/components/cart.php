@@ -60,7 +60,7 @@
                     </li>
                 </div>
                 <div class="cart-footer d-flex justify-content-end">
-                    <button type="button" class="btn btn-dark mt-3">Checkout</button>
+                    <a href="checkout.php"><button type="button" class="btn btn-dark mt-3">Checkout</button></a>
                 </div>
                 <?php } ?>
             </div>
