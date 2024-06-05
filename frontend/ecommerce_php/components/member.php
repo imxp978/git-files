@@ -35,7 +35,7 @@
             const msg = document.querySelector('#msg');
             login_btn.addEventListener('click', () => {
                 // console.log('login_btn clicked');
-                msg.textContent = 'start';
+                // msg.textContent = 'start';
                 if (email.value && password.value) {
                     // console.log('email & password')
                     fetch('./login.php', {
@@ -72,8 +72,9 @@
 
                         })
                 } else {
-                    msg.textContent = 'Please Insert Account and Password'
+                    msg.textContent = 'Please Insert Email and Password'
                     msg.style.color = 'red';
+                    notice(msg.textContent);
 
                 }
             })

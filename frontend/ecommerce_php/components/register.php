@@ -57,6 +57,9 @@
                     msg.style.color = 'red';
                 }
             })
+            .catch((error)=>{
+                console.log(error);
+            })
         }else {
             msg.textContent = 'Please Insert Email and Password';
             msg.style.color = 'red';
