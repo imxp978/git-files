@@ -20,19 +20,14 @@
                     Phone Number: <br>
                     <input class="form-control" type="text"><br>
                 </div>
-                <div>
-                    <a href="#"><button class="btn btn-sm btn-dark">Check Out</button></a>
-                </div>
             </div>
             <div class="col-4">
             cart items
                 <ul>
                     <?php 
-                        $SQLstring = sprintf("SELECT * FROM cart WHERE ip='%s' AND orderid IS NULL", $_SERVER['REMOTE_ADDR'] );
-                        $items = $link->query($SQLstring)
+                        $SQLstring = sprintf("SELECT * FROM cart WHERE ")
                     ?>
                 </ul>
-                
             </div>
             <?php } else { ?>
             <div class="text-center">
