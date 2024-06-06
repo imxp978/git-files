@@ -26,7 +26,6 @@
                             <div class="accordion-header" id="flush-heading<?php echo $i; ?>">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $i; ?>" aria-expanded="false" aria-controls="flush-collapseOne">
                                     <div class="container bg-light bg-gradient">
-
                                         <div class="row text-start">
                                             <div class="col-2"><b>Order#</b></div>
                                             <div class="col-2"><b>Time</b></div>
@@ -53,6 +52,7 @@
                             <div id="flush-collapse<?php echo $i; ?>" class="accordion-collapse collapse <?php echo ($i == 0) ? 'show' : ''; ?>" aria-labelledby="flush-heading<?php echo $i; ?>" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body row text-center">
                                     <div class="container col-10 border-bottom border-end">
+                                        <hr>
                                         <div class="row text-start">
                                             <div class="col-1"></div>
                                             <div class="col-3">item</div>
