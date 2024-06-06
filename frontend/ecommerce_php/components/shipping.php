@@ -26,8 +26,8 @@
                                     <input type="radio" name="gridRadios" id="gridRadios[]" value="<?php echo $data2['addressid'] ?>" <?php echo ($data2['setdefault']) ? 'checked' : ''; ?>>
                                 </div>
                                 <div class="col-2"><?php echo $data2['cname']; ?></div>
-                                <div class="col-2"><?php echo $data2['mobile'] ?></div>
-                                <div class="col-7"><?php echo $data2['address'] ?></div>
+                                <div class="col-3"><?php echo $data2['phone'] ?></div>
+                                <div class="col-6"><?php echo $data2['address'] ?></div>
                             </div>
                             <hr>
                         <?php } ?>
@@ -42,7 +42,7 @@
                         Phone Number: <br>
                         <input class="form-control" type="text" id="phone"><br>
                         <div class="my-3 text-start">
-                            <a href=""><button class="btn btn-sm btn-dark">Save</button></a>
+                            <button id="add_btn" class="btn btn-sm btn-dark">Save</button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,43 @@
     </div>
 
     <script>
-
+        const add_btn = document.querySelector('#add_btn');
+        add_btn.addEventListener('click', () => {
+            let name = document.querySelector('#name');
+            let address = document.querySelector('#address');
+            let phone = document.querySelector('#phone');
+            if ( name.value && address.value && phone.value) {
+                fetch('addadd.php', {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name.value,
+                        address: address.value,
+                        phone: phone.value
+                    })
+                })
+                .then(response=>response.json())
+                .then(data=> { 
+                    if (data.success) {
+                        console.log(data.message);
+                        notice(data.message);
+                        setTimeout (
+                            ()=> {
+                                window.location.reload();
+                            },1000
+                        )
+                    }
+                })
+                .catch(error=>{
+                    console.log(data.message);
+                    notice(data.message);
+                })
+            } else {
+                notice('Insert Name, Address, and Phone');
+            }
+        })
 
     </script>
 </section>
