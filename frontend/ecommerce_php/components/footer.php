@@ -1,8 +1,8 @@
 <section id="footer">
   <div class="container mx-auto pb-3" style="width: 100%">
     <div class="row d-flex justify-content-center">
-      <div id="cartnotice" class="notice d-flex justify-content-center position-fixed">
-        <p id="cartnotice-p" class="mx-auto my-auto text-center" style="color:white">
+      <div id="notice" class="notice d-flex justify-content-center position-fixed">
+        <p id="notice-p" class="mx-auto my-auto text-center" style="color:white">
           Added to cart <i class="fa-regular fa-circle-check"></i>
         </p>
       </div>

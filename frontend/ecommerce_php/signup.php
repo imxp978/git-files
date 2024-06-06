@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
                 $_SESSION['login'] = true;
                 $_SESSION['email'] = $email;
+                $_SESSION['id'] = $link->lastInsertId();
             } else {
                 $data = array(
                     'success' => false,

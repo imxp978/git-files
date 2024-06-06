@@ -8,8 +8,8 @@
     ?>
 
     <div class="container ">
-        <h3 class="mt-5 text-center">Shipping</h3>
-        <div class="row d-flex justify-content-center align-items-end">
+        <h3 class="mt-5 text-center">SHIPPING</h3>
+        <div class="row d-flex justify-content-center">
             <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
                 <div class="col-5">
                     <?php
@@ -17,30 +17,34 @@
                     $adds = $link->query($SQLstring_add);
                     if ($adds->rowCount() > 0) {
                     ?>
-                    <div>
-                        <h5>Choose Address</h5>
-
-                        <?php while ($data2 = $adds->fetch()) { ?>
-                            <div class="row d-flex align-items-center p-1">
-                                <div class="col-1">
-                                    <input type="radio" name="gridRadios" id="gridRadios[]" value="<?php echo $data2['addressid'] ?>" <?php echo ($data2['setdefault']) ? 'checked' : ''; ?>>
-                                </div>
-                                <div class="col-2"><?php echo $data2['cname']; ?></div>
-                                <div class="col-3"><?php echo $data2['phone'] ?></div>
-                                <div class="col-6"><?php echo $data2['address'] ?></div>
+                        <div>
+                            <u>
+                                <h5>Choose Address</h5>
+                            </u>
+                            <div class="input-group row d-flex align-items-center p-1" id="radioInputGroup">
+                                <?php while ($data2 = $adds->fetch()) { ?>
+                                    <div class="col-1">
+                                        <input type="radio" name="gridRadios" id="gridRadios[]" value="<?php echo $data2['addressid'] ?>" <?php echo ($data2['setdefault']) ? 'checked' : ''; ?>>
+                                    </div>
+                                    <div class="col-2"><?php echo $data2['cname']; ?></div>
+                                    <div class="col-3"><?php echo $data2['phone'] ?></div>
+                                    <div class="col-5"><?php echo $data2['address'] ?></div>
+                                    <div class="col-1"><button class="btn btn-sm btn-light" type="button" id="btn[]" name="btn[]" onclick="btn_confirmLink('Remove This Address?','address_del.php?mode=1&addressid=<?php echo $data2['addressid']; ?>');">x</button></div>
+                                    <hr>
+                                <?php } ?>
                             </div>
-                            <hr>
-                        <?php } ?>
-                    </div>
+                        </div>
                     <?php } ?>
                     <div>
-                        <h5>Add New Address</h5>
+                        <u>
+                            <h5 class="mt-5">Add New Address</h5>
+                        </u>
                         Name: <br>
                         <input class="form-control" type="text" id="name"><br>
-                        Address: <br>
-                        <input class="form-control" type="text" id="address"><br>
                         Phone Number: <br>
                         <input class="form-control" type="text" id="phone"><br>
+                        Address: <br>
+                        <input class="form-control" type="text" id="address"><br>
                         <div class="my-3 text-start">
                             <button id="add_btn" class="btn btn-sm btn-dark">Save</button>
                         </div>
@@ -48,6 +52,9 @@
                 </div>
                 <div class="col-1"></div>
                 <div class="col-4">
+                    <u>
+                        <h5>Items</h5>
+                    </u>
                     <div class="row text-end d-flex align-items-center">
                         <div class="col-2">#</div>
                         <div class="col-5">item</div>
@@ -71,21 +78,23 @@
                         <?php $total += $data['p_price'] * $data['qty'];
                         } ?>
                         <div class="col-10">Shipping: </div>
-                        <div class="col-2">$ 50</div>
+                        <div class="col-2">$:50</div>
 
                         <div class="col-10 my-3">Total: </div>
-                        <div class="col-2"><?php echo $total + 50; ?></div>
+                        <div class="col-2"><b>$: <?php echo $total + 50; ?></b></div>
 
                     </div>
                 </div>
                 <hr>
                 <?php if ($adds->rowCount() > 0) { ?>
                     <div class="col-10 my-5 text-center">
-                        <button class="btn btn-dark">Check Out</button>
+                        <a href="cart.php"><button class="btn btn-outline-dark">Cart</button></a>
+                        <button class="btn btn-dark" id="checkout">Check Out</button>
                     </div>
                 <?php } else { ?>
                     <div class="col-10 my-5 text-center">
-                        Add Shipping Address to Checkout
+                        <p>Add Shipping Address to Proceed</p><br>
+                        <a href="cart.php"><button class="btn btn-outline-dark">Cart</button></a>
                     </div>
                 <?php } ?>
 
@@ -101,43 +110,98 @@
     </div>
 
     <script>
+        const checkout_btn = document.querySelector('#checkout');
+        checkout_btn.addEventListener('click', ()=>{
+            let addressid = document.querySelector('input[name=gridRadios]:checked');
+            fetch('./addorder.php', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    addressid: addressid.value,
+                })
+            })
+            .then(response=>response.json())
+            .then(data=>{
+                notice(data.message);
+                if (data.success) {
+                    setTimeout(()=>{
+                        window.location.href ='./member.php';
+                    }, 1000);
+                }
+            })
+            .catch(error=>{
+                notice('Unexpected Error Occured, Please Try Again Later');
+                console.log(error);
+            })
+
+        })
+    </script>
+
+    <script>
+        const inputgroup = document.querySelector('#radioInputGroup');
+        inputgroup.addEventListener('change', (event) => {
+            // console.log(event.target.value)
+            if (event.target && event.target.nodeName == 'INPUT') {
+                let id = event.target.value;
+                fetch('./changeaddress.php', {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            addressid: event.target.value,
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => notice(data.message))
+                    .catch(error => {
+                        notice('Unexpected Error Occured, Please Try Again Later');
+                        console.log(error);
+                    })
+            }
+
+        })
+    </script>
+
+    <script>
         const add_btn = document.querySelector('#add_btn');
         add_btn.addEventListener('click', () => {
             let name = document.querySelector('#name');
             let address = document.querySelector('#address');
             let phone = document.querySelector('#phone');
-            if ( name.value && address.value && phone.value) {
-                fetch('addadd.php', {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: name.value,
-                        address: address.value,
-                        phone: phone.value
+            if (name.value && address.value && phone.value) {
+                fetch('./addaddress.php', {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: name.value,
+                            phone: phone.value,
+                            address: address.value
+                        })
                     })
-                })
-                .then(response=>response.json())
-                .then(data=> { 
-                    if (data.success) {
-                        console.log(data.message);
-                        notice(data.message);
-                        setTimeout (
-                            ()=> {
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            notice(data.message);
+                            setTimeout(() => {
                                 window.location.reload();
-                            },1000
-                        )
-                    }
-                })
-                .catch(error=>{
-                    console.log(data.message);
-                    notice(data.message);
-                })
+                            }, 1000)
+                        } else {
+                            console.log(data.message);
+                            notice(error.message);
+                        }
+                    })
+                    .catch(error => {
+                        notice('Unexpected Error Occured, Please Try Again Later');
+                        console.log(error);
+                    })
             } else {
-                notice('Insert Name, Address, and Phone');
+                notice('Insert Name, Phone, and Address');
             }
         })
-
     </script>
 </section>

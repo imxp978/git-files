@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     if ($p_id && $quantity > 0) {
-        $SQLstring_cart = sprintf("SELECT * From cart WHERE ip = '%s' AND p_id = %d", $ip, $p_id);
+        $SQLstring_cart = sprintf("SELECT * From cart WHERE ip = '%s' AND p_id = %d AND orderid IS NULL", $ip, $p_id);
         $check_cart = $link->query($SQLstring_cart);
         $SQLstring_product = sprintf("SELECT * From product WHERE p_id = %d", $p_id);
         $check_product = $link->query($SQLstring_product);

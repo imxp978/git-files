@@ -38,8 +38,8 @@ function searchShow() {
 }
 
 function notice(message) {
-  const notice = document.querySelector("#cartnotice");
-  const notice_p = document.querySelector('#cartnotice-p')
+  const notice = document.querySelector("#notice");
+  const notice_p = document.querySelector('#notice-p')
   // setTimeout(() => addClass(notice), 200);
   notice_p.textContent=message;
   notice.classList.add('active');
