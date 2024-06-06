@@ -25,33 +25,34 @@
                         <div class="accordion-item">
                             <div class="accordion-header" id="flush-heading<?php echo $i; ?>">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $i; ?>" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    <div class="container bg-light">
+                                    <div class="container bg-light bg-gradient">
 
                                         <div class="row text-start">
-                                            <div class="col-2">order#</div>
-                                            <div class="col-1">time</div>
-                                            <div class="col-2">payment</div>
-                                            <div class="col-1">status</div>
-                                            <div class="col-2">name</div>
-                                            <div class="col-3">address</div>
-                                            <div class="col-1">note</div>
+                                            <div class="col-2"><b>Order#</b></div>
+                                            <div class="col-2"><b>Time</b></div>
+                                            <div class="col-1"><b>Payment</b></div>
+                                            <div class="col-1"><b>Status</b></div>
+                                            <div class="col-2"><b>Name</b></div>
+                                            <div class="col-3"><b>Address</b></div>
+                                            <div class="col-1"><b>Note</b></div>
                                         </div>
                                         <hr>
                                         <div class="row text-start">
                                             <div class="col-2"><?php echo $data['orderid']; ?></div>
-                                            <div class="col-1"><?php echo $data['ordertime']; ?></div>
-                                            <div class="col-2"><?php echo $data['payment_method']; ?></div>
+                                            <div class="col-2"><?php echo $data['ordertime']; ?></div>
+                                            <div class="col-1"><?php echo $data['payment_method']; ?></div>
                                             <div class="col-1"><?php echo $data['status']; ?></div>
                                             <div class="col-2"><?php echo $data['cname']; ?></div>
                                             <div class="col-3"><?php echo $data['address']; ?></div>
                                             <div class="col-1"><?php echo $data['remark']; ?></div>
                                         </div>
+                                        <hr>
                                     </div>
                                 </button>
                             </div>
                             <div id="flush-collapse<?php echo $i; ?>" class="accordion-collapse collapse <?php echo ($i == 0) ? 'show' : ''; ?>" aria-labelledby="flush-heading<?php echo $i; ?>" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body row text-center">
-                                    <div class="container col-10">
+                                    <div class="container col-10 border-bottom border-end">
                                         <div class="row text-start">
                                             <div class="col-1"></div>
                                             <div class="col-3">item</div>
@@ -89,7 +90,7 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
+
                     <?php } ?>
 
                 </div>
@@ -103,9 +104,9 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-4 col-10">
                         Email:
-                        <input class="form-control m-1 input-sm" type="email" value="" id="inputEmail" required autofocus />
+                        <input class="form-control m-1 input-sm" type="email" value="test@test.com" id="inputEmail" required autofocus />
                         Password:
-                        <input class="form-control m-1 input-sm" type="password" value="" id="inputPassword" required />
+                        <input class="form-control m-1 input-sm" type="password" value="111111" id="inputPassword" required />
                         <span id="msg"></span><br>
                         <div class="my-3"></div>
                         <a href="register.php"><button class="btn btn-sm btn-outline-dark">Sign Up</button></a>
