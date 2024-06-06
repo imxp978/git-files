@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css testing</title>
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+	/* css 權重為：!important>inline style>id>class>element>* */
+        *{
+            color:red;
+            /* 0-0-0-0 */
+        }
+        .container{
+            background-color: aqua;
+        }
+        div{
+            font-size: 22px;
+            font-weight: bolder;
+            width: 100px;
+            text-align: center;
+            background-color: hotpink;
+            height: 50px;
+            margin-bottom: 30px;
+            color:greenyellow;
+        }
+        div.item{
+            color:yellow;
+            /* 0-0-1-1 */
+        }
+        .item{
+            color:rgb(41, 35, 11);
+            /* 0-0-1-0 */
+        }
+        #colorset{
+            color:#9a0eeb;
+            /* 0-1-0-0 */
+        }
+        .item span{
+            color:chartreuse;
+            /* 0-0-1-1 */
+        }
+        span{
+            color:orange;
+            /* 0-0-0-1 */
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>文字00</h1>
+    <section class="container">
+        <p>文字0</p>
+        <div>文字1</div>
+        <div class="item">文字2</div>
+        <div id="colorset" class="item">文字3</div>
+        <div id="colorset" class="item">
+            <span>文字3</span>
+        </div>
+        <div style="color:#fff;" id="colorset" class="item" >文字4</div>
+        <!-- 1-0-0-0 -->
+    </section>
+</body>
+</html>

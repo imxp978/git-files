@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css testing</title>
+    <link rel="stylesheet" href="test004.css">
+    <style type="text/css">
+        /* css權重為：!important>inline style>ID>class>element>0  */
+        .container{
+            width: 800px;
+            background-color: aqua;
+        }
+        div{
+            font-size: 22px;
+            font-weight: bolder;
+            width: 100px;
+            text-align: center;
+            background-color: hotpink;
+            height: 50px;
+            margin-bottom: 30px;
+            /* 觀念2：元件element權重>*的CSS，因此文字顏色會被取代*的CSS設定 */
+            color:greenyellow;
+            /* 0-0-0-1 */
+        }
+        *{
+            /* 觀念1：權重相同的CSS設定，後寫的會取代先寫入的CSS設定 */
+            color:red;
+            /* 0-0-0-0 */
+        }
+        .item{
+            /* 觀念3：類別item class>元件element權重>*的CSS，因此文字顏色會被取代元件的CSS設定 */
+            color:black;
+            /* 0-0-1-0 */
+        }
+        #colorset{
+            /* 觀念4：colorset ID>class>element權重>*的CSS，#ID文字顏色會取代類別的CSS設定 */
+            color:yellow;
+            /* 0-1-0-0 */
+        }
+    </style>
+</head>
+<body>
+    <h1>css權重測試網頁</h1>
+    <section class="container">
+        <p>文字0</p>
+        <div>文字1</div>
+        <div class="item">文字2</div>
+        <div id="colorset" class="item">文字3</div>
+    </section>
+</body>
+</html>

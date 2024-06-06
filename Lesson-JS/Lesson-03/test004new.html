@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css testing</title>
+    <link rel="stylesheet" href="test004.css">
+    <style type="text/css">
+        /* css權重為：!important>inline style>ID>class>element>*  */
+        .container {
+            width: 800px;
+            background-color: aqua;
+        }
+        .item{
+            /* 觀念3：類別item class>元件element權重>*的CSS，因此文字顏色會被取代元件的CSS設定 */
+            color:black;
+            /* 0-0-1-0 */
+        }
+        /* 問題：網頁復合式的css的權重，設定方式為何？權重值如何配置？ */
+        div.item{
+            /* 觀念6：復合式權重計算方式為各階層累加總數值，低階層累加進位，並不會影響上一階層的權重 */
+            color:blueviolet;
+            /* 0-0-1-1 */
+            /* 例#content #contentL #listNew p */
+            /* 0-3-0-1 */
+        }
+        div {
+            font-size: 22px;
+            font-weight: bolder;
+            width: 100px;
+            text-align: center;
+            background-color: hotpink;
+            height: 50px;
+            margin-bottom: 30px;
+            /* 觀念2：元件element權重>*的CSS，因此文字顏色會被取代*的CSS設定 */
+            color: greenyellow;
+            /* 0-0-0-1 */
+        }
+        *{
+            /* 觀念1：權重相同的CSS設定，後寫CSS會取代先寫入的CSS設定 */
+            color:red;
+            /* 0-0-0-0 */
+            /* 問題：要怎麼處理CSS被設定!important情形。 */
+            /* 要處理CSS被設定!important時，其他要取代它屬性必需也要同步設定!important才有辦法取代設定，但是也會同步影響之後的屬性設定 */
+        }
+        #colorset{
+            /* 觀念4：colorset ID>class>element權重>*的CSS，#ID文字顏色會取代類別的CSS設定 */
+            color:yellow;
+            /* 0-1-0-0 */
+        }
+        /* 使用複合設定文字3的字體顏色與放大字體，需標示css權重值，並觀察文字4字體變化(CSS具繼承的作用)。 */
+        #colorset.item{
+            /* 觀念7：注意低階層的CSS設定，到高階層具有繼承的作用，所以此設定將會影響文字4的字體放大 */
+            color:indigo;
+            font-size: 30px;
+            /* 0-1-1-0 */
+        }
+
+    </style>
+    
+</head>
+
+<body>
+    <h1>css權重測試網頁</h1>
+    <section class="container">
+        <p>文字0</p>
+        <div>文字1</div>
+        <div class="item">文字2</div>
+        <div id="colorset" class="item">文字3</div>
+        <div id="colorset" class="item">
+            <span>文字3</span>
+            <!-- 觀念8：在子階層的權重值將重新計算，並不會繼承上一階層權重 -->
+            <!-- 0-0-0-0 -->
+        </div>
+        <!-- 觀念5：inline style>id>class>element權重>*的CSS -->
+        <div id="colorset" class="item" style="color:white;">文字4</div>
+        <!-- 1-0-0-0 -->
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css testing</title>
+    <link rel="stylesheet" href="test003.css">
+    <style type="text/css">
+        /* css 權重為：              第1級    第2級 第3級 第4級    */
+        /* css 權重為：!important>inline style>id>class>element>* */
+        .container {
+            width: 800px;
+            background-color: aqua;
+        }
+        div {
+            font-size: 22px;
+            font-weight: bolder;
+            width: 100px;
+            text-align: center;
+            background-color: hotpink;
+            height: 50px;
+            margin-bottom: 30px;
+            /* 觀念2：元件element權重>*的CSS，因此文字顏色會取代*的CSS設定 */
+            color: greenyellow;
+            /* 0-0-0-1 */
+        }
+        * {
+            /* 觀念1：權重相同的CSS後寫的會取代先寫入的CSS設定 */
+            color: red;
+            /* 0-0-0-0 */
+        }
+        .item {
+            /* 觀念3：元件item class>element權重>*的CSS，因此文字顏色會取代元件的CSS設定 */
+            color: black;
+            /* 0-0-1-0 */
+        }
+        #colorset{
+            /* 觀念4：colorset id>class>element權重>*的CSS，文字顏色會取代元件的CSS設定 */
+            color:yellow;
+            /* 0-1-0-0 */
+        }
+        div.item{
+            /* 觀念6：復合權重計算為各階層累加總數值，低階層累加進位值，並不會影響上一階權重  */
+            color:#873df7;
+            /* 0-0-1-1 */
+        }
+        span{
+            /* color:orange; */
+            /* 0-0-0-1 */
+        }
+        #colorset.item{
+            /* 觀念7：注意低層的CSS的設定，到高階層具有繼承的作用  */
+            color: #0d0d0d;
+            font-size: 30px;
+            /* 0-1-1-0 */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>css權重測試網頁</h1>
+    <section class="container">
+        <p>文字0</p>
+        <div>文字1</div>
+        <div class="item">文字2</div>
+        <div id="colorset" class="item">文字3</div> 
+        <!-- 觀念8：權重並不會繼承  -->
+        <div id="colorset" class="item"><span>文字3</span></div> 
+        <!-- 觀念5：inline style>id>class>element權重>*的CSS -->
+        <div id="colorset" class="item" style="color:white">文字4</div>
+        <!-- 1-0-0-0  -->
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh_tw">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css transtion testing</title>
+    <style type="text/css">
+        .demo{
+            width: 680px;
+            border:1px solid red;
+            display: flex;
+            height: 800px;
+        }
+        .demo div{
+            width: 80px;
+            height: 50px;
+            border:1px solid blue;
+            margin-top: 0px;
+            margin-left: 2px;
+            background-color: #9acd32;
+            color: #fff;
+        }
+        .demo:hover >div{
+            /* 需保留80px空間給div */
+            margin-top: 700px;
+            transform: rotateY(720deg);
+            width: 150px;
+            height: 100px;
+            background-color: hotpink;
+        }
+        /* ---下列為各種 時間速率--- */
+        .timing1{
+            transition: all 5s ease 0s;
+        }
+        .timing2{
+            transition: all 5s ease-in 0s;
+        }
+        .timing3{
+            transition: all 5s ease-out 0s,background-color 5s ease-out 0s;
+        }
+        .timing4{
+            transition: all 5s ease-in-out 0s;
+        }
+        .timing5{
+            transition: all 5s linear 1s;
+        }
+        .timing6{
+            transition: all 5s cubic-bezier(0.1,0.7,1,0.1) 1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <div class="timing1">ease</div>
+        <div class="timing2">ease-in</div>
+        <div class="timing3">ease-out</div>
+        <div class="timing4">ease-in-out</div>
+        <div class="timing5">linear</div>
+        <div class="timing6">cubic-bezier</div>
+    </div>
+</body>
+</html>

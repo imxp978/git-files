@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh_tw">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css testing</title>
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+        *{
+            color: red;
+            /* 0-0-0-0 */
+            /* 所有的元件都受到*的CSS設定的影響 */
+            /* 當設定!important權重為最高權限，所有設定將無取代或是覆寫，若要覆寫時，其他必需要跟著同時設定!important */
+        }
+        .container{
+            background-color: aqua;
+        }
+        div.item{
+            color:gold;
+            /* 0-0-1-1 */
+            /* 當CSS設定為復合時，其權重計算為累加起來。 */
+        }
+        #colorset.item{
+            color:tomato;
+            font-size: 28px;
+            /* 0-1-1-0 */
+        }
+        .item{
+            color:cornsilk;
+            /* 0-0-1-0 */
+            /* 類別的權重將大於元件權重，所以顏色將會覆蓋 */
+        }
+        #colorset{
+            color: black;
+            /* 0-1-0-0 */
+            /* ID的權重大於類別，所以ID的colorset將覆蓋類別item的文字顏色 */
+        }
+        div{
+            font-size: 22px;
+            font-weight: bolder;
+            width: 100px;
+            text-align: center;
+            background-color: hotpink;
+            height: 50px;
+            margin-bottom: 30px;
+            color:greenyellow;
+            /* 0-0-0-1 */
+            /* div元件受到CSS文字顏色設定的影響，元件會繼承上面的設定 */
+        }
+        /*>inline style >ID >class >element >*  */
+    </style>
+
+</head>
+<body>
+    <section class="container">
+        <p>文字0</p>
+        <div>文字1</div>
+        <div class="item">文字2</div>
+        <div id="colorset" class="item">文字3</div>
+        <div id="colorset" class="item">
+            文字3
+            <i>文字3</i>
+        </div>
+        <div id="colorset" class="item" style="color:darkgrey;font-size:12px;">文字4</div>
+        <!-- 1-0-0-0 -->
+        <!--行內樣式的權重大於ID，所以行內樣式的文字顏色，將覆蓋ID的colorset文字顏色  -->
+    </section>
+</body>
+</html>

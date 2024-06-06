@@ -17,21 +17,21 @@
                     $adds = $link->query($SQLstring_add);
                     if ($adds->rowCount() > 0) {
                     ?>
-                        <div>
-                            <h5>Choose Address</h5>
+                    <div>
+                        <h5>Choose Address</h5>
 
-                            <?php while ($data2 = $adds->fetch()) { ?>
-                                <div class="row d-flex align-items-center p-1">
-                                    <div class="col-1">
-                                        <input type="radio" name="gridRadios" id="gridRadios[]" value="<?php echo $data2['addressid'] ?>" <?php echo ($data2['setdefault']) ? 'checked' : ''; ?>>
-                                    </div>
-                                    <div class="col-2"><?php echo $data2['cname']; ?></div>
-                                    <div class="col-2"><?php echo $data2['mobile'] ?></div>
-                                    <div class="col-7"><?php echo $data2['address'] ?></div>
+                        <?php while ($data2 = $adds->fetch()) { ?>
+                            <div class="row d-flex align-items-center p-1">
+                                <div class="col-1">
+                                    <input type="radio" name="gridRadios" id="gridRadios[]" value="<?php echo $data2['addressid'] ?>" <?php echo ($data2['setdefault']) ? 'checked' : ''; ?>>
                                 </div>
-                                <hr>
-                            <?php } ?>
-                        </div>
+                                <div class="col-2"><?php echo $data2['cname']; ?></div>
+                                <div class="col-2"><?php echo $data2['mobile'] ?></div>
+                                <div class="col-7"><?php echo $data2['address'] ?></div>
+                            </div>
+                            <hr>
+                        <?php } ?>
+                    </div>
                     <?php } ?>
                     <div>
                         <h5>Add New Address</h5>
@@ -71,18 +71,22 @@
                         <?php $total += $data['p_price'] * $data['qty'];
                         } ?>
                         <div class="col-10">Shipping: </div>
-                        <div class="col-2">$: 50</div>
+                        <div class="col-2">$ 50</div>
 
                         <div class="col-10 my-3">Total: </div>
-                        <div class="col-2"><?php echo '$: ' . $total+50; ?></div>
+                        <div class="col-2"><?php echo $total + 50; ?></div>
 
                     </div>
                 </div>
                 <hr>
                 <?php if ($adds->rowCount() > 0) { ?>
-                <div class="col-10 my-5 text-center">
-                    <button class="btn btn-dark">Check Out</button>
-                </div>
+                    <div class="col-10 my-5 text-center">
+                        <button class="btn btn-dark">Check Out</button>
+                    </div>
+                <?php } else { ?>
+                    <div class="col-10 my-5 text-center">
+                        Add Shipping Address to Checkout
+                    </div>
                 <?php } ?>
 
 
