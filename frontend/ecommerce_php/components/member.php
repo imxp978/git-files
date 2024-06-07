@@ -7,7 +7,7 @@
     ?>
     <div class="container text-center">
         <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
-            <h3 class="mt-5">Hi, <?php echo $_SESSION['email']; ?></h3>
+            <h3 class="my-5">Hi, <?php echo $_SESSION['email']; ?></h3>
             <hr>
             <?php
             $SQLstring_order = sprintf("SELECT uorder.orderid, uorder.create_time as ordertime, uorder.remark, ms1.msname as payment_method, ms2.msname as status, addbook. *
@@ -20,21 +20,25 @@
             <div class="container">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
 
+                        <div class="container">
+                            <div class="row text-start">
+                                <div class="col-2"><b>Order#</b></div>
+                                <div class="col-2"><b>Time</b></div>
+                                <div class="col-1"><b>Payment</b></div>
+                                <div class="col-1"><b>Status</b></div>
+                                <div class="col-2"><b>Name</b></div>
+                                <div class="col-3"><b>Address</b></div>
+                                <div class="col-1"><b>Note</b></div>
+                            </div>
+                            <hr>
+                        </div>
                     <?php $i = 0;
                     while ($data = $orders->fetch()) { ?>
-                        <div class="accordion-item">
+                        <div class="accordion-item mt-5">
                             <div class="accordion-header" id="flush-heading<?php echo $i; ?>">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $i; ?>" aria-expanded="false" aria-controls="flush-collapseOne">
                                     <div class="container bg-light bg-gradient">
-                                        <div class="row text-start">
-                                            <div class="col-2"><b>Order#</b></div>
-                                            <div class="col-2"><b>Time</b></div>
-                                            <div class="col-1"><b>Payment</b></div>
-                                            <div class="col-1"><b>Status</b></div>
-                                            <div class="col-2"><b>Name</b></div>
-                                            <div class="col-3"><b>Address</b></div>
-                                            <div class="col-1"><b>Note</b></div>
-                                        </div>
+
                                         <hr>
                                         <div class="row text-start">
                                             <div class="col-2"><?php echo $data['orderid']; ?></div>
@@ -51,7 +55,7 @@
                             </div>
                             <div id="flush-collapse<?php echo $i; ?>" class="accordion-collapse collapse <?php echo ($i == 0) ? 'show' : ''; ?>" aria-labelledby="flush-heading<?php echo $i; ?>" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body row text-center">
-                                    <div class="container col-10 border-bottom border-end">
+                                    <div class="container col-10 border-bottom border-end bg-gray">
                                         <hr>
                                         <div class="row text-start">
                                             <div class="col-1"></div>
@@ -85,7 +89,7 @@
                                             $i++;
                                         } ?>
                                         <div class="col-12 text-end">Shipping: $:50</div>
-                                        <div class="col-12 text-end">Total: $: <?php echo $total+50; ?></div>
+                                        <div class="col-12 text-end">Total: $: <?php echo $total + 50; ?></div>
                                     </div>
                                 </div>
                             </div>

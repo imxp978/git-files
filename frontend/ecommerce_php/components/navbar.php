@@ -2,7 +2,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg fixed-top mx-auto d-flex justify-content-start justify-content-sm-center">
       <div class="container d-flex justify-content-between" id="nav-container">
-        <a class="navbar-brand" href="./index.php">
+        <a class="navbar-brand" href="./">
           <h3>We Live, <br />We Eat, <br />We Grow</h3>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

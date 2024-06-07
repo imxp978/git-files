@@ -350,3 +350,13 @@ a.page-link {
 .swiper-pagination-bullet-active {
   color: black !important;
 } 
+
+.accordion-item {
+  bo/rder: 1px solid black !important;
+  border-radius: 20px !important;
+  back/ground-color: lightblue !important;
+}
+
+.accordion-header {
+  border-radius: 20px !important;
+}
