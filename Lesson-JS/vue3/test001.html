@@ -42,7 +42,6 @@
               <th scope="col">折扣</th>
               <th scope="col">特價</th>
               <th scope="col">備註</th>
-              
             </tr>
           </thead>
           <tbody class="table-group-divider">
@@ -180,8 +179,9 @@
 
             goodsEdit: function (apoint = "") {
               this.arrayIndex = apoint; //將產品陣列索引植存起來
-              if (apoint === '') {
-                this.mtitle = {
+              if (apoint == '') {
+                this.mtitle = '產品資料新增模式',
+                this.goods = {
                   imgfile: '',
                   p_name: '',
                   p_intro: '',

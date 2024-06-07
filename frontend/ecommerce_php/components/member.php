@@ -45,8 +45,8 @@
                                             <div class="col-2"><?php echo $data['ordertime']; ?></div>
                                             <div class="col-1"><?php echo $data['payment_method']; ?></div>
                                             <div class="col-1"><?php echo $data['status']; ?></div>
-                                            <div class="col-2"><?php echo $data['cname']; ?></div>
-                                            <div class="col-3"><?php echo $data['address']; ?></div>
+                                            <div class="col-1"><?php echo $data['cname']; ?></div>
+                                            <div class="col-4"><?php echo $data['address']; ?></div>
                                             <div class="col-1"><?php echo $data['remark']; ?></div>
                                         </div>
                                         <hr>
@@ -74,7 +74,7 @@
                                         $items = $link->query($SQLstring);
                                         $total = 0;
                                         while ($data2 = $items->fetch()) { ?>
-                                            <div class="row text-start">
+                                            <div class="row text-start d-flex justify-content-start align-items-center">
                                                 <div class="col-1"><img src="images/product_images/<?php echo $data2['img_file']; ?>" width="50px" alt=""></div>
                                                 <div class="col-3"><?php echo $data2['p_name']; ?></div>
                                                 <div class="col-2"><?php echo $data2['p_price']; ?></div>

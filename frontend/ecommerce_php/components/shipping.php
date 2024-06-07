@@ -24,7 +24,7 @@
                             <div class="input-group row d-flex align-items-center p-1" id="radioInputGroup">
                                 <?php while ($data2 = $adds->fetch()) { ?>
                                     <div class="col-1">
-                                        <input type="radio" name="gridRadios" id="gridRadios[]" value="<?php echo $data2['addressid'] ?>" <?php echo ($data2['setdefault']) ? 'checked' : ''; ?>>
+                                        <input type="radio" name="gridRadios" value="<?php echo $data2['addressid'] ?>" <?php echo ($data2['setdefault']) ? 'checked' : ''; ?>>
                                     </div>
                                     <div class="col-2"><?php echo $data2['cname']; ?></div>
                                     <div class="col-3"><?php echo $data2['phone'] ?></div>
@@ -89,7 +89,7 @@
                 <?php if ($adds->rowCount() > 0) { ?>
                     <div class="col-10 my-5 text-center">
                         <a href="cart.php"><button class="btn btn-outline-dark">Cart</button></a>
-                        <button class="btn btn-dark" id="checkout">Check Out</button>
+                        <button class="btn btn-dark" id="checkout_btn">Check Out</button>
                     </div>
                 <?php } else { ?>
                     <div class="col-10 my-5 text-center">
@@ -110,7 +110,7 @@
     </div>
 
     <script>
-        const checkout_btn = document.querySelector('#checkout');
+        const checkout_btn = document.querySelector('#checkout_btn');
         checkout_btn.addEventListener('click', ()=>{
             let addressid = document.querySelector('input[name=gridRadios]:checked');
             fetch('./addorder.php', {
@@ -185,14 +185,13 @@
                     })
                     .then(response => response.json())
                     .then(data => {
+                        notice(data.message);
                         if (data.success) {
-                            notice(data.message);
                             setTimeout(() => {
                                 window.location.reload();
                             }, 1000)
                         } else {
                             console.log(data.message);
-                            notice(error.message);
                         }
                     })
                     .catch(error => {
