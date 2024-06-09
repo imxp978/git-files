@@ -36,18 +36,31 @@ h5 {
 }
 
 .navbar .container.mini {
-  position: fixed;
+  height: 100%;
+  top: 0;
+  position: absolute;
 }
 
 .navbar {
   height: 200px;
   transition: 0.2s;
+  background-color: white;
+}
+
+.navbar-collapse.collapse {
+background-color: #fff;
+}
+
+.navbar-collapse.collapse.show {
+  background-color: rgba(199, 199, 199, 0.95);
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .navbar.mini {
   height: 50px;
   width: 100%;
-  background-color: gainsboro !important;
+  top: 0;
   transition: 0.3s;
 }
 
@@ -191,10 +204,12 @@ li {
   width: 0;
   opacity: 0;
   transition: 0.5s;
+  z-index: -1;
 }
 
 #search.active {
   width: 100%;
+  z-index: 0;
   opacity: 1;
 }
 
@@ -252,10 +267,6 @@ li {
 
 .product-link a {
   color: white !important;
-}
-
-.product-link a:hover {
-  color: lightgray !important;
 }
 
 #notice {

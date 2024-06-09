@@ -13,10 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $id = $_SESSION['id'];
     $addressid = $input['addressid'];
+    $note = $input['note'];
     $ip = $_SERVER['REMOTE_ADDR'];
+    date_default_timezone_set('Asia/Taipei');
     $orderid = date('Ymdhis').rand(100,999);
+    
+    $SQLstring_address = sprintf("SELECT * from addbook WHERE addressid=%d", $addressid);
+    $address_data = $link->query($SQLstring_address);
+    $data = $address_data->fetch();
+    $cname = $data['cname'];
+    $phone = $data['phone'];
+    $address = $data['address'];
+    
+        
 
-    $SQLstring = sprintf("INSERT INTO uorder (orderid, user_id, addressid, payment_method, payment_status, status ) VALUES ('%s', %d, %d, 3, 35, 7)", $orderid, $id, $addressid );
+    $SQLstring = sprintf("INSERT INTO uorder (orderid, user_id, cname, phone, address, payment_method, payment_status, status, remark) VALUES ('%s', %d, '%s', '%s', '%s', 3, 35, 7, '%s')", $orderid, $id, $cname, $phone, $address, $note );
     $addorder = $link->query($SQLstring);
     if ($addorder) {
         $SQLstring_cart = sprintf("UPDATE cart SET orderid=%d, user_id=%d, status=8 WHERE ip='%s' AND orderid IS NULL", $orderid, $id, $ip);

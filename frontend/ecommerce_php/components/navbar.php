@@ -73,8 +73,8 @@
               </ul>
             </li>
           </ul>
-          <div class="d-flex justify-content-lg-end justify-content-end text-end">
-            <ul class="navbar-nav mb-2">
+          <!-- <div class="d-flex justify-content-lg-end justify-content-md-start align-item"> -->
+            <ul class="navbar-nav d-flex justify-content-lg-end justify-content-md-start align-item-end">
               <li class="d-flex justify-content-end">
                 <div id="search">
                   <form name="search-form" method="get" action="./products.php" class="d-flex justify-content-end text-end" role="search">
@@ -115,7 +115,7 @@
                 </a>
               </li>
             </ul>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </nav>
