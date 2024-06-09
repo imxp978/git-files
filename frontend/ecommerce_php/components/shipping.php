@@ -4,7 +4,7 @@
         session_start();
     } ?>
 
-    <?php // require_once('connections/conn_db.php'); 
+    <?php require_once('connections/conn_db.php'); 
     ?>
 
     <div class="container ">
@@ -14,8 +14,7 @@
                 $SQLstring_cart = sprintf("SELECT * FROM cart WHERE ip='%s' AND orderid IS NULL", $_SERVER['REMOTE_ADDR']);
                 $cart = $link->query($SQLstring_cart);
                 if ($cart->rowCount()>0) {
-                
-                ?>
+            ?>
                 <div class="col-lg-5">
                     <?php
                     $SQLstring_add = sprintf("SELECT * FROM addbook WHERE user_id = %d ORDER BY addressid DESC", $_SESSION['id']);
@@ -34,7 +33,7 @@
                                     <div class="col-2"><?php echo $data2['cname']; ?></div>
                                     <div class="col-3"><?php echo $data2['phone'] ?></div>
                                     <div class="col-5"><?php echo $data2['address'] ?></div>
-                                    <div class="col-1"><button class="btn btn-sm btn-light" type="button" id="btn[]" name="btn[]" onclick="btn_confirmLink('Remove This Address?','address_del.php?mode=1&addressid=<?php echo $data2['addressid']; ?>');">x</button></div>
+                                    <div class="col-1"><button class="btn btn-sm btn-light" type="button" id="btn[]" name="btn[]" onclick="btn_confirmLink('Remove This Address?','controllers/address_del.php?mode=1&addressid=<?php echo $data2['addressid']; ?>');">x</button></div>
                                     <hr>
                                 <?php } ?>
                             </div>
@@ -79,17 +78,13 @@
                             <div class="col-1"><?php echo $data['qty']; ?></div>
                             <div class="col-2"><?php echo '$: ' . $data['p_price'] * $data['qty']; ?></div>
                             <hr>
-
-
                         <?php $total += $data['p_price'] * $data['qty'];
                         } ?>
                         <div class="col-10">Shipping: </div>
                         <div class="col-2">$:50</div>
-
                         <div class="col-10 my-3">Total: </div>
                         <div class="col-2"><b>$: <?php echo $total + 50; ?></b></div>
                         <textarea id="note" class="form-control" rows="5" maxlength="200" placeholder="Leave Notes..."></textarea>
-
                     </div>
                 </div>
                 <hr>
@@ -112,9 +107,6 @@
                             No Item in Cart, <a href="./products.php"><button class="btn btn-sm btn-dark">Go Shop</button></a>
                         </div>
                     <?php  } ?>
-
-
-
             <?php } else { ?>
                 <div class="text-center">
                     <a href="member.php"><button class="btn btn-sm btn-dark">Please Login</button></a>
@@ -124,118 +116,5 @@
         <hr>
     </div>
 
-    <script>
-        const checkout_btn = document.querySelector('#checkout_btn');
-        checkout_btn.addEventListener('click', ()=>{
-            let addressid = document.querySelector('input[name=gridRadios]:checked');
-            let note = document.querySelector('#note');
-            if (addressid) {
-            fetch('./addorder.php', {
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    addressid: addressid.value,
-                    note: note.value,
-                })
-            })
-            .then(response=>response.json())
-            .then(data=>{
-                notice(data.message);
-                if (data.success) {
-                    setTimeout(()=>{
-                        window.location.href ='./member.php';
-                    }, 1000);
-                }
-            })
-            .catch(error=>{
-                notice('Unexpected Error Occured, Please Try Again Later');
-                console.log(error);
-            })
-        } else {
-            notice('Please Select or Add an Address');
-        }
-        })
-    </script>
-
-    <script>
-        const inputgroup = document.querySelector('#radioInputGroup');
-        inputgroup.addEventListener('change', (event) => {
-            // console.log(event.target.value)
-            if (event.target && event.target.nodeName == 'INPUT') {
-                let id = event.target.value;
-                fetch('./changeaddress.php', {
-                        method: 'post',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            addressid: event.target.value,
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        notice(data.message)
-                        window.location.reload();  
-                    })
-                    .catch(error => {
-                        notice('Unexpected Error Occured, Please Try Again Later');
-                        console.log(error);
-                    })
-            }
-        })
-    </script>
-
-    <script>
-        const add_btn = document.querySelector('#add_btn');
-        add_btn.addEventListener('click', () => {
-            let name = document.querySelector('#name');
-            let address = document.querySelector('#address');
-            let phone = document.querySelector('#phone');
-            let msg = document.querySelector('#msg');
-            if (name.value && address.value && phone.value) {
-                fetch('./addaddress.php', {
-                        method: 'post',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            name: name.value,
-                            phone: phone.value,
-                            address: address.value
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        notice(data.message);
-                        if (data.success) {
-<<<<<<< HEAD
-=======
-                            notice(data.message);
-                            msg.innerHTML = data.message;
-                            msg.style.color = 'green';
->>>>>>> 1f8b8b6 (daily update)
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 1000)
-                        } else {
-                            console.log(data.message);
-<<<<<<< HEAD
-=======
-                            notice(data.message);
->>>>>>> 1f8b8b6 (daily update)
-                        }
-                    })
-                    .catch(error => {
-                        notice('Unexpected Error Occured, Please Try Again Later');
-                        console.log(error);
-                    })
-            } else {
-                notice('Insert Name, Phone, and Address');
-                msg.innerHTML = 'Insert Name, Phone, and Address';
-                msg.style.color = 'red';
-            }
-        })
-    </script>
+    <script src="scripts/shipping.js"></script>
 </section>

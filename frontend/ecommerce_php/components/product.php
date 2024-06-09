@@ -55,7 +55,7 @@
               <div class="row d-flex justify-content-center my-5">
                 <button class="col-1 btn btn-sm btn-light" id="minus_btn">-</button>
                 <div class="col-10">
-                <input class="col-10 form-control quantity text-center" type="number" value="1" id="quantity" min="1" readonly></input>
+                  <input class="col-10 form-control quantity text-center" type="number" value="1" id="quantity" min="1" readonly></input>
                 </div>
                 <button class="col-1 btn btn-sm btn-light" id="plus_btn">+</button>
               </div>
@@ -93,36 +93,9 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
   <hr />
+  <script src="scripts/product.js"></script>
 </section>
-
-<script>
-  const url = new URL(window.location);
-  const p_id = url.searchParams.get('productid');
-  const quantity = document.querySelector('#quantity');
-  const add_btn = document.querySelector('#add_btn');
-  add_btn.addEventListener('click', ()=>{
-      fetch('./addtocart.php', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          p_id: p_id,
-          quantity: quantity.value
-        })
-      })
-      .then(response=>response.json())
-      .then(data=>{
-        notice(data.message);
-        if (data.success) {
-          setTimeout( ()=> {
-            window.location.reload()
-          }, 1000);
-        }
-      })
-  });
-</script>

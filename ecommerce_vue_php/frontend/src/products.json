@@ -1,0 +1,94 @@
+[
+    {
+      "id": 1,
+      "title": "Category1",
+      "price": 110,
+      "quantity": 1,
+      "image": "Base-Walnut_960x.webp",
+      "description": "This is a good coffee maker to make the coffee to start your day!"
+    },
+    {
+      "id": 2,
+      "title": "Category2",
+      "price": 250,
+      "quantity": 10,
+      "image": "PDP-TableKnivesMorel_960x.webp",
+      "description": "This is a good coffee maker to make the coffee to start your day!"
+    }
+  ],
+
+  "product": [
+    {
+      "id": 1,
+      "title": "Sets",
+      "price": 8.99,
+      "quantity": 0,
+      "image": "1_cd3a98fc-2f96-4c63-9f35-188f0510ae54_960x.webp",
+      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+    },
+    {
+      "id": 2,
+      "title": "Prepware",
+      "price": 23.99,
+      "quantity": 10,
+      "image": "TheFullreSetinWinterBloom_960x.webp",
+      "description": "This is a good coffee maker to make the coffee to start your day!"
+    },
+    {
+      "id": 3,
+      "title": "Knives",
+      "price": 15.99,
+      "quantity": 5,
+      "image": "PDP-TableKnivesMorel_960x.webp",
+      "description": "This is a fine crafted fork designed by a designer"
+    },
+    {
+      "id": 4,
+      "title": "Cookware",
+      "price": 8.99,
+      "quantity": 0,
+      "image": "copperset_960x.webp",
+      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+    },
+    {
+      "id": 5,
+      "title": "Glassware",
+      "price": 23.99,
+      "quantity": 10,
+      "image": "FullGlassHaze_960x.webp",
+      "description": "This is a good coffee maker to make the coffee to start your day!"
+    },
+    {
+      "id": 6,
+      "title": "Ceramics",
+      "price": 15.99,
+      "quantity": 5,
+      "image": "Grotto_960x.webp",
+      "description": "This is a fine crafted fork designed by a designer"
+    },
+    {
+      "id": 7,
+      "title": "Tools",
+      "price": 8.99,
+      "quantity": 0,
+      "image": "CooksToolSet-5_960x.webp",
+      "description": "This is a good bowl for the home-made soup! Keep you heart and the soup warm and tasty!"
+    },
+    {
+      "id": 8,
+      "title": "Storage",
+      "price": 23.99,
+      "quantity": 10,
+      "image": "Base-Walnut_960x.webp",
+      "description": "This is a good coffee maker to make the coffee to start your day!"
+    },
+    {
+      "id": 9,
+      "title": "Cares",
+      "price": 15.99,
+      "quantity": 5,
+      "image": "saltspherewalnutsite_960x.webp",
+      "description": "This is a fine crafted fork designed by a designer"
+    }
+  ]
+

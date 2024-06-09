@@ -61,7 +61,7 @@
                                                 <div class="col-2 text-end">price</div>
                                                 <div class="col-1 text-end">quantity</div>
                                                 <div class="col-2 text-end">subtotal</div>
-                                            
+
                                             </div>
                                             <hr>
                                             <?php
@@ -91,89 +91,31 @@
                             </div>
                         <?php } ?>
                     </div>
-                <?php } else { ?>
-                    <div>
-                        No Order Yet, <a href="./products.php"><button class="btn btn-sm btn-dark">Go Shop</button></a>
-                    </div>
-                <?php } ?>
-                <button class="btn btn-sm btn-dark my-5" id="logout_btn">Logout</button>
-                </div>
             <?php } else { ?>
-                <div id="login" name="login">
-                    <h3 class="mt-5">LOGIN</h3>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-4 col-10">
-
-                            Email:
-                            <input class="form-control m-1 input-sm" type="email" value="test@test.com" id="inputEmail" required autofocus />
-                            Password:
-                            <input class="form-control m-1 input-sm" type="password" value="111111" id="inputPassword" required />
-                            <span id="msg"></span><br>
-                            <div class="my-3"></div>
-                            <a href="register.php"><button class="btn btn-sm btn-outline-dark">Sign Up</button></a>
-                            <button class="btn btn-sm btn-dark" id="login_btn">Login</button>
-
-                        </div>
-                    </div>
+                <div>
+                    No Order Yet, <a href="./products.php"><button class="btn btn-sm btn-dark">Go Shop</button></a>
                 </div>
             <?php } ?>
-            <hr>
-            <script>
-                const logout_btn = document.querySelector('#logout_btn');
-                logout_btn.addEventListener('click', () => {
-                    notice('Logout Successful');
-                    setTimeout(() => {
-                        window.location.href = './logout.php';
-                    }, 1000);
-                })
-            </script>
-
-            <script>
-                const email = document.querySelector('#inputEmail');
-                const password = document.querySelector('#inputPassword');
-                const login_btn = document.querySelector('#login_btn');
-                const msg = document.querySelector('#msg');
-                login_btn.addEventListener('click', () => {
-                    // console.log('login_btn clicked');
-                    // msg.textContent = 'start';
-                    if (email.value && password.value) {
-                        // console.log('email & password')
-                        fetch('./login.php', {
-                                method: 'post',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    email: email.value,
-                                    password: password.value
-                                })
-                            })
-                            // .then((response) => {
-                            //     return response.json()
-                            //     console.log('response received');
-                            // })
-                            .then(response => response.json())
-                            .then(data => {
-                                // console.log(data);
-                                // console.log('json converted');
-                                notice(data.message);
-                                if (data.success) {
-                                    // console.log('login successful');
-                                    msg.textContent = data.message;
-                                    msg.style.color = 'green';
-                                    setTimeout( ()=> {
-                                        window.location.href = 'member.php'}, 1000);
-                                } else {
-                                    msg.textContent = data.message;
-                                    msg.style.color = 'red';
-                                }
-                            })
-                            .catch((error) => {})
-                    } else {
-                        msg.textContent = 'Please Insert Email and Password'
-                        msg.style.color = 'red';
-                        notice(msg.textContent);
-                    }
-                })
-            </script>
+            <button class="btn btn-sm btn-dark my-5" id="logout_btn">Logout</button>
+            </div>
+        <?php } else { ?>
+            <div id="login" name="login">
+                <h3 class="mt-5">LOGIN</h3>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4 col-10">
+                        Email:
+                        <input class="form-control m-1 input-sm" type="email" value="test@test.com" id="inputEmail" required autofocus />
+                        Password:
+                        <input class="form-control m-1 input-sm" type="password" value="111111" id="inputPassword" required />
+                        <span id="msg"></span><br>
+                        <div class="my-3"></div>
+                        <a href="register.php"><button class="btn btn-sm btn-outline-dark">Sign Up</button></a>
+                        <button class="btn btn-sm btn-dark" id="login_btn">Login</button>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <hr>
+    </div>
+    <script src="scripts/member.js"></script>
 </section>

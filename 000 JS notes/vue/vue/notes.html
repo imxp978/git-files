@@ -1,11 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<script>
+// data 是函數：因為每個 Vue 實例需要一個獨立的數據對象。
+// methods 是對象：內部方法可以簡寫（省略冒號和 function）。
+// computed 是對象：類似 methods。
+// mounted 是函數：在組件掛載後調用。
+
+Vue.createApp({
+  // data 必須是一個函數，返回一個對象
+  data() {
+    return {
+      message: 'Hello Vue!',
+      counter: 0
+    };
+  },
+
+  // methods 是一個對象，裡面的方法可以使用縮寫形式 直接寫成一般函式的形式
+  methods: {
+    increment() {
+      this.counter += 1;
+    },
+    decrement() {
+      this.counter -= 1;
+    }
+  },
+
+  // computed 是一個對象，裡面的方法用來定義計算屬性
+  computed: {
+    doubleCounter() {
+      return this.counter * 2;
+    }
+  },
+
+  // mounted 是一個函數，在組件掛載完成後調用
+  mounted() {
+    console.log('Component mounted!');
+  }
+}).mount('#app');
+
+</script>
+
+
+
+
+
     <script>
         Vue.createApp({}).mounte('#app')
 
@@ -24,7 +60,7 @@
                 }
             },
 
-            methods: { //object
+            methods: { //object key: value / example: function() {} 可以省略:跟'function' 直接寫成一般函式的形式
                 fn1 (item) {
                     item ++
                     return item;

@@ -66,6 +66,7 @@ import { useCarouselStore } from "@/stores/CarouselStore.js";
 
 const carouselStore = useCarouselStore();
 const carousels = ref([]);
+
 onMounted(()=>{
   carouselStore.loadCarousels();
   carousels.value = carouselStore.carousels;

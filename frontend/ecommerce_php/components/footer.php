@@ -26,7 +26,7 @@
       </div>
       <div class="col col-12 col-sm-2 text-end">
         <h5>Member</h5>
-        <a href="./member.php" data-bs-toggle="modal" data-bs-target="#login">My Account</a><br />
+        <a href="./member.php">My Account</a><br />
         <a href="./cart.php">My Cart</a><br />
       </div>
       <div class="col col-12 col-sm-2 text-end">
