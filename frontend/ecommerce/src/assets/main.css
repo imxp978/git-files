@@ -1,7 +1,3 @@
-* {
-  bo/rder: 1px solid black;
-}
-
 body {
   font-family: Helvetica;
   font-size: 16px;
@@ -36,18 +32,31 @@ h5 {
 }
 
 .navbar .container.mini {
-  position: fixed;
+  height: 100%;
+  top: 0;
+  position: absolute;
 }
 
 .navbar {
   height: 200px;
   transition: 0.2s;
+  background-color: white;
+}
+
+.navbar-collapse.collapse {
+background-color: #fff;
+}
+
+.navbar-collapse.collapse.show {
+  background-color: rgba(199, 199, 199, 0.95);
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .navbar.mini {
   height: 50px;
   width: 100%;
-  background-color: gainsboro !important;
+  top: 0;
   transition: 0.3s;
 }
 
@@ -191,10 +200,12 @@ li {
   width: 0;
   opacity: 0;
   transition: 0.5s;
+  z-index: -1;
 }
 
 #search.active {
   width: 100%;
+  z-index: 0;
   opacity: 1;
 }
 
@@ -254,26 +265,24 @@ li {
   color: white !important;
 }
 
-.product-link a:hover {
-  color: lightgray !important;
-}
-
-#cartnotice {
-  background: rgba(0, 0, 0, 0.33);
+#notice {
+  background: rgba(0, 0, 0, 0.5);
   position: fixed;
   border-radius: 5px;
-  width: 10vw;
+  width: 15vw;
   min-width: 150px;
   height: 10vh;
-  z-index: 0;
+  z-index: -1;
   top: 50%;
   opacity: 0;
   transition: 0.3s;
+
 }
 
-#cartnotice.active {
+#notice.active {
+  color: white;
   opacity: 1;
-  z-index: 3;
+  z-index: 99;
   transition: 0.3s;
 }
 
@@ -287,6 +296,7 @@ li {
   top: 50%;
   opacity: 0;
   transition: 0.3s;
+  display: none !important;
 }
 
 #notifynotice.active {
@@ -347,3 +357,11 @@ a.page-link {
 .swiper-pagination-bullet-active {
   color: black !important;
 } 
+
+.accordion-item {
+  border-radius: 20px !important;
+}
+
+.accordion-header {
+  border-radius: 20px !important;
+}

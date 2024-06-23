@@ -1,4 +1,4 @@
-<section id="checkout">
+<section id="shipping">
 
     <?php if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -10,8 +10,13 @@
     <div class="container ">
         <h3 class="mt-5 text-center">SHIPPING</h3>
         <div class="row d-flex justify-content-center">
-            <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
-                <div class="col-5">
+            <?php if (isset($_SESSION['login']) && $_SESSION['login']) { 
+                $SQLstring_cart = sprintf("SELECT * FROM cart WHERE ip='%s' AND orderid IS NULL", $_SERVER['REMOTE_ADDR']);
+                $cart = $link->query($SQLstring_cart);
+                if ($cart->rowCount()>0) {
+                
+                ?>
+                <div class="col-lg-5">
                     <?php
                     $SQLstring_add = sprintf("SELECT * FROM addbook WHERE user_id = %d ORDER BY addressid DESC", $_SESSION['id']);
                     $adds = $link->query($SQLstring_add);
@@ -45,13 +50,14 @@
                         <input class="form-control" type="text" id="phone"><br>
                         Address: <br>
                         <input class="form-control" type="text" id="address"><br>
+                        <span id="msg"></span>
                         <div class="my-3 text-start">
-                            <button id="add_btn" class="btn btn-sm btn-dark">Save</button>
+                            <button id="add_btn" class="btn btn-sm btn-dark">Add</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-1"></div>
-                <div class="col-4">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-4">
                     <u>
                         <h5>Items</h5>
                     </u>
@@ -82,21 +88,30 @@
 
                         <div class="col-10 my-3">Total: </div>
                         <div class="col-2"><b>$: <?php echo $total + 50; ?></b></div>
+                        <textarea id="note" class="form-control" rows="5" maxlength="200" placeholder="Leave Notes..."></textarea>
 
                     </div>
                 </div>
                 <hr>
-                <?php if ($adds->rowCount() > 0) { ?>
+                <?php 
+                $SQLstring_add_default = sprintf("SELECT * FROM addbook WHERE user_id = %d AND setdefault=1", $_SESSION['id']);
+                $add_default = $link->query($SQLstring_add_default);
+                if ($add_default->rowCount() > 0) { ?>
                     <div class="col-10 my-5 text-center">
                         <a href="cart.php"><button class="btn btn-outline-dark">Cart</button></a>
                         <button class="btn btn-dark" id="checkout_btn">Check Out</button>
                     </div>
                 <?php } else { ?>
                     <div class="col-10 my-5 text-center">
-                        <p>Add Shipping Address to Proceed</p><br>
+                        <p>Add or Select a Shipping Address to Proceed</p><br>
                         <a href="cart.php"><button class="btn btn-outline-dark">Cart</button></a>
                     </div>
-                <?php } ?>
+                    <?php  } ?>
+                    <?php } else { ?>
+                        <div class="text-center">
+                            No Item in Cart, <a href="./products.php"><button class="btn btn-sm btn-dark">Go Shop</button></a>
+                        </div>
+                    <?php  } ?>
 
 
 
@@ -113,6 +128,8 @@
         const checkout_btn = document.querySelector('#checkout_btn');
         checkout_btn.addEventListener('click', ()=>{
             let addressid = document.querySelector('input[name=gridRadios]:checked');
+            let note = document.querySelector('#note');
+            if (addressid) {
             fetch('./addorder.php', {
                 method: 'post',
                 headers: {
@@ -120,6 +137,7 @@
                 },
                 body: JSON.stringify({
                     addressid: addressid.value,
+                    note: note.value,
                 })
             })
             .then(response=>response.json())
@@ -135,7 +153,9 @@
                 notice('Unexpected Error Occured, Please Try Again Later');
                 console.log(error);
             })
-
+        } else {
+            notice('Please Select or Add an Address');
+        }
         })
     </script>
 
@@ -155,13 +175,15 @@
                         })
                     })
                     .then(response => response.json())
-                    .then(data => notice(data.message))
+                    .then(data => {
+                        notice(data.message)
+                        window.location.reload();  
+                    })
                     .catch(error => {
                         notice('Unexpected Error Occured, Please Try Again Later');
                         console.log(error);
                     })
             }
-
         })
     </script>
 
@@ -171,6 +193,7 @@
             let name = document.querySelector('#name');
             let address = document.querySelector('#address');
             let phone = document.querySelector('#phone');
+            let msg = document.querySelector('#msg');
             if (name.value && address.value && phone.value) {
                 fetch('./addaddress.php', {
                         method: 'post',
@@ -187,11 +210,21 @@
                     .then(data => {
                         notice(data.message);
                         if (data.success) {
+<<<<<<< HEAD
+=======
+                            notice(data.message);
+                            msg.innerHTML = data.message;
+                            msg.style.color = 'green';
+>>>>>>> 1f8b8b6 (daily update)
                             setTimeout(() => {
                                 window.location.reload();
                             }, 1000)
                         } else {
                             console.log(data.message);
+<<<<<<< HEAD
+=======
+                            notice(data.message);
+>>>>>>> 1f8b8b6 (daily update)
                         }
                     })
                     .catch(error => {
@@ -200,6 +233,8 @@
                     })
             } else {
                 notice('Insert Name, Phone, and Address');
+                msg.innerHTML = 'Insert Name, Phone, and Address';
+                msg.style.color = 'red';
             }
         })
     </script>

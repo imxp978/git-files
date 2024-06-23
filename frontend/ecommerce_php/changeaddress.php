@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if($add_update) {
         $data = array(
             'success' => true,
-            'message' => 'Default Address Updtaed'
+            'message' => 'Default Address Updated'
         );
     } else {
         $data = array(

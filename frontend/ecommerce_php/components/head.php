@@ -1,8 +1,5 @@
-<!-- 資料庫連線程式載入 -->
 <?php require_once('connections/conn_db.php'); ?>
-<!-- 如果SESSION沒有啟動，則啟動SESSION功能，這是跨網頁變數存取 -->
 <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
-<!-- 載入PHP函數庫 -->
 <?php require_once("./components/php_lib.php"); ?>
 <!DOCTYPE html>
 <html lang="en">

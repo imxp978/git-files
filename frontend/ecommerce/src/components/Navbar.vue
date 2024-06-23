@@ -2,7 +2,7 @@
   <section id="navbar">
     <div class="container">
       <nav
-        class="navbar navbar-expand-lg bg-light bg-sm-dark fixed-top mx-auto d-flex justify-content-start justify-content-sm-end"
+        class="navbar navbar-expand-lg fixed-top mx-auto d-flex justify-content-start justify-content-sm-end"
         :class="{mini:mini}"
         >
         <div class="container">

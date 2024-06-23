@@ -61,9 +61,17 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { useCarouselStore } from "@/stores/CarouselStore.js";
 
-const carousels = useCarouselStore().carousels;
+const carouselStore = useCarouselStore();
+const carousels = ref([]);
+onMounted(()=>{
+  carouselStore.loadCarousels();
+  carousels.value = carouselStore.carousels;
+})
+
+
 </script>
 
 <style></style>
